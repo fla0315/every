@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ include file="../inc/top.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../inc/prof_top.jsp" %>
    <div class="container-fluid px-4">
-       <h1 class="mt-4">Dashboard</h1>
+       <h1 class="mt-4">에브리대학교</h1>
        <ol class="breadcrumb mb-4">
-           <li class="breadcrumb-item active">Dashboard</li>
+           <li class="breadcrumb-item active">EVERYHAKSA</li>
        </ol>
        <div class="row">
            <div class="col-xl-3 col-md-6">
