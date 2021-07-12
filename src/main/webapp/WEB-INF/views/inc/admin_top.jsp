@@ -13,10 +13,17 @@
         <meta name="author" content="" />
         <title>EVERYHAKSA</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css"/>
+        <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/styles.css'/>"/>
+        <link href="<c:url value='/resources/calendar/core/main.css'/>" rel="stylesheet" />
+        <link href="<c:url value='/resources/calendar/daygrid/main.css'/>" rel="stylesheet" />
+        <script src="<c:url value='/resources/calendar/core/main.js'/>"></script>
+        <script src="<c:url value='/resources/calendar/interaction/main.js'/>"></script>
+        <script src="<c:url value='/resources/calendar/daygrid/main.js'/>"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=46a41c1e7c20d77119a3710f087caae5&libraries=services"></script>
+		
 
-    </head>
+</head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -30,6 +37,7 @@
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div>
             </form>
+            <div style="color: white">OO님, 환영합니다.</div>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
