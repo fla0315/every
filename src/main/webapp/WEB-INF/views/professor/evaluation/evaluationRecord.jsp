@@ -38,7 +38,7 @@ body {
 				</div>
 				<div class="mb-3">
 					<label for="title">학생번호</label>&nbsp;&nbsp;<input type="button" class="btn_ btn-primary btn-sm bt_address" value="조회">
-					<input type="text" class="form-control" name="title" id="title" placeholder="성적을 입력할 학생을 선택해주세요">
+					<input type="text" class="form-control" name="title" id="title" placeholder="성적을 입력할 학생을 선택해주세요" readonly>
 				</div>
 
 				<div class="mb-3">
