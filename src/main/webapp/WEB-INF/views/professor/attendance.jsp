@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../../inc/prof_top.jsp" %>
+<%@ include file="../inc/prof_top.jsp" %>
 <!-- 성적 입력창 -->
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -26,7 +26,7 @@ body {
 </style>
 	<article>
 		<div class="container" role="main">
-			<h2>성적 입력</h2>
+			<h2>출석부</h2>
 			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
 				<br>
 				<div class="mb-3">
@@ -36,27 +36,24 @@ body {
 						<!-- 개설교과목 번호/이름 교수님 번호로 조회해 for문 돌리기 -->
 					</select>
 				</div>
-				<div class="card mb-4">
+				<div class="card mb-5">
                    <div class="card-header">
                        <i class="fas fa-table me-1"></i>
-                       성적 입력 테이블
+                       출석 입력
                    </div>
                    <div class="card-body">
-                       <table id="datatablesSimple">
+                       <table class="table-bordered text-center" style="width:100%; font-size:0.8em">
                            <thead>
                                <tr>
                                	<th><input type="checkbox"></th>
                                	<th>NO.</th>
-                                   <th>이름</th>
-                                   <th>학년</th>
-                                   <th>학번</th>
-                                   <th>학과</th>
-                                   <th>출석</th>
-                                   <th>과제</th>
-                                   <th>중간고사</th>
-                                   <th>기말고사</th>
-                                   <th>총점</th>
-                                   <th>최종성적</th>
+                                <th>이름</th>
+                                <th>학번</th>
+                                <th>학과</th>
+                                <c:forEach var="i" begin="1" end="12">
+                                   	<th>${i}주차 </th>
+                                   </c:forEach>
+                                <th>과제점수</th>
                                </tr>
                            </thead>
                            <tbody>
@@ -64,14 +61,19 @@ body {
                                	<td><input type="checkbox"></td>
                                    <td>1</td>
                                    <td>홍길동</td>
-                                   <td>1</td>
                                    <td>20211111</td>
                                    <td>컴퓨터공학과</td>
-                                   <td></td>
-                                   <td></td>
-                                   <td><input type="text" style="width:50px"></td> <!-- 중간 -->
-                                   <td><input type="text" style="width:50px"></td> <!-- 기말 -->
-                                   <td><input type="text" style="width:50px"></td> <!-- 총점 -->
+                                   <c:forEach var="i" begin="1" end="12">
+                                   	<td>
+                                   	<select>
+                                   		<option></option>
+                                   		<option>출석</option>
+                                   		<option>지각</option>
+                                   		<option>결석</option>
+                                   		<option>조퇴</option>
+                                   	</select>
+                                   </td>
+                                   </c:forEach>
                                    <td></td>
                                </tr>
                            </tbody>
@@ -79,10 +81,8 @@ body {
                    </div>
                </div>
 			</form>
-			
 			<div >
-				<button type="button" class="btn btn-sm btn-primary" id="btnSave">제출</button>
-				<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
 			</div>
 
 		</div>
@@ -90,4 +90,4 @@ body {
 	</article>
 
 
-<%@ include file="../../inc/bottom.jsp" %>
+<%@ include file="../inc/bottom.jsp" %>

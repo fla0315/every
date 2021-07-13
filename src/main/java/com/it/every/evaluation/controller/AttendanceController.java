@@ -6,13 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/professor/evaluation")
-public class EvaluationController {
+@RequestMapping("/professor")
+public class AttendanceController {
 	private static final Logger logger
-		= LoggerFactory.getLogger(EvaluationController.class);
+	= LoggerFactory.getLogger(AttendanceController.class);
 	
-	@RequestMapping("/evaluationRecord")
+	@RequestMapping("/attendance")
 	public void evaluationRecord() {
-		logger.info("성적 등록 화면");
+		logger.info("출석부");
 	}
 }
