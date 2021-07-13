@@ -1,162 +1,140 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../inc/student_top.jsp" %>
 
+   <div class="container-fluid px-4" style="background-color: bisque;">
+        <h4 class="mt-4" style="background-color: blueviolet;">수강신청내역조회</h4>
+        
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                
+            
 
-				<div class="container-fluid px-4">
-                        <h4 class="mt-4">개설과목조회</h4>
+
+                <table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                    <tr>
+                        <td class="">
                         
-                        
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                
-        <!-- 테이블 반복 -->
-            <table>
-                <thead>
-                <colgroup>
-					<col width="60px;">
-					<!-- 년도 -->
-					<col width="80px;">
-					<!-- 년도 -->
-					<col width="80px;">
-					<!-- 학기 -->
-					<col width="80px;">
-					<!-- 학기 -->
-					<col width="80px;">
-					<!-- 대학 -->
-					<col width="150px;">
-					<!-- 대학 -->
-				</colgroup>
-              	<th id="hide1">년도</th>
-                 	 <td><select name="p_year" id="p_year" style="width: 100%">
-						<!-- 이 부분은 추가로 DB에 날짜를 넣는 것을 추가해야할 듯  -->
-                        <option value="2020">2020</option>
-                        <option value="2019">2019</option>
-                        <option value="2018">2018</option>
-                        <option value="2017">2017</option>
-                        <option value="2017">2016</option>
-                        <option value="2017">2015</option>
-                        <option value="2017">2014</option>
-                        <option value="2017">2013</option>
-                  </select></td>
-                  
-                  
-                  
-                 <th id="hide1">학기</th>
-                 	 <td><select name="p_year" id="p_year" style="width: 100%">
-						<!-- 계절학기 부분은 뺏음 -->
-                        <option value="2020">1학기</option>
-                        <option value="2019">2학기</option>
-                  </select></td>
-                  
-                 <th id="hide1">학년</th>
-                 	 <td><select name="p_year" id="p_year" style="width: 100%">
-						<!-- 계절학기 부분은 뺏음 -->
-                        <option value="2020">1학년</option>
-                        <option value="2019">2학년</option>
-                        <option value="2019">3학년</option>
-                        <option value="2019">4학년</option>
-                  </select></td>
-                  
-                  
-                 <th id="hide1">이수구분</th>
-                 	 <td><select name="p_year" id="p_year" style="width: 100%">
-						<!-- 이 부분도 허브 할때 처럼 데이터에서 불러와야할 듯 -->
-                        <option value="2020">전체</option>
-                        <option value="2019">기초교양</option>
-                        <option value="2019">전공심화</option>
-                  </select></td>
-                  
-                 <th id="hide1">학부/과</th>
-                 	 <td><select name="p_year" id="p_year" style="width: 100%">
-						<!-- 학과의 큰 카테고리 범주-->
-                        <option value="2020">항공운항학과</option>
-                        <option value="2019">간호학과</option>
-                  </select></td>
-                  
-                  
-                 <th id="hide1">전공</th>
-                 	 <td><select name="p_year" id="p_year" style="width: 100%">
-						<!-- 학과의 큰 카테고리 범주-->
-                        <option value="2020">항공운항</option>
-                        <option value="2019">뭐든 전공</option>
-                  </select></td>
-                  
-</table>
-                              
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        
-                        <div class="card mb-4">
-                            <div class="card-header">
-                               개설과목조회
-                            </div>
-                            
-                            
-                            <div class="card-body">
-                            
-                            
-                                <table id="datatablesSimple">
-                                    <thead>
-                                      <tr>
-                 
-					                        <th> <input type="button" value="장바구니"></th>
-					                        <th>강의계획서</th>
-					                        <th>년도</th>
-					                        <th>학기</th>
-					                        <th>과목코드</th> <!-- 경운대기준0으로 시작해서 스트링으로 변경해야할수도 -->
-					                        <th>과목명</th>
-					                        <th>학부(과)</th> <!-- 경호학부 -->
-					                        <th>대면/비대면</th> <!-- 추가할지말지 회의 요망 -->
-					                        <th>학년</th>
-					                        <th>이수구분</th> <!-- 교양/핵심교양 이런거 -->
-					                        <th>학점</th> <!-- 3 -->
-					                        <th>시수</th> <!-- 이론3/실습0 -->
-					                        <th>담당교수</th> <!-- 장익훈  -->
-					                        <th>요일/교시/강의실</th> <!-- 화7, 목2,3 (제2호관 432호) -->
-                  						  </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                      <tr>
-                 
-					                        <th> <input type="button" value="장바구니"></th>
-					                        <th>강의계획서</th>
-					                        <th>년도</th>
-					                        <th>학기</th>
-					                        <th>과목코드</th> <!-- 경운대기준0으로 시작해서 스트링으로 변경해야할수도 -->
-					                        <th>과목명</th>
-					                        <th>학부(과)</th> <!-- 경호학부 -->
-					                        <th>대면/비대면</th> <!-- 추가할지말지 회의 요망 -->
-					                        <th>학년</th>
-					                        <th>이수구분</th> <!-- 교양/핵심교양 이런거 -->
-					                        <th>학점</th> <!-- 3 -->
-					                        <th>시수</th> <!-- 이론3/실습0 -->
-					                        <th>담당교수</th> <!-- 장익훈  -->
-					                        <th>요일/교시/강의실</th> <!-- 화7, 목2,3 (제2호관 432호) -->
-                  						  </tr>
+                            <!-- ********************** 검색조건 테이블 시작 ********************** -->
+                            <table border="0" cellspacing="5">
+                                <tr>
+                                    <td><span class=""><label for="년도">년도</label></span></td>
+                                    <td>
+                                        <div id="">
+                                            <select >
+                                            	<option value="">- 전체 -</option>
+                                                <option value=''>2021</option>
+                                                <option value=''>2020</option>
+                                                <option value=''>2019</option>
+                                                <option value=''>2018</option>
+                                            </select>
+                                         
+                                        </div>
+                                    </td>
+
+                                    <td style="padding-left:10px"><span class=""><label for="학기">학기</label></span></td>
+                                    <td>
+                                        <select id="" name="" title="학기" class="" >
+                                            <option value="">- 전체 -</option>
+                                            <option value="">1학기</option>
+                                            <option value="">2학기</option>
+                                        </select>
+                                    </td>
+
+  									<td style="padding-left:10px"><span class=""><label for="학기">학번</label></span></td>
+                                    <td>
+                                        <input type="text" >
+                                    </td>
+
+									<td style="padding-left:10px"><span class=""><label for="학기">이름</label></span></td>
+                                    <td>
+                                        <input type="text" >
+                                    </td>
+
+
+									<td>
+                                        <button>조회</button>
+                                        <button>출력</button>
+                                    </td>
+								</tr>
+								
+                                <!-- 2행완료 -->
+                            </table>
+							
+							<hr>
+							
+							<table border="0" cellpadding="0" cellspacing="0" style="width:70%;">
+
+							<tr>
+
+								<td><span class=""><label for="학기">학번</label></span></td>
+								<td>
+									<input type="text" style="width: 50%;">
+								</td>
+
+
+								<td><span class=""><label for="학기" >이름</label></span></td>
+								<td>
+									<input type="text" style="width: 50%">
+								</td>
+								
+								<td><span class=""><label for="학기">학년</label></span></td>
+								<td>
+								<input type="text" style="width: 50%">
+								</td>
+								
+							</tr>
+								
+							<tr>
+								<td><span class=""><label for="학기">학부(과)</label></span></td>
+								<td>
+									<input type="text" style="width: 50%">
+								</td>
+
+								<td><span class=""><label for="학기">전공</label></span></td>
+								<td>
+									<input type="text" style="width: 50%">
+								</td>
+
+							</tr>
+
+						</table>
+
+                            <hr> <br>
+
+
+                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-bordered table-striped mb-0">
+                                <thead>
+                                <tr>
+                                    <th scope="col">학기</th>
+                                    <th scope="col">이수구분</th>
+                                    <th scope="col">과목코드</th>
+                                    <th scope="col">과목명</th>
+                                    <th scope="col">학점</th>
+                                    <th scope="col">담당교수</th>
+                                    <th scope="col">재수강(년도/학기/과목/등급)</th>
+                                    <th scope="col">요일/교시</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr>
+                                        <td>학기</td>
+                                        <td>이수구분</td>
+                                        <td>과목코드</td>
+                                        <td>과목명</td>
+                                        <td>학점</td>
+                                        <td>담당교수</td>
+                                        <td>재수강(년도/학기/과목/등급)</td>
+                                        <td>요일/교시</td>
                                         
-                                    </tbody>
-                                </table>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            
                             </div>
-                        </div>
-                    </div>
-
-
-
-
-
 
 
 

@@ -12,21 +12,22 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/registration")
 @RequiredArgsConstructor
 public class RegistrationController {
-	
 	private static final Logger logger 
-		=LoggerFactory.getLogger(RegistrationController.class);
+	=LoggerFactory.getLogger(RegistrationController.class);
+
+	
+	@GetMapping("/open_registration")
+	public void open_rregistration() {
+		
+		logger.info("°³¼³±³°ú°ú¸ñ Á¶È¸ ÆäÀÌÁö");
+	}
 	
 	
 	@GetMapping("/registration")
 	public void registration() {
 		
-		logger.info("ìˆ˜ê°•ê³„íší‘œ í™”ë©´");
+		logger.info("¼ö°­½ÅÃ»³»¿ª Á¶È¸ ÆäÀÌÁö");
 	}
-	
-	
-	
-	
-	
 	
 	
 }

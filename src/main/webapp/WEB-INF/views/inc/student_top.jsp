@@ -125,6 +125,7 @@
                                     
                                     <div class="collapse" id="collapseSub" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="<c:url value='/registration/open_registration'/>">개설과목조회</a>
                                             <a class="nav-link" href="#">강의계획서조회</a>
                                             <a class="nav-link" href="#">수강취소</a>
                                         </nav>
@@ -134,7 +135,7 @@
                                 </nav>
                             
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="#">수강신청내역조회</a>
+                                 	  <a class="nav-link" href="<c:url value='/registration/registration'/>">수강신청내역조회</a>
 	                               </nav>
                            
                            
