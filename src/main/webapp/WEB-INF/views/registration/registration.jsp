@@ -4,7 +4,7 @@
    <div class="container-fluid px-4" style="background-color: bisque;">
         <h4 class="mt-4" style="background-color: blueviolet;">수강신청내역조회</h4>
         
-        
+        <!-- 개설교과과정 조회 페이지 -->
         <div class="card mb-4">
             <div class="card-body">
                 
