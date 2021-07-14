@@ -4,10 +4,10 @@
 
 <main>
 	<div class="container-fluid px-4">
-		<h1 class="mt-4">강의별 통계</h1>
+		<h1 class="mt-4">학생 성적 통계</h1>
 		<ol class="breadcrumb mb-4">
 			<li class="breadcrumb-item"><a href="index.html">OO학과</a></li>
-			<li class="breadcrumb-item active">OOO강의</li>
+			<li class="breadcrumb-item active">OOO</li>
 		</ol>
 		<div class="card mb-4">
 			<div class="card-body">

@@ -4,10 +4,9 @@
 
 <main>
 	<div class="container-fluid px-4">
-		<h1 class="mt-4">Charts</h1>
+		<h1 class="mt-4">학과별 교수 통계</h1>
 		<ol class="breadcrumb mb-4">
-			<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-			<li class="breadcrumb-item active">Charts</li>
+			<li class="breadcrumb-item"><a href="index.html">OO학과</a></li>
 		</ol>
 		<div class="card mb-4">
 			<div class="card-body">

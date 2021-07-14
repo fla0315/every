@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/admin_top.jsp" %>
 
-<h1 class="mt-4">공지사항</h1>
-<div class="card mb-4">
+	<h1 class="mt-4">거래게시판 관리</h1>
+	<div class="card mb-4">
 		<div class="card-header">
-			<i class="fas fa-table me-1"></i>공지사항
+			<i class="fas fa-table me-1"></i>거래게시판
 		</div>
 		<div class="card-body">
 			<table id="datatablesSimple">
@@ -30,9 +30,9 @@
 				<tbody>
 					<tr>
 						<td>1</td>
-						<td>2021학년도 제2학기 수강신청 안내</td>
+						<td>혼공자 자바교재 새제품 판매합니다~</td>
 						<td>홍길동</td>
-						<td>2021/07/14</td>
+						<td>2021/06/23</td>
 						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
 						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
 					</tr>
@@ -40,10 +40,6 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="dataTable-bottom">
-				<button class="btn btn-primary btn-sm">공지사항작성</button>
-		</div>
 	</div>
-	
 
 <%@ include file="../../inc/bottom.jsp" %>

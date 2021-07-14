@@ -496,6 +496,9 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="dataTable-bottom">
+				<button class="btn btn-primary btn-sm">학생등록</button>
+		</div>
 	</div>
 </body>
 </html>

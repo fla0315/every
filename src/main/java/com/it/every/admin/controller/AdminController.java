@@ -70,18 +70,33 @@ public class AdminController {
 		return "admin/mainDisplay/question";
 	}
 	
-	@RequestMapping("/chart/memberChart")
-	public String memberChart() {
+	@RequestMapping("/chart/studentChart")
+	public String studentChart() {
 		logger.info("학생성적통계 화면");
 		
-		return "admin/chart/memberChart";
+		return "admin/chart/studentChart";
 	}
 	
-	@RequestMapping("/chart/majorChart")
-	public String majorChart() {
-		logger.info("학과통계 화면");
+	@RequestMapping("/chart/professorChart")
+	public String professorChart() {
+		logger.info("교수강의통계 화면");
 		
-		return "admin/chart/majorChart";
+		return "admin/chart/professorChart";
+	}
+	
+	
+	@RequestMapping("/chart/majorStuChart")
+	public String majorStuChart() {
+		logger.info("학과별 학생통계 화면");
+		
+		return "admin/chart/majorStuChart";
+	}
+	
+	@RequestMapping("/chart/majorProfChart")
+	public String majorProfChart() {
+		logger.info("학과별 교수통계 화면");
+		
+		return "admin/chart/majorProfChart";
 	}
 	
 	@RequestMapping("/chart/classChart")
@@ -89,5 +104,19 @@ public class AdminController {
 		logger.info("강의별통계 화면");
 		
 		return "admin/chart/classChart";
+	}
+	
+	@RequestMapping("/board/freeBoard")
+	public String freeBoard() {
+		logger.info("자유게시판 화면");
+		
+		return "admin/board/freeBoard";
+	}
+	
+	@RequestMapping("/board/marketBoard")
+	public String marketBoard() {
+		logger.info("거래게시판 화면");
+		
+		return "admin/board/marketBoard";
 	}
 }
