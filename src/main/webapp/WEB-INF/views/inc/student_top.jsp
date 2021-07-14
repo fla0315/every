@@ -68,7 +68,7 @@
                             
                            	<div class="collapse" id="collapseMyPages" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                              <nav class="sb-sidenav-menu-nested nav">
-	                                	  <a class="nav-link" href="<c:url value='/student/studentEdit'/>"">학생정보수정</a>
+	                                	  <a class="nav-link" href="<c:url value='/student/studentEdit'/>">학생정보수정</a>
 	                              </nav>
                             
                                 	 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
@@ -77,10 +77,11 @@
                                    	 	</a>
                                     <div class="collapse" id="collapseScholarship" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">장학금 신청</a>
+                                            <a class="nav-link" href="<c:url value='/scholarship/scholarshipWrite'/>">장학금 신청</a>
                                             <a class="nav-link" href="#">장학금 조회</a>
                                         </nav>
                                     </div>
+                                    
                                     
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTuition" aria-expanded="false" aria-controls="pagesCollapseError">
                                         등록금
