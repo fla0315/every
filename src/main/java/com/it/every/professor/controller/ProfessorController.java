@@ -15,4 +15,9 @@ public class ProfessorController {
 	public void profMain() {
 		logger.info("교수님 메인 화면");
 	}
+	
+	@RequestMapping("/editProf")
+	public void editProf() {
+		logger.info("교수님 회원정보수정 화면");
+	}
 }

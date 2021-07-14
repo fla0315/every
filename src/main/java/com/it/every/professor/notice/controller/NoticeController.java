@@ -16,4 +16,11 @@ public class NoticeController {
 	public void noticeWrite() {
 		logger.info("개설교과목 공지사항 등록");
 	}
+	
+	@RequestMapping("/noticeList")
+	public void noticeList() {
+		logger.info("개설교과목 공지사항 조회");
+	}
 }
+
+

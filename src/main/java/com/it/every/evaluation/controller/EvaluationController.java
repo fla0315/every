@@ -13,6 +13,11 @@ public class EvaluationController {
 	
 	@RequestMapping("/evaluationRecord")
 	public void evaluationRecord() {
-		logger.info("성적 등록 화면");
+		logger.info("성적 입력/수정 화면");
+	}
+	
+	@RequestMapping("/evaluationCheck")
+	public void evaluationCheck() {
+		logger.info("성적 조회 화면");
 	}
 }
