@@ -2,10 +2,6 @@
 <%@ include file="inc/admin_top.jsp" %>
 
 <div class="container-fluid px-4">
-	<!-- <h1 class="mt-4">Dashboard</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">메인화면</li>
-                        </ol> -->
 	<br>
 	<div class="row">
 		<div class="col-xl-6" style="width: 750px;">
@@ -13,9 +9,6 @@
 				<div class="card-header">
 					<i class="fas fa-chart-area me-1"></i> 학사일정
 				</div>
-				<!-- <div class="card-body">
-					<canvas id="myAreaChart" width="100%" height="50"></canvas>
-				</div> -->
 				<script type="text/javascript" src="<c:url value='/resources/js/calendar.js'/>" ></script>
 				<div id="calendar" style="width: 100%"></div>
 			</div>

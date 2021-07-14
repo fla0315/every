@@ -27,7 +27,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="#">Every Haksa</a>
+            <a class="navbar-brand ps-3" href="<c:url value='/'/>">Every Haksa</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -65,38 +65,10 @@
                             </a>
                             <div class="collapse" id="collapseStudent" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseStuInfo" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        학생정보관리
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseStuInfo" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">학생등록</a>
-                                            <a class="nav-link" href="#">학생조회</a>
-                                            <a class="nav-link" href="#">학생수정</a>
-                                            <a class="nav-link" href="#">학생삭제</a>
-                                        </nav>
-                                    </div>
+                                    <a class="nav-link" href="<c:url value='/admin/student/studentList'/>">학생정보관리</a>
                                     <a class="nav-link" href="#">휴학/복학</a>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseTuition" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        등록금
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseTuition" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">등록금납부현황</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseScholar" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        장학금
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseScholar" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">대상자 조회</a>
-                                            <a class="nav-link" href="#">장학금 수여</a>
-                                        </nav>
-                                    </div>
+                                    <a class="nav-link" href="#">등록금</a>
+                                    <a class="nav-link" href="#">장학금</a>
                                 </nav>
                             </div>
                              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProf" aria-expanded="false" aria-controls="collapseLayouts">
@@ -106,18 +78,7 @@
                             </a>
                             <div class="collapse" id="collapseProf" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseProfInfo" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        교수정보관리
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseProfInfo" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">교수등록</a>
-                                            <a class="nav-link" href="#">교수조회</a>
-                                            <a class="nav-link" href="#">교수수정</a>
-                                            <a class="nav-link" href="#">교수삭제</a>
-                                        </nav>
-                                    </div>
+                                    <a class="nav-link" href="<c:url value='/admin/professor/professorList'/>">교수정보관리</a>
                                     <a class="nav-link" href="#">강의등록</a>
                                 </nav>
                             </div>
@@ -128,23 +89,26 @@
                             </a>
                             <div class="collapse" id="collapseAdmin" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAdminInfo" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        임직원정보관리
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAdminInfo" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">임직원등록</a>
-                                            <a class="nav-link" href="#">임직원조회</a>
-                                            <a class="nav-link" href="#">임직원수정</a>
-                                            <a class="nav-link" href="#">임직원삭제</a>
-                                        </nav>
-                                    </div>
+                                    <a class="nav-link" href="<c:url value='/admin/employee/employeeList'/>">임직원정보관리</a>
                                 </nav>
                             </div>
                             
-                            <!-- 커뮤니티관리 -->
-                            <div class="sb-sidenav-menu-heading">커뮤니티 관리</div>
+                            <!-- 게시판 관리 -->
+                            <div class="sb-sidenav-menu-heading">게시판 관리</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMain" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                메인화면
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseMain" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/notice'/>">공지사항</a>
+                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/lunchMenu'/>">식단표</a>
+                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/campusMap'/>">캠퍼스맵</a>
+                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/calendar'/>">학사일정</a>
+                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/question'/>">Q&A</a>
+                                </nav>
+                            </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBoard" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 자유게시판
@@ -168,43 +132,40 @@
                                 </nav>
                             </div>
                             
-                            <!-- 메인화면관리 -->
-                            <div class="sb-sidenav-menu-heading" >메인화면 관리</div>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                공지사항
-                            </a>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                식단표
-                            </a>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                캠퍼스맵
-                            </a>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                학사일정
-                            </a>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Q&A
-                            </a>
-                            
                             <!-- 시스템통계 -->
                             <div class="sb-sidenav-menu-heading">시스템통계</div>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMember" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 회원
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <a class="nav-link" href="#">
+                            <div class="collapse" id="collapseMember" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<c:url value='/admin/chart/memberChart'/>">학생 성적 통계</a>
+                                    <a class="nav-link" href="<c:url value='/admin/chart/memberChart'/>">교수 강의평가 통계</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMajor" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 학과
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <a class="nav-link" href="#">
+                            <div class="collapse" id="collapseMajor" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<c:url value='/admin/chart/majorChart'/>">학과별 학생 통계</a>
+                                    <a class="nav-link" href="<c:url value='/admin/chart/majorChart'/>">학과별 교수 통계</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseClass" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 강의
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
+                            <div class="collapse" id="collapseClass" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<c:url value='/admin/chart/classChart'/>">강의별 학생 통계</a>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
