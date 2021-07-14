@@ -22,6 +22,13 @@ public class scholarshipController {
 		
 	}
 	
+	@RequestMapping("/scholarshipList")
+	public void scholarshipList() {
+		
+		logger.info("장학금 조회 페이지");
+		
+	}
+	
 	
 	
 	
