@@ -22,7 +22,7 @@ public interface ConstUtil {
 	
 	//자료실 - 파일 저장 경로
 	String FILE_UPLOAD_PATH="pds_upload";
-	String FILE_UPLOAD_PATH_TEST="D:\\workspace_list\\spboot_WS\\springherb\\src\\main\\webapp\\pds_upload";
+	String FILE_UPLOAD_PATH_TEST="E:\\workspace_list\\spboot_WS\\springherb\\src\\main\\webapp\\pds_upload";
 	
 	//관리자 페이지 - 상품 등록시 상품 이미지 저장 경로
 	String IMAGE_FILE_UPLOAD_PATH="pd_images";
