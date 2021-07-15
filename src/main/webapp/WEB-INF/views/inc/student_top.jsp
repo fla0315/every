@@ -90,8 +90,8 @@
                                     
                                     <div class="collapse" id="collapseTuition" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">등록금 조회</a>
-                                            <a class="nav-link" href="#">등록금 납부</a>
+                                            <a class="nav-link" href="<c:url value='/tuition/tuitionList'/>">등록금 조회</a>
+                                            <a class="nav-link" href="">등록금 납부</a>
                                         </nav>
                                     </div>
                                 </nav>
