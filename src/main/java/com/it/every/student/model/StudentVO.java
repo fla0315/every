@@ -24,8 +24,9 @@ public class StudentVO {
 	private String indentity_state;/* 본인인증상태 */
 	private String indentity_code;/* 본인인증코드 */
 	private Timestamp change_date;/* 비밀번호 변경일 */
-	private String state;/* 학적상태번호 */
+	private String state;/* 학적상태번호*/
 	private int dept_no;/* 학과번호 */
-	
+	private String phonenum; /*휴대전화*/
+
 	
 }

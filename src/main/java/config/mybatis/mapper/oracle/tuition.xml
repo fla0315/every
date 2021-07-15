@@ -5,7 +5,11 @@
 <!-- <mapper namespace="config.mybatis.mapper.oracle.board"> -->
 <mapper namespace="config.mybatis.mapper.oracle.board">
 
+<select id="">
 
+select * from tuitionView
+
+</select>
 	
 </mapper>
 
