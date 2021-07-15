@@ -5,16 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.it.every.scholarship.controller.scholarshipController;
-
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/tuition")
 @RequiredArgsConstructor
-public class tuitionController {
+public class TuitionController {
 
-	private static final Logger logger = LoggerFactory.getLogger(tuitionController.class);
+	private static final Logger logger = LoggerFactory.getLogger(TuitionController.class);
 	
 
 	@RequestMapping("/tuitionList")
