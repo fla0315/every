@@ -4,10 +4,10 @@
 
 <main>
 	<div class="container-fluid px-4">
-		<h1 class="mt-4">Charts</h1>
+		<h1 class="mt-4">학생 성적 통계</h1>
 		<ol class="breadcrumb mb-4">
-			<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-			<li class="breadcrumb-item active">Charts</li>
+			<li class="breadcrumb-item"><a href="index.html">OO학과</a></li>
+			<li class="breadcrumb-item active">OOO</li>
 		</ol>
 		<div class="card mb-4">
 			<div class="card-body">
@@ -20,7 +20,7 @@
 		</div>
 		<div class="card mb-4">
 			<div class="card-header">
-				<i class="fas fa-chart-area me-1"></i> Area Chart Example
+				<i class="fas fa-chart-area me-1"></i> 학기별 평점
 			</div>
 			<div class="card-body">
 				<canvas id="myAreaChart" width="100%" height="30"></canvas>
@@ -28,7 +28,7 @@
 			<div class="card-footer small text-muted">Updated yesterday at
 				11:59 PM</div>
 		</div>
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-lg-6">
 				<div class="card mb-4">
 					<div class="card-header">
@@ -53,7 +53,7 @@
 						at 11:59 PM</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </main>
 <script src="<c:url value='/resources/js/chart-pie-demo.js'/>"></script>

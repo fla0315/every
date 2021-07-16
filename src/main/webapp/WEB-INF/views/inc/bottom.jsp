@@ -19,6 +19,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/chart-area-demo.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/chart-bar-demo.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/chart-pie-demo.js'/>"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/datatables-simple-demo.js'/>"></script>
     </body>
