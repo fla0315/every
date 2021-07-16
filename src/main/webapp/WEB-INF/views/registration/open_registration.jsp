@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../inc/student_top.jsp" %>
 
-   <div class="container-fluid px-4" style="background-color: bisque;">
-        <h4 class="mt-4" style="background-color: blueviolet;">개설과목조회</h4>
+   <div class="container-fluid px-4" style="background-color: white;">
+        <h4 class="mt-4" style="background-color: white;">개설과목조회</h4>
         
         
         <div class="card mb-4">

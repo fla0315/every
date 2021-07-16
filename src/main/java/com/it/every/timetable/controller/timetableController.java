@@ -1,4 +1,4 @@
-package com.it.every.registration.controller;
+package com.it.every.timetable.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,28 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.it.every.registration.controller.RegistrationController;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/registration")
+@RequestMapping("/timetable")
 @RequiredArgsConstructor
-public class RegistrationController {
+public class timetableController {
+
 	private static final Logger logger 
-	=LoggerFactory.getLogger(RegistrationController.class);
+	=LoggerFactory.getLogger(timetableController.class);
 
 	
-	@GetMapping("/open_registration")
+	@GetMapping("/timetable")
 	public void open_rregistration() {
 		
-		logger.info("개설교과과정페이지");
+		logger.info("시간표 화면 보여주기");
 	}
-	
-	
-	@GetMapping("/registration")
-	public void registration() {
-		
-		logger.info("수강신청내역 페이지");
-	}
-	
 	
 }
