@@ -13,6 +13,6 @@ public class AttendanceController {
 	
 	@RequestMapping("/attendance")
 	public void evaluationRecord() {
-		logger.info("√‚ºÆ∫Œ");
+		logger.info("Ï∂úÏÑùÎ∂Ä");
 	}
 }

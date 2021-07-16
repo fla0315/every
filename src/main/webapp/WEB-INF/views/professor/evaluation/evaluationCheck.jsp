@@ -27,7 +27,6 @@ body {
 	<article>
 		<div class="container" role="main">
 			<h2>성적 입력/수정</h2>
-			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
 				<br>
 				<div class="mb-3">
 					<label for="title">개설교과목</label>
@@ -45,23 +44,21 @@ body {
                        <table id="datatablesSimple">
                            <thead>
                                <tr>
-                               	<th><input type="checkbox"></th>
                                	<th>NO.</th>
-                                   <th>이름</th>
-                                   <th>학년</th>
-                                   <th>학번</th>
-                                   <th>학과</th>
-                                   <th>출석</th>
-                                   <th>과제</th>
-                                   <th>중간고사</th>
-                                   <th>기말고사</th>
-                                   <th>총점</th>
-                                   <th>최종성적</th>
+                                <th>이름</th>
+                                <th>학년</th>
+                                <th>학번</th>
+                                <th>학과</th>
+                                <th>출석</th>
+                                <th>과제</th>
+                                <th>중간고사</th>
+                                <th>기말고사</th>
+                                <th>총점</th>
+                                <th>최종성적</th>
                                </tr>
                            </thead>
                            <tbody>
                                <tr>
-                               	<td><input type="checkbox"></td>
                                    <td>1</td>
                                    <td>홍길동</td>
                                    <td>1</td>
@@ -69,20 +66,18 @@ body {
                                    <td>컴퓨터공학과</td>
                                    <td></td>
                                    <td></td>
-                                   <td><input type="text" style="width:50px"></td> <!-- 중간 -->
-                                   <td><input type="text" style="width:50px"></td> <!-- 기말 -->
-                                   <td><input type="text" style="width:50px"></td> <!-- 총점 -->
+                                   <td></td>
+                                   <td></td>
+                                   <td></td>
                                    <td></td>
                                </tr>
                            </tbody>
                        </table>
                    </div>
                </div>
-			</form>
-			
 			<div >
+				<p>최종 수정 날짜 : </p>
 				<button type="button" class="btn btn-sm btn-primary" id="btnSave">제출</button>
-				<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
 			</div>
 
 		</div>

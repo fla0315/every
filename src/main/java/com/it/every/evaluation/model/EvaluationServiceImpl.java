@@ -1,5 +1,8 @@
 package com.it.every.evaluation.model;
 
-public class EvaluationServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class EvaluationServiceImpl implements EvaluationService {
 
 }

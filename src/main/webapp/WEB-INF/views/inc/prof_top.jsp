@@ -15,12 +15,17 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        
         
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">교수님 페이지</a>
+            <a class="navbar-brand ps-3" href="<c:url value='/professor/profMain'/>">교수님 페이지</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -49,7 +54,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">마이페이지</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="<c:url value='/professor/editProf'/>">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
                                 회원정보수정
                             </a>
@@ -62,8 +67,8 @@
                             </a>
                             <div class="collapse" id="collapseNotice" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<c:url value='/professor/notice/noticeList'/>">공지사항 조회</a>
                                 	<a class="nav-link" href="<c:url value='/professor/notice/noticeWrite'/>">공지사항 등록</a>
-                                    <a class="nav-link" href="layout-static.html">공지사항 조회</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLecture" aria-expanded="false" aria-controls="collapseLayouts">
@@ -73,9 +78,9 @@
                             </a>
                             <div class="collapse" id="collapseLecture" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                	<a class="nav-link" href="layout-sidenav-light.html">강의 개설 신청</a>
-                                    <a class="nav-link" href="layout-static.html">강의 현황</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">학생 현황</a>
+                                	<a class="nav-link" href="#">강의 개설 신청</a>
+                                    <a class="nav-link" href="#">강의 현황</a>
+                                    <a class="nav-link" href="#">학생 현황</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -94,8 +99,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">과제 개설</a>
-                                            <a class="nav-link" href="register.html">과제 조회</a><!-- 평가 포함 -->
+                                            <a class="nav-link" href="#">과제 개설</a>
+                                            <a class="nav-link" href="#">과제 조회</a><!-- 평가 포함 -->
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
@@ -104,27 +109,25 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationRecord'/>">성적 입력</a>
-                                            <a class="nav-link" href="404.html">성적 조회</a>
-                                            <a class="nav-link" href="500.html">성적 수정</a>
+                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationRecord'/>">성적 입력/수정</a>
+                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationCheck'/>">성적 조회</a>
                                         </nav>
                                     </div>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">커뮤니티</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="#l">
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 자유게시판
                             </a>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 거래게시판
                             </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <div class="small">**교수님 환영합니다.</div>
                     </div>
                 </nav>
             </div>
