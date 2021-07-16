@@ -7,8 +7,8 @@
 
 	
 	<select id="selectByStuNo" parameterType="String" resultType="TuitionVO">
-		select * from tuitionView
-		where stu_no=#{stuNo}
+		select * from tuition
+		where stu_no= #{stuNo}
 	</select>
 	
 </mapper>
