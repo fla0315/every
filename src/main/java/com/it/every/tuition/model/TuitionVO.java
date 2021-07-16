@@ -11,12 +11,12 @@ import lombok.ToString;
 @ToString
 public class TuitionVO {
 
-	private int no; /* µî·Ï±İ¹øÈ£ */
-	private String stu_no; /* ÇĞ¹ø */
-	private String semester; /* ÇĞ ±â */
-	private int tuition;/* ±İ ¾× */
-	private String deposit_state; /* ³³ ºÎ¿© ºÎ */
-	private Timestamp deposit_date; /* ³³ ºÎÀÏ  */
+	private int no;  //ë“±ë¡ê¸ˆë²ˆí˜¸
+	private String stu_no; //í•™ë²ˆ
+	private String semester; //í•™ê¸°
+	private int tuition; //ë“±ë¡ê¸ˆ
+	private String deposit_state; /* ë‚©ë¶€ìƒí…Œ */
+	private Timestamp deposit_date; /* ë‚©ë¶€ì¼ì  */
 	
 	
 	
