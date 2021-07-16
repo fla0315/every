@@ -13,11 +13,11 @@ public class EvaluationController {
 	
 	@RequestMapping("/evaluationRecord")
 	public void evaluationRecord() {
-		logger.info("¼ºÀû ÀÔ·Â/¼öÁ¤ È­¸é");
+		logger.info("ì„±ì  ì…ë ¥/ìˆ˜ì • í™”ë©´");
 	}
 	
 	@RequestMapping("/evaluationCheck")
 	public void evaluationCheck() {
-		logger.info("¼ºÀû Á¶È¸ È­¸é");
+		logger.info("ì„±ì  ì¡°íšŒ í™”ë©´");
 	}
 }
