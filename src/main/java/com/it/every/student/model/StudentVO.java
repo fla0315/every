@@ -11,22 +11,23 @@ import lombok.ToString;
 @ToString
 public class StudentVO {
 	
-	private String stu_no;/* ÇĞ¹ø */
-	private String student_id;/* ¾ÆÀÌµğ */
-	private String pwd ; /* ºñ¹Ğ¹øÈ£ */
-	private String name;/* ¼º¸í */
-	private String semester; /* ÇĞ±â */
-	private String major; /* Àü°ø */
-	private String minor; /* ºÎÀü°ø */
-	private Timestamp admission_date; /* ÀÔÇĞÀÏ */
-	private Timestamp graduation_date;/* Á¹¾÷ÀÏ */
-	private int credits;/* ÀÌ¼öÇĞÁ¡ */
-	private String indentity_state;/* º»ÀÎÀÎÁõ»óÅÂ */
-	private String indentity_code;/* º»ÀÎÀÎÁõÄÚµå */
-	private Timestamp change_date;/* ºñ¹Ğ¹øÈ£ º¯°æÀÏ */
-	private String state;/* ÇĞÀû»óÅÂ¹øÈ£*/
-	private int dept_no;/* ÇĞ°ú¹øÈ£ */
-	private String phonenum; /*ÈŞ´ëÀüÈ­*/
+	private String stuNo ;/* í•™ë²ˆ */
+	private String studentId;/* ì•„ì´ë”” */
+	private String pwd; /* ë¹„ë°€ë²ˆí˜¸ */
+	private String name ; /* ì„±ëª… */
+	private String semester;/* í•™ê¸° */
+	private String major ;/* ì „ê³µ */
+	private String minor ; /* ë¶€ì „ê³µ */
+	private Timestamp admissionDate; /* ì…í•™ì¼ */
+	private Timestamp graduationDate ; /* ì¡¸ì—…ì¼ */
+	private int credits ; /* ì´ìˆ˜í•™ì  */
+	private String indentityState ; /* ë³¸ì¸ì¸ì¦ìƒíƒœ */
+	private String indentityCode ; /* ë³¸ì¸ì¸ì¦ì½”ë“œ */
+	private Timestamp changeDate ;/* ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ì¼ */
+	private String state ; /* í•™ì ìƒíƒœë²ˆí˜¸ */
+	private int deptNo ;/* í•™ê³¼ë²ˆí˜¸ */
+	private String phonenum; /*ì „í™”ë²ˆí˜¸*/
+
 
 	
 }
