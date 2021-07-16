@@ -5,7 +5,8 @@
 <!-- <mapper namespace="config.mybatis.mapper.oracle.board"> -->
 <mapper namespace="com.it.every.tuition.model.TuitionDAO">
 
-	<select id="selectTuitionView" parameterType="String" resultType="map">
+	
+	<select id="selectByStuNo" parameterType="String" resultType="TuitionVO">
 		select * from tuitionView
 		where stu_no=#{stuNo}
 	</select>

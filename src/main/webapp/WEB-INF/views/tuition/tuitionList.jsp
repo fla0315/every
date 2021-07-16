@@ -4,17 +4,16 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
- <div class="container-fluid px-4" style="background-color: white;">
+<div class="container-fluid px-4" style="background-color: white;">
 	<h4 class="mt-4" style="background-color: white;">등록금 조회</h4>
 	<br>
 
 	<div class="card mb-4">
 		<div class="card-body">
-
-			<table border="0" cellpadding="0" cellspacing="0" style="width: 80%; margin: 0 auto; " >
+			<table border="0" cellpadding="0" cellspacing="0"
+				style="width: 80%; margin: 0 auto;">
 
 				<tr>
-
 					<td><span class=""><label for="학기">학번</label></span></td>
 					<td><input type="text" style="width: 50%;"></td>
 
@@ -23,10 +22,12 @@
 
 					<td><span class=""><label for="학기">학년</label></span></td>
 					<td><input type="text" style="width: 50%"></td>
-	
-				</tr>
-		<tr> <td><span> &nbsp;</span></td></tr>
 
+				</tr>
+				
+				<tr>
+					<td><span> &nbsp;</span></td>
+				</tr>
 				<tr style="margin-top: 20">
 					<td><span class=""><label for="학기">학부(과)</label></span></td>
 					<td><input type="text" style="width: 50%"></td>
@@ -39,59 +40,58 @@
 						<button>출력</button>
 
 					</td>
-
 					<!-- 등록금번호 학번 학기 금액, 납부여부, 납부일   -->
-
 				</tr>
-
 			</table>
 		</div>
-
 	</div>
 
-	<hr>
-	<br>
-
+	<hr><br>
 
 	<div class="container">
-<table class="table table-sm">
-  <thead>
-    <tr>
-      <th scope="col" width="80">번호</th>
-      <th scope="col" width="100">학기</th>
-      <th scope="col" width="100">학번</th>
-      <th scope="col" width="100">금액</th>
-      <th scope="col"width="200">납입구분</th>
-      <th scope="col" width="200">납부일자</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>1학기</td>
-      <td>201224026</td>
-      <td>5,000,000</td>
-      <td>납부완료</td>
-      <td>2012-03-05</td>
-    </tr>
- <tr>
-      <th scope="row">2</th>
-      <td>1학기</td>
-      <td>201224026</td>
-      <td>5,000,000</td>
-      <td>납부완료</td>
-      <td>2012-03-05</td>
-    </tr> <tr>
-     <th scope="row">3</th>
-      <td>1학기</td>
-      <td>201224026</td>
-      <td>5,000,000</td>
-      <td>납부완료</td>
-      <td>2012-03-05</td>
-    </tr>
-  </tbody>
-</table>	
-	</div>			
-		</div>		
+		<table class="box2">
+			<caption>등록금 조회</caption>
+			<colgroup>
+				<col style="width: 10%;" />
+				<col style="width: 10%;" />
+				<col style="width: 15%;" />
+				<col style="width: 15%;" />
+				<col style="width: 10%;" />
+				<col style="width: 10%;" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">번호</th>
+					<th scope="col">학기</th>
+					<th scope="col">학번</th>
+					<th scope="col">금액</th>
+					<th scope="col">납입구분</th>
+					<th scope="col">납부일자</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${empty list }">
+					<tr>
+						<td colspan="6" class="align_center">조회된 등록금이 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:if test="${!empty list }">
+					<!--게시판 내용 반복문 시작  -->
+					<c:forEach var="vo" items="${list }">
+						<tr class="align_center">
+							<td>${vo.no}</td>
+							<td class="align_left">${vo.semester}</td>
+							<td>${vo.stuNo}</td>
+							<td>${vo.tuition }</td>
+							<td>${vo.depositState}</td>
+							<td>${vo.depositDate}</td>
+						</tr>
+					</c:forEach>
+					<!--반복처리 끝  -->
+				</c:if>
+			</tbody>
+		</table>
+	</div>
+</div>
 <%@ include file="../inc/bottom.jsp" %>        
 				
