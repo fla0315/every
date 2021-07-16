@@ -100,4 +100,10 @@ on p.dept_no = d.dept_no
 join prof_position pp
 on p.position_no = pp.position_no;
 
+create or replace view evaluationView
+as
+select s.name, s.major, trunc(s.semester/2) year, e.*
+from student s join evaluation e
+on s.stu_no = e.stu_no;
+
 commit;

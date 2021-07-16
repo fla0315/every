@@ -52,9 +52,14 @@ public class EvaluationController {
 		
 		//개설과목별 학생리스트 불러오기
 		List<Map<String, Object>> evList = evaluationService.selectEvaluationView(openSubCode);
-		logger.info("교수님 개설강좌 목록 osList.size={}", evList.size());
-		model.addAttribute("evList", evList);
+		if (evList.size()<0) {
+			logger.info("실패");
+		}else {
+			logger.info("개설과목별 학생리스트 evList.size={}", evList.size());
+			model.addAttribute("evList", evList);
+		}
+		return "/professor/evaluation/evaluationRecord";
 		
-		return "redirect:/professor/evaluation/evaluationRecord";
+		//select 가져올 방법 찾기 
 	}
 }

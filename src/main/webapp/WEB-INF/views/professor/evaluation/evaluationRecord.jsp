@@ -85,9 +85,9 @@ body {
                                </c:if>
                                <c:if test="${!empty evList }">
                               	 <c:set var="no" value="1" />
-                               	<c:forEach var="vo" items="${evList }">
+                               	<c:forEach var="map" items="${evList }">
                                		<tr>
-                               			<td>${no }</td>
+                               			<td>${map['NAME'] }</td>
                                			<td></td>
                                		</tr>
                                		<c:set var="no" value="${no }+1" />

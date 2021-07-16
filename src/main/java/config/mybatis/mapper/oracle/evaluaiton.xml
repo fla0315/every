@@ -12,6 +12,5 @@
 		select * from evaluationView
 		where sub_code=#{openSubCode}
 	</select>
-	
 	<!-- insert는 evaluaiton에 그대로 sub_code, stu_no -->
 </mapper>
