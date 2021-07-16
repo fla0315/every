@@ -68,7 +68,7 @@
                             
                            	<div class="collapse" id="collapseMyPages" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                              <nav class="sb-sidenav-menu-nested nav">
-	                                	  <a class="nav-link" href="#">학생정보수정</a>
+	                                	  <a class="nav-link" href="<c:url value='/student/studentEdit'/>">학생정보수정</a>
 	                              </nav>
                             
                                 	 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
@@ -77,10 +77,11 @@
                                    	 	</a>
                                     <div class="collapse" id="collapseScholarship" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">장학금 신청</a>
-                                            <a class="nav-link" href="#">장학금 조회</a>
+                                            <a class="nav-link" href="<c:url value='/scholarship/scholarshipWrite'/>">장학금 신청</a>
+                                            <a class="nav-link" href="<c:url value='/scholarship/scholarshipList'/>">장학금 조회</a>
                                         </nav>
                                     </div>
+                                    
                                     
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTuition" aria-expanded="false" aria-controls="pagesCollapseError">
                                         등록금
@@ -89,8 +90,8 @@
                                     
                                     <div class="collapse" id="collapseTuition" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">등록금 조회</a>
-                                            <a class="nav-link" href="#">등록금 납부</a>
+                                            <a class="nav-link" href="<c:url value='/tuition/tuitionList'/>">등록금 조회</a>
+                                            <a class="nav-link" href="">등록금 납부</a>
                                         </nav>
                                     </div>
                                 </nav>
@@ -126,7 +127,7 @@
                                     <div class="collapse" id="collapseSub" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="<c:url value='/registration/open_registration'/>">개설과목조회</a>
-                                            <a class="nav-link" href="#">강의계획서조회</a>
+                                            <a class="nav-link" href="<c:url value='/timetable/timetable'/>">강의계획서조회</a>
                                             <a class="nav-link" href="#">수강취소</a>
                                         </nav>
                                     </div>
@@ -185,7 +186,7 @@
                                  	  <a class="nav-link" href="#">자유게시판</a>
 	                               </nav>
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="#">시간표조회</a>
+                                 	  <a class="nav-link" href="<c:url value='/timetable/timetable'/>"">시간표조회</a>
 	                               </nav>
                             </div>
                           <!-- 나의 강좌 끝 -->
