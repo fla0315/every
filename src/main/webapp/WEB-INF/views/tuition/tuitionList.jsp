@@ -76,7 +76,6 @@
 					</tr>
 				</c:if>
 				<c:if test="${!empty list }">
-					<!--게시판 내용 반복문 시작  -->
 					<c:forEach var="vo" items="${list }">
 						<tr class="align_center">
 							<td>${vo.no}</td>
@@ -87,7 +86,6 @@
 							<td>${vo.depositDate}</td>
 						</tr>
 					</c:forEach>
-					<!--반복처리 끝  -->
 				</c:if>
 			</tbody>
 		</table>

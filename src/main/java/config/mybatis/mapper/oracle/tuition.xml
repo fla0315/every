@@ -2,14 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- <mapper namespace="config.mybatis.mapper.oracle.board"> -->
 <mapper namespace="com.it.every.tuition.model.TuitionDAO">
 
-	
 	<select id="selectByStuNo" parameterType="String" resultType="TuitionVO">
 		select * from tuition
-		where stu_no= #{stuNo}
+		where stu_no =#{stuNo}
 	</select>
+	
 	
 </mapper>
 

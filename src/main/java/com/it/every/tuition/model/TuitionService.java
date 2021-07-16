@@ -4,7 +4,6 @@ import java.util.List;
 
 public interface TuitionService {
 	
-
 	List<TuitionVO>selectByStuNo (String stuNo);
 	
 	

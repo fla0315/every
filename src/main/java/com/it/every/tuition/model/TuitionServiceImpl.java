@@ -13,7 +13,7 @@ public class TuitionServiceImpl implements TuitionService{
 	private final TuitionDAO tuitionDao;
 
 	@Override
-	public List<TuitionVO> selectByStuNo(String stuNo) {
+	public List<TuitionVO> selectByStuNo(String stuNo ) {
 		return tuitionDao.selectByStuNo(stuNo);
 	}
 	
