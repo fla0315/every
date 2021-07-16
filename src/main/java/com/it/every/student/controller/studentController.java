@@ -23,7 +23,7 @@ public class studentController {
 	@GetMapping("/studentEdit")
 	public void studentEdit() {
 		
-		logger.info("È¸¿ø ¼öÁ¤ ÆäÀÌÁö");
+		logger.info("í•™ìƒì •ë³´ìˆ˜ì •");
 	}
 	
 	

@@ -22,7 +22,7 @@ public class timetableController {
 	@GetMapping("/timetable")
 	public void open_rregistration() {
 		
-		logger.info("½Ã°£Ç¥ Á¶È¸ ÆäÀÌÁö");
+		logger.info("ì‹œê°„í‘œ í™”ë©´ ë³´ì—¬ì£¼ê¸°");
 	}
 	
 }

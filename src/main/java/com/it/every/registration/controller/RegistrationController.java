@@ -19,14 +19,14 @@ public class RegistrationController {
 	@GetMapping("/open_registration")
 	public void open_rregistration() {
 		
-		logger.info("°³¼³±³°ú°ú¸ñ Á¶È¸ ÆäÀÌÁö");
+		logger.info("ê°œì„¤êµê³¼ê³¼ì •í˜ì´ì§€");
 	}
 	
 	
 	@GetMapping("/registration")
 	public void registration() {
 		
-		logger.info("¼ö°­½ÅÃ»³»¿ª Á¶È¸ ÆäÀÌÁö");
+		logger.info("ìˆ˜ê°•ì‹ ì²­ë‚´ì—­ í˜ì´ì§€");
 	}
 	
 	

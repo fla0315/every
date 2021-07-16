@@ -3,13 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- <mapper namespace="config.mybatis.mapper.oracle.board"> -->
-<mapper namespace="config.mybatis.mapper.oracle.board">
+<mapper namespace="com.it.every.tuition.model.TuitionDAO">
 
-<select id="">
-
-select * from tuitionView
-
-</select>
+	<select id="selectTuitionView" parameterType="String" resultType="map">
+		select * from tuitionView
+		where stu_no=#{stuNo}
+	</select>
 	
 </mapper>
 

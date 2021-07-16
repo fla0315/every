@@ -18,7 +18,7 @@ public class TuitionController {
 	@RequestMapping("/tuitionList")
 	public void scholarshipWrite() {
 		
-		logger.info("µî·Ï±İ Á¶È¸ ÆäÀÌÁö");
+		logger.info("ë“±ë¡ê¸ˆ ì¡°íšŒ");
 		
 	}
 	

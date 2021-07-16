@@ -18,14 +18,14 @@ public class scholarshipController {
 	@RequestMapping("/scholarshipWrite")
 	public void scholarshipWrite() {
 		
-		logger.info("ÀåÇĞ±İ µî·Ï ÆäÀÌÁö");
+		logger.info("ì¥í•™ê¸ˆ ì‹ ì²­");
 		
 	}
 	
 	@RequestMapping("/scholarshipList")
 	public void scholarshipList() {
 		
-		logger.info("ÀåÇĞ±İ Á¶È¸ ÆäÀÌÁö");
+		logger.info("ì¥í•™ê¸ˆ ëª©ë¡");
 		
 	}
 	
