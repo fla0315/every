@@ -16,7 +16,7 @@ body {
 	});
 </script>
 <article>
-	<div class="container" role="main">
+	<div class="container col-lg-10" role="main">
 		<h2>공지사항</h2>
 		<br>
 		<div class="mb-3">

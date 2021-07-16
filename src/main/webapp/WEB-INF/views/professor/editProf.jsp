@@ -7,9 +7,8 @@
 </style>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
-                <main>
                        <div class="row justify-content-center topdown">
-                           <div class="col-lg-7">
+                           <div class="col-lg-10">
                                <div class="card shadow-lg border-0 rounded-lg mt-5">
                                    <div class="card-header">
                                    	<h3 class="text-center font-weight-light my-4">교수님 회원정보수정</h3>
@@ -72,7 +71,6 @@
                                </div>
                            </div>
                        </div>
-                </main>
             </div>
          </div>
 <%@ include file="../inc/bottom.jsp" %>

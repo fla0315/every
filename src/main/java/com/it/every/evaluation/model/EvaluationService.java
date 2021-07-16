@@ -1,5 +1,9 @@
 package com.it.every.evaluation.model;
 
-public interface EvaluationService {
+import java.util.List;
+import java.util.Map;
 
+public interface EvaluationService {
+	List<EvaluationVO> selectBySubCode(String openSubCode);
+	List<Map<String, Object>> selectEvaluationView(String openSubCode);
 }

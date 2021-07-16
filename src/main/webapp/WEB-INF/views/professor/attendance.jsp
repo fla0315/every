@@ -21,7 +21,7 @@ body {
 }
 </style>
 	<article>
-		<div class="container" role="main">
+		<div class="container col-lg-10" role="main">
 			<h2>출석부</h2>
 			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
 				<br>

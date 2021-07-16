@@ -25,7 +25,7 @@ body {
 }
 </style>
 	<article>
-		<div class="container" role="main">
+		<div class="container col-lg-10" role="main">
 			<h2>성적 입력/수정</h2>
 				<br>
 				<div class="mb-3">
