@@ -10,16 +10,16 @@ import lombok.ToString;
 @Getter
 @ToString
 public class ProfessorVO {
-	private int prof_no;				//±³¼ö¹øÈ£
-	private int position_no2;			//Á÷Ã¥¹øÈ£
-	private int dept_no;				//ÇĞ°ú¹øÈ£
-	private String prof_name;			//±³¼ö¸í
-	private String prof_id;				//¾ÆÀÌµğ
-	private String prof_pwd;			//ºñ¹Ğ¹øÈ£
-	private String prof_email;			//ÀÌ¸ŞÀÏ
-	private Timestamp prof_start_date;	//ÀÓ¿ëÀÏ
-	private Timestamp prof_end_date;	//ÅğÁ÷ÀÏ
-	private char identity_state;		//º»ÀÎÀÎÁõ»óÅÂ
-	private String identity_code;		//º»ÀÎÀÎÁõÄÚµå
-	private Timestamp change_date;		//ºñ¹Ğ¹øÈ£ º¯°æÀÏ
+	private int profNo;					//êµìˆ˜ë²ˆí˜¸
+	private int positionNo;				//ì§ì±…ë²ˆí˜¸
+	private int deptNo;					//í•™ê³¼ë²ˆí˜¸
+	private String profName;			//êµìˆ˜ëª…
+	private String profId;				//êµìˆ˜ ì•„ì´ë””
+	private String profPwd;				//ë¹„ë°€ë²ˆí˜¸
+	private String profEmail;			//ì´ë©”ì¼
+	private Timestamp profStartDate;	//ì„ìš©ì¼
+	private Timestamp profEndDate;		//í‡´ì§ì¼
+	private char identityState;			//ë³¸ì¸ì¸ì¦ìƒíƒœ
+	private String identityCode;		//ë³¸ì¸ì¸ì¦ì½”ë“œ
+	private Timestamp changeDate;		//ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ì¼
 }

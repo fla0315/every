@@ -2,6 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="config.mybatis.mapper.oracle.ProfessorDAO">
-
+<mapper namespace="com.it.every.professor.model.ProfessorDAO">
+	<select id="selectByid" parameterType="string" resultType="professorVo">
+		select * from professor where prof_id = #{prof_id}
+	</select>
+	
+	<select id="selectProfessorDeptView" parameterType="string" resultType="map">
+		select * from professorDeptView
+		where prof_id=#{prof_kim}
+	</select>
+	
+	<select id="selectPwd" parameterType="String" resultType="String">
+		select prof_pwd from professor
+		where prof_id=#{prof_id}
+	</select>
+	
+	<select id="checkDuplicate" parameterType="String" resultType="int">
+		select count(*) from professor where prof_id=#{prof_id}
+	</select>
+	
+	<update id="updateProf" parameterType="professorVo">
+		update professor
+		set prof_id=#{profId}, prof_email=#{profEmail}
+		where prof_no=#{profNo}
+	</update>
 </mapper>

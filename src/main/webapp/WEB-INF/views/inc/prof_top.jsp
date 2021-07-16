@@ -54,7 +54,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">마이페이지</div>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="<c:url value='/professor/editProf'/>">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
                                 회원정보수정
                             </a>

@@ -14,12 +14,12 @@ public class NoticeController {
 	
 	@RequestMapping("/noticeWrite")
 	public void noticeWrite() {
-		logger.info("°³¼³±³°ú¸ñ °øÁö»çÇ× µî·Ï");
+		logger.info("ê°œì„¤êµê³¼ëª© ê³µì§€ì‚¬í•­ ë“±ë¡");
 	}
 	
 	@RequestMapping("/noticeList")
 	public void noticeList() {
-		logger.info("°³¼³±³°ú¸ñ °øÁö»çÇ× Á¶È¸");
+		logger.info("ê°œì„¤êµê³¼ëª© ê³µì§€ì‚¬í•­ ì¡°íšŒ");
 	}
 }
 
