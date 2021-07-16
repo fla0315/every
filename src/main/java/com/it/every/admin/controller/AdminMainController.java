@@ -3,37 +3,13 @@ package com.it.every.admin.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminMainController {
 
-	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	
-	@RequestMapping("/student/studentList")
-	public String studentList() {
-		logger.info("학생조회 화면");
-		
-		return "admin/student/studentList";
-	}
-	
-	
-	@RequestMapping("/professor/professorList")
-	public String professorList() {
-		logger.info("교수조회 화면");
-		
-		return "admin/professor/professorList";
-	}
-	
-	
-	@RequestMapping("/employee/employeeList")
-	public String employeeList() {
-		logger.info("임직원조회 화면");
-		
-		return "admin/employee/employeeList";
-	}
+	private static final Logger logger = LoggerFactory.getLogger(AdminMainController.class);
 	
 	@RequestMapping("/mainDisplay/calendar")
 	public String calendar() {
@@ -70,28 +46,6 @@ public class AdminController {
 		return "admin/mainDisplay/question";
 	}
 	
-	@RequestMapping("/chart/studentChart")
-	public String studentChart() {
-		logger.info("학생성적통계 화면");
-		
-		return "admin/chart/studentChart";
-	}
-	
-	@RequestMapping("/chart/professorChart")
-	public String professorChart() {
-		logger.info("교수강의통계 화면");
-		
-		return "admin/chart/professorChart";
-	}
-	
-	
-	@RequestMapping("/chart/majorStuChart")
-	public String majorStuChart() {
-		logger.info("학과별 학생통계 화면");
-		
-		return "admin/chart/majorStuChart";
-	}
-	
 	@RequestMapping("/chart/majorProfChart")
 	public String majorProfChart() {
 		logger.info("학과별 교수통계 화면");
@@ -119,4 +73,6 @@ public class AdminController {
 		
 		return "admin/board/marketBoard";
 	}
+	
+	
 }

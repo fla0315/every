@@ -20,7 +20,7 @@
 		</div>
 		<div class="card mb-4">
 			<div class="card-header">
-				<i class="fas fa-chart-area me-1"></i> Area Chart Example
+				<i class="fas fa-chart-area me-1"></i> 학기별 평점
 			</div>
 			<div class="card-body">
 				<canvas id="myAreaChart" width="100%" height="30"></canvas>
@@ -28,7 +28,7 @@
 			<div class="card-footer small text-muted">Updated yesterday at
 				11:59 PM</div>
 		</div>
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-lg-6">
 				<div class="card mb-4">
 					<div class="card-header">
@@ -53,7 +53,7 @@
 						at 11:59 PM</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </main>
 <script src="<c:url value='/resources/js/chart-pie-demo.js'/>"></script>

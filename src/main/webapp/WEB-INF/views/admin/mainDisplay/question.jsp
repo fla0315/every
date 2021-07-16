@@ -31,9 +31,45 @@
 				<tbody>
 					<tr>
 						<td>1</td>
-						<td>등록금 관련 질문</td>
+						<td><a href="#">질문이요~!!</a></td>
 						<td>홍길동</td>
 						<td>2021/07/14</td>
+						<td><input type="button" class="btn btn-success btn-sm" value="답글"></td>
+						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
+						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td><a href="#">등록금 관련 질문합니다</a></td>
+						<td>심길동</td>
+						<td>2021/07/13</td>
+						<td><input type="button" class="btn btn-success btn-sm" value="답글"></td>
+						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
+						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td><a href="#">기숙사관련 질문드려요</a></td>
+						<td>최길동</td>
+						<td>2021/07/11</td>
+						<td><input type="button" class="btn btn-success btn-sm" value="답글"></td>
+						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
+						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td><a href="#">방학 중 강의실 사용질문</a></td>
+						<td>양길동</td>
+						<td>2021/07/08</td>
+						<td><input type="button" class="btn btn-success btn-sm" value="답글"></td>
+						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
+						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td><a href="#">안녕하세요. 질문있습니다!</a></td>
+						<td>홍길동</td>
+						<td>2021/07/02</td>
 						<td><input type="button" class="btn btn-success btn-sm" value="답글"></td>
 						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
 						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
