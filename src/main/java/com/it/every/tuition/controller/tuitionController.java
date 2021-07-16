@@ -25,17 +25,18 @@ public class TuitionController {
 	private final TuitionService tuitionService;
 
 	@RequestMapping("/tuitionList")
-	public String scholarshipWrite(@RequestParam String stuNo ,Model model) {
+	public String scholarshipWrite(@ModelAttribute TuitionVO vo ,Model model) {
 		
-		logger.info("등록금 조회 , 매개변수 stuNo={}",stuNo);
+		logger.info("등록금 조회 , 매개변수 stuNo={}",vo);
 		
-		stuNo = "201224026";
+		vo.setStuNo("201224026");
 		
 		List<TuitionVO> list = tuitionService.selectByStuNo("stuNo");
 		
 		logger.info("등록금 조회 결과 list.size={}",list.size());
 		
 		model.addAttribute("list", list);
+		model.addAttribute("vo", vo);
 		
 		return "tuition/tuitionList";
 		
