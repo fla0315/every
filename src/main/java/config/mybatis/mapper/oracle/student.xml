@@ -5,13 +5,13 @@
 <mapper namespace="com.it.every.student.model.StudentDAO">
 
 
-	<select id="selectByid" parameterType="string" resultType="studentVo">
+	<select id="selectByid" parameterType="String" resultType="studentVo">
 		select * from student where student_id = #{studentId}
 	</select>
 	
-	<select id="selectStudentDeptView" parameterType="string" resultType="map">
+	<select id="selectStudentDeptView" parameterType="String" resultType="map">
 		select * from studentDeptView
-		where student_id=#{1}
+		where student_id=#{fla0315}
 	</select> 
 	
 	<select id="selectPwd" parameterType="String" resultType="String">

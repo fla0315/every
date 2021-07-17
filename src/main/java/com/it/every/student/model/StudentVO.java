@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class StudentVO {
 	
-	private String stuNo ;/* 학번 */
+	private String stuNo; /* 학번 */
 	private String studentId;/* 아이디 */
 	private String pwd; /* 비밀번호 */
 	private String name ; /* 성명 */

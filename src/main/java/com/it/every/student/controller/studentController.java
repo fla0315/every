@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.it.every.professor.model.ProfessorVO;
 import com.it.every.student.model.StudentService;
 import com.it.every.student.model.StudentVO;
-import com.it.every.timetable.controller.timetableController;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,31 +24,35 @@ import lombok.RequiredArgsConstructor;
 public class studentController {
 
 	private static final Logger logger 
-	=LoggerFactory.getLogger(timetableController.class);
+		=LoggerFactory.getLogger(studentController.class);
 	
 	private final StudentService studentService;
 
 	
 	@GetMapping("/studentEdit")
 	public String studentEdit(HttpSession session, Model model) {
-		String userid = "1";	//(String)session.getAttribute("userId");
 		
+		String userid = "fla0315";	//(String)session.getAttribute("userId");
 		logger.info("학부생 회원정보수정 화면, userid={}", userid);
-		
 		Map<String, Object> map = studentService.selectStudentDeptView(userid);
-		model.addAttribute("map", map);
 		
+		StudentVO vo =studentService.selectByid(userid);
+		model.addAttribute("map", map);
+		model.addAttribute("vo", vo);
 		return "student/studentEdit";
 	}
+	
+	
 	
 	@PostMapping("/studentEdit")
 	public String studentEdit_post(@ModelAttribute StudentVO vo, HttpSession session, Model model) {
 		
-		String userid = "1";	//(String)session.getAttribute("userId");
-		logger.info("학부생 회원정보수정 처리 화면, userid={}, vo={}", userid, vo);
+		String userid = "fla0315";	//(String)session.getAttribute("userId");
+		logger.info("학부생 회원정보수정 처리 화면, userid={} vo={}", userid, vo);
 		
 		String msg="비밀번호 체크 실패", url="/student/studentEdit";
 		int result = studentService.loginProc(userid, vo.getPwd());
+		logger.info("회원수정 처리, 비밀번호 체크 결과, result={}", result);
 		
 		if(result==studentService.LOGIN_OK) { //비밀번호 일치
 			int cnt = studentService.updateStudent(vo);
