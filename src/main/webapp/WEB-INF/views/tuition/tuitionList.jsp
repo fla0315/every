@@ -15,13 +15,13 @@
 
 				<tr>
 					<td><span class=""><label for="학기">학번</label></span></td>
-					<td><input type="text" style="width: 50%;"></td>
+					<td><input type="text" style="width: 50%;" value="${map['STU_NO']}" readonly/></td>
 
 					<td><span class=""><label for="학기">이름</label></span></td>
-					<td><input type="text" style="width: 50%"></td>
+					<td><input type="text" style="width: 50%"  value="${map['NAME']}" readonly></td>
 
-					<td><span class=""><label for="학기">학년</label></span></td>
-					<td><input type="text" style="width: 50%"></td>
+					<td><span class=""><label for="아이디">아이디</label></span></td>
+					<td><input type="text" style="width: 50%"  value="${map['STUDENT_ID']}" readonly></td>
 
 				</tr>
 				
@@ -30,10 +30,10 @@
 				</tr>
 				<tr style="margin-top: 20">
 					<td><span class=""><label for="학기">학부(과)</label></span></td>
-					<td><input type="text" style="width: 50%"></td>
+					<td><input type="text" style="width: 50%"  value="${map['DEPT_NAME'] }" readonly></td>
 
 					<td><span class=""><label for="학기">전공</label></span></td>
-					<td><input type="text" style="width: 50%"></td>
+					<td><input type="text" id="major" style="width: 50%" value="${map['MAJOR']}" readonly></td>
 					<td><span class=""><label for="학기"> </label></span></td>
 					<td>
 						<button>조회</button>
@@ -70,25 +70,33 @@
 				</tr>
 			</thead>
 			<tbody>
-			<input type="text" name="stuNo" value="${map['STU_NO'] }">
-			 <h6>No.${map['STU_NO']}</h6><!-- 데이터 긁어올 예정 -->
+			
+			
 				<c:if test="${empty list }">
 					<tr>
 						<td colspan="6" class="align_center">조회된 등록금이 없습니다.</td>
 					</tr>
 				</c:if>
+				
+				
+				
+				
 				<c:if test="${!empty list }">
 					<c:forEach var="map" items="${list }">
 						<tr class="align_center">
-							<td>${map['NO'] }</td>
+							<%-- <td>${map['NO'] }</td> --%>
 							<td class="align_left" name="studentId">${map['STUDENT_ID'] }</td>
-							<td>${map['STUDENT_ID'] }</td>
+							<%-- <td>${map['STUDENT_ID'] }</td>
 							<td>${map['TUITION'] }</td>
 							<td>${map['DEPOSIT_STATE']}</td>
-							<td>${map['DEPOSIT_DATE']}</td>
+							<td>${map['DEPOSIT_DATE']}</td> --%>
 						</tr>
 					</c:forEach>
 				</c:if>
+				
+				
+				
+				
 			</tbody>
 		</table>
 	</div>
