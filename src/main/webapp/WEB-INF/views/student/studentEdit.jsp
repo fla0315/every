@@ -20,13 +20,12 @@
                                <div class="card shadow-lg border-0 rounded-lg mt-5">
                                    <div class="card-header">
                                       <h3 class="text-center font-weight-light my-4">학생 회원정보수정</h3>
-                                      <h6>No.${map['STUNO']}</h6><!-- 데이터 긁어올 예정 -->
-                                      <h6>No.${vo.stuNo}</h6><!-- 데이터 긁어올 예정 -->
+                                      <h6>No.${map['STU_NO']}</h6><!-- 데이터 긁어올 예정 -->
                                       <%-- <span>${sessionScope.userid}</span> --%>
                                    </div>
                                    <div class="card-body">
                                          <form name="frm" method="post" action="<c:url value='/student/studentEdit'/>">
-                                        	 <input type="text" name="stu_No" value="${map['STUNO'] }">
+                                        	 <input type="hidden" name="stuNo" value="${map['STU_NO'] }">
                                         	  
                                            <div class="row mb-3">
                                                 <div class="col-md-6">
@@ -37,7 +36,7 @@
                                                </div>
                                                <div class="col-md-6">
                                                    <div class="form-floating mb-3 mb-md-0">
-                                                       <input class="form-control" name="student_id" type="text" value="${map['STUDENTID'] }" />
+                                                       <input class="form-control" name="studentId" type="text" value="${map['STUDENT_ID'] }" />
                                                        <label for="inputPasswordConfirm">아이디</label>
                                                    </div>
                                                </div>
@@ -45,7 +44,7 @@
                                            <div class="row mb-3">
                                                <div class="col-md-6">
                                                   <div class="form-floating mb-3 mb-md-0">
-                                                       <input class="form-control" id="dept" type="text" value="${map['DEPT_NAME'] }" readonly/>
+                                                       <input class="form-control" id="deptName" type="text" value="${map['DEPT_NAME'] }" readonly/>
                                                        <label for="dept">학과</label>
                                                    </div>
                                                </div>
