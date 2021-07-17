@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.it.every.professor.model.ProfessorDAO">
+
 	<select id="selectByid" parameterType="string" resultType="professorVo">
 		select * from professor where prof_id = #{prof_id}
 	</select>
@@ -26,4 +27,6 @@
 		set prof_id=#{profId}, prof_email=#{profEmail}
 		where prof_no=#{profNo}
 	</update>
+	
+	
 </mapper>
