@@ -1,5 +1,6 @@
 package com.it.every.student.model;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -55,6 +56,11 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public Map<String, Object> selectStudentDeptView(String userid) {
 		return studentDao.selectStudentDeptView(userid);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectByStuId(String userid) {
+		return studentDao.selectByStuId(userid);
 	}
 	
 	

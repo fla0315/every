@@ -29,7 +29,14 @@
 		where stu_no=#{stuNo}
 	</update>
 	
-
+	
+	<!-- 등록금조회 -->
+	<select id="selectByStuId" parameterType="String" resultType="map">
+		select * from tuitionView
+		where student_id=#{1}
+	</select>
+	
+	
 	
 </mapper>
 

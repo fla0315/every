@@ -1,43 +1,46 @@
-package com.it.every.tuition.controller;
+package com.it.every.student.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.it.every.tuition.model.TuitionService;
-import com.it.every.tuition.model.TuitionVO;
+import com.it.every.student.model.StudentService;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequestMapping("tuition")
 @RequiredArgsConstructor
-@RequestMapping("/tuition")
 public class TuitionController {
-
+	
 	private static final Logger logger = LoggerFactory.getLogger(TuitionController.class);
 
-	private final TuitionService tuitionService;
-
+	private final StudentService studentService;
+	
 	@RequestMapping("/tuitionList")
-	public String scholarshipWrite(@ModelAttribute TuitionVO vo, Model model) {
+	public String tuitionList(HttpSession session, Model model) {
 
-		logger.info("등록금 조회 , 매개변수 stuNo={}", vo);
-
-		vo.setStuNo("201224026");
-
-		List<TuitionVO> list = tuitionService.selectByStuNo("stuNo");
-
+		//String userid = (String)session.getAttribute("userId");
+		String userid ="1";
+		
+		logger.info("등록금 조회 , 매개변수 userid={}", userid);
+		
+		List<Map<String, Object>> list = studentService.selectByStuId("userid");
+		
 		logger.info("등록금 조회 결과 list.size={}", list.size());
-
+		
 		model.addAttribute("list", list);
-		model.addAttribute("vo", vo);
 
 		return "tuition/tuitionList";
 
 	}
+	
+	
 }

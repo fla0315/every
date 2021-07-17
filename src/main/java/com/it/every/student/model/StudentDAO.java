@@ -1,5 +1,6 @@
 package com.it.every.student.model;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -14,5 +15,8 @@ public interface StudentDAO {
 	int checkDuplicate(String userid);
 	String selectPwd(String userid);
 	int updateStudent(StudentVO vo);
+
+	//등록금조회
+	List<Map<String, Object>> selectByStuId (String userid);
 	
 }

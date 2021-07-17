@@ -70,20 +70,22 @@
 				</tr>
 			</thead>
 			<tbody>
+			<input type="text" name="stuNo" value="${map['STU_NO'] }">
+			 <h6>No.${map['STU_NO']}</h6><!-- 데이터 긁어올 예정 -->
 				<c:if test="${empty list }">
 					<tr>
 						<td colspan="6" class="align_center">조회된 등록금이 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:if test="${!empty list }">
-					<c:forEach var="vo" items="${list }">
+					<c:forEach var="map" items="${list }">
 						<tr class="align_center">
-							<td>${vo.no}</td>
-							<td class="align_left">${vo.semester}</td>
-							<td>${vo.stuNo}</td>
-							<td>${vo.tuition }</td>
-							<td>${vo.depositState}</td>
-							<td>${vo.depositDate}</td>
+							<td>${map['NO'] }</td>
+							<td class="align_left" name="studentId">${map['STUDENT_ID'] }</td>
+							<td>${map['STUDENT_ID'] }</td>
+							<td>${map['TUITION'] }</td>
+							<td>${map['DEPOSIT_STATE']}</td>
+							<td>${map['DEPOSIT_DATE']}</td>
 						</tr>
 					</c:forEach>
 				</c:if>

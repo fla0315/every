@@ -1,5 +1,6 @@
 package com.it.every.student.model;
 
+import java.util.List;
 import java.util.Map;
 
 import com.it.every.professor.model.ProfessorVO;
@@ -21,6 +22,6 @@ public interface StudentService {
 	int loginProc(String userid, String pwd);
 	int updateStudent(StudentVO vo);
 	
-	
+	List<Map<String, Object>> selectByStuId (String userid);
 	
 }
