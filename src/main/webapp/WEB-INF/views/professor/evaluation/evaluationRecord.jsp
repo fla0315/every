@@ -77,7 +77,6 @@ body {
                                </tr>
                            </thead>
                            <tbody>
-                               
                                <c:if test="${empty evList }">
                                	<tr>
                                		<td colspan="12" class="text-center">등록된 학생이 없습니다.</td>
@@ -87,8 +86,39 @@ body {
                               	 <c:set var="no" value="1" />
                                	<c:forEach var="map" items="${evList }">
                                		<tr>
+                               			<td><input type="checkbox"></td>
+                               			<td>${no }</td>
                                			<td>${map['NAME'] }</td>
-                               			<td></td>
+                               			<td>${map['YEAR'] }</td>
+                               			<td>${map['STU_NO'] }</td>
+                               			<td>${map['MAJOR'] }</td>
+                               			<td><input type="text" value="${map['ATTENDANCE'] }" size="5"></td> <!-- 점수 계산 예정 -->
+                               			<td><input type="text" value="${map['ASSIGNMENT'] }" size="5"></td> <!-- 과제 계산 예정 -->
+                               			<td><input type="text" value="${map['MIDTERM'] }" size="5"></td>
+                               			<td><input type="text" value="${map['FINALS'] }" size="5"></td>
+                               			<td><input type="text" value="${map['TOTAL_GRADE'] }" size="5"></td>
+                               			<td>
+                               				<c:if test="${!empty map['TOTAL_GRADE']}">
+                               					<fmt:parseNumber var="grade" type="number" value="${map['TOTAL_GRADE'] }" integerOnly="true"/>
+                               					<c:choose>
+                               						<c:when test="${grade>=90 }">
+                               							A
+                               						</c:when>
+                               						<c:when test="${grade>=80 }">
+                               							B
+                               						</c:when>
+                               						<c:when test="${grade>=70 }">
+                               							C
+                               						</c:when>
+                               						<c:when test="${grade>=60 }">
+                               							D
+                               						</c:when>
+                               						<c:when test="${grade<60 }">
+                               							F
+                               						</c:when>
+                               					</c:choose>
+                               				</c:if>
+                               			</td>
                                		</tr>
                                		<c:set var="no" value="${no }+1" />
                                	</c:forEach>
