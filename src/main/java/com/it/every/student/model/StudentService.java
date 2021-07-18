@@ -23,5 +23,5 @@ public interface StudentService {
 	int updateStudent(StudentVO vo);
 	
 	List<Map<String, Object>> selectByStuId (String userid);
-	
+	Map<String, Object> selectByTuitionNo (String userid ,int tuitionNo);
 }

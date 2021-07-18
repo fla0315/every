@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.every.student.model.StudentService;
 import com.it.every.student.model.StudentVO;
@@ -30,11 +31,11 @@ public class TuitionController {
 	public String tuitionList(HttpSession session, Model model) {
 
 		//String userid = (String)session.getAttribute("userId");
-		String userid ="1";
+		String userid ="123";
 		
 		logger.info("등록금 조회 , 매개변수 userid={}", userid);
 		
-		List<Map<String, Object>> list = studentService.selectByStuId("userid");
+		List<Map<String, Object>> list = studentService.selectByStuId(userid);
 		Map<String, Object> map = studentService.selectStudentDeptView(userid);
 		
 		logger.info("등록금 조회 결과 list.size={}", list.size());
@@ -47,8 +48,22 @@ public class TuitionController {
 	}
 	
 	@RequestMapping("/tuitionPDF")
-	public void tuitionPDF() {
-		logger.info("등록금 pdf 화면");
+	public String tuitionPDF(HttpSession session, @RequestParam(defaultValue = "0") int tuitionNo, Model model) {
+		
+		String userid ="123";
+		tuitionNo =2;
+		logger.info("등록금 pdf 화면 , 파라미터 tuitionNo={}",tuitionNo);
+		
+		/*
+		Map<String, Object> map = studentService.selectByTuitionNo(userid, tuitionNo);
+		
+		logger.info("등록금 pdf 화면 map={}", map);
+		
+		model.addAttribute("map", map);
+		*/
+		
+		return "tuition/tuitionPDF";
+		
 	}
 	
 	

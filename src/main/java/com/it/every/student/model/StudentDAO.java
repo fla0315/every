@@ -18,5 +18,6 @@ public interface StudentDAO {
 
 	//등록금조회
 	List<Map<String, Object>> selectByStuId (String userid);
+	Map<String, Object> selectByTuitionNo (String userid ,int tuitionNo);
 	
 }

@@ -62,6 +62,13 @@ public class StudentServiceImpl implements StudentService{
 	public List<Map<String, Object>> selectByStuId(String userid) {
 		return studentDao.selectByStuId(userid);
 	}
+
+	@Override
+	public Map<String, Object> selectByTuitionNo(String userid, int tuitionNo) {
+		return studentDao.selectByTuitionNo(userid, tuitionNo);
+	}
+
+
 	
 	
 	

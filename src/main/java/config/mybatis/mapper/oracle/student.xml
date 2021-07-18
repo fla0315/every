@@ -11,7 +11,7 @@
 	
 	<select id="selectStudentDeptView" parameterType="String" resultType="map">
 		select * from studentDeptView
-		where student_id=#{1}
+		where student_id=#{123}
 	</select> 
 	
 	<select id="selectPwd" parameterType="String" resultType="String">
@@ -33,11 +33,17 @@
 	<!-- 등록금조회 -->
 	<select id="selectByStuId" parameterType="String" resultType="map">
 		select * from tuitionView
-		where student_id=#{1}
+		where student_id=#{123}
 	</select>
 	
+	<!-- 등록금 PDF -->
+	<!-- <select id="selectByTuitionNo" parameterType="String" resultType="map">
+		select * from tuitionView
+		where student_id=#{123} and tuition_no='#{2}'
+	</select> -->
 	
-	
+
+
 </mapper>
 
 
