@@ -12,5 +12,11 @@
 		select * from evaluationView
 		where sub_code=#{openSubCode}
 	</select>
-	<!-- insert는 evaluaiton에 그대로 sub_code, stu_no -->
+	<!-- insert는 evaluation에 그대로 sub_code, stu_no -->
+	
+	<update id="editBystuNo">
+		update evaluation
+		set midterm=#{midterm}, finals=#{finals}, assignment=#{assignment}, attendance=#{attendance}, total_grade=#{total_grade}, edit_date=sysdate
+		where sub_code=#{subCode} and stu_no=#{stuNO}
+	</update>
 </mapper>

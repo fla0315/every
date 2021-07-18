@@ -26,6 +26,11 @@
 				alert('개설교과목 번호를 선택하세요!');
 			}
 		});
+	
+		$('input[name=chkAll]').change(function(){
+			$('.card-body table tbody input[type=checkbox]').prop('checked', this.checked);
+		});
+		
 	});
 </script>
 
@@ -62,7 +67,7 @@ body {
                        <table id="datatablesSimple">
                            <thead>
                                <tr>
-                               	<th><input type="checkbox"></th>
+                               	<th data-sortable=false><input type="checkbox" name="chkAll"></th>
                                	<th>NO.</th>
                                 <th>이름</th>
                                 <th>학년</th>
@@ -74,6 +79,7 @@ body {
                                 <th>기말고사</th>
                                 <th>총점</th>
                                 <th>최종성적</th>
+                                <th data-sortable=false></th>
                                </tr>
                            </thead>
                            <tbody>
@@ -118,6 +124,9 @@ body {
                                						</c:when>
                                					</c:choose>
                                				</c:if>
+                               			</td>
+                               			<td style="width:5%" class="text-center">
+                               				<a href="<c:url value='/professor/evaluation/evaluationEdit?stuNo=${map["STU_NO"] }' />" style="color:black">수정</a>
                                			</td>
                                		</tr>
                                		<c:set var="no" value="${no }+1" />
