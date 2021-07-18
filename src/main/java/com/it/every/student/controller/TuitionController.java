@@ -46,5 +46,12 @@ public class TuitionController {
 
 	}
 	
+	@RequestMapping("/tuitionPDF")
+	public void tuitionPDF() {
+		logger.info("등록금 pdf 화면");
+	}
+	
+	
+	
 	
 }
