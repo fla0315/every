@@ -29,6 +29,15 @@ public class studentController {
 	private final StudentService studentService;
 
 	
+	@RequestMapping("/studentMain")
+	public void studentMain() {
+		
+		
+	}
+	
+	
+	
+	
 	@GetMapping("/studentEdit")
 	public String studentEdit(HttpSession session, Model model) {
 		

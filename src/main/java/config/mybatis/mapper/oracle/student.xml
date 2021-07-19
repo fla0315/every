@@ -42,8 +42,13 @@
 		where student_id=#{123} and tuition_no='#{2}'
 	</select> -->
 	
+	<!-- 장학금 조회 -->
+	<select id="selectByScholarship" parameterType="String" resultType="map">
+		select * from scholarshipView
+		where student_id=#{123}
+	</select>
 
-
+	
 </mapper>
 
 

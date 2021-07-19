@@ -69,33 +69,21 @@
 							<tr>
 
 								<td><span class=""><label for="학기">학번</label></span></td>
-								<td>
-									<input type="text" style="width: 50%;">
-								</td>
+								<td><input type="text" style="width: 50%;" value="${map['STU_NO']}" readonly/></td>
 
 
 								<td><span class=""><label for="학기" >이름</label></span></td>
-								<td>
-									<input type="text" style="width: 50%">
-								</td>
+								<td><input type="text" style="width: 50%"  value="${map['NAME']}" readonly></td>
 								
-								<td><span class=""><label for="학기">학년</label></span></td>
-								<td>
-								<input type="text" style="width: 50%">
-								</td>
 								
 							</tr>
 								
 							<tr>
 								<td><span class=""><label for="학기">학부(과)</label></span></td>
-								<td>
-									<input type="text" style="width: 50%">
-								</td>
+								<td><input type="text" style="width: 50%"  value="${map['DEPT_NAME'] }" readonly></td>
 
 								<td><span class=""><label for="학기">전공</label></span></td>
-								<td>
-									<input type="text" style="width: 50%">
-								</td>
+								<td><input type="text" id="major" style="width: 50%" value="${map['MAJOR']}" readonly></td>
 
 							</tr>
 
