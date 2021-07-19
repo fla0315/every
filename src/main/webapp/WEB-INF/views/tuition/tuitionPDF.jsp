@@ -28,29 +28,59 @@
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"> </script>
 
 <script type="text/javascript">
-
-	 /* window.html2canvas = html2canvas;
-	window.jsPDF = window.jspdf.jsPDF; */ 
-	
-	function makePDF() {
-		
-		const element =document.getElementById("invoice");
-		
-		html2pdf()
-		.from(element)
-		.save();
-		/* var doc = new jsPDF(); 
-		doc.text(10,10,);
-		doc.save(); */
-	}
 	function btClose1() {
 		close();
 	}
 	
-	
 </script>
 
+<link href="/resources/css/ui-deepBlue.css?" rel="stylesheet" type="text/css">
 
+<script src="/resources/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+<script src="/resources/js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="/resources/js/jquery.jqGrid.js" type="text/javascript"></script>
+<script src="/resources/js/project-ui.js?fake=Mon Jul 19 22:20:14 KST 2021" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+});
+
+//프린트 하기
+function printDiv(id){
+	//if (document.all && window.print) 
+	//{
+		div2print = document.all[id];
+		window.onbeforeprint = hideDivs;
+		window.onafterprint = showDivs;
+		window.print();
+	/*}
+	else if (document.layers) 
+	{
+		div2print = document[id];
+		hideDivs();
+		window.print();
+	}*/ 
+}
+function hideDivs () {
+	if (document.all) 
+	{
+		var divs = document.all.tags('DIV');
+		for (var d = 0; d < divs.length; d++)
+		if (divs[d] != div2print)
+		divs[d].style.display = 'none';
+	}
+	else if (document.layers) {
+	for (var l = 0; l < document.layers.length; l++)
+	if (document.layers[l] != div2print)
+			document.layers[l].visibility = 'hide';
+
+	}
+}
+function showDivs () {
+	var divs = document.all.tags('DIV');
+	for (var d = 0; d < divs.length; d++)
+	divs[d].style.display = 'block';
+}
+</script>
 <STYLE>
 
 P.HStyle0, LI.HStyle0, DIV.HStyle0
@@ -70,9 +100,10 @@ P.HStyle5, LI.HStyle5, DIV.HStyle5
 </HEAD>
 
 <BODY>
-<div id="invoice" > 
+<div id="prints" > 
 
 
+		
 <P CLASS=HStyle1 STYLE='line-height:100%;'><SPAN STYLE='font-size:20.0pt;font-weight:"bold";line-height:100%;'>등록금 납입고지서</SPAN></P>
 
 <P CLASS=HStyle4 STYLE='line-height:100%; text-align: center;'><SPAN STYLE='font-size:10.0pt;line-height:100%;  '>(은행용)</SPAN></P>
@@ -484,7 +515,9 @@ P.HStyle5, LI.HStyle5, DIV.HStyle5
 
 </TABLE></P>
 
-<P CLASS=HStyle4 STYLE='line-height:100%; text-align: center;'><SPAN STYLE='font-size:9.0pt;line-height:100%; margin: 0 auto;'><button onclick="makePDF()"> 출력  </button> &nbsp;&nbsp;&nbsp; <button onclick="btClose1()"> 닫기  </button> </SPAN></P>
+<P CLASS=HStyle4 STYLE='line-height:100%; text-align: center;'><SPAN STYLE='font-size:9.0pt;line-height:100%; margin: 0 auto;'><span class="info-user">
+			<span><button type="button" onClick="javascript:printDiv('prints');">출력</button></span>
+</span> &nbsp;&nbsp;&nbsp; <button onclick="btClose1()"> 닫기  </button> </SPAN></P>
 
 <br>
 <P CLASS=HStyle4 STYLE='line-height:100%; text-align: center;'><SPAN STYLE='font-size:9.0pt;line-height:100%; margin: 0 auto;'>※ 영수증은 소득세법에 의한 연말 소득세 공제 신청서로 사용할 수 있음.</SPAN></P>

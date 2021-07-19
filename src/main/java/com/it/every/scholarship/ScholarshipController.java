@@ -25,6 +25,36 @@ public class ScholarshipController {
 	private final StudentService studentService;
 	
 	
+	
+	
+	@RequestMapping("/scholarshipWrite")
+	public String scholarshipWrite() {
+		
+		logger.info("장학금 신청 화면 보여주기");
+		
+		return "scholarship/scholarshipWrite";
+	}
+	
+	
+	@RequestMapping("/scholarshipPDF")
+	public String scholarshipPDF() {
+		
+		logger.info("scholarshipPDF 화면 보여주기");
+		
+		return "scholarship/scholarshipPDF";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/scholarshipList")
 	public String scholarshipList(HttpSession session, Model model) {
 

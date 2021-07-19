@@ -2,7 +2,33 @@
 <%@ include file="../inc/student_top.jsp" %>
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/jspdf.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+
+<script type="text/javascript">	
+	
+		
+		$(function(){
+			$('#btScholarship').click(function(){
+				
+				open('http://localhost:9091/every/scholarship/scholarshipPDF','chk',
+				 'width=1000,height=1000,left=0,top=0,location=yes,resizable=yes');
+				
+				
+			});
+		});
+		
+		
+	
+</script>
+
+
 
  <div class="container-fluid px-4" style="background-color: white;">
 	<h4 class="mt-4" style="background-color: white;">장학금 조회</h4>
@@ -105,6 +131,7 @@
       <th scope="col">장학금 항목</th>
       <th scope="col">지급 금액</th>
       <th scope="col">수여년도</th>
+      <th scope="col">확인서</th>
     </tr>
   </thead>
   <tbody>
@@ -129,6 +156,7 @@
 							<td>
 								<fmt:formatDate value="${map['AWARDING_DATE']}" pattern="yyyy-MM-dd"/> <!-- 납입 날짜 -->
 							</td>
+							<td><input type="button" id="btScholarship" value="출력"></td>
 						</tr>
 					</c:forEach>
 				</c:if>
