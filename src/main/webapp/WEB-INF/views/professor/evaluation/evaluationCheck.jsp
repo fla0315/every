@@ -21,7 +21,7 @@
 		$('#btCheck').click(function(){
 			if($('#openSub option:selected').val()!='선택하세요'){
 				var openSubCode = $('#openSub option:selected').val();
-				location.href="<c:url value='/professor/evaluation/checkOpenSubj2?openSubCode="+openSubCode+"'/>";
+				location.href="<c:url value='/professor/evaluation/evaluationCheck?openSubCode="+openSubCode+"'/>";
 			} else{
 				alert('개설교과목 번호를 선택하세요!');
 			}
@@ -41,7 +41,7 @@ body {
 				<br>
 				<div class="mb-3">
 					<label for="title">개설교과목</label>
-					<select id="openSub">
+					<select id="openSub" class="dataTable-selector">
 						<option>선택하세요</option>
 						<c:if test="${!empty osList }">
 							<c:forEach var="vo" items="${osList}">

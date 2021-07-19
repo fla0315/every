@@ -22,4 +22,9 @@ public class EvaluationServiceImpl implements EvaluationService {
 		return evaluationDao.selectEvaluationView(openSubCode);
 	}
 
+	@Override
+	public int editBystuNo(EvaluationVO vo) {
+		return evaluationDao.editBystuNo(vo);
+	}
+
 }

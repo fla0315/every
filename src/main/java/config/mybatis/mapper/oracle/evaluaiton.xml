@@ -14,9 +14,9 @@
 	</select>
 	<!-- insert는 evaluation에 그대로 sub_code, stu_no -->
 	
-	<update id="editBystuNo">
+	<update id="editBystuNo" parameterType="evaluationVo">
 		update evaluation
-		set midterm=#{midterm}, finals=#{finals}, assignment=#{assignment}, attendance=#{attendance}, total_grade=#{total_grade}, edit_date=sysdate
-		where sub_code=#{subCode} and stu_no=#{stuNO}
+		set midterm=#{midterm}, finals=#{finals}, assignment=#{assignment}, attendance=#{attendance}, total_grade=#{totalGrade}, edit_date=sysdate
+		where sub_code=#{subCode} and stu_no=#{stuNo}
 	</update>
 </mapper>

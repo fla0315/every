@@ -110,8 +110,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationRecord'/>">성적 입력/수정</a>
-                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationCheck'/>">성적 조회</a>
+                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationRecord?openSubCode='/>">성적 입력/수정</a>
+                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationCheck?openSubCode='/>">성적 조회</a>
                                         </nav>
                                     </div>
                                 </nav>

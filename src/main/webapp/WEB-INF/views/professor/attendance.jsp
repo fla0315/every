@@ -27,7 +27,7 @@ body {
 				<br>
 				<div class="mb-3">
 					<label for="title">개설교과목</label>
-					<select>
+					<select class="dataTable-selector">
 						<option>선택하세요</option>
 						<!-- 개설교과목 번호/이름 교수님 번호로 조회해 for문 돌리기 -->
 					</select>
@@ -61,7 +61,7 @@ body {
                                    <td>컴퓨터공학과</td>
                                    <c:forEach var="i" begin="1" end="12">
                                    	<td>
-                                   	<select>
+                                   	<select class="custom-select">
                                    		<option></option>
                                    		<option>출석</option>
                                    		<option>지각</option>
