@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ include file="../../inc/prof_top.jsp" %>
 <!-- 성적 입력창 -->
 <!-- jQuery -->
@@ -26,6 +27,10 @@
 				alert('개설교과목 번호를 선택하세요!');
 			}
 		});
+	
+		$('#btExcel').click(function(){
+			location.href="<c:url value='/professor/evaluation/excelDown?openSubCode="+${open}+"'/>";
+		});
 	});
 </script>
 
@@ -45,12 +50,18 @@ body {
 						<option>선택하세요</option>
 						<c:if test="${!empty osList }">
 							<c:forEach var="vo" items="${osList}">
-								<option>${vo.openSubCode }</option>
+								<c:if test="${open == vo.openSubCode }">
+									<option selected>${vo.openSubCode }</option>
+								</c:if>
+								<c:if test="${open != vo.openSubCode }">
+									<option>${vo.openSubCode }</option>
+								</c:if>
 							</c:forEach>
 						</c:if>
 						<!-- 개설교과목 번호/이름 교수님 번호로 조회해 for문 돌리기 -->
 					</select>
 					<input type="button" id="btCheck" value="조회">
+					<input type = "button" value="엑셀 다운로드" id="btExcel" />
 				</div>
 				<div class="card mb-4">
                    <div class="card-header">

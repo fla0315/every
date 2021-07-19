@@ -6,17 +6,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-<script>
-/* 	$(document).on('click', '#btnSave', function(e){
-		e.preventDefault();
-		$("#form").submit();
-	});
-
-	$(document).on('click', '#btnList', function(e){
-		e.preventDefault();
-		location.href="${pageContext.request.contextPath}/board/getBoardList";
-	}); */
-	
+<script type="text/javascript">
 	$(function(){	//개설과목 학생성적조회
 		$('#btCheck').click(function(){
 			if($('#openSub option:selected').val()!='선택하세요'){
@@ -51,7 +41,12 @@ body {
 						<option>선택하세요</option>
 						<c:if test="${!empty osList }">
 							<c:forEach var="vo" items="${osList}">
-								<option>${vo.openSubCode }</option>
+								<c:if test="${open == vo.openSubCode }">
+									<option selected>${vo.openSubCode }</option>
+								</c:if>
+								<c:if test="${open != vo.openSubCode }">
+									<option>${vo.openSubCode }</option>
+								</c:if>
 							</c:forEach>
 						</c:if>
 						<!-- 개설교과목 번호/이름 교수님 번호로 조회해 for문 돌리기 -->
