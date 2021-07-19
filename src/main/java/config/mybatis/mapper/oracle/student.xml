@@ -45,7 +45,7 @@
 	<!-- 장학금 조회 -->
 	<select id="selectByScholarship" parameterType="String" resultType="map">
 		select * from scholarshipView
-		where student_id=#{123}
+		where student_id=#{123} 
 	</select>
 
 	
