@@ -86,7 +86,7 @@ public class EvaluationController {
 		
 		String msg="등록/수정 실패!", url="/professor/evaluation/evaluationRecord?openSubCode="+open;
 		if(cnt>0) {
-			return "redirect:/professor/evaluation/evaluationRecord?openSubCode="+open;
+			msg = "등록/수정 성공!";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -137,10 +137,10 @@ public class EvaluationController {
 		CellStyle headStyle = wb.createCellStyle();
 		
 		//가는 경계선
-	   headStyle.setBorderTop(BorderStyle.THIN);
-	   headStyle.setBorderBottom(BorderStyle.THIN);
-	   headStyle.setBorderLeft(BorderStyle.THIN);
-	   headStyle.setBorderRight(BorderStyle.THIN);
+		headStyle.setBorderTop(BorderStyle.THIN);
+		headStyle.setBorderBottom(BorderStyle.THIN);
+		headStyle.setBorderLeft(BorderStyle.THIN);
+		headStyle.setBorderRight(BorderStyle.THIN);
 
 	   //배경색
 	   headStyle.setFillForegroundColor(HSSFColorPredefined.GREEN.getIndex());

@@ -2,15 +2,20 @@
 <%@ include file="../inc/prof_top.jsp" %>
 <!-- 성적 입력창 -->
 
-<script>
-	$(document).on('click', '#btnSave', function(e){
-		e.preventDefault();
-		$("#form").submit();
-	});
-
-	$(document).on('click', '#btnList', function(e){
-		e.preventDefault();
-		location.href="${pageContext.request.contextPath}/board/getBoardList";
+<script type="text/javascript">
+	$(function(){
+		$('#btCheck').click(function(){
+			if($('#openSub option:selected').val()!='선택하세요'){
+				var openSubCode = $('#openSub option:selected').val();
+				location.href="<c:url value='/professor/attendance?openSubCode="+openSubCode+"'/>";
+			} else{
+				alert('개설교과목 번호를 선택하세요!');
+			}
+		});
+		
+		$('input[name=chkAll]').change(function(){
+			$('.card-body table tbody input[type=checkbox]').prop('checked', this.checked);
+		});
 	});
 </script>
 
@@ -29,8 +34,18 @@ body {
 					<label for="title">개설교과목</label>
 					<select class="dataTable-selector">
 						<option>선택하세요</option>
-						<!-- 개설교과목 번호/이름 교수님 번호로 조회해 for문 돌리기 -->
+						<c:if test="${!empty osList }">
+							<c:forEach var="vo" items="${osList}">
+								<c:if test="${open == vo.openSubCode }">
+									<option selected>${vo.openSubCode }</option>
+								</c:if>
+								<c:if test="${open != vo.openSubCode }">
+									<option>${vo.openSubCode }</option>
+								</c:if>
+							</c:forEach>
+						</c:if>
 					</select>
+					<input type="button" id="btCheck" value="조회">
 				</div>
 				<div class="card mb-5">
                    <div class="card-header">
@@ -41,15 +56,15 @@ body {
                        <table class="table-bordered text-center" style="width:100%; font-size:0.8em">
                            <thead>
                                <tr>
-                               	<th><input type="checkbox"></th>
+                               	<th><input type="checkbox" name="chkAll"></th>
                                	<th>NO.</th>
                                 <th>이름</th>
                                 <th>학번</th>
                                 <th>학과</th>
                                 <c:forEach var="i" begin="1" end="12">
                                    	<th>${i}주차 </th>
-                                   </c:forEach>
-                                <th>과제점수</th>
+                                </c:forEach>
+                                <th>수정</th>   
                                </tr>
                            </thead>
                            <tbody>
@@ -70,19 +85,17 @@ body {
                                    	</select>
                                    </td>
                                    </c:forEach>
-                                   <td></td>
+                                   <td><input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/evaluation/evaluationEdit'/>"></button></td>
                                </tr>
                            </tbody>
                        </table>
                    </div>
                </div>
 			</form>
-			<div >
+			<div class="text-center">
 				<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
 			</div>
-
 		</div>
-
 	</article>
 
 
