@@ -20,4 +20,6 @@ public interface StudentDAO {
 	List<Map<String, Object>> selectByStuId (String userid);
 	Map<String, Object> selectByTuitionNo (String userid ,int tuitionNo);
 	
+	List<Map<String, Object>> selectByScholarship (String userid);
+	
 }

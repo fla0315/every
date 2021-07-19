@@ -99,42 +99,40 @@
 <table class="table table-sm">
   <thead>
     <tr>
-      <th scope="col">번호</th>
-      <th scope="col">신청년도</th>
+      <th scope="col">학번</th>
       <th scope="col">학기</th>
       <th scope="col">이름</th>
       <th scope="col">장학금 항목</th>
       <th scope="col">지급 금액</th>
-      <th scope="col">신청결과</th>
+      <th scope="col">수여년도</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>2012</td>
-      <td>1학기</td>
-      <td>김영림</td>
-      <td>국가장학금</td>
-      <td>2,500,000</td>
-      <td>지급완료</td>
-    </tr>
- <tr>
-      <th scope="row">1</th>
-      <td>2012</td>
-      <td>1학기</td>
-      <td>김영림</td>
-      <td>국가장학금</td>
-       <td>2,500,000</td>
-      <td>지급완료</td>
-    </tr> <tr>
-      <th scope="row">1</th>
-      <td>2012</td>
-      <td>1학기</td>
-      <td>김영림</td>
-      <td>국가장학금</td>
-       <td>2,500,000</td>
-      <td>지급완료</td>
-    </tr>
+   
+				<c:if test="${empty list }">
+					<tr>
+						<td colspan="6" class="align_center">조회된 장학금이 없습니다.</td>
+					</tr>
+				</c:if>
+				
+				
+				<c:if test="${!empty list }">
+					<c:forEach var="map" items="${list }">
+						<tr class="align_center">
+							<td>${map['STU_NO'] }</td>  <!-- 번호  -->
+							<td>${map['SEMESTER'] }</td>  <!-- 학기  -->
+							<td>${map['NAME']}</td> <!-- 이름 -->
+							<td>${map['SCHOLARSHIP_TYPE'] }</td> <!-- 이름 -->
+							<td>
+								<fmt:formatNumber value="${map['SCHOLARSHIP'] }" pattern="#,###"/>원 <!-- 금액 -->
+							</td>
+							<td>
+								<fmt:formatDate value="${map['AWARDING_DATE']}" pattern="yyyy-MM-dd"/> <!-- 납입 날짜 -->
+							</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+				
   </tbody>
 </table>	
 	</div>			

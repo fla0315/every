@@ -19,7 +19,7 @@ import com.it.every.student.model.StudentVO;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("tuition")
+@RequestMapping("/tuition")
 @RequiredArgsConstructor
 public class TuitionController {
 	

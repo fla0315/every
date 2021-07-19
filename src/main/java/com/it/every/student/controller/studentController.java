@@ -28,6 +28,13 @@ public class studentController {
 	
 	private final StudentService studentService;
 
+	@RequestMapping("/scholarshipWrite")
+	public void scholarshipWrite() {
+		
+		logger.info("장학금 신청");
+		
+	}
+	
 	
 	@RequestMapping("/studentMain")
 	public void studentMain() {
