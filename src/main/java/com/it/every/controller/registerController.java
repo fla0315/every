@@ -1,5 +1,6 @@
 package com.it.every.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.it.every.sms.sms;
 
@@ -220,22 +223,18 @@ public class registerController {
 		
 		if (type.equals("student")) {
 			result = service.logincheck1(id,pwd);
-	
 		}else if (type.equals("admin")) {
 			result = service.logincheck2(id,pwd);
 		}else if (type.equals("professor")) {
 			result = service.logincheck3(id,pwd);
 		}
 	
-		
 	logger.info("처리 결과 result={}",result);
 	if(result==registerService.LOGIN_OK) {
 		HttpSession session = request.getSession();
 		session.setAttribute("mbId", id);
 		session.setAttribute("mbCode", pwd);
 		
-		
-
 	}else if(result==registerService.PWD_DISAGREE) {
 			msg="비밀번호가 일치하지 않습니다.";
 	}else if(result==registerService.ID_NONE) {

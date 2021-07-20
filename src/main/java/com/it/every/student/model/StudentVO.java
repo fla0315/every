@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class StudentVO {
 	
-	private String stuNo ;/* 학번 */
+	private String stuNo; /* 학번 */
 	private String studentId;/* 아이디 */
 	private String pwd; /* 비밀번호 */
 	private String name ; /* 성명 */
@@ -21,7 +21,7 @@ public class StudentVO {
 	private String admissionDate; /* 입학일 */
 	private String graduationDate ; /* 졸업일 */
 	private int credits ; /* 이수학점 */
-	private String indentityState ; /* 본인인증상태 */
+	private char indentityState ; /* 본인인증상태 */
 	private String indentityCode ; /* 본인인증코드 */
 	private Timestamp changeDate ;/* 비밀번호 변경일 */
 	private String state ; /* 학적상태번호 */

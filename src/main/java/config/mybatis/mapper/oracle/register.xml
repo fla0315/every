@@ -3,16 +3,99 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- <mapper namespace="config.mybatis.mapper.oracle.board"> -->
-<mapper namespace="com.it.every.controller.registerDAO">
+<mapper namespace="com.it.every.register.model.registerDAO">
 
-	<select id = "checkDuplicate" parameterType="String" resultType="int">
-			select count(*) from student where student_id=#{student_id}
+	
+	<!-- 학생 회원가입 및 로그인 시 중복 아이디 체크 -->
+	<select id = "checkDuplicate" parameterType="registerVo" resultType="int">
+		select count(*) from
+		(select * from student stu full outer join 
+		professor pr on stu.stu_no=pr.prof_no
+ 		full outer join employee em on stu.stu_no=em.emp_no)
+	
+		<if test='chk_info=="student"'>
+			where student_id=#{User_id}
+		</if>
+		<if test='chk_info=="professor"'>
+			where prof_id=#{User_id}
+		</if>
+		<if test='chk_info=="admin"'>
+			where emp_id=#{User_id}
+		</if>
 	</select>
 	
-	<select id = "checkDuplicatestuno" parameterType="String" resultType="int">
-			select count(*) from student s, professor p 
-			where s.stu_no=#{stu_no} or p.prof_no=#{stu_no}
+	
+<!-- 회원가입 시 입력번호 체크 -->
+<select id="checkDuplicatestuno" parameterType="registerVo" resultType="int">
+	select count(*) from
+		(select * from student stu full outer join 
+		professor pr on stu.stu_no=pr.prof_no
+ 		full outer join employee em on stu.stu_no=em.emp_no)
+
+		<if test='chk_info=="student"'>
+			where stu_no=#{stu_no}
+		</if>
+		
+		<if test='chk_info=="professor"'>
+			where prof_no=#{stu_no}
+		</if>
+		
+		<if test='chk_info=="admin"'>
+			where emp_no=#{stu_no}
+		</if>
+</select>
+					
+
+	<!-- 회원가입 -->
+	<update id="registerMember" parameterType="registerVO">
+	<if test='chk_info=="student"'>
+	 	update student
+	 	set student_id=#{user_id}, pwd=#{pwd}, phonenum=#{phonenum},
+	 	indentity_state=#{indentitystate}
+		where stu_no=#{stu_no}
+	</if>
+	<if test='chk_info=="admin"'>
+	 	update employee
+	 	set emp_id=#{user_id}, pwd=#{pwd}, identity_state=#{indentitystate}
+		where emp_no=#{stu_no}
+	</if>
+	<if test='chk_info=="professor"'>
+	 	update professor
+	 	set prof_id=#{user_id}, prof_pwd=#{pwd}, prof_ph=#{phonenum}, prof_email=#{Email}
+	 	,identity_state=#{indentitystate}
+		where prof_no=#{stu_no}
+	</if>
+	
+	 </update>
+	 
+<!-- 로그인 시 아이디 체크 -->
+<select resultType="String" parameterType="String" id="selectPwd1"> 
+	select pwd from student where student_id=#{student_id} 
+</select>
+<select resultType="String" parameterType="String" id="selectPwd2"> 
+	select prof_pwd from professor where prof_id=#{prof_id} 
+</select>
+<select resultType="String" parameterType="String" id="selectPwd3"> 
+	select pwd from Employee where emp_id=#{emp_id} 
 	</select>
+
+<!-- 섹션 값 불러올 거 -->
+
+<select id="selectByuserid" parameterType="String" resultType="StudentVO">
+	 	select * from student
+		where student_id=#{student_Id} 
+</select>
+
+<select id="selectByuserid2" parameterType="String" resultType="ProfessorVO">
+	 	select * from professor
+		where prof_id=#{prof_Id} 
+</select>
+	
+<select id="selectByuserid3" parameterType="String" resultType="employeeVO">
+	 	select * from employee
+		where emp_id=#{emp_Id} 
+</select>
+	
 	
 	<update id="registerMember" parameterType="registerVO">
 	 	update student
@@ -41,22 +124,9 @@
 	
 	<select id="selectallprof" parameterType="String">
 		select * from professor where prof_id=#{prof_id}
-	
 	</select>
 	
 	<select id="selectallemp" parameterType="String">
 		select * from employee where EMP_id=#{EMP_id}
-	
 	</select>
-	
-	
 </mapper>
-
-
-
-
-
-
-
-
-

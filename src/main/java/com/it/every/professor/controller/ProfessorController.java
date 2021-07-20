@@ -35,7 +35,7 @@ public class ProfessorController {
 	
 	@GetMapping("/editProf")
 	public String editProf(HttpSession session, Model model) {
-		String userid = "profkim123";	//(String)session.getAttribute("userId");
+		String userid = "profkim";	//(String)session.getAttribute("userId");
 		logger.info("교수님 회원정보수정 화면, userid={}", userid);
 		
 		
@@ -47,7 +47,7 @@ public class ProfessorController {
 	
 	@PostMapping("/editProf")
 	public String editProf_post(@ModelAttribute ProfessorVO vo, HttpSession session, Model model) {
-		String userid = "profkim123";	//(String)session.getAttribute("userId");
+		String userid = "profkim";	//(String)session.getAttribute("userId");
 		logger.info("교수님 회원정보수정 처리 화면, userid={}, vo={}", userid, vo);
 		
 		String msg="비밀번호 체크 실패", url="/professor/editProf";

@@ -16,6 +16,7 @@ public class ProfessorVO {
 	private String profName;			//교수명
 	private String profId;				//교수 아이디
 	private String profPwd;				//비밀번호
+	private String profPh;				//전화번호
 	private String profEmail;			//이메일
 	private Timestamp profStartDate;	//임용일
 	private Timestamp profEndDate;		//퇴직일
