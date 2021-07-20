@@ -116,7 +116,6 @@ public class registerServiceIMPl implements registerService{
 
 	@Override
 	public EmployeeVO selectByuserid3(String id) {
-		// TODO Auto-generated method stub
 		return dao.selectByuserid3(id);
 	}
 
