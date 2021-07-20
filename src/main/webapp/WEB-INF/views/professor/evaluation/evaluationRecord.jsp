@@ -6,15 +6,21 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-<script>
-	$(document).on('click', '#btnSave', function(e){
-		e.preventDefault();
-		$("#form").submit();
-	});
-
-	$(document).on('click', '#btnList', function(e){
-		e.preventDefault();
-		location.href="${pageContext.request.contextPath}/board/getBoardList";
+<script type="text/javascript">
+	$(function(){	//개설과목 학생성적조회
+		$('#btCheck').click(function(){
+			if($('#openSub option:selected').val()!='선택하세요'){
+				var openSubCode = $('#openSub option:selected').val();
+				location.href="<c:url value='/professor/evaluation/evaluationRecord?openSubCode="+openSubCode+"'/>";
+			} else{
+				alert('개설교과목 번호를 선택하세요!');
+			}
+		});
+	
+		$('input[name=chkAll]').change(function(){
+			$('.card-body table tbody input[type=checkbox]').prop('checked', this.checked);
+		});
+		
 	});
 </script>
 
@@ -25,16 +31,27 @@ body {
 }
 </style>
 	<article>
-		<div class="container" role="main">
+		<div class="container col-lg-10" role="main">
 			<h2>성적 입력/수정</h2>
-			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
+			<form name="form" id="form" role="form" method="post">
 				<br>
 				<div class="mb-3">
 					<label for="title">개설교과목</label>
-					<select>
+					<select id="openSub" class="dataTable-selector">
 						<option>선택하세요</option>
+						<c:if test="${!empty osList }">
+							<c:forEach var="vo" items="${osList}">
+								<c:if test="${open == vo.openSubCode }">
+									<option selected>${vo.openSubCode }</option>
+								</c:if>
+								<c:if test="${open != vo.openSubCode }">
+									<option>${vo.openSubCode }</option>
+								</c:if>
+							</c:forEach>
+						</c:if>
 						<!-- 개설교과목 번호/이름 교수님 번호로 조회해 for문 돌리기 -->
 					</select>
+					<input type="button" id="btCheck" value="조회">
 				</div>
 				<div class="card mb-4">
                    <div class="card-header">
@@ -42,38 +59,75 @@ body {
                        성적 입력 테이블
                    </div>
                    <div class="card-body">
+                   	<input type="hidden" name="open" value="${open }">
                        <table id="datatablesSimple">
                            <thead>
                                <tr>
-                               	<th><input type="checkbox"></th>
+                               	<th data-sortable=false><input type="checkbox" name="chkAll"></th>
                                	<th>NO.</th>
-                                   <th>이름</th>
-                                   <th>학년</th>
-                                   <th>학번</th>
-                                   <th>학과</th>
-                                   <th>출석</th>
-                                   <th>과제</th>
-                                   <th>중간고사</th>
-                                   <th>기말고사</th>
-                                   <th>총점</th>
-                                   <th>최종성적</th>
+                                <th>이름</th>
+                                <th>학년</th>
+                                <th>학번</th>
+                                <th>학과</th>
+                                <th>출석</th>
+                                <th>과제</th>
+                                <th>중간고사</th>
+                                <th>기말고사</th>
+                                <th>총점</th>
+                                <th>최종성적</th>
+                                <th data-sortable=false></th>
                                </tr>
                            </thead>
                            <tbody>
-                               <tr>
-                               	<td><input type="checkbox"></td>
-                                   <td>1</td>
-                                   <td>홍길동</td>
-                                   <td>1</td>
-                                   <td>20211111</td>
-                                   <td>컴퓨터공학과</td>
-                                   <td></td>
-                                   <td></td>
-                                   <td><input type="text" style="width:50px"></td> <!-- 중간 -->
-                                   <td><input type="text" style="width:50px"></td> <!-- 기말 -->
-                                   <td><input type="text" style="width:50px"></td> <!-- 총점 -->
-                                   <td></td>
-                               </tr>
+                               <c:if test="${empty evList }">
+                               	<tr>
+                               		<td colspan="12" class="text-center">등록된 학생이 없습니다.</td>
+                               	</tr>
+                               </c:if>
+                               <c:if test="${!empty evList }">
+                              	 <c:set var="no" value="1" />
+                               	<c:forEach var="map" items="${evList }">
+                               		<tr>
+                               			<td><input type="checkbox"></td>
+                               			<td>${no }</td>
+                               			<td>${map['NAME'] }</td>
+                               			<td>${map['YEAR'] }</td>
+                               			<td>${map['STU_NO'] }<input type="hidden" name="stuNo" value="${map['STU_NO'] }" /></td>
+                               			<td>${map['MAJOR'] }</td>
+                               			<td><input type="text" name="attendance" value="${map['ATTENDANCE'] }" size="5" readonly></td> <!-- 점수 계산 예정 -->
+                               			<td><input type="text" name="assignment" value="${map['ASSIGNMENT'] }" size="5" readonly></td> <!-- 과제 계산 예정 -->
+                               			<td><input type="text" name="midterm" value="${map['MIDTERM'] }" size="5"></td>
+                               			<td><input type="text" name="finals" value="${map['FINALS'] }" size="5"></td>
+                               			<td><input type="text" name="totalGrade" value="${map['TOTAL_GRADE'] }" size="5"></td>
+                               			<td>
+                               				<c:if test="${!empty map['TOTAL_GRADE']}">
+                               					<fmt:parseNumber var="grade" type="number" value="${map['TOTAL_GRADE'] }" integerOnly="true"/>
+                               					<c:choose>
+                               						<c:when test="${grade>=90 }">
+                               							A
+                               						</c:when>
+                               						<c:when test="${grade>=80 }">
+                               							B
+                               						</c:when>
+                               						<c:when test="${grade>=70 }">
+                               							C
+                               						</c:when>
+                               						<c:when test="${grade>=60 }">
+                               							D
+                               						</c:when>
+                               						<c:when test="${grade<60 }">
+                               							F
+                               						</c:when>
+                               					</c:choose>
+                               				</c:if>
+                               			</td>
+                               			<td style="width:5%" class="text-center">
+                               				<input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/evaluation/evaluationEdit'/>"></button>
+                               			</td>
+                               		</tr>
+                               		<c:set var="no" value="${no }+1" />
+                               	</c:forEach>
+                               </c:if>
                            </tbody>
                        </table>
                    </div>
