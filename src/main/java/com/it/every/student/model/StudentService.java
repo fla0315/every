@@ -17,6 +17,7 @@ public interface StudentService {
 	public static final int ID_NONE=3; //아이디 존재하지 않음
 	
 	StudentVO selectByid(String userid);
+	StudentVO selectByStuNo(String stuNo);
 	Map<String, Object> selectStudentDeptView(String userid);
 	int checkDuplicate(String userid);
 	int loginProc(String userid, String pwd);

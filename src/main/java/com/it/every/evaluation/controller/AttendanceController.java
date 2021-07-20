@@ -43,7 +43,7 @@ public class AttendanceController {
 		
 		if(openSubCode!=null && !openSubCode.isEmpty()) {
 			List<AttendanceVO> atList = attendanceService.showAttendance(openSubCode);
-			logger.info("출석부 조회 결과, atList={}", atList);
+			logger.info("출석부 조회 결과, atList.size={}", atList.size());
 			model.addAttribute("atList", atList);
 		}
 		return "/professor/attendance";

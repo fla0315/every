@@ -75,13 +75,13 @@ body {
                                	</c:if>
                                	<c:if test="${!empty atList }">
                                	<c:set var="noCheck" value="1" />
-                               	<c:forEach var="vo" items="atList">
+                               	<c:forEach var="vo" items="${atList}">
                                <tr>
                                	<td><input type="checkbox"></td>
                                    <td>${noCheck }</td>
                                    <td>이름</td>
                                    <td>${vo.stuNo }</td>
-                                   <td>컴퓨터공학과</td>
+                                   <td>${vo.classification }</td>
                                    <c:forEach var="i" begin="1" end="10">
                                    	<td>
                                    	<select class="custom-select">

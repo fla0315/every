@@ -9,6 +9,10 @@
 		select * from student where student_id = #{studentId}
 	</select>
 	
+	<select id="selectByStuNo" parameterType="String" resultType="studentVo">
+		select * from student where stu_No = #{stuNo}
+	</select>
+	
 	<select id="selectStudentDeptView" parameterType="String" resultType="map">
 		select * from studentDeptView
 		where student_id=#{123}

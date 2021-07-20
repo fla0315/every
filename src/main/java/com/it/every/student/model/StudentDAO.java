@@ -11,6 +11,7 @@ import com.it.every.professor.model.ProfessorVO;
 public interface StudentDAO {
 	
 	StudentVO selectByid(String userid);
+	StudentVO selectByStuNo(String stuNo);
 	Map<String, Object> selectStudentDeptView(String userid);
 	int checkDuplicate(String userid);
 	String selectPwd(String userid);

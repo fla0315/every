@@ -76,6 +76,9 @@ public class StudentServiceImpl implements StudentService{
 	public StudentVO selectByid(String userid) {
 		return studentDao.selectByid(userid);
 	}
-	
-	
+
+	@Override
+	public StudentVO selectByStuNo(String stuNo) {
+		return studentDao.selectByStuNo(stuNo);
+	}
 }
