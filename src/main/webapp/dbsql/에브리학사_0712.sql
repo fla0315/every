@@ -171,6 +171,7 @@ DROP TABLE certification_type
 DROP TABLE attendance
 	CASCADE CONSTRAINTS;
 
+
 /* 학부생 */
 CREATE TABLE student (
 	stu_no VARCHAR2(500) NOT NULL, /* 학번 */
@@ -458,8 +459,8 @@ ALTER TABLE registration
 /* 성적 */
 CREATE TABLE evaluation (
 	sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	stu_no VARCHAR2(500), /* 학번 */
-	classification VARCHAR2(500), /* 수강구분 */
+	stu_no VARCHAR2(500) NOT NULL, /* 학번 */
+	classification VARCHAR2(500) NOT NULL, /* 수강구분 */
 	midterm NUMBER, /* 중간고사 */
 	finals NUMBER, /* 기말고사 */
 	assignment NUMBER, /* 과제 */
@@ -472,14 +473,18 @@ CREATE TABLE evaluation (
 
 CREATE UNIQUE INDEX PK_evaluation
 	ON evaluation (
-		sub_code ASC
+		sub_code ASC,
+		stu_no ASC,
+		classification ASC
 	);
 
 ALTER TABLE evaluation
 	ADD
 		CONSTRAINT PK_evaluation
 		PRIMARY KEY (
-			sub_code
+			sub_code,
+			stu_no,
+			classification
 		);
 
 /* 개설교과과정 */
@@ -1092,38 +1097,32 @@ ALTER TABLE certification_type
 /* 출석부 */
 CREATE TABLE attendance (
 	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	stu_no VARCHAR2(500), /* 학번 */
-	classification VARCHAR2(500), /* 수강구분 */
-	first NUMBER, /* 1주차 */
-	second NUMBER, /* 2주차 */
-	third NUMBER, /* 3주차 */
-	fourth NUMBER, /* 4주차 */
-	fifth NUMBER, /* 5주차 */
-	sixth NUMBER, /* 6주차 */
-	seventh NUMBER, /* 7주차 */
-	eighth NUMBER, /* 8주차 */
-	ninth NUMBER, /* 9주차 */
-	tenth NUMBER, /* 10주차 */
+	stu_no VARCHAR2(500) NOT NULL, /* 학번 */
+	classification VARCHAR2(500) NOT NULL, /* 수강구분 */
+	first VARCHAR2(30), /* 1주차 */
+	second VARCHAR2(30), /* 2주차 */
+	third VARCHAR2(30), /* 3주차 */
+	fourth VARCHAR2(30), /* 4주차 */
+	fifth VARCHAR2(30), /* 5주차 */
+	sixth VARCHAR2(30), /* 6주차 */
+	seventh VARCHAR2(30), /* 7주차 */
+	eighth VARCHAR2(30), /* 8주차 */
+	ninth VARCHAR2(30), /* 9주차 */
+	tenth VARCHAR2(30), /* 10주차 */
 	point NUMBER /* 출석점수 */
 );
 
-/*출석부*/
+CREATE UNIQUE INDEX PK_attendance
+	ON attendance (
+		open_sub_code ASC,
+		stu_no ASC,
+		classification ASC
+	);
+
 ALTER TABLE attendance
 	ADD
 		CONSTRAINT PK_attendance
 		PRIMARY KEY (
-			open_sub_code
-		);
-
-ALTER TABLE attendance
-	ADD
-		CONSTRAINT FK_registration_TO_attendance
-		FOREIGN KEY (
-			open_sub_code,
-			stu_no,
-			classification
-		)
-		REFERENCES registration (
 			open_sub_code,
 			stu_no,
 			classification
@@ -1308,7 +1307,20 @@ ALTER TABLE evaluation
 			stu_no,
 			classification
 		);
-
+ALTER TABLE attendance
+	ADD
+		CONSTRAINT FK_registration_TO_attendance
+		FOREIGN KEY (
+			open_sub_code,
+			stu_no,
+			classification
+		)
+		REFERENCES registration (
+			open_sub_code,
+			stu_no,
+			classification
+		);
+        
 ALTER TABLE open_subj
 	ADD
 		CONSTRAINT FK_professor_TO_open_subj

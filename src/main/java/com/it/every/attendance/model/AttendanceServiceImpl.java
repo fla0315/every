@@ -1,6 +1,7 @@
 package com.it.every.attendance.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 	}
 
 	@Override
-	public List<AttendanceVO> showAttendance(String openSubCode) {
+	public List<Map<String, Object>> showAttendance(String openSubCode) {
 		return attendanceDao.showAttendance(openSubCode);
 	}
 	

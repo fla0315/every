@@ -8,8 +8,8 @@
 		values(openSubCode, stuNo, classification)
 	</insert> -->
 	
-	<select id="showAttendance" parameterType="string" resultType="AttendanceVo">
-		select * from attendance
+	<select id="showAttendance" parameterType="string" resultType="map">
+		select * from attendanceView
 		where open_sub_code=#{openSubCode}
 	</select>
 </mapper>

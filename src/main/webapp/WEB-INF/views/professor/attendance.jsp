@@ -75,13 +75,63 @@ body {
                                	</c:if>
                                	<c:if test="${!empty atList }">
                                	<c:set var="noCheck" value="1" />
-                               	<c:forEach var="vo" items="${atList}">
+                               	<c:forEach var="map" items="${atList}">
                                <tr>
                                	<td><input type="checkbox"></td>
                                    <td>${noCheck }</td>
-                                   <td>이름</td>
-                                   <td>${vo.stuNo }</td>
-                                   <td>${vo.classification }</td>
+                                   <td>${map['NAME'] }</td>
+                                   <td>${map['STU_NO'] }</td>
+                                   <td>${map['MAJOR'] }</td>
+                                   <td>
+                                   	<select class="custom-select">
+                                   		<option></option>
+                                   		<option
+	                                   		<c:if test="${map['FIRST'] eq '출석' }">
+	                                   			 selected
+	                                   		</c:if>
+                                   		>출석</option>
+                                   		<option 
+                                   		<c:if test="${map['FIRST'] eq '지각' }">
+                                   			selected
+                                   		</c:if>
+                                   		>지각</option>
+                                   		<option 
+                                   		<c:if test="${map['FIRST'] eq '결석' }">
+                                   			selected
+                                   		</c:if>
+                                   		>결석</option>
+                                   		<option 
+                                   		<c:if test="${map['FIRST'] eq '조퇴' }">
+                                   			selected
+                                   		</c:if>
+                                   		>조퇴</option>
+                                   	</select>
+                                   </td>
+                                   <td>
+                                   	<select class="custom-select">
+                                   		<option></option>
+                                   		<option
+	                                   		<c:if test="${map['SECOND'] eq '출석' }">
+	                                   			 selected
+	                                   		</c:if>
+                                   		>출석</option>
+                                   		<option 
+                                   		<c:if test="${map['SECOND'] eq '지각' }">
+                                   			selected
+                                   		</c:if>
+                                   		>지각</option>
+                                   		<option 
+                                   		<c:if test="${map['SECOND'] eq '결석' }">
+                                   			selected
+                                   		</c:if>
+                                   		>결석</option>
+                                   		<option 
+                                   		<c:if test="${map['SECOND'] eq '조퇴' }">
+                                   			selected
+                                   		</c:if>
+                                   		>조퇴</option>
+                                   	</select>
+                                   </td>
                                    <c:forEach var="i" begin="1" end="10">
                                    	<td>
                                    	<select class="custom-select">

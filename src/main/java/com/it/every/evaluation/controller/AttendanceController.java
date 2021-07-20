@@ -1,6 +1,8 @@
 package com.it.every.evaluation.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -42,9 +44,24 @@ public class AttendanceController {
 		}
 		
 		if(openSubCode!=null && !openSubCode.isEmpty()) {
-			List<AttendanceVO> atList = attendanceService.showAttendance(openSubCode);
+			List<Map<String, Object>> atList = attendanceService.showAttendance(openSubCode);
 			logger.info("출석부 조회 결과, atList.size={}", atList.size());
+			
+			List<String> numList = new ArrayList<>();
+			numList.add("FIRST");
+			numList.add("SECOND");
+			numList.add("THIRD");
+			numList.add("FOURTH");
+			numList.add("FIFTH");
+			numList.add("SIXTH");
+			numList.add("SEVENTH");
+			numList.add("EIGHTH");
+			numList.add("NINTH");
+			numList.add("TENTH");
+			logger.info("numList={}",numList.size());
+			
 			model.addAttribute("atList", atList);
+			model.addAttribute("numList", numList);
 		}
 		return "/professor/attendance";
 	}
