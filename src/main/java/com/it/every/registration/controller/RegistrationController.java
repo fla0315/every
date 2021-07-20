@@ -16,13 +16,6 @@ public class RegistrationController {
 	=LoggerFactory.getLogger(RegistrationController.class);
 
 	
-	@GetMapping("/open_registration")
-	public void open_rregistration() {
-		
-		logger.info("개설교과과정페이지");
-	}
-	
-	
 	@GetMapping("/registration")
 	public void registration() {
 		

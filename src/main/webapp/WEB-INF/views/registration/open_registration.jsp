@@ -26,7 +26,7 @@
                                     <td>
                                         <div id="">
                                             <select >
-                                            	<option value="">- 전체 -</option>
+                                            	<option value="">ALL</option>
                                                 <option value=''>2021</option>
                                                 <option value=''>2020</option>
                                                 <option value=''>2019</option>
@@ -44,7 +44,7 @@
                                     <td style="padding-left:10px"><span class=""><label for="학기">학기</label></span></td>
                                     <td>
                                         <select id="" name="" title="학기" class="" >
-                                            <option value="">- 전체 -</option>
+                                            <option value="">ALL</option>
                                             <option value="">1학기</option>
                                             <option value="">2학기</option>
                                         </select>
@@ -59,7 +59,7 @@
                                     <td style="padding-left:10px"><span class=""><label for="학년">학년</label></span></td>
                                     <td>
                                         <select style="vertical-align: middle;" id="searchCuriShyy" name="searchCuriShyy" title="학년" class="" notnull="true">
-                                            <option value="">- 전체 -</option>
+                                            <option value="">ALL</option>
                                             <option value="">1학년</option>
                                             <option value="">2학년</option>
                                             <option value="">3학년</option>
@@ -72,7 +72,7 @@
                                     
                                     <td>
                                         <select id="searchCptnDcd" name="searchCptnDcd" class="ctl_select" tabindex="1" title="이수구분">
-                                            <option value = "">- 전체 -</option>
+                                            <option value = "">ALL</option>
                                             <option value = "">기초교양</option>
                                             <option value = "">전공선택</option>
                                             <option value = "">필수교양</option>
@@ -87,7 +87,7 @@
                                     
                                     <td>
                                         <select id="" name="" class="" tabindex="1" title="학과">
-                                            <option value = "">- 전체 -</option>
+                                            <option value = "">ALL</option>
                                             <option value="">항공운항</option>
                                             <option value="">간호학과</option>
                                             <option value="">컴퓨터공학과</option>
@@ -101,7 +101,7 @@
                                     <td>
                                         
                                         <select id="" name="" class="" tabindex="1" title="전공" style="text-align: center;">
-                                            <option value = "">- 전체 -</option>
+                                            <option value = "">ALL</option>
                                             <option value="">항공운항</option>
                                             <option value="">간호학과</option>
                                             <option value="">컴퓨터공학과</option>
@@ -145,12 +145,13 @@
                                     <th scope="col">학점</th>
                                     <th scope="col">담당교수</th>
                                     <th scope="col">강의실/시간</th>
+                                    <th scope="col">강의계획서</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     
                                     <tr>
-                                        <td>장바구니</td>
+                                        <td><button>장바구니</button></td>
                                         <td>년도</td>
                                         <td>학기</td>
                                         <td>과목명</td>
@@ -160,6 +161,7 @@
                                         <td>학점</td>
                                         <td>담당교수</td>
                                         <td>강의실/시간</td>
+                                        <td><button>강의계획서</button></td>
                                         
                                     </tr>
 
