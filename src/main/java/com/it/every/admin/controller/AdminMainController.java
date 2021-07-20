@@ -32,6 +32,13 @@ public class AdminMainController {
 		return "admin/mainDisplay/notice";
 	}
 	
+	@RequestMapping("/mainDisplay/noticeWrite")
+	public String noticeWrite() {
+		logger.info("공지사항등록 화면");
+		
+		return "admin/mainDisplay/noticeWrite";
+	}
+	
 	@RequestMapping("/mainDisplay/lunchMenu")
 	public String lunchMenu() {
 		logger.info("식단표 화면");
@@ -67,6 +74,13 @@ public class AdminMainController {
 		return "admin/board/freeBoard";
 	}
 	
+	@RequestMapping("/board/freeBoardReport")
+	public String freeBoardReport() {
+		logger.info("자유게시판 신고글관리 화면");
+		
+		return "admin/board/freeBoardReport";
+	}
+	
 	@RequestMapping("/board/marketBoard")
 	public String marketBoard() {
 		logger.info("거래게시판 화면");
@@ -74,5 +88,10 @@ public class AdminMainController {
 		return "admin/board/marketBoard";
 	}
 	
-	
+	@RequestMapping("/board/marketBoardReport")
+	public String marketBoardReport() {
+		logger.info("거래게시판 신고글관리 화면");
+		
+		return "admin/board/marketBoardReport";
+	}
 }

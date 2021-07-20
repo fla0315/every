@@ -26,6 +26,21 @@ public class ProfessorManageController {
 		return "admin/professor/professorRegister";
 	}
 	
+	@RequestMapping("/professor/professorEdit")
+	public String professorEdit() {
+		logger.info("교수정보 수정 화면");
+		
+		return "admin/professor/professorEdit";
+	}
+	
+	@RequestMapping("/professor/professorDelete")
+	public String professorDelete() {
+		logger.info("교수정보 삭제");
+		
+		return "admin/professor/professorDelete";
+	}
+	
+	
 	@RequestMapping("/chart/professorChart")
 	public String professorChart() {
 		logger.info("교수강의통계 화면");

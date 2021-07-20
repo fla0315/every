@@ -2,6 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/admin_top.jsp" %>
 
+<script type="text/javascript">
+	$(function(){
+		$('.btnDel').each(function(index, item) {
+			$(item).click(function(){
+				var result = confirm('삭제하시겠습니까?');
+				
+				if(!result) {
+					return false;
+				} 
+				
+			});
+		});
+	}); 
+</script>
+
 	<div class="card mb-4" style="width: 90%; margin: 0 auto; margin-top: 50px">
 		<div class="card-header" style="font-size: 1.5em">
 			<i class="fas fa-user-alt"></i>&nbsp; 학생목록
@@ -10,67 +25,64 @@
 			<table id="datatablesSimple">
 				<thead>
 					<tr>
-						<th>학부</th>
-						<th>학과</th>
-						<th>학번</th>
-						<th>이름</th>
-						<th>입학년도</th>
-						<th>학적상태</th>
-						<th>수정</th>
-						<th>삭제</th>
+						<th style="text-align: center">학과</th>
+						<th style="text-align: center">학번</th>
+						<th style="text-align: center">이름</th>
+						<th style="text-align: center">입학년도</th>
+						<th style="text-align: center">졸업년도</th>
+						<th style="text-align: center">학기</th>
+						<th style="text-align: center">학적상태</th>
+						<th style="text-align: center">수정</th>
+						<th style="text-align: center">삭제</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>OO학부</td>
-						<td>OO학과</td>
-						<td>20210001</td>
-						<td>홍길동</td>
-						<td>2021</td>
-						<td>재학생</td>
-						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
-						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
-					</tr>
-					<tr>
-						<td>OO학부</td>
-						<td>OO학과</td>
-						<td>20180013</td>
-						<td>오길동</td>
-						<td>2018</td>
-						<td>재학생</td>
-						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
-						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
-					</tr>
-					<tr>
-						<td>OO학부</td>
-						<td>OO학과</td>
-						<td>20200034</td>
-						<td>배길동</td>
-						<td>2020</td>
-						<td>휴학생</td>
-						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
-						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
-					</tr>
-					<tr>
-						<td>OO학부</td>
-						<td>OO학과</td>
-						<td>20100048</td>
-						<td>마길동</td>
-						<td>2010</td>
-						<td>졸업생</td>
-						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
-						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
-					</tr>
-					<tr>
-						<td>OO학부</td>
-						<td>OO학과</td>
-						<td>20210017</td>
-						<td>김길동</td>
-						<td>2021</td>
-						<td>재학생</td>
-						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
-						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
-					</tr>
+					<c:if test="${empty list}">
+						<tr>
+							<td colspan="8" style="text-align: center">글 정보가 없습니다.</td>
+						</tr>
+					</c:if>
+					<c:if test="${!empty list}">
+					<c:forEach var="vo" items="${list }">          
+						<c:set var="admissionDate" value="${vo.admissionDate}"/>
+						<c:set var="graduationDate" value="${vo.graduationDate}"/>
+			            <tr>
+			               <td style="vertical-align: middle; text-align: center;">${vo.major }</td>
+			               <td style="vertical-align: middle; text-align: center;">${vo.stuNo }</td>
+			               <td style="vertical-align: middle; text-align: center;">${vo.name }</td>
+			               <td style="vertical-align: middle; text-align: center;">
+			               	${fn:substring(admissionDate,0,4) }
+			               </td>
+			               <c:if test="${graduationDate == null }">
+			               		<td style="vertical-align: middle; text-align: center;">
+					               	-
+					            </td>
+			               </c:if>
+			               <c:if test="${graduationDate != null }">
+			               		<td style="vertical-align: middle; text-align: center;">
+					               	${fn:substring(graduationDate,0,4) }
+					            </td>
+			               </c:if>
+			               <td style="vertical-align: middle; text-align: center;">${vo.semester }</td>
+			               <td style="vertical-align: middle; text-align: center;">${vo.state }</td>
+			               <td style="vertical-align: middle; text-align: center;">
+								<a href="<c:url value='/student/studentEdit?stuNo=${vo.stuNo }'/>">
+									<button class="btn btn-primary btn-sm">
+										수정
+									</button>
+								</a>
+							</td>
+							<td style="vertical-align: middle; text-align: center;">
+								<a href="<c:url value='/admin/student/studentDelete?stuNo=${vo.stuNo }'/>" 
+									class="btnDel">
+									<button class="btn btn-danger btn-sm" >
+										삭제
+									</button>
+								</a>
+							</td>
+			            </tr> 
+			         	</c:forEach>
+					</c:if>
 				</tbody>
 			</table>
 		</div>

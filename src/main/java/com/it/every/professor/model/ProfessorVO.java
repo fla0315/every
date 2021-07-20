@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class ProfessorVO {
-	private int profNo;					//교수번호
+	private String profNo;				//교수번호
 	private int positionNo;				//직책번호
 	private int deptNo;					//학과번호
 	private String profName;			//교수명

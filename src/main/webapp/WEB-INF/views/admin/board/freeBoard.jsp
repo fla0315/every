@@ -30,13 +30,22 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td style="vertical-align: middle">1</td>
+						<td style="vertical-align: middle; text-align: center;">2</td>
+						<td style="vertical-align: middle"><a href="#">광고성 게시글*광고성 게시글*광고성 게시글</a></td>
+						<td style="vertical-align: middle; text-align: center;">양길동</td>
+						<td style="vertical-align: middle; text-align: center;">2021/05/29</td>
+						<td style="vertical-align: middle; text-align: center;">36</td>
+						<td style="vertical-align: middle; text-align: center;"><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
+						<td style="vertical-align: middle; text-align: center;"><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
+					</tr>
+					<tr>
+						<td style="vertical-align: middle; text-align: center;">1</td>
 						<td style="vertical-align: middle"><a href="#">컴공 자바기초강의 수업 어떤가요??</a></td>
-						<td style="vertical-align: middle">홍길동</td>
-						<td style="vertical-align: middle">2021/03/14</td>
-						<td style="vertical-align: middle">10</td>
-						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
-						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
+						<td style="vertical-align: middle; text-align: center;">홍길동</td>
+						<td style="vertical-align: middle; text-align: center;">2021/03/14</td>
+						<td style="vertical-align: middle; text-align: center;">10</td>
+						<td style="vertical-align: middle; text-align: center;"><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
+						<td style="vertical-align: middle; text-align: center;"><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
 					</tr>
 					
 				</tbody>

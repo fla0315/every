@@ -19,6 +19,8 @@
         <script src="<c:url value='/resources/calendar/core/main.js'/>"></script>
         <script src="<c:url value='/resources/calendar/interaction/main.js'/>"></script>
         <script src="<c:url value='/resources/calendar/daygrid/main.js'/>"></script>
+        <script src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
+        <script src="<c:url value='/resources/js/id-validate.js'/>"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 		<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=46a41c1e7c20d77119a3710f087caae5&libraries=services"></script> -->
 		
@@ -124,7 +126,7 @@
                             <div class="collapse" id="collapseBoard" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<c:url value='/admin/board/freeBoard'/>">게시글 관리</a>
-                                    <a class="nav-link" href="#">게시글 신고현황</a>
+                                    <a class="nav-link" href="<c:url value='/admin/board/freeBoardReport'/>">게시글 신고현황</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSell" aria-expanded="false" aria-controls="collapsePages">
@@ -135,7 +137,7 @@
                             <div class="collapse" id="collapseSell" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<c:url value='/admin/board/marketBoard'/>">거래글 관리</a>
-                                    <a class="nav-link" href="#">거래글 신고현황</a>
+                                    <a class="nav-link" href="<c:url value='/admin/board/marketBoardReport'/>">거래글 신고현황</a>
                                 </nav>
                             </div>
                             
