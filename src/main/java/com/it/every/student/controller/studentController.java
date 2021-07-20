@@ -43,8 +43,6 @@ public class studentController {
 	}
 	
 	
-	
-	
 	@GetMapping("/studentEdit")
 	public String studentEdit(HttpSession session, Model model) {
 		
