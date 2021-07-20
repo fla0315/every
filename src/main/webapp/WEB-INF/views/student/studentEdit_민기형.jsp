@@ -61,7 +61,7 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">학생정보 수정</h3></div>
                                     <div class="card-body">
-                                        <form name="registerfrm" method="post" action="<c:url value='/student/studentEdit'/>">
+                                        <form name="registerfrm" method="post" action="<c:url value='/admin/student/studentEdit'/>">
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">

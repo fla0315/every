@@ -60,7 +60,7 @@ public class StudentManageController {
 		return "admin/student/studentRegister";
 	}
 	
-	@PostMapping("/register_post")
+	@PostMapping("/student/register_post")
 	public String register_post(@ModelAttribute StudentVO vo, Model model) {
 		
 		logger.info("학생등록 처리, 파라미터 vo={}", vo);
@@ -80,6 +80,46 @@ public class StudentManageController {
 		return "common/message";
 	}
 	
+	@GetMapping("/student/studentEdit")
+	public String studentEdit(@RequestParam(defaultValue = "0") String stuNo, Model model) {
+		
+		logger.info("학생정보 수정 화면");
+		
+		StudentVO vo = studentService.selectByStuNo(stuNo);
+		List<DepartmentVO> deptList = departmentService.selectDepartment();
+		List<StudentStateVO> stateList = studentStateService.selectAllState();
+		
+		logger.info("학생정보 수정 화면, 조회 결과 vo={}", vo);
+		logger.info("학과 조회 결과, deptList.size={}", deptList.size());
+		logger.info("학적상태 조회 결과, stateList.size={}", stateList.size());
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("stateList", stateList);
+		
+		return "admin/student/studentEdit";
+	}
+	
+	@PostMapping("/student/studentEdit")
+	public String studentEdit_post(@ModelAttribute StudentVO vo, Model model) {
+		
+		logger.info("학생정보수정 처리, 파라미터 vo = {}", vo);
+		
+		String msg = "비밀번호 체크실패", url = "admin/student/studentEdit?stuNo=" + vo.getStuNo();
+		int cnt = studentService.updateStudent(vo);
+		logger.info("회원수정 결과, cnt={}", cnt);
+		if(cnt > 0) {
+			msg = "회원정보 수정되었습니다.";
+			url = "/admin/student/studentList";
+		} else {
+			msg = "회원정보 수정 실패!";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 	
 	@GetMapping("/student/studentDelete")
 	public String studentDelete(@RequestParam String stuNo, Model model) {
