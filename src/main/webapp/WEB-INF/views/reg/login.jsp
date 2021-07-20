@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<%@ include file="../inc/admin_top.jsp"%>
+<%@ include file="../inc/top.jsp"%>
 <script type="text/javascript"
 	src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
 	
@@ -46,6 +46,10 @@ $(function(){
 				alert('아이디를 입력해주세요.');
 				$('#user_id').focus();
 				event.preventDefault();					
+		}else if ($('#chkId').val()=='N') {
+			alert('없는 아이디입니다.')
+			$('#user_id').focus();
+			event.preventDefault();	
 		}
 	 
 	//비밀번호
@@ -54,24 +58,95 @@ $(function(){
 			$('#pwd').focus();
 			event.preventDefault();			
 		}
+		//로그인 실패하기
+	else if($('#chkpwd').val()=="N"){
+		alert('비밀번호가 틀렸습니다.');
+		$('#pwd').focus();
+		event.preventDefault();			
+	}
 	});	
-//id	
+	
+
+	//유형 선택 여부
+	$('#user_id').click(function(){
+		if($('input:radio[name=chk_info]').is(':checked')==false){
+				alert('유형을 선택해주세요.');
+				event.preventDefault();	
+		}
+		});
+	
+	
+	
 //ajax
+//회원유형(radio변경 시 모든 입력값 초기화)
+	$('input:radio[name=chk_info]').click(function(){
+			var data=$(this).val(); 
+			$('#user_id').val('');
+			$('#pwd').val('');
+			$('#chkId').val('');
+			$('#chkpwd').val('');
+			$('#check_id').html("");
+				$.ajax({
+					url:"<c:url value='/reg/regtypecheck'/>",
+					type:"post",
+					data:"chk_info="+data,
+					success:function(result){
+						$('#changeradio').val(result).css("color","blue");
+					},
+					error:function(xhr, status, error){
+						alert("error 발생!!" + error);
+					}
+		}); 
+		});
+
+
+//ID
 $('#user_id').keyup(function(){
 	var data=$(this).val();
+	var data2=$('input[name="chk_info"]:checked').val(); 
 	if(validate_check(data) && data.length>=2){
 		$.ajax({
 			url:"<c:url value='/reg/idcheck'/>",
 			type:"post",
-			data:"userid="+data,
+			data:{"userid":data,"chk_info":data2},
 			success:function(res){
 				//alert(res);
 				if(res){
-					$('#check_id').html("없는 아이디").css("color", "red");
+					$('#check_id').html("있는 아이디").css("color", "blue");
 					$('#chkId').val('Y').css("color","red");
 				}else{
-				
+					$('#check_id').html("없는 아이디").css("color", "red");
 					$('#chkId').val('N');
+				}
+			},
+			error:function(xhr, status, error){
+				alert("error 발생!!" + error);
+			}
+		});				
+	}else{
+		$('#check_id').text('규칙에 맞지 않습니다.').css("color", "brown");
+		
+	}
+});
+
+$('#pwd').keyup(function(){
+	var data=$('#user_id').val();
+	var data2=$('#pwd').val();
+	var data3=$('input[name="chk_info"]:checked').val(); 
+	if(validate_check(data) && data.length>=2){
+		$.ajax({
+			url:"<c:url value='/reg/loginpwdcheck'/>",
+			type:"post",
+			data:{"userid":data,"pwd":data2,"chk_info":data3},
+			success:function(res){
+				//alert(res);
+				if(res){
+					$('#check_id').html("비밀번호도 맞습니다.").css("color", "blue");
+					$('#chkpwd').val('Y').css("color","red");
+				}else{
+					$('#check_id').html("비밀번호가 틀립니다.").css("color", "red");
+					$('#chkpwd').val('N').css("color","blue");
+					
 				}
 			},
 			error:function(xhr, status, error){
@@ -91,13 +166,11 @@ $('#user_id').keyup(function(){
 
 </script>
 
-
-
 <div class="reg_box">
 <div class="container">
 <div>
 	<article class="align_center">
-		<form name="register" method="post" action="<c:url value='/reg/check'/>">
+		<form name="register" method="post" action="<c:url value='/reg/checklogin'/>">
 			<div class="col-11 border" style="width:800">
 			<fieldset>
 			
@@ -133,7 +206,8 @@ $('#user_id').keyup(function(){
 			</div>
 			 <input type ="hidden" name="chkId" id="chkId"> 
 			  <input type ="hidden" name="chkpwd" id="chkpwd">
-			   <input type ="hidden" name="chkphone" id="chkphone">
+			   <input type ="hidden" name="changeradio" id="changeradio">
+			  
 
 		</form>
 	</article>

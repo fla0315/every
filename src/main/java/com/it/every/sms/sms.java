@@ -15,14 +15,14 @@ import org.json.simple.JSONObject;
 
 public class sms {
 
-public String smsNaver(String phonenum) {
+public String smsNaver(String phone){
 	   
    String hostNameUrl = "https://sens.apigw.ntruss.com";
    String requestUrl= "/sms/v2/services/";
    String requestUrlType= "/messages";
-   String accessKey="gitLkir2p95OQKPXZrmy";
-   String secretKey="pqM901acPw8aocbh5RlmMDuVaopCY8OxAK4tmoaS";
-   String serviceId="ncp:sms:kr:269455217040:we";
+   String accessKey="rkVbAdiilyy44i6iEx9E";
+   String secretKey="5Cb04oMfSUN40h0syhDiWvreiEo6v50tLj8cJq4o";
+   String serviceId="ncp:sms:kr:269995979055:sms";
    String method="POST";
    String timestamp= Long.toString(System.currentTimeMillis());
    requestUrl+=serviceId + requestUrlType;
@@ -32,22 +32,22 @@ public String smsNaver(String phonenum) {
    JSONObject toJson = new JSONObject();
    JSONArray toArr = new JSONArray();
    
-   int a =(int) Math.floor(Math.random() * 20000);
-   System.out.println(phonenum);
-   System.out.println("인증번호"+a);
-   String auth = Integer.toString(a);
-
    
-   toJson.put("subject","");
-   toJson.put("content","인증번호 : "+auth);
-   toJson.put("to",phonenum);
+   int a =(int) Math.floor(Math.random() * 11000);
+   System.out.println("랜덤번호"+ a);
+  
+   
+   String no = Integer.toString(a);
+   toJson.put("subject","일단");
+   toJson.put("content",no);
+   toJson.put("to",phone);
    toArr.add(toJson);
    
    bodyJson.put("type","sms");
    bodyJson.put("countryCode","82");
-   bodyJson.put("from","01023372823");
+   bodyJson.put("from","01045792823");
    bodyJson.put("subject","인증");
-   bodyJson.put("content","발신자");
+   bodyJson.put("content","받고보자");
    bodyJson.put("messages",toArr);
    
    String body = bodyJson.toJSONString();
@@ -95,7 +95,7 @@ public String smsNaver(String phonenum) {
       System.out.println(e);
       // TODO: handle exception
    }
-   return auth;
+   		return no;
    }
 
    private static String makeSignature(String url, String timestamp, String method, String accessKey,

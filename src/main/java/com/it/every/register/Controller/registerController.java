@@ -351,7 +351,6 @@ public class registerController {
 			url= "professor/profMain";		
 		}
 		
-		
 		return url;
 	}
 }
