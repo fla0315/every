@@ -3,6 +3,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<%
+String Id = (String)session.getAttribute("user_id");
+String no = (String)session.getAttribute("no");
+String name = (String)session.getAttribute("name");
+boolean t_login = false;
+
+if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
+	t_login=true; //로그인이 된 경우
+}
+%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -44,7 +55,7 @@
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div>
             </form>
-            <div style="color: white">관리자님, 환영합니다.</div>
+            <div style="color: white"><%=name %>, 환영합니다.</div>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
