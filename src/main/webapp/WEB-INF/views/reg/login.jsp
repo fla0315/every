@@ -173,10 +173,17 @@ $('#pwd').keyup(function(){
 		<form name="register" method="post" action="<c:url value='/reg/checklogin'/>">
 			<div class="col-11 border" style="width:800">
 			<fieldset>
-			
+				
 				<legend>로그인</legend>
+				
+				<br>
+				<br>
+				<input type="radio" name="chk_info" id="chk_info" value="student">학생
+				<input type="radio" name="chk_info" id="chk_info" value="admin">관리자 
+				<input type="radio" name="chk_info" id="chk_info" value="professor">교수
+				
+				<br>
 				<!-- 아이디 -->
-					<br>
 					<br>
 				<div class="id" style="width: 200px;">
 					<label for="userid">아이디</label> <br> <input type="text"
@@ -185,7 +192,6 @@ $('#pwd').keyup(function(){
 						class="check_id" id="check_id" style=""></span>
 				</div>
 				<br>
-
 				<!-- 비밀번호 -->
 				<div class="pwd" style="width: 200px;">
 					<label for="pwd">비밀번호</label> <br> <input type="password"
@@ -193,12 +199,6 @@ $('#pwd').keyup(function(){
 						style="ime-mode: inactive"> 
 				</div>
 				<br>
-				<input type="radio" name="chk_info" id="chk_info" value="student">학생
-				<input type="radio" name="chk_info" id="chk_info" value="admin">관리자 
-				<input type="radio" name="chk_info" id="chk_info" value="professor">교수
-				
-				<br>
-
 				<div class="center"></div>
 				<input type="submit" id="submit" class="btn btn-danger" value="로그인"  style="width:80px;">
 				

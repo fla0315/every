@@ -107,4 +107,29 @@ select s.name, s.major, trunc(s.semester/2) year, e.*
 from student s join evaluation e
 on s.stu_no = e.stu_no;
 
+create or replace view studentDeptView
+as
+(
+    select s.*, d.dept_name  
+    from student s join department d
+    on s.dept_no = d.dept_no
+);
+
+--등록금 조회 view
+create or replace view tuitionView
+as
+(
+    select s.student_id , t.*
+    from student s join tuition t
+    on s.stu_no = t.stu_no
+);
+
+create or replace view scholarshipView
+as
+(
+select sch.* , a.award_no, a.stu_no, a.awarding_date
+from scholarship sch join award a
+on sch.scholarship_no = a.scholarship_no
+);
+
 commit;

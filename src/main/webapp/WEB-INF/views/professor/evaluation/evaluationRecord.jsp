@@ -85,11 +85,11 @@ body {
                                	</tr>
                                </c:if>
                                <c:if test="${!empty evList }">
-                              	 <c:set var="no" value="1" />
+                              	 <c:set var="noCheck" value="1" />
                                	<c:forEach var="map" items="${evList }">
                                		<tr>
                                			<td><input type="checkbox"></td>
-                               			<td>${no }</td>
+                               			<td>${noCheck }</td>
                                			<td>${map['NAME'] }</td>
                                			<td>${map['YEAR'] }</td>
                                			<td>${map['STU_NO'] }<input type="hidden" name="stuNo" value="${map['STU_NO'] }" /></td>
@@ -125,7 +125,7 @@ body {
                                				<input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/evaluation/evaluationEdit'/>"></button>
                                			</td>
                                		</tr>
-                               		<c:set var="no" value="${no }+1" />
+                               		<c:set var="noCheck" value="${noCheck+1 }" />
                                	</c:forEach>
                                </c:if>
                            </tbody>

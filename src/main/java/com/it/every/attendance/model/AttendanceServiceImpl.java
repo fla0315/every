@@ -1,0 +1,24 @@
+package com.it.every.attendance.model;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class AttendanceServiceImpl implements AttendanceService {
+	private final AttendanceDAO attendanceDao;
+
+	@Override
+	public int registerAttendance(String openSubCode, String stuNo, String classification) {
+		return attendanceDao.registerAttendance(openSubCode, stuNo, classification);
+	}
+
+	@Override
+	public List<AttendanceVO> showAttendance(String openSubCode) {
+		return attendanceDao.showAttendance(openSubCode);
+	}
+	
+}

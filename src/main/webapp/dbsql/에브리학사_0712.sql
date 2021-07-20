@@ -167,7 +167,9 @@ DROP TABLE board_file
 DROP TABLE certification_type 
 	CASCADE CONSTRAINTS;
 
-
+/* 출석부 */
+DROP TABLE attendance
+	CASCADE CONSTRAINTS;
 
 /* 학부생 */
 CREATE TABLE student (
@@ -203,7 +205,7 @@ ALTER TABLE student
 
 /* 장학금 수여 */
 CREATE TABLE award (
-	no NUMBER NOT NULL, /* 장학금수여번호 */
+	award_no NUMBER NOT NULL, /* 장학금수여번호 */
 	stu_no VARCHAR2(500), /* 학번 */
 	scholarship_no NUMBER, /* 장학금번호 */
 	awarding_date DATE /* 수여일 */
@@ -211,14 +213,14 @@ CREATE TABLE award (
 
 CREATE UNIQUE INDEX PK_award
 	ON award (
-		no ASC
+		award_no ASC
 	);
 
 ALTER TABLE award
 	ADD
 		CONSTRAINT PK_award
 		PRIMARY KEY (
-			no
+			award_no
 		);
 
 /* 장학금 */
@@ -1087,6 +1089,45 @@ ALTER TABLE certification_type
 			certification_code
 		);
 
+/* 출석부 */
+CREATE TABLE attendance (
+	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
+	stu_no VARCHAR2(500), /* 학번 */
+	classification VARCHAR2(500), /* 수강구분 */
+	first NUMBER, /* 1주차 */
+	second NUMBER, /* 2주차 */
+	third NUMBER, /* 3주차 */
+	fourth NUMBER, /* 4주차 */
+	fifth NUMBER, /* 5주차 */
+	sixth NUMBER, /* 6주차 */
+	seventh NUMBER, /* 7주차 */
+	eighth NUMBER, /* 8주차 */
+	ninth NUMBER, /* 9주차 */
+	tenth NUMBER, /* 10주차 */
+	point NUMBER /* 출석점수 */
+);
+
+/*출석부*/
+ALTER TABLE attendance
+	ADD
+		CONSTRAINT PK_attendance
+		PRIMARY KEY (
+			open_sub_code
+		);
+
+ALTER TABLE attendance
+	ADD
+		CONSTRAINT FK_registration_TO_attendance
+		FOREIGN KEY (
+			open_sub_code,
+			stu_no,
+			classification
+		)
+		REFERENCES registration (
+			open_sub_code,
+			stu_no,
+			classification
+		);
 
 ALTER TABLE student
 	ADD

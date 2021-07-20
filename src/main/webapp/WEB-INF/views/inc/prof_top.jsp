@@ -36,6 +36,7 @@
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div> -->
             </form>
+            <div style="color: white">${sessionScope.name }님 환영합니다.</div>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -128,7 +129,7 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">**교수님 환영합니다.</div>
+                        <div class="small">${sessionScope.name }님 로그인 중입니다.</div>
                     </div>
                 </nav>
             </div>

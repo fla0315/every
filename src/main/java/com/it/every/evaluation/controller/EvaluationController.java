@@ -48,8 +48,9 @@ public class EvaluationController {
 	
 	
 	@GetMapping("/evaluationRecord")
-	public String evaluationRecord(@RequestParam String openSubCode, Model model) {
-		String profNo = "1"; //@RequestParam String profNo, login시, session으로 받아야함
+	public String evaluationRecord(@RequestParam String openSubCode, Model model, HttpSession session) {
+		//@RequestParam String profNo, login시, session으로 받아야함
+		String profNo = (String) session.getAttribute("no");
 		
 		logger.info("성적 입력/수정 화면");
 		
@@ -96,8 +97,8 @@ public class EvaluationController {
 	}
 	
 	@GetMapping("/evaluationCheck")
-	public String evaluationCheck(@RequestParam String openSubCode, Model model) {
-		String profNo = "1"; //@RequestParam String profNo, login시, session으로 받아야함
+	public String evaluationCheck(@RequestParam String openSubCode, Model model, HttpSession session) {
+		String profNo = (String) session.getAttribute("no");
 		
 		logger.info("성적 조회 화면, 파라미터 openSubCode={}", openSubCode);
 		

@@ -32,7 +32,7 @@ body {
 				<br>
 				<div class="mb-3">
 					<label for="title">개설교과목</label>
-					<select class="dataTable-selector">
+					<select id="openSub" class="dataTable-selector">
 						<option>선택하세요</option>
 						<c:if test="${!empty osList }">
 							<c:forEach var="vo" items="${osList}">
@@ -61,20 +61,28 @@ body {
                                 <th>이름</th>
                                 <th>학번</th>
                                 <th>학과</th>
-                                <c:forEach var="i" begin="1" end="12">
+                                <c:forEach var="i" begin="1" end="10">
                                    	<th>${i}주차 </th>
                                 </c:forEach>
-                                <th>수정</th>   
+                                <th>수정</th>
                                </tr>
                            </thead>
                            <tbody>
+                           		<c:if test="${empty atList }">
+                               			<tr>
+                               				<td colspan="17" class="text-center">등록된 학생이 없습니다.</td>
+                               			</tr>
+                               	</c:if>
+                               	<c:if test="${!empty atList }">
+                               	<c:set var="noCheck" value="1" />
+                               	<c:forEach var="vo" items="atList">
                                <tr>
                                	<td><input type="checkbox"></td>
-                                   <td>1</td>
-                                   <td>홍길동</td>
-                                   <td>20211111</td>
+                                   <td>${noCheck }</td>
+                                   <td>이름</td>
+                                   <td>${vo.stuNo }</td>
                                    <td>컴퓨터공학과</td>
-                                   <c:forEach var="i" begin="1" end="12">
+                                   <c:forEach var="i" begin="1" end="10">
                                    	<td>
                                    	<select class="custom-select">
                                    		<option></option>
@@ -87,6 +95,9 @@ body {
                                    </c:forEach>
                                    <td><input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/evaluation/evaluationEdit'/>"></button></td>
                                </tr>
+                               	<c:set var="noCheck" value="${noCheck+1 }" />
+                               </c:forEach>
+                               </c:if>
                            </tbody>
                        </table>
                    </div>
