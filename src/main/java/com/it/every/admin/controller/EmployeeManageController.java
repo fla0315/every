@@ -21,8 +21,22 @@ public class EmployeeManageController {
 	
 	@RequestMapping("/employee/employeeRegister")
 	public String employeeRegister() {
-		logger.info("교수등록 화면");
+		logger.info("임직원등록 화면");
 		
 		return "admin/employee/employeeRegister";
+	}
+	
+	@RequestMapping("/employee/employeeEdit")
+	public String employeeEdit() {
+		logger.info("임직원정보 수정 화면");
+		
+		return "admin/employee/employeeEdit";
+	}
+	
+	@RequestMapping("/employee/employeeDelete")
+	public String employeeDelete() {
+		logger.info("임직원정보 삭제");
+		
+		return "admin/employee/employeeDelete";
 	}
 }

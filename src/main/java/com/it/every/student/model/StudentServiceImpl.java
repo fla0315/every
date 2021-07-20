@@ -10,8 +10,36 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService{
-
+	
 	private final StudentDAO studentDao;
+	
+	@Override
+	public int studentRegister(StudentVO vo) {
+		return studentDao.studentRegister(vo);
+	}
+
+	@Override
+	public List<StudentVO> selectAll() {
+		return studentDao.selectAll();
+	}
+
+	@Override
+	public StudentVO selectByStuNo(String stuNo) {
+		return studentDao.selectByStuNo(stuNo);
+	}
+
+
+
+	@Override
+	public StudentVO selectByid(String userid) {
+		return studentDao.selectByid(userid);
+	}
+
+
+
+	@Override
+	public int deleteStudent(String stuNo) {
+		return studentDao.deleteStudent(stuNo);
 
 	@Override
 	public StudentVO selectByid(String userid) {
@@ -31,6 +59,7 @@ public class StudentServiceImpl implements StudentService{
 		return result;
 	}
 
+
 	@Override
 	public int loginProc(String userid, String pwd) {
 		String dbPwd = studentDao.selectPwd(userid);
@@ -47,6 +76,8 @@ public class StudentServiceImpl implements StudentService{
 		}
 		return result;
 	}
+
+
 
 	@Override
 	public int updateStudent(StudentVO vo) {
@@ -72,10 +103,6 @@ public class StudentServiceImpl implements StudentService{
 	public List<Map<String, Object>> selectByScholarship(String userid) {
 		return studentDao.selectByScholarship(userid);
 	}
-
-
-	
-	
 	
 	
 }

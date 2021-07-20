@@ -22,4 +22,9 @@ public interface StudentDAO {
 	
 	List<Map<String, Object>> selectByScholarship (String userid);
 	
+	public int studentRegister(StudentVO vo);
+	public List<StudentVO> selectAll();
+	public StudentVO selectByStuNo(String stuNo);
+	public int updateStudent(StudentVO vo);
+	public int deleteStudent(String stuNo);
 }

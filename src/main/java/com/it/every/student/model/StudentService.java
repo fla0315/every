@@ -29,5 +29,4 @@ public interface StudentService {
 	List<Map<String, Object>> selectByScholarship (String userid);
 	
 	
-	
 }
