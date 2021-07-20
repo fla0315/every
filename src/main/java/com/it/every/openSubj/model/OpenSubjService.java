@@ -1,5 +1,9 @@
 package com.it.every.openSubj.model;
 
-public class OpenSubjService {
+import java.util.List;
 
+public interface OpenSubjService {
+
+	List<OpenSubjVO> selectScholarALL();
+	
 }
