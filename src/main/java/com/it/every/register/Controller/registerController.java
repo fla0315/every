@@ -11,15 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.it.every.admin.model.employeeVO;
 import com.it.every.email.mailSendGoogle;
+import com.it.every.employee.model.EmployeeVO;
 import com.it.every.professor.model.ProfessorVO;
 import com.it.every.register.model.registerService;
 import com.it.every.register.model.registerVO;
@@ -335,12 +332,12 @@ public class registerController {
 			
 		}else if (chk_info.equals("admin")) {
 			result = service.logincheck2(id,pwd);
-			employeeVO evo=service.selectByuserid3(id);
-			session.setAttribute("no", evo.getEMPNO());
-			session.setAttribute("name", evo.getEMPNAME());
+			EmployeeVO evo=service.selectByuserid3(id);
+			session.setAttribute("no", evo.getEmpNo());
+			session.setAttribute("name", evo.getEmpName());
 			session.setAttribute("user_id", id);
 			logger.info("처리 결과(값을 잘 받아왔는지 확인함) result={} 회원번호={} 회원이름={} 회원아이디={}"  
-					,result,evo.getEMPNO(),evo.getEMPNAME(),id);
+					,result,evo.getEmpNo(),evo.getEmpName(),id);
 			url= "admin/mainDisplay/notice";
 			
 		}else if (chk_info.equals("professor")) {
