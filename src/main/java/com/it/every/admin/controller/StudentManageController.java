@@ -1,3 +1,4 @@
+/*
 package com.it.every.admin.controller;
 
 import java.util.List;
@@ -167,3 +168,4 @@ public class StudentManageController {
 	}
 	
 }
+*/

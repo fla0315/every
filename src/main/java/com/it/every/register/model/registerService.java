@@ -1,6 +1,6 @@
 package com.it.every.register.model;
 
-import com.it.every.admin.model.employeeVO;
+import com.it.every.employee.model.EmployeeVO;
 import com.it.every.professor.model.ProfessorVO;
 import com.it.every.student.model.StudentVO;
 
@@ -26,7 +26,7 @@ public interface registerService {
 	int logincheck3(String id, String pwd);
 	public StudentVO selectByuserid(String id); 
 	public ProfessorVO selectByuserid2(String id); 
-	public employeeVO selectByuserid3(String id); 
+	public EmployeeVO selectByuserid3(String id); 
 
 
 }	

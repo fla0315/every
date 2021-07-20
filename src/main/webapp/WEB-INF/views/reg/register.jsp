@@ -37,80 +37,101 @@ function validate_check(id){
 */ 
 }
 
+
+
 //유효성검사
 $(function(){
+
+	 //회원유형이 교수일 경우에만 email 활성화
+	if ($('#chk_info').val()!="professor") {
+		$('#email').css("display","none");
+		$('#email').attr("disabled",true);
+		$('#email1').val('end');
+		$('#email_check').val('none');
+		$('#chkmail').val('none');
+	}
+ 
+	
 	//아이디
-	$('#submit').click(function(){
-		
-		 if($('#student_id').val()==""){
+	$('.registeration').click(function(){
+		 if($('#userid').val()==""){
 				alert('아이디를 입력해주세요.');
-				$('#student_id').focus();
+				$('#userid').focus();
 				event.preventDefault();		
-		}else if(!validate_check($('#student_id').val())){
+		}else if(!validate_check($('#userid').val())){
 				alert('아이디는 영문, 숫자, _만 가능합니다.');
-				$('#student_id').focus();
+				$('#userid').focus();
 				event.preventDefault();					
 		}else if($('#chkId').val()!='Y'){
 				alert('아이디 중복확인 해야합니다.');
-				$('#student_id').focus();
+				$('#userid').focus();
 				event.preventDefault();		
-		
-	 
+		 
 	//비밀번호
 	}else if($('#pwd').val()==""){
 			alert('비밀번호를 입력해주세요.');
 			$('#pwd').focus();
 			event.preventDefault();			
-		}else if(!validate_check($('#pwd').val())){
+	}else if(!validate_check($('#pwd').val())){
 			alert('비밀번호는 영문, 숫자, _만 가능합니다.');
 			$('#pwd').focus();
 			event.preventDefault();	
-		}else if($('#pwd').val().length<5||$('#pwd').val().length>11){
+	}else if($('#pwd').val().length<5||$('#pwd').val().length>11){
 			alert('비밀번호 기준 확인');
 			$('#pwd').focus();
 			event.preventDefault();	
-	//비밀번호 확인작업		
 	
-		}else if($('#pwd2').val()==""){
+	//비밀번호 확인작업			
+	}else if($('#pwd2').val()==""){
 			alert('확인 비밀번호를 입력해주세요.');
 			$('#pwd2').focus();
 			event.preventDefault();	
-		}else if($('#pwd2').val()!=$('#pwd').val()){
+	}else if($('#pwd2').val()!=$('#pwd').val()){
 			alert('확인 비밀번호가 다릅니다.');
 			$('#pwd2').focus();
 			event.preventDefault();		
 		
 		 
-	//인증절차 확인작업
+	//휴대폰 인증절차 확인작업
 	}else if($('#chkphone').val()==""){
 		alert('휴대폰인증을 진행해주세요.');
 		event.preventDefault();	
 	}else if($('#chkphone').val()!=$('#phone_check').val()){
-		alert('인증실패.');
+		alert('휴대폰 인증실패.');
 		$('#phone_check').focus();
 		event.preventDefault();	
+		
+	//이메일 인증절차 확인작업
+	}else if($('#chkmail').val()==""&&$('#chk_info').val=="professor"){
+		alert('이메일인증을 진행해주세요.')
+	}else if($('#chkmail').val()!=$('#email_check').val()){
+		alert('이메일 인증실패.')
+		$('#email_check').focus();
+		event.preventDefault();	
 	}
+		 
 	}); 
 	
 
 	
 //id	
 //ajax
-$('#student_id').keyup(function(){
+$('#userid').keyup(function(){
 	var data=$(this).val();
+	var data2=$('#chk_info').val();
 	if(validate_check(data) && data.length>=2){
 		$.ajax({
 			url:"<c:url value='/reg/idcheck'/>",
 			type:"post",
-			data:"userid="+data,
+			data:{"userid":data,"chk_info":data2},
 			success:function(res){
 				//alert(res);
 				if(res){
-					$('#check_id').html("사용가능한 아이디").css("color", "blue");
-					$('#chkId').val('Y').css("color","red");
-				}else{
 					$('#check_id').html("이미 등록된 아이디").css("color", "red");
 					$('#chkId').val('N');
+				}else{
+					$('#check_id').html("사용가능한 아이디").css("color", "blue");
+					$('#chkId').val('Y').css("color","red");
 				}
 			},
 			error:function(xhr, status, error){
@@ -126,6 +147,7 @@ $('#student_id').keyup(function(){
 //pw
 $('#pwd').keyup(function(){
 	var data=$(this).val();
+	var data2=$('#pwd2').val();
 	if(validate_check(data) && data.length>=2){
 		$.ajax({
 			url:"<c:url value='/reg/pwd1check'/>",
@@ -140,6 +162,14 @@ $('#pwd').keyup(function(){
 					$('.checkpwd').html("비밀번호는 5~10자리로!").css("color", "red");								
 					 $('#chkpwd').val('N'); 
 				}
+				if (data2.length>2) {
+					if(data2!=data){
+						$('.check_pwd2').html("두 비밀번호가 다릅니다.").css("color", "red");
+					}else{
+						$('.check_pwd2').html("두 비밀번호가 일치합니다.").css("color", "blue");	
+					}
+				}
+				
 			},
 			error:function(xhr, status, error){
 				alert("error 발생!!" + error);
@@ -163,8 +193,7 @@ $('#pwd2').keyup(function(){
 			success:function(res){
 				//alert(res);
 				if(res){
-					$('.check_pwd2').html("두 비밀번호가 일치합니다.").css("color", "blue");
-					
+					$('.check_pwd2').html("두 비밀번호가 일치합니다.").css("color", "blue");	
 				}else{
 					$('.check_pwd2').html("두 비밀번호가 다릅니다.").css("color", "red");								
 				}
@@ -175,7 +204,6 @@ $('#pwd2').keyup(function(){
 		});				
 	}
 });
-
 
 //휴대폰 인증
 $('#phoneconfirm').click(function(){
@@ -188,9 +216,7 @@ $('#phoneconfirm').click(function(){
 		$.ajax({
 			url:"<c:url value='/reg/phonecheck'/>",
 			type:"GET",
-			data:"phonenum="+JSON.stringify(phonenum),
-			contentType: "application/json; charset=utf-8;",
-            dataType: "json",
+			data:"phonenum="+phonenum,
 			success:function(res){
 				//alert(res);
 				$('#chkphone').val(res).css("color","red"); 
@@ -225,14 +251,60 @@ $('#phone_check').keyup(function(){
 		});				
 	
 });
-	
-});	
 
+//이메일 체크하기
+$('#emailconfirm').click(function(){
+	var email1 = $('#email1').val();
+	var email2 = $('#email2').val();
+	
+	var emailaddress= email1+"@"+email2
+
+		$.ajax({
+			url:"<c:url value='/reg/emailcheck'/>",
+			type:"GET",
+			data:"emailaddress="+JSON.stringify(emailaddress),
+			contentType: "application/json; charset=utf-8;",
+            dataType: "json",
+			success:function(res){
+				//alert(res);
+				$('#chkmail').val(res).css("color","red"); 
+			},
+			error:function(xhr, status, error){
+				alert("error 발생!!" + error);
+			}
+		});				
+	}); 
+	
+//이메일 인증번호 체크하기	
+$('#email_check').keyup(function(){
+	var data2=$(this).val();
+	var data1=$('#chkmail').val();
+	
+		$.ajax({
+			url:"<c:url value='/reg/numcheck'/>",
+			type:"post",
+			data:{"num1":data1,"num2":data2},
+			success:function(res){
+				//alert(res);
+				if(res){
+					$('#checkemail').html("인증되셨습니다.").css("color", "blue");
+					
+				}else{
+					$('#checkemail').html("인증실패").css("color", "red");								
+				}
+			},
+			error:function(xhr, status, error){
+				alert("error 발생!!" + error);
+			}
+		});				
+	
+		});
+});
 
 </script>
 
 
-
+<!-- 여기부터 페이지 -->
 <div class="reg_box">
 <div class="container">
 <div>
@@ -242,13 +314,15 @@ $('#phone_check').keyup(function(){
 			<fieldset>
 			
 				<legend>회원 가입</legend>
+				<!-- 회원 번호에서 받아온 값(회원번호, 타입) -->
 					<input type="hidden" name="stuno" id="stuno" value="${param.stuno}">
+					<input type="hidden" name="chk_info" id="chk_info" value="${param.chk_info}">
 				<!-- 아이디 -->
 					<br>
 					<br>
 				<div class="id" style="width: 200px;">
-					<label for="userid">아이디</label> <br> 
-					<input type="text" class="student_id" id="student_id" name="student_id" placeholder="ID" required
+					<label for="user_id">아이디</label> <br> 
+					<input type="text" class="userid" id="userid" name="userid" placeholder="ID" required
 						style="ime-mode: inactive"> <br> <span
 						class="check_id" id="check_id" style=""></span>
 				</div>
@@ -265,31 +339,42 @@ $('#phone_check').keyup(function(){
 
 				<!-- 비밀번호 확인용 -->
 				<div class="pwd2" style="width: 200px;">
-					<label for="pwd">비밀번호 확인</label> <br> <input type="password"
+					<label for="pwd">비밀번호 확인</label> 
+					<br> 
+					<input type="password"
 						class="form" id="pwd2" name="pwd2" placeholder="pass" required>
 					<div class="check_pwd2" id="check_pwd2"></div>
 				</div>
 				<br>
 
-				<!-- 이메일 
-				<div class="email" style="width: 400px;">
-					<label for="email">이메일</label> <br> <input type="text"
-						class="form" id="email1" name="email1" placeholder="E-MAIL"	required> 
-						<span class="@" id="@">@</span> <select
-						class="input" name="email2" id="email2">
+				<!-- 이메일 -->
+				<div id="email" class="email" style="width: 400px;">
+					<label for="email">이메일</label> 
+					<br> 
+					<input type="text" class="email1" id="email1" name="email1" placeholder="E-MAIL"> 
+						<span class="@" id="@">@</span> 
+					<select	class="input" name="email2" id="email2">
 						<option value="naver.com">naver.com</option>
 						<option value="hanmail.net">hanmail.net</option>
 						<option value="nate.com">nate.com</option>
 						<option value="gmail.com">gmail.com</option>
-					</select> <span class="check_email" id="email_check"></span>
+					</select> 
+				<br>
+				<br>
+				<input type="button" value="이메일 인증번호 보내기" id="emailconfirm"> 
+				<br>
+				<input type="text" class="email_check" id="email_check" placeholder="이메일 인증번호" required>
+				<br>
+					<span class="checkemail" id="checkemail"></span>
 				</div>
-				<br> -->
-
+				
+				
+				<br>
 				<!-- 휴대폰 -->
 				<div class="phone">
 					<label for="hp1">휴대폰</label> <br> 
 				<span> 
-					<select name="hp1" id="phone1" name="phone1" title="휴대폰 앞자리" style="width: 80px;">
+					<select name="phone1" id="phone1" name="phone1" title="휴대폰 앞자리" style="width: 80px;">
 							<option value="010">010</option>
 							<option value="011">011</option>
 							<option value="016">016</option>
@@ -312,16 +397,20 @@ $('#phone_check').keyup(function(){
 				<br>
 
 				<div class="center"></div>
-				<input type="submit" id="submit" class="btn btn-danger" value="회원가입"  style="width:80px;">
+			
 				
 			</fieldset>
 			</div>
-			 <input type ="hidden" name="chkId" id="chkId"> 
-			  <input type ="hidden" name="chkpwd" id="chkpwd">
-			   <input type ="hidden" name="chkphone" id="chkphone">
-
+	<input type="submit" class="registeration" value="회원가입"  style="width:80px;">
 		</form>
+			
+		<input type ="hidden" name="chkId" id="chkId"> 
+			  <input type ="hidden" name="chkpwd" id="chkpwd">
+			   <input type ="text" name="chkphone" id="chkphone">
+			   <input type= "hidden" name ="chkmail" id="chkmail">
+			   
 	</article>
+
 	</div>
 	
 </div>

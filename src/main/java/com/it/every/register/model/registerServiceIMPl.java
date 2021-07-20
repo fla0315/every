@@ -2,7 +2,7 @@ package com.it.every.register.model;
 
 import org.springframework.stereotype.Service;
 
-import com.it.every.admin.model.employeeVO;
+import com.it.every.employee.model.EmployeeVO;
 import com.it.every.professor.model.ProfessorVO;
 import com.it.every.student.model.StudentVO;
 
@@ -115,15 +115,9 @@ public class registerServiceIMPl implements registerService{
 	}
 
 	@Override
-	public employeeVO selectByuserid3(String id) {
-		// TODO Auto-generated method stub
+	public EmployeeVO selectByuserid3(String id) {
 		return dao.selectByuserid3(id);
 	}
 
-	
-
-
-
-	
 
 }
