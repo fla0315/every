@@ -50,19 +50,19 @@
 	<update id="registerMember" parameterType="registerVO">
 	<if test='chk_info=="student"'>
 	 	update student
-	 	set student_id=#{id}, pwd=#{pwd}, phonenum=#{phonenum},
-	 	identity_state=#{indentityState}
+	 	set student_id=#{user_id}, pwd=#{pwd}, phonenum=#{phonenum},
+	 	indentity_state=#{indentitystate}
 		where stu_no=#{stu_no}
 	</if>
 	<if test='chk_info=="admin"'>
 	 	update employee
-	 	set emp_id=#{id}, pwd=#{pwd}, identity_state=#{indentityState}
+	 	set emp_id=#{user_id}, pwd=#{pwd}, identity_state=#{indentitystate}
 		where emp_no=#{stu_no}
 	</if>
 	<if test='chk_info=="professor"'>
 	 	update professor
-	 	set prof_id=#{id}, prof_pwd=#{pwd}, prof_ph=#{phonenum}, prof_email=#{Email}
-	 	,identity_state=1
+	 	set prof_id=#{user_id}, prof_pwd=#{pwd}, prof_ph=#{phonenum}, prof_email=#{Email}
+	 	,identity_state=#{indentitystate}
 		where prof_no=#{stu_no}
 	</if>
 	

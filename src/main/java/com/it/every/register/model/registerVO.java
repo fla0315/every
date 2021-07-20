@@ -32,7 +32,7 @@ public class registerVO {
 	private String Stu_no;
 	private String User_id;
 	private String pwd;
-	private char IndentityState;
+	private char Indentitystate;
 	private String Email; 
 	private String phonenum;
 	

@@ -37,21 +37,16 @@ public class registerController {
 
 	public final registerService service;
 
-	@GetMapping("/register")
-	public String register(){
-		logger.info("전체 출력");
-		return "/reg/register";
-	}
 
 	@GetMapping("/login")
 	public String register2(){
-		logger.info("전체 출력");
+		logger.info("로그인 출력");
 		return "/reg/login";
 	}
 
 	@GetMapping("/checkstuno")
 	public String login2(){
-		logger.info("전체 출력");
+		logger.info("회원번호 확인 출력");
 		return "/reg/checkstuno";
 	}
 
@@ -60,6 +55,20 @@ public class registerController {
 		return "inc/name";
 	}
 
+	//회원유형 검색(radio 변경용)
+		@ResponseBody
+		@RequestMapping("/regtypecheck")
+		public String ajaxregtypecheck(@RequestParam("chk_info") String chk_info) {
+			logger.info("ajax이용-회원유형 확인, 파라미터 회원유형={}",chk_info);
+
+			boolean bool=true;
+
+			logger.info("ajax-인증번호 전송 결과, result={}, num={}", bool, chk_info);
+
+			return chk_info;
+		}
+	
+	
 
 	//등록된 학생, 교수, 임직원 체크
 	@ResponseBody
@@ -69,7 +78,6 @@ public class registerController {
 		logger.info("ajax이용- 회원가입 시 등록번호 확인, 입력번호={}, 회원유형={} ", vo.getStu_no(), vo.getChk_info());
 
 		int result=service.checkDuplicatestuno(vo);
-
 
 		logger.info("ajax- 회원가입 시 등록번호 확인 결과, result={}", result);
 
@@ -81,15 +89,18 @@ public class registerController {
 	}
 
 	//학번 및 유형 전달용(회원가입 시)
-	@RequestMapping("/checkstuno")
+	@RequestMapping("/register")
 	public String ajaxstuno(@RequestParam("stuno") String stuno, @RequestParam("chk_info") String chk_info, Model model) {
 		logger.info("회원가입 시 전달 학번확인, 회원번호 회원번호={}, 회원유형={}", stuno, chk_info);
 
-		model.addAttribute("stuno",stuno);
-		model.addAttribute("chk_info",chk_info);
-
-
-		return "/reg/register";
+		String url="/reg/register";
+		if( (stuno==null|| stuno.isEmpty()) || (chk_info==null||chk_info.isEmpty())){
+			 url="reg/chekstuno";
+		}else {
+			model.addAttribute("stuno",stuno);
+			model.addAttribute("chk_info",chk_info);
+		}
+		return url;
 	}
 
 	//아이디 체크(회원가입 및 로그인에 사용)
@@ -123,6 +134,7 @@ public class registerController {
 	public boolean ajaxpwdcheck(@RequestParam("pwd") String pwd) {
 		logger.info("ajax이용-비밀번호확인, 파라미터 pwd={}",pwd);
 
+		int a =1023372823;
 		boolean bool=false;
 
 		if (pwd.length()>=5&&pwd.length()<=10) {
@@ -157,13 +169,17 @@ public class registerController {
 	@ResponseBody
 	@RequestMapping("/phonecheck")
 	public String ajaxphone(@RequestParam("phonenum") String phonenum) {
+	
 		logger.info("ajax이용-휴대전화 동작확인, 파라미터 phone-num={}",phonenum);
 
 		boolean bool=true;
 
+		String phone= phonenum;
 		sms sms = new sms();
+		logger.info("ajax이용-휴대전화 동작확인, 파라미터 phone-num={}",phone);
 
-		String num= sms.smsNaver(phonenum); //인증번호
+
+		String num= sms.smsNaver(phone); //인증번호
 
 		if (num==""||num.equals(null)) {
 			logger.info("ajax이용-번호 없어");	
@@ -254,8 +270,6 @@ public class registerController {
 	public String register(
 			@RequestParam("stuno") String stuno,
 			@RequestParam("chk_info") String chk_info,
-			@RequestParam("chkphone") String chkphone,
-			@RequestParam("chkmail") String chkmail,
 			@RequestParam("phone1") String phone1,
 			@RequestParam("phone2") String phone2,
 			@RequestParam("phone3") String phone3,
@@ -265,14 +279,16 @@ public class registerController {
 			@RequestParam("pwd") String pwd) {
 		
 		logger.info("회원정보 입력 과정 인증, 파라미터"
-				+ " 휴대폰 인증번호={}, 회원번호={}, 이메일 인증번호={}, 회원유형={}, 입력 id={}, 입력 pw={}"
-					, chkphone, stuno, chkmail, chk_info, userid, pwd);
-
-	
+				+ "  회원번호={}, 회원유형={}, 입력 id={}, 입력 pw={}"
+					,  stuno, chk_info, userid, pwd);
+		String email="제발 좀 끝내자";
 		
 		String phonenum = phone1+phone2+phone3;
-		String email = email1+"@"+email2;
-
+		if (chk_info.equals("professor")) {
+			 email = email1+"@"+email2;
+		}
+		
+		
 		registerVO vo = new registerVO();
 		
 		vo.setStu_no(stuno);
@@ -281,13 +297,13 @@ public class registerController {
 		vo.setEmail(email);
 		vo.setPhonenum(phonenum);
 		vo.setChk_info(chk_info);
-		vo.setIndentityState('Y');
+		vo.setIndentitystate('y');
 		
 	
 		int a = service.registerMember(vo);
 		logger.info("회원가입 결과, a={}",a);
 
-		return "/every/reg/register2";
+		return "professor/profMain";
 	}
 
 	//로그인!!!!!!
@@ -335,7 +351,7 @@ public class registerController {
 			session.setAttribute("user_id", id);
 			logger.info("처리 결과(값을 잘 받아왔는지 확인함) result={} 회원번호={} 회원이름={} 회원아이디={}" 
 					,result,pvo.getProfNo(),pvo.getProfName(),id);
-			url= "admin/mainDisplay/calendar";		
+			url= "professor/profMain";		
 		}
 		
 		
