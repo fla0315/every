@@ -10,56 +10,104 @@
 			<table id="datatablesSimple">
 				<thead>
 					<tr>
-						<th>학과/부서</th>
-						<th>사번</th>
-						<th>이름</th>
-						<th>직책</th>
-						<th>권한</th>
-						<th>입사년도</th>
-						<th>수정</th>
-						<th>삭제</th>
+						<th style="text-align: center">학과/부서</th>
+						<th style="text-align: center">사번</th>
+						<th style="text-align: center">이름</th>
+						<th style="text-align: center">직책</th>
+						<th style="text-align: center">권한</th>
+						<th style="text-align: center">입사년도</th>
+						<th style="text-align: center">수정</th>
+						<th style="text-align: center">삭제</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>대학본부</td>
-						<td>00000001</td>
-						<td>홍길동</td>
-						<td>부장</td>
-						<td>관리자</td>
-						<td>2008</td>
-						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
-						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
+						<td style="vertical-align: middle; text-align: center;">대학본부</td>
+						<td style="vertical-align: middle; text-align: center;">00000001</td>
+						<td style="vertical-align: middle; text-align: center;">홍길동</td>
+						<td style="vertical-align: middle; text-align: center;">부장</td>
+						<td style="vertical-align: middle; text-align: center;">관리자</td>
+						<td style="vertical-align: middle; text-align: center;">2008</td>
+						<td style="vertical-align: middle; text-align: center;">
+							<a href="<c:url value='/admin/employee/employeeEdit'/>">
+								<button class="btn btn-primary btn-sm">
+									수정
+								</button>
+							</a>
+						</td>
+						<td style="vertical-align: middle; text-align: center;">
+							<a href="<c:url value='/admin/employee/employeeDelete'/>">
+								<button class="btn btn-danger btn-sm">
+									삭제
+								</button>
+							</a>
+						</td>
 					</tr>
 					<tr>
-						<td>입학관리처</td>
-						<td>00000037</td>
-						<td>홍길용</td>
-						<td>대리</td>
-						<td>부관리자</td>
-						<td>2015</td>
-						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
-						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
+						<td style="vertical-align: middle; text-align: center;">입학관리처</td>
+						<td style="vertical-align: middle; text-align: center;">00000037</td>
+						<td style="vertical-align: middle; text-align: center;">홍길용</td>
+						<td style="vertical-align: middle; text-align: center;">대리</td>
+						<td style="vertical-align: middle; text-align: center;">부관리자</td>
+						<td style="vertical-align: middle; text-align: center;">2015</td>
+						<td style="vertical-align: middle; text-align: center;">
+							<a href="<c:url value='/admin/employee/employeeEdit'/>">
+								<button class="btn btn-primary btn-sm">
+									수정
+								</button>
+							</a>
+						</td>
+						<td style="vertical-align: middle; text-align: center;">
+							<a href="<c:url value='/admin/employee/employeeDelete'/>">
+								<button class="btn btn-danger btn-sm">
+									삭제
+								</button>
+							</a>
+						</td>
 					</tr>
 					<tr>
-						<td>행정처</td>
-						<td>00000048</td>
-						<td>홍길순</td>
-						<td>주임</td>
-						<td>부관리자</td>
-						<td>2019</td>
-						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
-						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
+						<td style="vertical-align: middle; text-align: center;">행정처</td>
+						<td style="vertical-align: middle; text-align: center;">00000048</td>
+						<td style="vertical-align: middle; text-align: center;">홍길순</td>
+						<td style="vertical-align: middle; text-align: center;">주임</td>
+						<td style="vertical-align: middle; text-align: center;">부관리자</td>
+						<td style="vertical-align: middle; text-align: center;">2019</td>
+						<td style="vertical-align: middle; text-align: center;">
+							<a href="<c:url value='/admin/employee/employeeEdit'/>">
+								<button class="btn btn-primary btn-sm">
+									수정
+								</button>
+							</a>
+						</td>
+						<td style="vertical-align: middle; text-align: center;">
+							<a href="<c:url value='/admin/employee/employeeDelete'/>">
+								<button class="btn btn-danger btn-sm">
+									삭제
+								</button>
+							</a>
+						</td>
 					</tr>
 					<tr>
-						<td>경영학부</td>
-						<td>00000005</td>
-						<td>홍길자</td>
-						<td>사원</td>
-						<td>스태프</td>
-						<td>2020</td>
-						<td><input type="button" class="btn btn-primary btn-sm" value="수정"></td>
-						<td><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
+						<td style="vertical-align: middle; text-align: center;">경영학부</td>
+						<td style="vertical-align: middle; text-align: center;">00000005</td>
+						<td style="vertical-align: middle; text-align: center;">홍길자</td>
+						<td style="vertical-align: middle; text-align: center;">사원</td>
+						<td style="vertical-align: middle; text-align: center;">스태프</td>
+						<td style="vertical-align: middle; text-align: center;">2020</td>
+						<td style="vertical-align: middle; text-align: center;">
+							<a href="<c:url value='/admin/employee/employeeEdit'/>">
+								<button class="btn btn-primary btn-sm">
+									수정
+								</button>
+							</a>
+						</td>
+						<td style="vertical-align: middle; text-align: center;">
+							<a href="<c:url value='/admin/employee/employeeDelete'/>">
+								<button class="btn btn-danger btn-sm">
+									삭제
+								</button>
+							</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

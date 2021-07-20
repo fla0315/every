@@ -17,6 +17,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <!-- jQuery -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         
@@ -25,7 +26,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="<c:url value='/professor/profMain'/>">교수님 페이지</a>
+            <a class="navbar-brand ps-3" href="<c:url value='/professor/profMain'/>">에브리학사</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -90,7 +91,7 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                	<a class="nav-link" href="<c:url value='/professor/attendance'/>">
+                                	<a class="nav-link" href="<c:url value='/professor/attendance?openSubCode='/>">
                                 	출석부
                             		</a>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
@@ -109,8 +110,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationRecord'/>">성적 입력/수정</a>
-                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationCheck'/>">성적 조회</a>
+                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationRecord?openSubCode='/>">성적 입력/수정</a>
+                                            <a class="nav-link" href="<c:url value='/professor/evaluation/evaluationCheck?openSubCode='/>">성적 조회</a>
                                         </nav>
                                     </div>
                                 </nav>

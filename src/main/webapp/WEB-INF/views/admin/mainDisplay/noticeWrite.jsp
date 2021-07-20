@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../../inc/prof_top.jsp" %>
+<%@ include file="../../inc/admin_top.jsp" %>
 <!-- 성적 입력창 -->
 <!-- summernote -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
@@ -30,17 +30,10 @@ body {
 }
 </style>
 	<article>
-		<div class="container col-lg-10" role="main">
+		<div class="container" role="main">
 			<h2>공지사항 등록</h2>
 			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
 				<br>
-				<div class="mb-3">
-					<label for="title">개설교과목</label>
-					<select>
-						<option>선택하세요</option>
-						<!-- 개설교과목 번호/이름 교수님 번호로 조회해 for문 돌리기 -->
-					</select>
-				</div>
 				<div class="mb-3">
 					<label for="title">제목</label>
 					<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
@@ -54,7 +47,7 @@ body {
 			</form>
 
 			<div >
-				<button type="button" class="btn btn-sm btn-primary" id="btnSave">제출</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnSave">등록</button>
 				<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
 			</div>
 		</div>

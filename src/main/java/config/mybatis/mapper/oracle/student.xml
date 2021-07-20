@@ -29,9 +29,6 @@
 		where stu_no=#{stuNo}
 	</update>
 	
-	
-	
-	
 	<!-- 등록금조회 -->
 	<select id="selectByStuId" parameterType="String" resultType="map">
 		select * from tuitionView
@@ -53,11 +50,38 @@
 			where s.student_id=#{123}
 	</select>
 	
+	<insert id="studentRegister" parameterType="studentVo">
+		<selectKey resultType="string" keyProperty="stuNo" order="BEFORE">
+			select to_char(student_seq.nextval, 'FM000000000') from dual
+		</selectKey>
+		insert into student(stu_no, student_id, name, pwd, major, 
+			admission_date, graduation_date, state, phonenum)
+		values(#{stuNo}, #{stuNo}, #{name}, #{pwd}, #{major}, 
+			#{admissionDate}, #{graduationDate}, #{state}, #{phoneNum})
+	</insert>
+
+	<select id="selectAll" resultType="studentVo">
+		select * from student order by major
+	</select>
 	
+	<select id="selectByStuNo" parameterType="String" resultType="studentVo">
+		select * from student where stu_no = #{stuNo}
+	</select>
+	
+	<update id="updateStudent" parameterType="studentVo">
+		update student
+		set major=#{major}, stu_no=#{stuNo}, student_id=#{studentId}, name=#{name}, 
+			pwd=#{pwd}, semester=#{semester}, admission_date=#{admissionDate},
+			graduation_date=#{graduationDate}, credits=#{credits}, state=#{state},
+			phonenum=#{phoneNum}
+		where stu_no = #{stuNo}
+	</update>
+	
+	<delete id="deleteStudent" parameterType="string">
+		delete from student where stu_no=#{stuNo}
+	</delete>
 	
 </mapper>
-
-
 
 
 
