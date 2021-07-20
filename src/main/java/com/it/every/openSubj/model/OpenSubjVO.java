@@ -10,9 +10,11 @@ import lombok.ToString;
 @Setter
 @ToString
 public class OpenSubjVO {
-	private String openSubCode;
-	private String subjCode;
-	private String profNo;
-	private Timestamp openDate;
-	private Timestamp closeDate;
+
+	private String openSubCode;/* 개설교과과목코드 */
+	private String subjCode; /* 과목코드 */
+	private String profNo; /* 교수번호 */
+	private Timestamp openDate; /* 개설일자 */
+	private Timestamp closeDate; /* 폐지일자 */
+	
 }

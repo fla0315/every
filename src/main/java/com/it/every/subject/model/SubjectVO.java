@@ -11,19 +11,17 @@ import lombok.ToString;
 @ToString
 public class SubjectVO {
 	
-	private String subj_code;	/* °ú¸ñÄÚµå */
-	private String prof_no; 	/* ±³¼ö¹øÈ£ */
-	private String semester;	 /* ÇĞ±â */
-	private String subj_name; 	/* °ú¸ñ¸í */
-	private String major; 		/* ÇĞºÎ/°ú */
-	private String grade ; 		/* ÇĞ³â */
-	private String timetable;	/* °­ÀÇ½Ç/½Ã°£Ç¥ */
-	private String course_type;	/* ÀÌ¼ö±¸ºĞ */
-	private String  explanation;	 		/* °ú¸ñ¼³¸í */
-	private int credit;			/* ÀÌ¼öÇĞÁ¡ */
-	private int personnel;		/* ÀÎ¿ø */
-	private Timestamp open_date;	/* °³¼³³¯Â¥  */
-	private Timestamp  close_date;	/* ÆóÁö³¯Â¥ */
+	private String subjCode;	/* ê³¼ëª©ì½”ë“œ */
+	private String profNo; 	/* êµìˆ˜ë²ˆí˜¸ */
+	private String typeCode; 	/* êµ¬ë¶„ì½”ë“œ */
+	private String subjName; 	/* ê³¼ëª©ëª… */
+	private String semester;	 /* í•™ê¸° */
+	private String facultyName; /* í•™ë¶€ */
+	private String grade ; 		/* í•™ë…„ */
+	private String timetable;	/* ì‹œê°„í‘œ */
+	private String  explanation; /* ê³¼ëª©ì„¤ëª… */
+	private int credit;			/* í•™ì  */
+	private int personnel;		/* ì¸ì›ìˆ˜ */
 	
 	
 }

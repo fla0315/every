@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class TuitionVO {
 
-	private int no;  //등록금번호
+	private int tuitionNo;  //등록금번호
 	private String semester; //학기
 	private String stuNo; //학번
 	private int tuition; //등록금

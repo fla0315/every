@@ -4,4 +4,7 @@ import java.util.List;
 
 public interface OpenSubjService {
 	List<OpenSubjVO> selectByProfNo(String profNo);
+
+	List<OpenSubjVO> selectScholarALL();
+	
 }

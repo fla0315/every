@@ -15,4 +15,13 @@ public class OpenSubjServiceImpl implements OpenSubjService {
 	public List<OpenSubjVO> selectByProfNo(String profNo) {
 		return openSubjDao.selectByProfNo(profNo);
 	}
+public class OpenSubjServiceImpl implements OpenSubjService{
+	
+	private final OpenSubjDAO openSubjDao;
+	
+	@Override
+	public List<OpenSubjVO> selectScholarALL() {
+		return openSubjDao.selectScholarALL();
+	}
+
 }
