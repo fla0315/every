@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- <mapper namespace="config.mybatis.mapper.oracle.board"> -->
+<mapper namespace="com.it.every.controller.registerDAO">
+
+	<select id = "checkDuplicate" parameterType="String" resultType="int">
+			select count(*) from student where student_id=#{student_id}
+	</select>
+	
+	<select id = "checkDuplicatestuno" parameterType="String" resultType="int">
+			select count(*) from student s, professor p 
+			where s.stu_no=#{stu_no} or p.prof_no=#{stu_no}
+	</select>
+	
+	<update id="registerMember" parameterType="registerVO">
+	 	update student
+	 	set student_id=#{student_id}, pwd=#{pwd}, phonenum=#{phonenum}
+		where stu_no=#{stu_no}
+	 </update>
+	 
+	<select id="selectPwd1" parameterType="String" resultType="String">
+		select pwd from student
+		where student_id=#{student_id} 
+	</select>
+	
+	<select id="selectPwd2" parameterType="String" resultType="String">
+		select prof_pwd from professor
+		where prof_id=#{prof_id}
+	</select>
+	
+	<select id="selectPwd3" parameterType="String" resultType="String">
+		select employee from Employee
+		where emp_id=#{emp_id}
+	</select>
+	
+	<select id="selectallstu" parameterType="String">
+		select * from student where student_id=#{student_id}
+	</select>
+	
+	<select id="selectallprof" parameterType="String">
+		select * from professor where prof_id=#{prof_id}
+	</select>
+	
+	<select id="selectallemp" parameterType="String">
+		select * from employee where EMP_id=#{EMP_id}
+	</select>
+</mapper>
