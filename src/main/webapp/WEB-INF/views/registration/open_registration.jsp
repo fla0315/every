@@ -131,48 +131,81 @@
                             <hr> <br>
 
 
-                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                                <table class="table table-bordered table-striped mb-0">
-                                <thead>
-                                <tr>
-                                    <th scope="col">장바구니</th>
-                                    <th scope="col">년도</th>
-                                    <th scope="col">학기</th>
-                                    <th scope="col">과목명</th>
-                                    <th scope="col">학부(과)</th>
-                                    <th scope="col">학년</th>
-                                    <th scope="col">이수구분</th>
-                                    <th scope="col">학점</th>
-                                    <th scope="col">담당교수</th>
-                                    <th scope="col">강의실/시간</th>
-                                    <th scope="col">강의계획서</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    <tr>
-                                        <td><button>장바구니</button></td>
-                                        <td>년도</td>
-                                        <td>학기</td>
-                                        <td>과목명</td>
-                                        <td>학부(과)</td>
-                                        <td>학년</td>
-                                        <td>이수구분</td>
-                                        <td>학점</td>
-                                        <td>담당교수</td>
-                                        <td>강의실/시간</td>
-                                        <td><button>강의계획서</button></td>
-                                        
-                                    </tr>
+                            <div
+							class="table-wrapper-scroll-y my-custom-scrollbar">
+							<table class="table table-bordered table-striped mb-0">
+								<thead>
+									<tr>
+										<th scope="col">장바구니</th>
+										<th scope="col">년도</th>
+										<th scope="col">학기</th>
+										<th scope="col">과목명</th>
+										<th scope="col">학부(과)</th>
+										<th scope="col">학년</th>
+										<th scope="col">이수구분</th>
+										<th scope="col">학점</th>
+										<th scope="col">담당교수</th>
+										<th scope="col">강의실/시간</th>
+										<th scope="col">강의계획서</th>
+									</tr>
+								</thead>
+								<tbody>
 
-                                </tbody>
-                            </table>
-                            
-                            </div>
+									<!-- 데이터 없을 때  -->
+									<c:if test="${empty list }">
+										<tr>
+											<td colspan="6" class="align_center">개설된 과목이 없습니다.</td>
+										</tr>
+									</c:if>
+
+									<c:if test="${!empty list }">
+										<c:forEach var="map" items="${list }">
+											<tr class="align_center">
+												<!-- 장바구니 -->
+												<td><input type="button" id="btCartSubj" value="장바구니"></td>
+
+												<!-- 년도 -->
+												<td><fmt:formatDate value="${map['OPEN_DATE']}"
+														pattern="yyyy" /></td>
+												<!-- 학기 -->
+												<td>${map['SEMESTER'] }</td>
+
+												<!-- 과목명 -->
+												<td>${map['SUBJ_NAME'] }</td>
+
+												<!-- 학부(과)  -->
+												<td>${map['FACULTY_NAME'] }</td>
+												<!-- 학년 -->
+
+												<!-- 이수구분 -->
+												<td>${map['GRADE'] }</td>
+												
+												<!-- 이수구분 -->
+												<td>${map['TYPE'] }</td>
+
+												<!-- 학점 -->
+												<td>${map['CREDIT'] }</td>
+
+												<!-- 담당교수 -->
+												<td>${map['PROF_NAME'] }</td>
+
+												<!-- 강의실/시간 -->
+												<td>${map['TIMETABLE'] }</td>
+
+												<!-- 강의계획서 -->
+												<td><input type="button" id="btSyllabus" value="강의계획서"></td>
+
+											</tr>
+										</c:forEach>
+									</c:if>
 
 
 
 
 
 
+								</tbody>
+							</table>
+
+						</div>
 <%@ include file="../inc/bottom.jsp" %>        

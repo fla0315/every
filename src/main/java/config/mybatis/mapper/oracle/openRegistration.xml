@@ -5,7 +5,7 @@
 <mapper namespace="com.it.every.openSubj.model.OpenSubjDAO">
 
 
-	<select id="selectScholarALL" resultType="OpenSubjVO">
+	<select id="selectScholarALL" resultType="map">
 		select st.type, sj.* ,prof.prof_name ,os.*
 		from subj_type st join subject sj
 		on st.type_code = sj.subj_code
@@ -15,6 +15,6 @@
 		on os.subj_code = sj.subj_code
 	</select>
 	
-
+	
 	
 </mapper>
