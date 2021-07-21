@@ -29,17 +29,13 @@
 		where stu_no=#{stuNo}
 	</update>
 	
+	
 	<!-- 등록금조회 -->
 	<select id="selectByStuId" parameterType="String" resultType="map">
 		select * from tuitionView
 		where student_id=#{123}
 	</select>
 	
-	<!-- 등록금 PDF -->
-	<!-- <select id="selectByTuitionNo" parameterType="String" resultType="map">
-		select * from tuitionView
-		where student_id=#{123} and tuition_no='#{2}'
-	</select> -->
 	
 	<!-- 장학금 조회 -->
 	<select id="selectByScholarship" parameterType="String" resultType="map">
@@ -49,6 +45,8 @@
 			on a.stu_no = s.stu_no
 			where s.student_id=#{123}
 	</select>	
+	
+	
 </mapper>
 
 

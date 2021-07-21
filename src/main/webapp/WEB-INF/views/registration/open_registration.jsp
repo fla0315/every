@@ -22,6 +22,7 @@
 
 
                                 <tr>
+                                <!-- 년도는 5개로 고정 -->
                                     <td><span class=""><label for="년도">년도</label></span></td>
                                     <td>
                                         <div id="">
@@ -31,6 +32,8 @@
                                                 <option value=''>2020</option>
                                                 <option value=''>2019</option>
                                                 <option value=''>2018</option>
+                                                <option value=''>2017</option>
+                                                <option value=''>2016</option>
                                             </select>
                                          
                                         </div>
@@ -40,13 +43,13 @@
 
 
 
-
+									<!-- 학기 -->
                                     <td style="padding-left:10px"><span class=""><label for="학기">학기</label></span></td>
                                     <td>
-                                        <select id="" name="" title="학기" class="" >
-                                            <option value="">ALL</option>
-                                            <option value="">1학기</option>
-                                            <option value="">2학기</option>
+                                        <select id="searchCptnDcd" name="searchCptnDcd" class="ctl_select" tabindex="1" title="이수구분">
+									            <option value="">ALL</option>
+									            <option value="">1학기</option>
+									            <option value="">2학기</option>
                                         </select>
                                     </td>
 
@@ -60,22 +63,21 @@
                                     <td>
                                         <select style="vertical-align: middle;" id="searchCuriShyy" name="searchCuriShyy" title="학년" class="" notnull="true">
                                             <option value="">ALL</option>
-                                            <option value="">1학년</option>
-                                            <option value="">2학년</option>
-                                            <option value="">3학년</option>
-                                            <option value="">4학년</option>
+                                            <option value="">1</option>
+                                            <option value="">2</option>
+                                            <option value="">3</option>
+                                            <option value="">4</option>
                                         </select>
                                     </td>
 
-
+									<!-- 이수구분 -->
                                     <td><span class="ctl_label"><label for="searchCptnDcd">이수구분</label></span></td>
-                                    
                                     <td>
-                                        <select id="searchCptnDcd" name="searchCptnDcd" class="ctl_select" tabindex="1" title="이수구분">
-                                            <option value = "">ALL</option>
-                                            <option value = "">기초교양</option>
-                                            <option value = "">전공선택</option>
-                                            <option value = "">필수교양</option>
+                                       <select id="searchCptnDcd" name="searchCptnDcd" class="ctl_select" tabindex="1" title="이수구분">
+									            <option value="">ALL</option>
+									            <c:forEach var="typeMap" items="${typeMap }">
+										            <option value="${typeMap['TYPE_CODE']}">${typeMap['TYPE'] }</option>            	
+									            </c:forEach>                     
                                         </select>
                                     </td>
                                 </tr>
@@ -86,36 +88,32 @@
                                     <td><span class=""><label for="학과">학과</label></span></td>
                                     
                                     <td>
-                                        <select id="" name="" class="" tabindex="1" title="학과">
-                                            <option value = "">ALL</option>
-                                            <option value="">항공운항</option>
-                                            <option value="">간호학과</option>
-                                            <option value="">컴퓨터공학과</option>
+                                          <select id="searchCptnDcd" name="searchCptnDcd" class="ctl_select" tabindex="1" title="이수구분">
+									            <option value="">ALL</option>
+									            <c:forEach var="fMap" items="${facultyMap }">
+										            <option value="${fMap['FACULTY_NO']}">${fMap['FACULTY_NAME'] }</option>            	
+									            </c:forEach>                     
                                         </select>
                                     </td>
 
 
 
 
-                                    <td style="padding-left:10px"><span class=""><label for="전공">전공</label></span></td>
+                                   <%--  <td style="padding-left:10px"><span class=""><label for="전공">전공</label></span></td>
                                     <td>
-                                        
-                                        <select id="" name="" class="" tabindex="1" title="전공" style="text-align: center;">
-                                            <option value = "">ALL</option>
-                                            <option value="">항공운항</option>
-                                            <option value="">간호학과</option>
-                                            <option value="">컴퓨터공학과</option>
-                                            <option value="">아동사회복지학과</option>
-                                            
+                                          <select id="searchCptnDcd" name="searchCptnDcd" class="ctl_select" tabindex="1" title="이수구분">
+									            <option value="">ALL</option>
+									            <c:forEach var="fMap" items="${facultyMap }">
+										            <option value="${fMap['FACULTY_NO']}">${fMap['FACULTY_NAME'] }</option>            	
+									            </c:forEach>                     
                                         </select>
-                                    </td>
+                                    </td> --%>
 
 
                                     <td style="padding-left:10px"><span class="ctl_label"><label for="searchSbNo">교과목번호/명</label></span></td>
                                     <td>
                                         <input type="text" id="searchSbNo" name="searchSbNo" value="" class="ctl_input" title="교과목번호/명"
                                         style="width:60px" size="30" tabindex="1" />
-                                        <a href=#> <i class="fas fa-search"></i></a> 
                                         <button><i class="fas fa-search"></i></button>
                                         <input type="text" id="searchNm" name="searchNm" value="" class="ctl_input" style="width:120px"  readonly="readonly" size="30" tabindex="2" />
                                     </td>

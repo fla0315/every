@@ -104,9 +104,52 @@
                             
                             
                             
+                          <!-- 수업정보 시작 -->
+                          <div class="sb-sidenav-menu-heading">수업정보</div>
+                              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSugang" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                수업정보
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            
+                            
+                            <div class="collapse" id="collapseSugang" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            
+                               <%--  <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSub" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        개설과목조회
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="collapseSub" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="<c:url value='/registration/open_registration'/>">개설과목조회</a>
+                                            <a class="nav-link" href="<c:url value='/timetable/timetable'/>">강의계획서조회</a>
+                                        </nav>
+                                    </div>
+                                </nav> --%>
+                            
+	                              <nav class="sb-sidenav-menu-nested nav">
+                                 	   <a class="nav-link" href="<c:url value='/registration/open_registration'/>">개설과목조회</a>
+	                               </nav>
+	                              <nav class="sb-sidenav-menu-nested nav">
+                                 		<a class="nav-link" href="<c:url value='/timetable/timetable'/>">강의계획서조회</a>
+	                               </nav>
+	                              <nav class="sb-sidenav-menu-nested nav">
+                                 	  <a class="nav-link" href="<c:url value='/registration/registration'/>">수강신청내역조회</a>
+	                               </nav>
+                           
+                           
+	                              <nav class="sb-sidenav-menu-nested nav">
+                                 	  <a class="nav-link" href="#">장바구니</a>
+	                               </nav>
+                            </div>
+                            
+                           <!-- 수강신청끝 -->
+                           
+                           
+                           
                           <!-- 수강신청 시작 -->
                           <div class="sb-sidenav-menu-heading">수강관리</div>
-                          
                               <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSugang" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 수강신청

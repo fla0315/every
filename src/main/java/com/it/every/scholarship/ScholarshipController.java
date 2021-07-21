@@ -26,7 +26,6 @@ public class ScholarshipController {
 	
 	
 	
-	
 	@RequestMapping("/scholarshipWrite")
 	public String scholarshipWrite() {
 		
@@ -43,16 +42,6 @@ public class ScholarshipController {
 		
 		return "scholarship/scholarshipPDF";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	@RequestMapping("/scholarshipList")

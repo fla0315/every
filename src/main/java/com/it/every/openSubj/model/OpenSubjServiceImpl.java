@@ -1,6 +1,7 @@
 package com.it.every.openSubj.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,17 @@ public class OpenSubjServiceImpl implements OpenSubjService {
 	}
 	
 	@Override
-	public List<OpenSubjVO> selectScholarALL() {
-		return openSubjDao.selectScholarALL();
+	public List<OpenSubjVO> OpenRegistraionALL() {
+		return openSubjDao.OpenRegistraionALL();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectFacultyS() {
+		return openSubjDao.selectFacultyS();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectTypeS() {
+		return openSubjDao.selectTypeS();
 	}
 }

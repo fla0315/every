@@ -39,6 +39,7 @@ public class TuitionController {
 		Map<String, Object> map = studentService.selectStudentDeptView(userid);
 		
 		logger.info("등록금 조회 결과 list.size={}", list.size());
+		logger.info("등록금 조회??? 결과 map={}", map);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);
