@@ -1,6 +1,5 @@
 package com.it.every.evaluation.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class AttendanceController {
 	private final AttendanceService attendanceService;
 	
 	@RequestMapping("/attendance")
-	public String evaluationRecord(@RequestParam String openSubCode, HttpSession session, Model model) {
+	public String attendanceCheck(@RequestParam String openSubCode, HttpSession session, Model model) {
 		logger.info("출석부 조회");
 		
 		String profNo = (String) session.getAttribute("no");
@@ -47,21 +46,8 @@ public class AttendanceController {
 			List<Map<String, Object>> atList = attendanceService.showAttendance(openSubCode);
 			logger.info("출석부 조회 결과, atList.size={}", atList.size());
 			
-			List<String> numList = new ArrayList<>();
-			numList.add("FIRST");
-			numList.add("SECOND");
-			numList.add("THIRD");
-			numList.add("FOURTH");
-			numList.add("FIFTH");
-			numList.add("SIXTH");
-			numList.add("SEVENTH");
-			numList.add("EIGHTH");
-			numList.add("NINTH");
-			numList.add("TENTH");
-			logger.info("numList={}",numList.size());
-			
 			model.addAttribute("atList", atList);
-			model.addAttribute("numList", numList);
+			model.addAttribute("open", openSubCode);
 		}
 		return "/professor/attendance";
 	}
