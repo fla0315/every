@@ -48,7 +48,7 @@ public class ScholarshipController {
 	public String scholarshipList(HttpSession session, Model model) {
 
 		//String userid = (String)session.getAttribute("userId");
-		String userid ="123";
+		String userid ="fla0315";
 		
 		logger.info("장학금 조회 , 매개변수 userid={}", userid);
 		
@@ -57,7 +57,7 @@ public class ScholarshipController {
 	
 		Map<String, Object> map = studentService.selectStudentDeptView(userid);
 		
-		logger.info("등록금 조회 결과 list.size={}", list.size());
+		logger.info("장학금 조회 결과 list.size={}", list.size());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);

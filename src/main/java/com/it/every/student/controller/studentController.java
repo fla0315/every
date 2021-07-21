@@ -48,7 +48,7 @@ public class studentController {
 	@GetMapping("/studentEdit")
 	public String studentEdit(HttpSession session, Model model) {
 		
-		String userid = "1"; //(String)session.getAttribute("userId");
+		String userid = "fla0315"; //(String)session.getAttribute("userId");
 		logger.info("학부생 회원정보수정 화면, userid={}", userid);
 		Map<String, Object> map = studentService.selectStudentDeptView(userid);
 		
@@ -61,7 +61,7 @@ public class studentController {
 	@PostMapping("/studentEdit")
 	public String studentEdit_post(@ModelAttribute StudentVO vo, HttpSession session, Model model) {
 		
-		String userid = "1"; //(String)session.getAttribute("userId");
+		String userid = "fla0315"; //(String)session.getAttribute("userId");
 		logger.info("학부생 회원정보수정 처리 화면, userid={} vo={}", userid, vo);
 		
 		String msg="비밀번호 체크 실패", url="/student/studentEdit";
