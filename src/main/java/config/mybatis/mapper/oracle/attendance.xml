@@ -12,4 +12,12 @@
 		select * from attendanceView
 		where open_sub_code=#{openSubCode}
 	</select>
+	
+	<update id="editBystuNo" parameterType="attendanceVo">
+		update attendance
+		set first=#{first}, second=#{second}, third=#{third}, fourth=#{fourth},
+		fifth=#{fifth}, sixth=#{sixth}, seventh=#{seventh}, eighth=#{eighth},
+		ninth=#{ninth}, tenth=#{tenth}, point=#{point}
+		where open_sub_code=#{openSubCode} and stu_no=#{stuNo}
+	</update>
 </mapper>

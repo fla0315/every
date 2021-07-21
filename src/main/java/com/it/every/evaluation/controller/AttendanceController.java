@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -50,5 +52,24 @@ public class AttendanceController {
 			model.addAttribute("open", openSubCode);
 		}
 		return "/professor/attendance";
+	}
+	
+	@PostMapping("/attendanceEdit")
+	public String attendanceEdit(@ModelAttribute AttendanceVO vo, @RequestParam String open, @RequestParam String stuNo, Model model) {
+		logger.info("개인 출석 등록/수정 처리, 파라미터 vo={}, openSubCode={}, stuNo={}", vo, open, stuNo);
+		vo.setOpenSubCode(open);
+		
+		int cnt = attendanceService.editBystuNo(vo);
+		logger.info("개인 출석 등록/수정 처리 결과, cnt={}", cnt);
+		
+		String msg="등록/수정 실패!", url="/professor/attendance?openSubCode="+open;
+		if(cnt>0) {
+			msg = "등록/수정 성공!";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 }

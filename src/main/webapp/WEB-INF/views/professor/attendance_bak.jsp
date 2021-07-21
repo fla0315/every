@@ -20,20 +20,10 @@
 		var sum = 0;
 		$('.attend1').each(function(idx){
 			$('.attend'+idx+' option:selected').each(function(){
-				var p = $(this).val();
-				if(p=="출석"){
-					p = 10;
-				}else if(p=="지각"){
-					p = 5;
-				}else if(p=="결석"){
-					p = 0;
-				}else if(p=="조퇴"){
-					p = 5;
-				}else{
-					p = 0;
-				}
+				var p = parseInt($(this).val());
 				sum += p;
 			});
+			/* $('input[name=point'+idx+']').val(sum); */
 			$('#point'+idx).val(sum);
 			sum = 0;
 		})
@@ -106,23 +96,23 @@ body {
                                    <td>${map['MAJOR'] }</td>
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="first">
-                                   		<option value=""></option>
-                                   		<option value="출석"
+                                   		<option value="none"></option>
+                                   		<option value="10"
                                    		<c:if test="${map['FIRST'] eq '출석' }">
                                    			 selected
                                    		</c:if>
                                    		>출석</option>
-                                   		<option value="지각"
+                                   		<option value="5"
                                    		<c:if test="${map['FIRST'] eq '지각' }">
                                    			selected
                                    		</c:if>
                                    		>지각</option>
-                                   		<option value="결석"
+                                   		<option value="0"
                                    		<c:if test="${map['FIRST'] eq '결석' }">
                                    			selected
                                    		</c:if>
                                    		>결석</option>
-                                   		<option value="조퇴"
+                                   		<option value="5"
                                    		<c:if test="${map['FIRST'] eq '조퇴' }">
                                    			selected
                                    		</c:if>
@@ -131,23 +121,23 @@ body {
                                    </td>
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="second">
-                                   		<option value=""></option>
-                                   		<option value="출석"
+                                   		<option value="0"></option>
+                                   		<option value="10"
                                    		<c:if test="${map['SECOND'] eq '출석' }">
                                    			 selected
                                    		</c:if>
                                    		>출석</option>
-                                   		<option value="지각"
+                                   		<option value="5"
                                    		<c:if test="${map['SECOND'] eq '지각' }">
                                    			selected
                                    		</c:if>
                                    		>지각</option>
-                                   		<option value="결석"
+                                   		<option value="0"
                                    		<c:if test="${map['SECOND'] eq '결석' }">
                                    			selected
                                    		</c:if>
                                    		>결석</option>
-                                   		<option value="조퇴"
+                                   		<option value="5"
                                    		<c:if test="${map['SECOND'] eq '조퇴' }">
                                    			selected
                                    		</c:if>
@@ -156,23 +146,23 @@ body {
                                    </td>
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="third">
-                                   		<option value=""></option>
-                                   		<option value="출석"
+                                   		<option value="0"></option>
+                                   		<option value="10"
                                    		<c:if test="${map['THIRD'] eq '출석' }">
                                    			 selected
                                    		</c:if>
                                    		>출석</option>
-                                   		<option value="지각"
+                                   		<option value="5"
                                    		<c:if test="${map['THIRD'] eq '지각' }">
                                    			selected
                                    		</c:if>
                                    		>지각</option>
-                                   		<option value="결석"
+                                   		<option value="0"
                                    		<c:if test="${map['THIRD'] eq '결석' }">
                                    			selected
                                    		</c:if>
                                    		>결석</option>
-                                   		<option value="조퇴"
+                                   		<option value="5"
                                    		<c:if test="${map['THIRD'] eq '조퇴' }">
                                    			selected
                                    		</c:if>
@@ -181,23 +171,23 @@ body {
                                    </td>
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="fourth">
-                                   		<option value=""></option>
-                                   		<option value="출석"
+                                   		<option value="0"></option>
+                                   		<option value="10"
                                    		<c:if test="${map['FOURTH'] eq '출석' }">
                                    			 selected
                                    		</c:if>
                                    		>출석</option>
-                                   		<option value="지각"
+                                   		<option value="5"
                                    		<c:if test="${map['FOURTH'] eq '지각' }">
                                    			selected
                                    		</c:if>
                                    		>지각</option>
-                                   		<option value="결석"
+                                   		<option value="0"
                                    		<c:if test="${map['FOURTH'] eq '결석' }">
                                    			selected
                                    		</c:if>
                                    		>결석</option>
-                                   		<option value="조퇴"
+                                   		<option value="5"
                                    		<c:if test="${map['FOURTH'] eq '조퇴' }">
                                    			selected
                                    		</c:if>
@@ -206,23 +196,23 @@ body {
                                    </td>
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="fifth">
-                                   		<option value=""></option>
-                                   		<option value="출석"
+                                   		<option value="0"></option>
+                                   		<option value="10"
                                    		<c:if test="${map['FIFTH'] eq '출석' }">
                                    			 selected
                                    		</c:if>
                                    		>출석</option>
-                                   		<option value="지각"
+                                   		<option value="5"
                                    		<c:if test="${map['FIFTH'] eq '지각' }">
                                    			selected
                                    		</c:if>
                                    		>지각</option>
-                                   		<option value="결석"
+                                   		<option value="0"
                                    		<c:if test="${map['FIFTH'] eq '결석' }">
                                    			selected
                                    		</c:if>
                                    		>결석</option>
-                                   		<option value="조퇴"
+                                   		<option value="5"
                                    		<c:if test="${map['FIFTH'] eq '조퇴' }">
                                    			selected
                                    		</c:if>
@@ -231,23 +221,23 @@ body {
                                    </td>
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="sixth">
-                                   		<option value=""></option>
-                                   		<option value="출석"
+                                   		<option value="0"></option>
+                                   		<option value="10"
                                    		<c:if test="${map['SIXTH'] eq '출석' }">
                                    			 selected
                                    		</c:if>
                                    		>출석</option>
-                                   		<option value="지각"
+                                   		<option value="5"
                                    		<c:if test="${map['SIXTH'] eq '지각' }">
                                    			selected
                                    		</c:if>
                                    		>지각</option>
-                                   		<option value="결석"
+                                   		<option value="0"
                                    		<c:if test="${map['SIXTH'] eq '결석' }">
                                    			selected
                                    		</c:if>
                                    		>결석</option>
-                                   		<option value="조퇴"
+                                   		<option value="5"
                                    		<c:if test="${map['SIXTH'] eq '조퇴' }">
                                    			selected
                                    		</c:if>
@@ -256,23 +246,23 @@ body {
                                    </td>
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="seventh">
-                                   		<option value=""></option>
-                                   		<option value="출석"
+                                   		<option value="0"></option>
+                                   		<option value="10"
                                    		<c:if test="${map['SEVENTH'] eq '출석' }">
                                    			 selected
                                    		</c:if>
                                    		>출석</option>
-                                   		<option value="지각"
+                                   		<option value="5"
                                    		<c:if test="${map['SEVENTH'] eq '지각' }">
                                    			selected
                                    		</c:if>
                                    		>지각</option>
-                                   		<option value="결석"
+                                   		<option value="0"
                                    		<c:if test="${map['SEVENTH'] eq '결석' }">
                                    			selected
                                    		</c:if>
                                    		>결석</option>
-                                   		<option value="조퇴"
+                                   		<option value="5"
                                    		<c:if test="${map['SEVENTH'] eq '조퇴' }">
                                    			selected
                                    		</c:if>
@@ -281,23 +271,23 @@ body {
                                    </td>
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="eighth">
-                                   		<option value=""></option>
-                                   		<option value="출석"
+                                   		<option value="0"></option>
+                                   		<option value="10"
                                    		<c:if test="${map['EIGHTH'] eq '출석' }">
                                    			 selected
                                    		</c:if>
                                    		>출석</option>
-                                   		<option value="지각"
+                                   		<option value="5"
                                    		<c:if test="${map['EIGHTH'] eq '지각' }">
                                    			selected
                                    		</c:if>
                                    		>지각</option>
-                                   		<option value="결석"
+                                   		<option value="0"
                                    		<c:if test="${map['EIGHTH'] eq '결석' }">
                                    			selected
                                    		</c:if>
                                    		>결석</option>
-                                   		<option value="조퇴"
+                                   		<option value="5"
                                    		<c:if test="${map['EIGHTH'] eq '조퇴' }">
                                    			selected
                                    		</c:if>
@@ -306,23 +296,23 @@ body {
                                    </td>
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="ninth">
-                                   		<option value=""></option>
-                                   		<option value="출석"
+                                   		<option value="0"></option>
+                                   		<option value="10"
                                    		<c:if test="${map['NINTH'] eq '출석' }">
                                    			 selected
                                    		</c:if>
                                    		>출석</option>
-                                   		<option value="지각"
+                                   		<option value="5"
                                    		<c:if test="${map['NINTH'] eq '지각' }">
                                    			selected
                                    		</c:if>
                                    		>지각</option>
-                                   		<option value="결석"
+                                   		<option value="0"
                                    		<c:if test="${map['NINTH'] eq '결석' }">
                                    			selected
                                    		</c:if>
                                    		>결석</option>
-                                   		<option value="조퇴"
+                                   		<option value="5"
                                    		<c:if test="${map['NINTH'] eq '조퇴' }">
                                    			selected
                                    		</c:if>
@@ -331,23 +321,23 @@ body {
                                    </td>
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="tenth">
-                                   		<option value=""></option>
-                                   		<option value="출석"
+                                   		<option value="0"></option>
+                                   		<option value="10"
                                    		<c:if test="${map['TENTH'] eq '출석' }">
                                    			 selected
                                    		</c:if>
                                    		>출석</option>
-                                   		<option value="지각"
+                                   		<option value="5"
                                    		<c:if test="${map['TENTH'] eq '지각' }">
                                    			selected
                                    		</c:if>
                                    		>지각</option>
-                                   		<option value="결석"
+                                   		<option value="0"
                                    		<c:if test="${map['TENTH'] eq '결석' }">
                                    			selected
                                    		</c:if>
                                    		>결석</option>
-                                   		<option value="조퇴"
+                                   		<option value="5"
                                    		<c:if test="${map['TENTH'] eq '조퇴' }">
                                    			selected
                                    		</c:if>

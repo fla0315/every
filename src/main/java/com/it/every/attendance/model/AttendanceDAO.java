@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AttendanceDAO {
 	int registerAttendance(String openSubCode, String stuNo, String classification);
 	List<Map<String, Object>> showAttendance(String openSubCode);
+	int editBystuNo(AttendanceVO vo);
 }

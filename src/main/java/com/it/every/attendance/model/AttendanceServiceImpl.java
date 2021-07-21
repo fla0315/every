@@ -21,5 +21,10 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public List<Map<String, Object>> showAttendance(String openSubCode) {
 		return attendanceDao.showAttendance(openSubCode);
 	}
+
+	@Override
+	public int editBystuNo(AttendanceVO vo) {
+		return attendanceDao.editBystuNo(vo);
+	}
 	
 }
