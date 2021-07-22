@@ -42,7 +42,7 @@
     
     <div id="main"> 
         <br>
-        <h1 id="header">장학금 비수혜 확인서</h1>
+        <h1 id="header">장학금 수혜 확인서</h1>
 
         <table id="table1">
             <tr>
@@ -136,7 +136,7 @@
         <div  style="text-align: center; margin: 0 auto;" >
             <br>
             <h1>가 천 대 학 교 총 장</h1>
-            <span>여기도장</span>
+            <span>직인</span>
         </div>
 
 

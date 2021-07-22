@@ -142,7 +142,7 @@
 	                               </nav>
 	                               
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="<c:url value='/registration/registration'/>">수강신청내역조회</a>
+                                 	  <a class="nav-link" href="<c:url value='/registration/myregistration'/>">수강신청내역조회</a>
 	                               </nav>
 	                              <nav class="sb-sidenav-menu-nested nav">
                                  	  <a class="nav-link" href="<c:url value='/registration/registration'/>">수강취소</a>
