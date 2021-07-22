@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.it.every.common.SearchVO;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -18,7 +20,7 @@ public class OpenSubjServiceImpl implements OpenSubjService {
 	}
 	
 	@Override
-	public List<OpenSubjVO> OpenRegistraionALL() {
+	public List<OpenSubjVO> OpenRegistraionALL( ) {
 		return openSubjDao.OpenRegistraionALL();
 	}
 

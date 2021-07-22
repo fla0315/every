@@ -5,7 +5,7 @@
 <mapper namespace="com.it.every.openSubj.model.OpenSubjDAO">
 
 	<!-- 개설교과과목 전체조회  -->
-	<select id="OpenRegistraionALL" resultType="map">
+	<select id="OpenRegistraionALL" resultType="map" >
 		select st.type, sj.* ,prof.prof_name ,os.*
 		from subj_type st join subject sj
 		on st.type_code = sj.subj_code
@@ -15,15 +15,22 @@
 		on os.subj_code = sj.subj_code
 	</select>
 	
+	
+	
 	<!-- 학과 찾는거 -->
 	<select id="selectFacultyS" resultType="map">
 		select distinct faculty_name from faculty
 	</select>
 	
+	
+	
 	<!-- 이수구분 찾는거 -->
 	<select id="selectTypeS" resultType="map">
 		select distinct type from subj_type
 	</select>
+	
+	
+	
 	
 	
 </mapper>

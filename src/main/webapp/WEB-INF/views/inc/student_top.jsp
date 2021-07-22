@@ -138,7 +138,7 @@
                                  	  <a class="nav-link" href="#">장바구니</a>
 	                               </nav>
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="<c:url value='/registration/registration'/>">수강신청</a>
+                                 	  <a class="nav-link" href="<c:url value='/registration/request_registration'/>">수강신청</a>
 	                               </nav>
 	                               
 	                              <nav class="sb-sidenav-menu-nested nav">

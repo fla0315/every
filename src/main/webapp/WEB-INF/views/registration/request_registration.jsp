@@ -3,7 +3,7 @@
 <%@ include file="../inc/student_top.jsp"%>
 
 <div class="container-fluid px-4" style="background-color: white;">
-	<h4 class="mt-4" style="background-color: white;">개설과목조회</h4>
+	<h4 class="mt-4" style="background-color: white;">수강신청</h4>
 
 
 	<div class="card mb-4">
@@ -119,7 +119,7 @@
 							<table class="table table-bordered table-striped mb-0">
 								<thead>
 									<tr>
-										<th scope="col">장바구니</th>
+										<th scope="col">수강신청</th>
 										<th scope="col">년도</th>
 										<th scope="col">학기</th>
 										<th scope="col">과목명</th>
@@ -145,7 +145,7 @@
 										<c:forEach var="map" items="${list }">
 											<tr class="align_center">
 												<!-- 장바구니 -->
-												<td><input type="button" id="btCartSubj" value="장바구니"></td>
+												<td><input type="button" id="btRequest" value="수강신청"></td>
 
 												<!-- 년도 -->
 												<td><fmt:formatDate value="${map['OPEN_DATE']}"
