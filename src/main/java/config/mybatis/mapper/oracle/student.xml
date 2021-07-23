@@ -38,9 +38,15 @@
 	
 	
 	<!-- 장학금 조회 -->
-	<select id="selectByScholarship" parameterType="studentVo" resultType="map">
-			select *
+	<select id="selectByScholarship" parameterType="String" resultType="map">
+			<!-- select *
 			from scholarshipView a
+			join student s
+			on a.stu_no = s.stu_no
+			where s.student_id=#{studentId} -->
+			select sch.* , a.award_no, a.stu_no, a.awarding_date
+			from scholarship sch join award a
+			on sch.scholarship_no = a.scholarship_no
 			join student s
 			on a.stu_no = s.stu_no
 			where s.student_id=#{studentId}
