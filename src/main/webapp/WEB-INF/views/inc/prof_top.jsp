@@ -31,7 +31,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-light" style="background-color: #8DBABD;">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="<c:url value='/professor/profMain'/>">에브리학사</a>
+            <a class="navbar-brand ps-3" href="<c:url value='/professor/profMain'/>"><i class="fas fa-user-graduate"></i>&nbsp;에브리학사</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->

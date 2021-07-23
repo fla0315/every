@@ -15,6 +15,17 @@
 		set official_no=#{officialNo} 
 		where msg_no=#{msgNo}
 	</update>
+	
+	<select id="chitchatAll" parameterType="String" resultType="map">
+		select * from chitchatView
+		where official_no=#{no} or receiver=#{no}
+	</select>
+	
+	<select id="contentsByMsgNo" parameterType="int" resultType="">
+		SELECT dbms_lob.substr(contents, dbms_lob.getlength(contents))
+		FROM chitchatView
+		WHERE  msg_no = 2;
+	</select>
 </mapper>
 
 

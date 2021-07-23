@@ -18,6 +18,7 @@ import com.it.every.chitchat.inbox.model.InboxService;
 import com.it.every.chitchat.inbox.model.InboxVO;
 import com.it.every.chitchat.outbox.model.OutboxService;
 import com.it.every.chitchat.outbox.model.OutboxVO;
+import com.it.every.employee.model.employeeService;
 import com.it.every.professor.model.ProfessorService;
 import com.it.every.student.model.StudentService;
 import com.it.every.student.model.StudentVO;
@@ -33,18 +34,26 @@ public class ChitchatController {
 	
 	private final ProfessorService professorService;
 	private final StudentService studentService;
+	private final employeeService employeeService;
 	private final OutboxService outboxService;
 	private final InboxService inboxService;
+	
 	
 	@RequestMapping("/chitchatMain")
 	public void main(Model model, HttpSession session) {
 		String no = (String) session.getAttribute("no");
 		String name = (String) session.getAttribute("name");
 		logger.info("쪽지 메인 화면");
+		
+		/* 전체 발신/수신 쪽지 조회 */
+		List<Map<String, Object>> list = inboxService.chitchatAll(no);
+		
+		model.addAttribute("list", list);
+		logger.info("쪽지 리스트 불러오기 list.size={}", list.size());
 	}
 	
 	@PostMapping("/chitchatMain")
-	public String main_post(@ModelAttribute OutboxVO ovo, @RequestParam String receiver, @RequestParam String code, Model model) {
+	public String main_post(@ModelAttribute OutboxVO ovo, @RequestParam String receiver, @RequestParam String code, Model model, HttpSession session) {
 		logger.info("쪽지 발송하기, 파라미터 ovo={}, receiver={}, code={}", ovo, receiver, code);
 		
 		int cnt = outboxService.sendMessage(ovo);
@@ -81,18 +90,22 @@ public class ChitchatController {
 		
 		List<Map<String, Object>> plist = null;
 		List<StudentVO> slist = null;
+		List<Map<String, Object>> elist = null;
 		
 		//교수님 조회
 		plist = professorService.searchForChat(keyword);
 		//학생 조회
 		slist = studentService.searchForChat(keyword);
 		//직원 조회
+		elist = employeeService.searchForChat(keyword);
 		
 		logger.info("교수님 검색, plist.size={}", plist.size());
 		logger.info("학생 검색, slist.size={}", slist.size());
+		logger.info("임직원 검색, elist.size={}", elist.size());
 		
 		model.addAttribute("plist", plist);
 		model.addAttribute("slist", slist);
+		model.addAttribute("elist", elist);
 		
 		return "/chitchat/searchReceiver";
 	}

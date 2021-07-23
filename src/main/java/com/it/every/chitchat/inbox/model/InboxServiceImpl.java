@@ -1,5 +1,8 @@
 package com.it.every.chitchat.inbox.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,5 +20,10 @@ public class InboxServiceImpl implements InboxService {
 	@Override
 	public int receiveMessage(InboxVO vo) {
 		return inboxDao.receiveMessage(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> chitchatAll(String no) {
+		return inboxDao.chitchatAll(no);
 	}
 }

@@ -6,6 +6,14 @@ body {
 	padding-top: 70px;
 	padding-bottom: 30px;
 }
+
+.ccdetail a {
+	color:black;
+}
+
+.ccdetail a:hover{
+	color:gray;
+}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -58,14 +66,14 @@ body {
 										<input class="form-control" name="officialName" id="name"
 											type="text" value="${sessionScope.name }" readonly/> <label
 											for="name">보내는 사람</label>
-										<input type="text" name="officialNo" value="${sessionScope.no }"> 
+										<input type="hidden" name="officialNo" value="${sessionScope.no }"> 
 									</div>
 								</div>
 								<div class="col-md-5">
 									<div class="form-floating mb-3 mb-md-0">
 										<input class="form-control" name="receiver" type="text" id="receiver"
 											value=""/ readonly> <label for="receiver">받는 사람</label>
-											<input type="text" value="" id="code" name="code">
+											<input type="hidden" value="" id="code" name="code">
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -87,26 +95,54 @@ body {
 					<div class="col-xl-6">
 					<div class="card mb-4">
 						<div class="card-header">
-							<i class="fas fa-envelope"></i> 전체보기
+							<i class="fas fa-envelope-square"></i> 전체보기
 						</div>
-						<div class="card-body">
+						<div class="card-body" style="height:427px">
 							<table class="table-bordered text-center" style="width: 100%">
 								<colgroup>
 									<col style="width: 10%" />
+									<col style="width: 10%" />
 									<col style="width: 50%" />
 									<col style="width: 30%" />
-									<col style="width: 10%" />
 								</colgroup>
 								<thead>
 									<tr>
 										<th><input type="checkbox" name="chkAll"></th>
-										<th>제목</th>
+										<th></th>
+										<th>내용</th>
 										<th>보낸 사람</th>
-										<th>보관</th>
 									</tr>
 								</thead>
 								<tbody>
-	
+									<c:if test="${empty list }">
+										<tr>
+											<td colspan="3">데이터가 없습니다.</td>
+										</tr>
+									</c:if>
+									<c:if test="${!empty list }">
+										<c:forEach var="map" items="${list }">
+											<tr>
+												<td><input type="checkbox"></td>
+												<td>
+													<c:if test="${map['OFFICIAL_NO'] eq no }">
+														<i class="fas fa-envelope"></i>
+													</c:if>
+													<c:if test="${!(map['OFFICIAL_NO'] eq no) }">
+														<i class="far fa-envelope"></i>
+													</c:if>
+												</td>
+												<td class="ccdetail text-left">&nbsp;<a href="#">${map['CONTENTS'] }</a></td>
+												<td>
+												<c:if test="${map['OFFICIAL_NO'] eq no }">
+														나
+												</c:if>
+												<c:if test="${!(map['OFFICIAL_NO'] eq no) }">
+													${map['OFFICIAL_NAME'] }
+												</c:if>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:if>
 								</tbody>
 							</table>
 						</div>

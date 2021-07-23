@@ -114,8 +114,9 @@
 			</table>
 		</c:if>
 		
-		<%-- <c:if test="${!empty alist }">
+		<c:if test="${!empty elist }">
 		<!-- 임직원 -->
+		<br><div>직원 목록</div>
 		<table class="table-bordered text-center" style="width: 100%">
 		<colgroup>
 			<col style="width: 30%" />
@@ -126,13 +127,23 @@
 			<tr>
 				<th>이름</th>
 				<th>부서</th>
+				<th>직책</th>
 			</tr>
+			<c:forEach var="map" items="${elist }">
+				<tr>
+					<td><a href="#" 
+						onclick="setReceiver('${map['EMP_NAME'] }','${map['EMP_NO'] }')">
+						${map['EMP_NAME'] }</a></td>
+					<td>${map['DEP_NAME'] }</td>
+					<td>${map['POSITION_NAME'] }</td>
+				</tr>
+			</c:forEach>
 		</thead>
 		<tbody>
 
 		</tbody>
 		</table>
-		</c:if> --%>
+		</c:if>
 	</div>
 </body>
 </html>
