@@ -29,5 +29,6 @@ public interface StudentService {
 	
 	List<Map<String, Object>> selectByScholarship (String userid);
 	
-	
+	//쪽지조회
+	List<StudentVO> searchForChat(String keyword);
 }

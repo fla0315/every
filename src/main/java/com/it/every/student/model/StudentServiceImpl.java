@@ -81,4 +81,10 @@ public class StudentServiceImpl implements StudentService{
 	public StudentVO selectByStuNo(String stuNo) {
 		return studentDao.selectByStuNo(stuNo);
 	}
+
+
+	@Override
+	public List<StudentVO> searchForChat(String keyword) {
+		return studentDao.searchForChat(keyword);
+	}
 }

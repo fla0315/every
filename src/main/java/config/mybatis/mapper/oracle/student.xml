@@ -53,6 +53,13 @@
 			on a.stu_no = s.stu_no
 			where s.student_id=#{123}
 	</select>	
+	
+	<!-- 쪽지용 이름으로 검색 -->
+	<select id="searchForChat" parameterType="String" resultType="studentVo">
+		select name, stu_no, major
+		from student
+		where name like '%' || #{keyword} || '%'
+	</select>
 </mapper>
 
 

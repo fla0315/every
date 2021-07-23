@@ -22,4 +22,7 @@ public interface StudentDAO {
 	Map<String, Object> selectByTuitionNo (String userid ,int tuitionNo);
 	
 	List<Map<String, Object>> selectByScholarship (String userid);
+	
+	//쪽지조회
+	List<StudentVO> searchForChat(String keyword);
 }

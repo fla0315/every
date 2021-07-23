@@ -4,6 +4,9 @@
 
 <mapper namespace="com.it.every.chitchat.outbox.model.OutboxDAO">
 	<insert id="sendMessage" parameterType="outboxVo">
+		<selectKey keyProperty="msgNo" resultType="int" order="BEFORE">
+			select outbox_seq.nextval from dual
+		</selectKey>
 		insert into outbox(msg_no, official_no, contents, send_date, official_name)
 		values(#{msgNo}, #{officialNo}, #{contents}, sysdate, #{officialName})
 	</insert>

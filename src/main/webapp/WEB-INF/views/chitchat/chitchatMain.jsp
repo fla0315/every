@@ -55,15 +55,17 @@ body {
 							<div class="row mb-3">
 								<div class="col-md-5">
 									<div class="form-floating">
-										<input class="form-control" name="name" id="name"
+										<input class="form-control" name="officialName" id="name"
 											type="text" value="${sessionScope.name }" readonly/> <label
 											for="name">보내는 사람</label>
+										<input type="text" name="officialNo" value="${sessionScope.no }"> 
 									</div>
 								</div>
 								<div class="col-md-5">
 									<div class="form-floating mb-3 mb-md-0">
-										<input class="form-control" name="receiver" type="text"
+										<input class="form-control" name="receiver" type="text" id="receiver"
 											value=""/ readonly> <label for="receiver">받는 사람</label>
+											<input type="text" value="" id="code" name="code">
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -71,7 +73,7 @@ body {
 								</div>
 							</div>
 							<div class="form-floating mb-3">
-								<textarea class="col-md-12" rows="10" cols=""></textarea>
+								<textarea class="col-md-12" rows="10" cols="" name="contents"></textarea>
 							</div>
 							<div class="mt-4 mb-0">
 								<div class="d-grid">

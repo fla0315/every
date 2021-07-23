@@ -28,5 +28,9 @@
 		where prof_no=#{profNo}
 	</update>
 	
-	
+	<!-- 쪽지용 검색 -->
+	<select id="searchForChat" parameterType="String" resultType="map">
+		select * from chitchatProfessor
+		where prof_name like '%' || #{keyword} || '%'
+	</select>
 </mapper>
