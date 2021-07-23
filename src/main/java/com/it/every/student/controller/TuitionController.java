@@ -30,7 +30,7 @@ public class TuitionController {
 	@RequestMapping("/tuitionList")
 	public String tuitionList(HttpSession session, Model model) {
 
-		String userid = (String)session.getAttribute("userId");
+		String userid = (String)session.getAttribute("user_id");
 		//String userid ="fla0315";
 		
 		logger.info("등록금 조회 , 매개변수 userid={}", userid);
@@ -50,7 +50,7 @@ public class TuitionController {
 	
 	@RequestMapping("/tuitionPDF")
 	public String tuitionPDF(HttpSession session, @RequestParam(defaultValue = "0") int tuitionNo, Model model) {
-		String userid = (String)session.getAttribute("userId");
+		String userid = (String)session.getAttribute("user_id");
 		//String userid ="fla0315";
 		tuitionNo =2;
 		logger.info("등록금 pdf 화면 , 파라미터 tuitionNo={}",tuitionNo);

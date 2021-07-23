@@ -11,7 +11,7 @@
 	
 	<select id="selectStudentDeptView" parameterType="String" resultType="map">
 		select * from studentDeptView
-		where student_id=#{fla0315}
+		where student_id=#{studentId}
 	</select> 
 	
 	<select id="selectPwd" parameterType="String" resultType="String">

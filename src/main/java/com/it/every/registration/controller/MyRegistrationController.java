@@ -30,7 +30,7 @@ public class MyRegistrationController {
 	@RequestMapping("/myregistration")
 	public String myregistration(HttpSession session, Model model) {
 		
-		String userid = (String)session.getAttribute("userId");
+		String userid = (String)session.getAttribute("user_id");
 		//String userid ="fla0315";
 		
 		logger.info("나의수상신청목록 페이지");
