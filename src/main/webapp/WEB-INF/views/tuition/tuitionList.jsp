@@ -9,9 +9,16 @@
 <script type="text/javascript">	
 	
 		
-		$(function(){
+		/* $(function(){
 			$('#btTuition').click(function(){
 				open('http://localhost:9091/every/tuition/tuitionPDF','chk',
+				 'width=1000,height=1000,left=0,top=0,location=yes,resizable=yes');	
+			});
+		}); */
+		
+		$(function(){
+			$('#btTuition').click(function(){
+				open('http://localhost:9091/every/tuition/tuitionPDF?tuitionNo=${map["TUITION_NO"] }','chk',
 				 'width=1000,height=1000,left=0,top=0,location=yes,resizable=yes');	
 			});
 		});
@@ -112,7 +119,10 @@
 							<td>
 								<fmt:formatDate value="${map['DEPOSIT_DATE']}" pattern="yyyy-MM-dd"/> <!-- 납입 날짜 -->
 							</td>
-							<td><input type="button" id="btTuition" value="출력"></td>
+							<td>
+							<input type="button" class="btn btn-sm btn-secondary" id="btTuition" value="출력" formaction="<c:url value='/tuition/tuitionPDF?tuitionNo=${map["TUITION_NO"] }'/>">
+							</td>
+							
 						</tr>
 					</c:forEach>
 				</c:if>

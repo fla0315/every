@@ -28,6 +28,13 @@ public class SearchVO {
 	/** 동 */
 	private String dong = "";
     
+	//년도 이건 검색조건
+	private String searchYear = "";
+	//학기 검색조건
+	private String searchSemester = "";
+
+	
+	
     /**블럭당 보여질 페이지 수,  페이지 사이즈 */
     private int blockSize; // properties에서 설정
     

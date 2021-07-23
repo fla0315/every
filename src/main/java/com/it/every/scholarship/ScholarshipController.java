@@ -47,8 +47,8 @@ public class ScholarshipController {
 	@RequestMapping("/scholarshipList")
 	public String scholarshipList(HttpSession session, Model model) {
 
-		//String userid = (String)session.getAttribute("userId");
-		String userid ="fla0315";
+		String userid = (String)session.getAttribute("userId");
+		//String userid ="fla0315";
 		
 		logger.info("장학금 조회 , 매개변수 userid={}", userid);
 		

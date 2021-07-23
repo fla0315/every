@@ -31,19 +31,19 @@
 	
 	
 	<!-- 등록금조회 -->
-	<select id="selectByStuId" parameterType="String" resultType="map">
+	<select id="selectByStuId" parameterType="studentVo" resultType="map">
 		select * from tuitionView
-		where student_id=#{fla0315}
+		where student_id=#{studentId}
 	</select>
 	
 	
 	<!-- 장학금 조회 -->
-	<select id="selectByScholarship" parameterType="String" resultType="map">
+	<select id="selectByScholarship" parameterType="studentVo" resultType="map">
 			select *
 			from scholarshipView a
 			join student s
 			on a.stu_no = s.stu_no
-			where s.student_id=#{fla0315}
+			where s.student_id=#{studentId}
 	</select>	
 	
 	

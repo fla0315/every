@@ -328,7 +328,7 @@ public class registerController {
 			session.setAttribute("user_id", id);
 			logger.info("처리 결과(값을 잘 받아왔는지 확인함) result={} 회원번호={} 회원이름={} 회원아이디={}" 
 					,result,svo.getStuNo(),svo.getName(),id);
-			url= "student/studentList";
+			url= "student/studentMain";
 			
 		}else if (chk_info.equals("admin")) {
 			result = service.logincheck2(id,pwd);

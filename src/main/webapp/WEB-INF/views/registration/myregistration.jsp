@@ -9,26 +9,22 @@
 		
 		$('#search').click(function(){
 			var sum =0;
+			var count=0;
 			$('tr #credit').each(function(idx,item){
-				/* console.log(item);
-				var p = $(this).val();
-				sum+=p; */
 				sum += Number($(this).text());
 			});
 			$('input[name=sumCredit]').val(sum);
+			
+			
+			$('tr #credit').each(function(idx,item){
+				count+=1;
+			});
+			$('input[name=sumCount]').val(count);
+			
 		});	
 	}); 
 	
-	/* $(function(){
-		$('#search').click(function(){
-		      var sum = 0;
-		      $('tr #credit').each(function(idx,item){
-		        sum += Number($(this).val());
-		      });
-		      $('input[name=subCredit]').val(sum);
-		});	
-	  });
- */
+
 </script>
 
 
@@ -72,12 +68,12 @@
 
   									<td style="padding-left:10px"><span class=""><label for="학기">학번</label></span></td>
                                     <td>
-                                        <input type="text" >
+                                        <input type="text" value="${map['STU_NO']}" readonly>
                                     </td>
 
 									<td style="padding-left:10px"><span class=""><label for="학기">이름</label></span></td>
                                     <td>
-                                        <input type="text" >
+                                        <input type="text" value="${map['NAME']}" readonly>
                                     </td>
 
 
@@ -89,7 +85,8 @@
                                 <!-- 2행완료 -->
                             </table>
                             <hr> <br>
-							<label>신청과목</label> <input type="text"><label>신청학점</label> <input name="sumCredit" type="text" value=""><br>
+							<label>신청과목</label> <input  name="sumCount" type="text" value=""  readonly="readonly">
+							<label>신청학점</label> <input name="sumCredit" type="text" value="" readonly="readonly"><br>
 
                             <div class="table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-striped mb-0">
@@ -152,9 +149,7 @@
 				
 
 								</tbody>
-								
                             </table>
-                            <label>신청학점</label> <input name="sumCredit" type="text" value=""><br>
                             </div>
 
 
