@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="col-xl-12">
 	<div class="card mb-4">
 		<div class="card-header">
-			<i class="far fa-envelope"></i> 메세지 수신함
+			<i class="fas fa-envelope"></i> 메세지 보관함
 		</div>
 		<div class="card-body">
 			<table class="table-bordered text-center" style="width: 100%">
@@ -12,33 +11,25 @@
 					<col style="width: 10%" />
 					<col style="width: 50%" />
 					<col style="width: 30%" />
-					<col style="width: 10%" />
 				</colgroup>
 				<thead>
 					<tr>
 						<th><input type="checkbox" name="chkAll"></th>
 						<th>내용</th>
 						<th>보낸 사람</th>
-						<th>보관 여부</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${empty list }">
-						<tr>
-							<td colspan="3">데이터가 없습니다.</td>
-						</tr>
-					</c:if>
 					<c:if test="${!empty list }">
 						<c:forEach var="map" items="${list }">
 							<c:if test="${!(map['OFFICIAL_NO'] eq no) }">
+								<c:if test="${!(empty map['KEEP_FLAG']) }">
 							<tr>
 								<td><input type="checkbox"/></td>
 								<td class="ccdetail text-left">&nbsp;<a href="#">${map['CONTENTS'] }</a></td>
-								<td>${map['OFFICIAL_NAME'] }</td>
-								<c:if test="${!empty map['KEEP_FLAG'] }">
-									<td>${map['KEEP_FLAG'] }</td>
-								</c:if>
+								<td>받는 사람 이름 가져오기</td>
 							</tr>
+								</c:if>
 							</c:if>
 						</c:forEach>
 					</c:if>

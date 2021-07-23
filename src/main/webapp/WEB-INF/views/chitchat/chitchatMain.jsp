@@ -163,6 +163,7 @@ body {
 			
 			<div class="tab-pane fade" id="storagebox" role="tabpanel"
 				aria-labelledby="storagebox-tab">
+				<c:import url="storagebox.jsp"></c:import>
 			</div>
 		</div>
 	</div>

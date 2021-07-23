@@ -33,4 +33,9 @@
 		select * from chitchatProfessor
 		where prof_name like '%' || #{keyword} || '%'
 	</select>
+	
+	<!-- 번호로 이름 찾기 -->
+	<select id="nameByProfNo" parameterType="string" resultType="string">
+		select prof_name from professor where prof_no = #{no}
+	</select>
 </mapper>

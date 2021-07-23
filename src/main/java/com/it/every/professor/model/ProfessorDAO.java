@@ -13,4 +13,5 @@ public interface ProfessorDAO {
 	String selectPwd(String userid);
 	int updateProf(ProfessorVO vo);
 	List<Map<String, Object>> searchForChat(String keyword);
+	String nameByProfNo(String no);
 }

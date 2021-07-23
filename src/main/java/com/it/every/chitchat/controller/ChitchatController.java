@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,19 @@ public class ChitchatController {
 		
 		/* 전체 발신/수신 쪽지 조회 */
 		List<Map<String, Object>> list = inboxService.chitchatAll(no);
+		
+		//받는 사람 이름 받아오기
+		for(Map<String, Object> map : list) {
+			logger.info("보낸 사람 : " + (String)map.get("OFFICIAL_NO"));
+			String receiver = (String)map.get("RECEIVER");
+			if(((String)map.get("OFFICIAL_NO")).equals(no) && (!((String)map.get("RECEIVER")).equals(no))) {
+				if((((String) map.get("OFFICIAL_NO")).charAt(0))== 'P'){ //교수일 경우
+					String receiverName = professorService.nameByProfNo(receiver);
+					logger.info("receiverName={}", receiverName);
+					map.put("RECEIVERNAME", receiverName);
+				}
+			}
+		}
 		
 		model.addAttribute("list", list);
 		logger.info("쪽지 리스트 불러오기 list.size={}", list.size());

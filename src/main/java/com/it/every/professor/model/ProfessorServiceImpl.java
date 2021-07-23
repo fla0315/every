@@ -59,4 +59,10 @@ public class ProfessorServiceImpl implements ProfessorService {
 	public List<Map<String, Object>> searchForChat(String keyword) {
 		return professorDao.searchForChat(keyword);
 	}
+
+	@Override
+	public String nameByProfNo(String no) {
+		return professorDao.nameByProfNo(no);
+	}
+
 }
