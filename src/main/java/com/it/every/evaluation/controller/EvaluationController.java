@@ -78,10 +78,10 @@ public class EvaluationController {
 	}
 	
 	@RequestMapping("/evaluationEdit")
-	public String evaluationRecord_post(@ModelAttribute EvaluationVO vo, @RequestParam String open, Model model) {
-		logger.info("성적 등록/수정 처리, 파라미터 vo={}, openSubCode={}", vo, open);
-		vo.setSubCode(open);
+	public String evaluationEdit(@ModelAttribute EvaluationVO vo, @RequestParam String open, Model model) {
+		logger.info("성적 등록/수정 처리, 파라미터 vo={}, open={}", vo, open);
 		
+		vo.setSubCode(open);
 		int cnt = evaluationService.editBystuNo(vo);
 		logger.info("성적 등록/수정 처리 결과, cnt={}", cnt);
 		

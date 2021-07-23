@@ -39,6 +39,12 @@ function validate_check(id){
 
 //유효성검사
 $(function(){
+	
+	if($('#changeradio').val()==""){
+		$('.log').hide();
+			
+	}
+	
 	//아이디
 	$('#submit').click(function(){
 		
@@ -70,7 +76,7 @@ $(function(){
 	//유형 선택 여부
 	$('#user_id').click(function(){
 		if($('input:radio[name=chk_info]').is(':checked')==false){
-				alert('유형을 선택해주세요.');
+				alert('회원 유형을 선택해주세요.');
 				event.preventDefault();	
 		}
 		});
@@ -78,9 +84,13 @@ $(function(){
 	
 	
 //ajax
-//회원유형(radio변경 시 모든 입력값 초기화)
+
+
+
+//회원유형 체크, (radio변경 시 모든 입력값 초기화)
 	$('input:radio[name=chk_info]').click(function(){
 			var data=$(this).val(); 
+			$('.log').show();
 			$('#user_id').val('');
 			$('#pwd').val('');
 			$('#chkId').val('');
@@ -103,7 +113,8 @@ $(function(){
 //ID
 $('#user_id').keyup(function(){
 	var data=$(this).val();
-	var data2=$('input[name="chk_info"]:checked').val(); 
+	var data2=$('input[name="chk_info"]:checked').val();
+	
 	if(validate_check(data) && data.length>=2){
 		$.ajax({
 			url:"<c:url value='/reg/idcheck'/>",
@@ -117,6 +128,10 @@ $('#user_id').keyup(function(){
 				}else{
 					$('#check_id').html("없는 아이디").css("color", "red");
 					$('#chkId').val('N');
+				}
+				
+				if(res&&$('#chkpwd').val()=="Y"){
+					$('#check_id').html("비밀번호도 맞습니다.").css("color", "blue");
 				}
 			},
 			error:function(xhr, status, error){
@@ -173,18 +188,12 @@ $('#pwd').keyup(function(){
 		<form name="register" method="post" action="<c:url value='/reg/checklogin'/>">
 			<div class="col-11 border" style="width:800">
 			<fieldset>
-				
+			
 				<legend>로그인</legend>
-				
 				<br>
-				<br>
-				<input type="radio" name="chk_info" id="chk_info" value="student">학생
-				<input type="radio" name="chk_info" id="chk_info" value="admin">관리자 
-				<input type="radio" name="chk_info" id="chk_info" value="professor">교수
-				
-				<br>
+			<div class="log">
 				<!-- 아이디 -->
-					<br>
+					
 				<div class="id" style="width: 200px;">
 					<label for="userid">아이디</label> <br> <input type="text"
 						class="user_id" id="user_id" name="user_id" placeholder="ID" required
@@ -192,22 +201,32 @@ $('#pwd').keyup(function(){
 						class="check_id" id="check_id" style=""></span>
 				</div>
 				<br>
+
 				<!-- 비밀번호 -->
-				<div class="pwd" style="width: 200px;">
-					<label for="pwd">비밀번호</label> <br> <input type="password"
-						class="form" id="pwd" name="pwd" placeholder="password" required
+				<div class="password" style="width: 200px;">
+					<label for="pass">비밀번호</label> 
+						<br> 
+						<input type="password" class="form" id="pwd" name="pwd" placeholder="password" required
 						style="ime-mode: inactive"> 
 				</div>
+			</div>
 				<br>
+				<input type="radio" name="chk_info" id="chk_info" value="student">학생
+				<input type="radio" name="chk_info" id="chk_info" value="admin">관리자 
+				<input type="radio" name="chk_info" id="chk_info" value="professor">교수
+				
+				<br>
+
 				<div class="center"></div>
 				<input type="submit" id="submit" class="btn btn-danger" value="로그인"  style="width:80px;">
-				
+			
 			</fieldset>
+				<br>
 			</div>
 			 <input type ="hidden" name="chkId" id="chkId"> 
 			  <input type ="hidden" name="chkpwd" id="chkpwd">
+			  <!-- radio바꿨을때 초기화용 -->
 			   <input type ="hidden" name="changeradio" id="changeradio">
-			  
 
 		</form>
 	</article>
@@ -215,8 +234,5 @@ $('#pwd').keyup(function(){
 	
 </div>
 </div>
-
-
-
 
 <%@ include file="../inc/bottom.jsp"%>

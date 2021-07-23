@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.it.every.attendance.model.AttendanceVO;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -25,6 +27,11 @@ public class EvaluationServiceImpl implements EvaluationService {
 	@Override
 	public int editBystuNo(EvaluationVO vo) {
 		return evaluationDao.editBystuNo(vo);
+	}
+
+	@Override
+	public int updateAttend(AttendanceVO vo) {
+		return evaluationDao.updateAttend(vo);
 	}
 
 }

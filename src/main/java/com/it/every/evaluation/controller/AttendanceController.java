@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.every.attendance.model.AttendanceService;
 import com.it.every.attendance.model.AttendanceVO;
+import com.it.every.evaluation.model.EvaluationService;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
 
@@ -30,6 +31,7 @@ public class AttendanceController {
 	
 	private final OpenSubjService openSubjService;
 	private final AttendanceService attendanceService;
+	private final EvaluationService evaluationService;
 	
 	@RequestMapping("/attendance")
 	public String attendanceCheck(@RequestParam String openSubCode, HttpSession session, Model model) {
@@ -54,9 +56,9 @@ public class AttendanceController {
 		return "/professor/attendance";
 	}
 	
-	@PostMapping("/attendanceEdit")
-	public String attendanceEdit(@ModelAttribute AttendanceVO vo, @RequestParam String open, @RequestParam String stuNo, Model model) {
-		logger.info("개인 출석 등록/수정 처리, 파라미터 vo={}, openSubCode={}, stuNo={}", vo, open, stuNo);
+	@RequestMapping("/attendanceEdit")
+	public String attendanceEdit(@ModelAttribute AttendanceVO vo, @RequestParam String open, Model model) {
+		logger.info("개인 출석 등록/수정 처리, 파라미터 vo={}, openSubCode={}", vo, open);
 		vo.setOpenSubCode(open);
 		
 		int cnt = attendanceService.editBystuNo(vo);
@@ -64,7 +66,8 @@ public class AttendanceController {
 		
 		String msg="등록/수정 실패!", url="/professor/attendance?openSubCode="+open;
 		if(cnt>0) {
-			msg = "등록/수정 성공!";
+			evaluationService.updateAttend(vo);
+			return "redirect:/professor/attendance?openSubCode="+open;
 		}
 		
 		model.addAttribute("msg", msg);

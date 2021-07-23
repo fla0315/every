@@ -33,7 +33,6 @@ body {
 	<article>
 		<div class="container col-lg-10" role="main">
 			<h2>성적 입력/수정</h2>
-			<form name="form" id="form" role="form" method="post">
 				<br>
 				<div class="mb-3">
 					<label for="title">개설교과목</label>
@@ -59,7 +58,7 @@ body {
                        성적 입력 테이블
                    </div>
                    <div class="card-body">
-                   	<input type="hidden" name="open" value="${open }">
+                   <form name="form" id="form" role="form" method="post">
                        <table id="datatablesSimple">
                            <thead>
                                <tr>
@@ -92,7 +91,7 @@ body {
                                			<td>${noCheck }</td>
                                			<td>${map['NAME'] }</td>
                                			<td>${map['YEAR'] }</td>
-                               			<td>${map['STU_NO'] }<input type="hidden" name="stuNo" value="${map['STU_NO'] }" /></td>
+                               			<td>${map['STU_NO'] }</td>
                                			<td>${map['MAJOR'] }</td>
                                			<td><input type="text" name="attendance" value="${map['ATTENDANCE'] }" size="5" readonly></td> <!-- 점수 계산 예정 -->
                                			<td><input type="text" name="assignment" value="${map['ASSIGNMENT'] }" size="5" readonly></td> <!-- 과제 계산 예정 -->
@@ -122,7 +121,7 @@ body {
                                				</c:if>
                                			</td>
                                			<td style="width:5%" class="text-center">
-                               				<input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/evaluation/evaluationEdit'/>"></button>
+                               				<input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/evaluation/evaluationEdit?stuNo=${map["STU_NO"] }&open=${open}'/>">
                                			</td>
                                		</tr>
                                		<c:set var="noCheck" value="${noCheck+1 }" />
@@ -132,9 +131,8 @@ body {
                        </table>
                    </div>
                </div>
-			</form>
-			
 			<div >
+			</form>
 				<button type="button" class="btn btn-sm btn-primary" id="btnSave">제출</button>
 				<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
 			</div>

@@ -17,6 +17,29 @@
 			$('.card-body table tbody input[type=checkbox]').prop('checked', this.checked);
 		});
 		
+		$('.attend1').change(function(){
+			var sum = 0;
+			$('.attend1').each(function(idx){
+				$('.attend'+idx+' option:selected').each(function(){
+					var p = $(this).val();
+					if(p=="출석"){
+						p = 10;
+					}else if(p=="지각"){
+						p = 5;
+					}else if(p=="결석"){
+						p = 0;
+					}else if(p=="조퇴"){
+						p = 5;
+					}else{
+						p = 0;
+					}
+					sum += p;
+				});
+				$('#point'+idx).val(sum);
+				sum = 0;
+			})
+		})
+		
 		var sum = 0;
 		$('.attend1').each(function(idx){
 			$('.attend'+idx+' option:selected').each(function(){
@@ -49,7 +72,6 @@ body {
 	<article>
 		<div class="container col-lg-10" role="main">
 			<h2>출석부</h2>
-			<form name="form" id="form" role="form" method="post">
 				<br>
 				<div class="mb-3">
 					<label for="title">개설교과목</label>
@@ -74,7 +96,6 @@ body {
                        출석 입력
                    </div>
                    <div class="card-body">
-                   	<input type="hidden" name="open" value="${open }">
                        <table class="table-bordered text-center" style="width:100%; font-size:0.8em">
                            <thead>
                                <tr>
@@ -102,8 +123,9 @@ body {
                                	<td><input type="checkbox"></td>
                                    <td>${noCheck }</td>
                                    <td>${map['NAME'] }</td>
-                                   <td>${map['STU_NO'] }<input type="hidden" value="${map['STU_NO'] }" name="stuNo"></td>
+                                   <td>${map['STU_NO'] }</td>
                                    <td>${map['MAJOR'] }</td>
+                                   <form name="form" id="form" role="form" method="post">
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="first">
                                    		<option value=""></option>
@@ -354,9 +376,11 @@ body {
                                    		>조퇴</option>
                                    	</select>
                                    </td>
-                                   <td><input type="text" id="point${noCheck }" name="point">
+                                   <td><input type="hidden" id="point${noCheck }" name="point">
+                                   <input type="hidden" name="open" value="${open }">
                                    <input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/attendanceEdit?stuNo=${map["STU_NO"] }'/>"></td>
                                </tr>
+                               </form>
                                	<c:set var="noCheck" value="${noCheck+1 }" />
                                </c:forEach>
                                </c:if>
@@ -364,7 +388,6 @@ body {
                        </table>
                    </div>
                </div>
-			</form>
 			<div class="text-center">
 				<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
 			</div>
