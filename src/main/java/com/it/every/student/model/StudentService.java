@@ -31,4 +31,5 @@ public interface StudentService {
 	
 	//쪽지조회
 	List<StudentVO> searchForChat(String keyword);
+	String nameByStuNo(String no);
 }

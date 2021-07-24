@@ -16,5 +16,10 @@ public class EmployeeServiceImpl implements employeeService {
 	public List<Map<String, Object>> searchForChat(String keyword) {
 		return employeeDao.searchForChat(keyword);
 	}
+
+	@Override
+	public String nameByEmpNo(String no) {
+		return employeeDao.nameByEmpNo(no);
+	}
 	
 }

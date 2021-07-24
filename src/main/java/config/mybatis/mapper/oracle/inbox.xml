@@ -20,6 +20,12 @@
 		select * from chitchatView
 		where official_no=#{no} or receiver=#{no}
 	</select>
+	
+	<update id="storeMessage" parameterType="inboxVo">
+		update inbox
+		set keep_flag=#{keepFlag}
+		where msg_no=#{msgNo}
+	</update>
 </mapper>
 
 

@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface InboxDAO {
 	int receiveMessage(InboxVO vo);
 	List<Map<String, Object>> chitchatAll(String no);
+	int storeMessage(InboxVO vo);
 }

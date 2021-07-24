@@ -60,6 +60,10 @@
 		from student
 		where name like '%' || #{keyword} || '%'
 	</select>
+	<!-- 번호로 이름 찾기 -->
+	<select id="nameByStuNo" parameterType="string" resultType="string">
+		select name from student where stu_no = #{no}
+	</select>
 </mapper>
 
 

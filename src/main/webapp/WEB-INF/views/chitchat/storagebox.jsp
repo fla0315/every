@@ -27,7 +27,7 @@
 							<tr>
 								<td><input type="checkbox"/></td>
 								<td class="ccdetail text-left">&nbsp;<a href="#">${map['CONTENTS'] }</a></td>
-								<td>받는 사람 이름 가져오기</td>
+								<td>${map['OFFICIAL_NAME'] }</td>
 							</tr>
 								</c:if>
 							</c:if>

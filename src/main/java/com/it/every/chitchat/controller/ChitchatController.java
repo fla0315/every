@@ -51,15 +51,25 @@ public class ChitchatController {
 		
 		//받는 사람 이름 받아오기
 		for(Map<String, Object> map : list) {
-			logger.info("보낸 사람 : " + (String)map.get("OFFICIAL_NO"));
+			String officialNo = (String)map.get("OFFICIAL_NO");
 			String receiver = (String)map.get("RECEIVER");
-			if(((String)map.get("OFFICIAL_NO")).equals(no) && (!((String)map.get("RECEIVER")).equals(no))) {
-				if((((String) map.get("OFFICIAL_NO")).charAt(0))== 'P'){ //교수일 경우
-					String receiverName = professorService.nameByProfNo(receiver);
-					logger.info("receiverName={}", receiverName);
-					map.put("RECEIVERNAME", receiverName);
+			char startNo = receiver.charAt(0);
+			String receiverName="";
+			if(officialNo.equals(no) && (!receiver.equals(no))) {
+				logger.info("받는 사람={}", receiver);
+				logger.info("{}",startNo);
+				if(startNo=='P'){ //교수일 경우
+					receiverName = professorService.nameByProfNo(receiver);
+				} else if(startNo== 'E'){ //임직원의 경우
+					receiverName = employeeService.nameByEmpNo(receiver);
+				} else{	//학생의 경우
+					receiverName = studentService.nameByStuNo(receiver);
 				}
-			}
+				
+				logger.info("receiverName={}", receiverName);
+				map.put("RECEIVERNAME", receiverName);
+			} 
+			
 		}
 		
 		model.addAttribute("list", list);
@@ -96,6 +106,38 @@ public class ChitchatController {
 	@RequestMapping("/searchReceiver")
 	public void searchReceiver() {
 		logger.info("쪽지 보낼 회원 찾기");
+	}
+	
+	@RequestMapping("/chitchatDetail")
+	public void chitchatDetail(@RequestParam int msgNo) {
+		logger.info("쪽지 세부 내용, 파라미터 msgNo={}", msgNo);
+	}
+	
+	@PostMapping("/storage")
+	public String storage_post(@RequestParam int msgNo, @RequestParam String flag, Model model){
+		InboxVO vo = new InboxVO();
+		String msg="쪽지 보관 실패", url="/chitchat/chitchatMain";
+		logger.info("보관할 msgNo={}, flag={}", msgNo, flag);
+		if(flag.equals("N")) {	//보관
+			flag = "Y";
+		}else if(flag.equals("Y")) { //보관 취소
+			flag = "N";
+			msg = "쪽지 보관이 취소되었습니다.";
+		}
+		
+		vo.setMsgNo(msgNo);
+		vo.setKeepFlag(flag);
+		
+		int cnt = inboxService.storeMessage(vo);
+		if(cnt>0 && flag.equals("Y")) {
+			msg = "쪽지가 보관되었습니다.";
+		}else if(cnt>0 && flag.equals("N")) {
+			msg = "쪽지 보관이 취소되었습니다.";
+		} 
+		
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		return "common/message";
 	}
 	
 	@PostMapping("/searchReceiver")

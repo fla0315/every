@@ -26,4 +26,9 @@ public class InboxServiceImpl implements InboxService {
 	public List<Map<String, Object>> chitchatAll(String no) {
 		return inboxDao.chitchatAll(no);
 	}
+
+	@Override
+	public int storeMessage(InboxVO vo) {
+		return inboxDao.storeMessage(vo);
+	}
 }

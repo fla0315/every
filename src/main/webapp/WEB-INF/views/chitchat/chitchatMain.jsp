@@ -122,7 +122,7 @@ body {
 									<c:if test="${!empty list }">
 										<c:forEach var="map" items="${list }">
 											<tr>
-												<td><input type="checkbox"></td>
+												<td><input type="checkbox"><input id="detailNo" type="hidden" value="${map['MSG_NO'] }"></td>
 												<td>
 													<c:if test="${map['OFFICIAL_NO'] eq no }">
 														<i class="fas fa-envelope"></i>
@@ -131,7 +131,8 @@ body {
 														<i class="far fa-envelope"></i>
 													</c:if>
 												</td>
-												<td class="ccdetail text-left">&nbsp;<a href="#">${map['CONTENTS'] }</a></td>
+												<td class="ccdetail text-left">&nbsp;
+												<a href="#" onclick="window.open('${pageContext.request.contextPath }/chitchat/chitchatDetail?msgNo=${map['MSG_NO'] }', 'detail', 'top=100, left=600, width=500, height=500, location=yes, resizable=yes')">${map['CONTENTS'] }</a></td>
 												<td>
 												<c:if test="${map['OFFICIAL_NO'] eq no }">
 														나

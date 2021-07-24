@@ -30,16 +30,24 @@
 					</c:if>
 					<c:if test="${!empty list }">
 						<c:forEach var="map" items="${list }">
+							<form name="frmStroage" method="post" action="<c:url value='/chitchat/storage'/> ">
 							<c:if test="${!(map['OFFICIAL_NO'] eq no) }">
-							<tr>
-								<td><input type="checkbox"/></td>
-								<td class="ccdetail text-left">&nbsp;<a href="#">${map['CONTENTS'] }</a></td>
-								<td>${map['OFFICIAL_NAME'] }</td>
-								<c:if test="${!empty map['KEEP_FLAG'] }">
-									<td>${map['KEEP_FLAG'] }</td>
-								</c:if>
-							</tr>
+									<tr>
+										<td><input type="checkbox"/>
+											<input type="hidden" name="msgNo" value="${map['MSG_NO'] }" />
+											<input type="hidden" name="flag" value="${map['KEEP_FLAG'] }" />
+										</td>
+										<td class="ccdetail text-left">&nbsp;<a href="#">${map['CONTENTS'] }</a></td>
+										<td>${map['OFFICIAL_NAME'] }</td>
+										<c:if test="${map['KEEP_FLAG']=='Y' }">
+											<td><input class="btn btn-danger" type="submit" value="취소"></td>
+										</c:if>
+										<c:if test="${map['KEEP_FLAG']=='N' }">
+											<td><input class="btn btn-success" type="submit" value="보관"></td>
+										</c:if>
+									</tr>
 							</c:if>
+							</form>
 						</c:forEach>
 					</c:if>
 				</tbody>

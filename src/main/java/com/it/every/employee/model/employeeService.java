@@ -5,4 +5,5 @@ import java.util.Map;
 
 public interface employeeService {
 	List<Map<String, Object>> searchForChat(String keyword);
+	String nameByEmpNo(String no);
 }

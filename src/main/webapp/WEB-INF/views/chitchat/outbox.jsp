@@ -34,8 +34,11 @@
 								<td><input type="checkbox"/></td>
 								<td class="ccdetail text-left">&nbsp;<a href="#">${map['CONTENTS'] }</a></td>
 								<td>${map['RECEIVERNAME'] }</td>
-								<c:if test="${!empty map['KEEP_FLAG'] }">
-									<td>${map['KEEP_FLAG'] }</td>
+								<c:if test="${empty map['READ_DATE'] }">
+									<td>읽지 않음</td>
+								</c:if>
+								<c:if test="${!empty map['READ_DATE'] }">
+									<td>${map['READ_DATE'] }</td>
 								</c:if>
 							</tr>
 							</c:if>
