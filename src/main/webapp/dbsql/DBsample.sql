@@ -58,6 +58,34 @@ Insert into EVERY.DEPARTMENT (DEPT_NO,FACULTY_NO,DEPT_NAME,TEL,BUILDING_CODE,TOT
 Insert into EVERY.DEPARTMENT (DEPT_NO,FACULTY_NO,DEPT_NAME,TEL,BUILDING_CODE,TOTAL_CREDIT) values (29,6,'전기공학과',null,'7',null);
 Insert into EVERY.DEPARTMENT (DEPT_NO,FACULTY_NO,DEPT_NAME,TEL,BUILDING_CODE,TOTAL_CREDIT) values (30,6,'에너지IT학과',null,'7',null);
 
+-- 임직원 부서
+insert into emp_depart values(1, '교무처');
+insert into emp_depart values(2, '입학처');
+insert into emp_depart values(3, '학생처');
+insert into emp_depart values(4, '기획처');
+insert into emp_depart values(5, '연구처');
+insert into emp_depart values(6, '행정처');
+
+-- 임직원 직책
+insert into emp_position values(1, '처장');
+insert into emp_position values(2, '부장');
+insert into emp_position values(3, '과장');
+insert into emp_position values(4, '대리');
+insert into emp_position values(5, '사원');
+
+-- 임직원 권한
+insert into authority values(1, '관리자', 'ADMIN', sysdate);
+insert into authority values(2, '부관리자', 'ASSISTANT', sysdate);
+insert into authority values(3, '스태프', 'STAFF', sysdate);
+
+-- 임직원 데이터
+insert into employee(emp_no, emp_id, emp_name, pwd, start_date, dep_code, position_code, auth_code)
+values('E00001', 'E00001', '관리자', '1', '10/11/10', 3,2,1);
+insert into employee(emp_no, emp_id, emp_name, pwd, start_date, dep_code, position_code, auth_code)
+values('E00002', 'E00002', '이관리', '1', '18/07/17', 5,4,3);
+insert into employee(emp_no, emp_id, emp_name, pwd, start_date, dep_code, position_code, auth_code)
+values('E00003', 'E00003', '홍관리', '1', '16/09/19', 2,3,2);
+
 -- 교수 직책
 Insert into EVERY.PROF_POSITION (POSITION_NO,POSITION_NAME) values (1,'정교수');
 Insert into EVERY.PROF_POSITION (POSITION_NO,POSITION_NAME) values (2,'부교수');
@@ -163,39 +191,35 @@ from scholarship sch join award a
 on sch.scholarship_no = a.scholarship_no
 );
 
-create sequence inbox_seq 
-start with 1
-increment by 1
-nocache;
-
-create or replace trigger tr_chitchat
-    after insert on outbox
-    for each row
-BEGIN
-    insert into inbox(no, msg_no)
-    values(inbox_seq.nextval, :NEW.msg_no);
-END;
-
+--쪽지 전체 조회
 create or replace view chitchatView
 as
-select o.*, i.official_no as receiver
+select o.*, i.official_no as receiver, i.read_date, i.keep_flag
 from outbox o join inbox i
 on o.msg_no = i.msg_no;
 
 create or replace view chitchatProfessor
 as
-select p.prof_name, d.dept_name, pp.position_name
+select p.prof_name, p.prof_no , d.dept_name, pp.position_name
 from professor p join department d
 on p.dept_no = d.dept_no
 join prof_position pp
 on p.position_no = pp.position_no;
 
+create or replace view chitchatEmployee
+as
+select e.emp_no, e.emp_name, d.dep_name, p.position_name
+from employee e join emp_depart d
+on e.dep_code = d.dep_code
+join emp_position p
+on e.position_code = p.position_code;
+
 -- 쪽지 테스트
 insert into outbox(msg_no, official_no, contents, send_date, official_name)
-values(1, '201224026', '안녕하세요 교수님', sysdate, '김영림');
+values(outbox_seq.nextval, '201224026', '안녕하세요 교수님', sysdate, '김영림');
 insert into outbox(msg_no, official_no, contents, send_date, official_name)
-values(2, '201224026', '과제가 너무 많습니다...', sysdate, '김영림');
+values(outbox_seq.nextval, '201224026', '과제가 너무 많습니다...', sysdate, '김영림');
 insert into outbox(msg_no, official_no, contents, send_date, official_name)
-values(3, 'P00001', '열심히 하게나^^', sysdate, '김교수');
+values(outbox_seq.nextval, 'P00001', '열심히 하게나^^', sysdate, '김교수');
 
 commit;

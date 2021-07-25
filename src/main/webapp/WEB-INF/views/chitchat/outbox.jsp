@@ -9,9 +9,10 @@
 			<table class="table-bordered text-center" style="width: 100%">
 				<colgroup>
 					<col style="width: 10%" />
-					<col style="width: 50%" />
-					<col style="width: 30%" />
-					<col style="width: 10%" />
+					<col style="width: 45%" />
+					<col style="width: 15%" />
+					<col style="width: 15%" />
+					<col style="width: 15%" />
 				</colgroup>
 				<thead>
 					<tr>
@@ -19,6 +20,7 @@
 						<th>내용</th>
 						<th>받는 사람</th>
 						<th>수신 확인</th>
+						<th>발신 취소</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -29,19 +31,24 @@
 					</c:if>
 					<c:if test="${!empty list }">
 						<c:forEach var="map" items="${list }">
+						<form name="cancel" method="post" action="<c:url value='/chitchat/cancel'/> ">
 							<c:if test="${map['OFFICIAL_NO'] eq no }">
 							<tr>
-								<td><input type="checkbox"/></td>
-								<td class="ccdetail text-left">&nbsp;<a href="#">${map['CONTENTS'] }</a></td>
+								<td><input type="checkbox"/>
+									<input type="hidden" name="msgNo" value="${map['MSG_NO'] }" />
+								</td>
+								<td class="ccdetail text-left">&nbsp;<a href="#" onclick="window.open('${pageContext.request.contextPath }/chitchat/chitchatDetail?msgNo=${map['MSG_NO'] }', 'detail', 'top=100, left=600, width=500, height=500, location=yes, resizable=yes')">${map['CONTENTS'] }</a></td>
 								<td>${map['RECEIVERNAME'] }</td>
 								<c:if test="${empty map['READ_DATE'] }">
 									<td>읽지 않음</td>
+									<td><input class="btn btn-secondary" type="submit" value="취소"></td>
 								</c:if>
 								<c:if test="${!empty map['READ_DATE'] }">
 									<td>${map['READ_DATE'] }</td>
 								</c:if>
 							</tr>
 							</c:if>
+						</form>
 						</c:forEach>
 					</c:if>
 				</tbody>

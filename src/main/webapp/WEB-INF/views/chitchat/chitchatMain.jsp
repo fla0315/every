@@ -81,7 +81,7 @@ body {
 								</div>
 							</div>
 							<div class="form-floating mb-3">
-								<textarea class="col-md-12" rows="10" cols="" name="contents"></textarea>
+								<textarea class="col-md-12" rows="10" cols="20" wrap="hard" name="contents"></textarea>
 							</div>
 							<div class="mt-4 mb-0">
 								<div class="d-grid">
@@ -122,7 +122,7 @@ body {
 									<c:if test="${!empty list }">
 										<c:forEach var="map" items="${list }">
 											<tr>
-												<td><input type="checkbox"><input id="detailNo" type="hidden" value="${map['MSG_NO'] }"></td>
+												<td><input type="checkbox">
 												<td>
 													<c:if test="${map['OFFICIAL_NO'] eq no }">
 														<i class="fas fa-envelope"></i>
@@ -132,7 +132,7 @@ body {
 													</c:if>
 												</td>
 												<td class="ccdetail text-left">&nbsp;
-												<a href="#" onclick="window.open('${pageContext.request.contextPath }/chitchat/chitchatDetail?msgNo=${map['MSG_NO'] }', 'detail', 'top=100, left=600, width=500, height=500, location=yes, resizable=yes')">${map['CONTENTS'] }</a></td>
+												<a href="#" onclick="window.open('${pageContext.request.contextPath }/chitchat/chitchatDetail?msgNo=${map['MSG_NO'] }&readDate=${map['READ_DATE'] }', 'detail', 'top=100, left=600, width=500, height=500, location=yes, resizable=yes')">${map['CONTENTS'] }</a></td>
 												<td>
 												<c:if test="${map['OFFICIAL_NO'] eq no }">
 														나

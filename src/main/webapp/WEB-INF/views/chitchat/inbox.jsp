@@ -30,14 +30,14 @@
 					</c:if>
 					<c:if test="${!empty list }">
 						<c:forEach var="map" items="${list }">
-							<form name="frmStroage" method="post" action="<c:url value='/chitchat/storage'/> ">
+							<form name="frmStorage" method="post" action="<c:url value='/chitchat/storage'/> ">
 							<c:if test="${!(map['OFFICIAL_NO'] eq no) }">
 									<tr>
 										<td><input type="checkbox"/>
 											<input type="hidden" name="msgNo" value="${map['MSG_NO'] }" />
 											<input type="hidden" name="flag" value="${map['KEEP_FLAG'] }" />
 										</td>
-										<td class="ccdetail text-left">&nbsp;<a href="#">${map['CONTENTS'] }</a></td>
+										<td class="ccdetail text-left">&nbsp;<a href="#" onclick="window.open('${pageContext.request.contextPath }/chitchat/chitchatDetail?msgNo=${map['MSG_NO'] }&readDate=${map['READ_DATE'] }', 'detail', 'top=100, left=600, width=500, height=500, location=yes, resizable=yes')">${map['CONTENTS'] }</a></td>
 										<td>${map['OFFICIAL_NAME'] }</td>
 										<c:if test="${map['KEEP_FLAG']=='Y' }">
 											<td><input class="btn btn-danger" type="submit" value="취소"></td>

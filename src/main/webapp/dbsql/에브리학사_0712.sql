@@ -171,6 +171,8 @@ DROP TABLE certification_type
 DROP TABLE attendance
 	CASCADE CONSTRAINTS;
 
+DROP SEQUENCE INBOX_SEQ;
+DROP SEQUENCE OUTBOX_SEQ;
 
 /* 학부생 */
 CREATE TABLE student (
@@ -726,7 +728,7 @@ ALTER TABLE official_info
 CREATE TABLE outbox (
 	msg_no NUMBER NOT NULL, /* 쪽지번호 */
 	official_no VARCHAR2(500), /* 발신인 번호 */
-	contents CLOB, /* 내용 */
+	contents VARCHAR2(4000), /* 내용 */
 	send_date DATE, /* 발송일 */
 	official_name VARCHAR2(500), /* 발신인명 */
 	del_flag CHAR(1) /* 삭제여부 */
@@ -1401,6 +1403,8 @@ ALTER TABLE account_info
 			bank_code
 		);
 
+
+
 ALTER TABLE inbox
 	ADD
 		CONSTRAINT FK_outbox_TO_inbox
@@ -1409,7 +1413,7 @@ ALTER TABLE inbox
 		)
 		REFERENCES outbox (
 			msg_no
-		);
+		) on delete cascade;
 
 ALTER TABLE classroom
 	ADD
@@ -1540,3 +1544,24 @@ ALTER TABLE board_file
 		REFERENCES post (
 			post_no
 		);
+        
+alter table classroom add usable char(2) default 'Y' not null;
+
+create sequence outbox_seq 
+start with 1
+increment by 1
+nocache;
+
+create sequence inbox_seq 
+start with 1
+increment by 1
+nocache;
+
+
+create or replace trigger tr_chitchat
+    after insert on outbox
+    for each row
+BEGIN
+    insert into inbox(no, msg_no, keep_flag)
+    values(inbox_seq.nextval, :NEW.msg_no, 'N');
+END;

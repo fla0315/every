@@ -31,4 +31,14 @@ public class InboxServiceImpl implements InboxService {
 	public int storeMessage(InboxVO vo) {
 		return inboxDao.storeMessage(vo);
 	}
+
+	@Override
+	public Map<String, Object> chitchatDetail(int msgNo) {
+		return inboxDao.chitchatDetail(msgNo);
+	}
+
+	@Override
+	public int updateReadDate(int msgNo) {
+		return inboxDao.updateReadDate(msgNo);
+	}
 }

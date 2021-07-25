@@ -10,6 +10,11 @@
 		insert into outbox(msg_no, official_no, contents, send_date, official_name)
 		values(#{msgNo}, #{officialNo}, #{contents}, sysdate, #{officialName})
 	</insert>
+	
+	<delete id="deleteMessage" parameterType="int">
+		delete from outbox
+		where msg_no = ${msgNo}
+	</delete>
 </mapper>
 
 

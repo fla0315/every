@@ -21,10 +21,21 @@
 		where official_no=#{no} or receiver=#{no}
 	</select>
 	
+	<select id="chitchatDetail" parameterType="int" resultType="map">
+		select * from chitchatView
+		where msg_no = ${msgNo}
+	</select>
+	
 	<update id="storeMessage" parameterType="inboxVo">
 		update inbox
 		set keep_flag=#{keepFlag}
 		where msg_no=#{msgNo}
+	</update>
+	
+	<update id="updateReadDate" parameterType="int">
+		update inbox
+		set read_date=sysdate
+		where msg_no=${msgNo}
 	</update>
 </mapper>
 

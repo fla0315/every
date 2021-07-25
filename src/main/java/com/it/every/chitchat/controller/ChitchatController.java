@@ -43,7 +43,6 @@ public class ChitchatController {
 	@RequestMapping("/chitchatMain")
 	public void main(Model model, HttpSession session) {
 		String no = (String) session.getAttribute("no");
-		String name = (String) session.getAttribute("name");
 		logger.info("쪽지 메인 화면");
 		
 		/* 전체 발신/수신 쪽지 조회 */
@@ -57,7 +56,6 @@ public class ChitchatController {
 			String receiverName="";
 			if(officialNo.equals(no) && (!receiver.equals(no))) {
 				logger.info("받는 사람={}", receiver);
-				logger.info("{}",startNo);
 				if(startNo=='P'){ //교수일 경우
 					receiverName = professorService.nameByProfNo(receiver);
 				} else if(startNo== 'E'){ //임직원의 경우
@@ -109,12 +107,43 @@ public class ChitchatController {
 	}
 	
 	@RequestMapping("/chitchatDetail")
-	public void chitchatDetail(@RequestParam int msgNo) {
-		logger.info("쪽지 세부 내용, 파라미터 msgNo={}", msgNo);
+	public void chitchatDetail(@RequestParam int msgNo, @RequestParam(defaultValue="") String readDate, HttpSession session, Model model) {
+		String no = (String) session.getAttribute("no");
+		logger.info("쪽지 세부 내용, 파라미터 msgNo={}, no={}, readDate={}", msgNo, no, readDate);
+		
+		Map<String, Object> map = inboxService.chitchatDetail(msgNo);
+		String receiver = (String)map.get("RECEIVER");
+		char startNo = receiver.charAt(0);
+		String receiverName="";
+		logger.info("받는 사람={}", receiver);
+		if(startNo=='P'){ //교수일 경우
+			receiverName = professorService.nameByProfNo(receiver);
+		} else if(startNo== 'E'){ //임직원의 경우
+			receiverName = employeeService.nameByEmpNo(receiver);
+		} else{	//학생의 경우
+			receiverName = studentService.nameByStuNo(receiver);
+		}
+		
+		if(receiver.equals(no)) {	//받은 메시지 수신 확인
+			if(readDate=="") {
+				int read = inboxService.updateReadDate(msgNo);
+				if(read>0) {
+					logger.info("수신확인 성공");
+				}
+			}else {
+				logger.info("이미 읽은 쪽지");
+			}
+		}
+		
+		logger.info("receiverName={}", receiverName);
+		map.put("RECEIVERNAME", receiverName);
+		
+		
+		model.addAttribute("map", map);
 	}
 	
 	@PostMapping("/storage")
-	public String storage_post(@RequestParam int msgNo, @RequestParam String flag, Model model){
+	public String storage_post(@RequestParam int msgNo, @RequestParam String flag, @RequestParam(defaultValue = "") String detail, Model model){
 		InboxVO vo = new InboxVO();
 		String msg="쪽지 보관 실패", url="/chitchat/chitchatMain";
 		logger.info("보관할 msgNo={}, flag={}", msgNo, flag);
@@ -133,7 +162,26 @@ public class ChitchatController {
 			msg = "쪽지가 보관되었습니다.";
 		}else if(cnt>0 && flag.equals("N")) {
 			msg = "쪽지 보관이 취소되었습니다.";
-		} 
+		}
+		
+		if(("detail").equals(detail)) {
+			url = "/chitchat/chitchatDetail?msgNo="+msgNo;
+		}
+		
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		return "common/message";
+	}
+	
+	@PostMapping("/cancel")
+	public String cancel_post(@RequestParam int msgNo, Model model) {
+		logger.info("발송 취소, 파라미터 msgNo={}", msgNo);
+		
+		String msg="실패하였습니다.", url="/chitchat/chitchatMain";
+		int cnt = outboxService.deleteMessage(msgNo);
+		if(cnt>0) {
+			msg = "발송 취소하였습니다.";
+		}
 		
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
