@@ -9,5 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface StudentRegistrationDAO {
 
 	List<Map<String ,Object>> searchMyRegistarion(String userid);
-	
+
+	int insertMyRegistarion(RegistrationVO registrationVo);
 }

@@ -9,15 +9,6 @@
 			</if>
 		</sql>
 		
-		
-		
-	<!-- 수강신청  -->
-	<insert id="insertRegistarion" parameterType="registrationVo">
-		insert into registration(open_sub_code,stu_no,classification,score,lecture_eval_flag)
-		values(#{openSubCode},#{stuNo},${classification},100,'Y')
-	</insert>
-		
-		
 	<!-- 나의 수강신청 내역조회 -->
 		<select id="searchMyRegistarion" parameterType="searchVo" resultType="map">
 				select * from 
@@ -34,6 +25,14 @@
 				where stu.student_id=#{studentId}
 		</select>
 	
-
+	<!-- 수강신청  -->
+	<insert id="insertMyRegistarion" parameterType="registrationVo">
+		insert into registration(open_sub_code,stu_no)
+		values(#{openSubCode},#{stuNo})
+	</insert>
+		
+	
+	
+	
 	
 </mapper>

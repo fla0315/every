@@ -8,5 +8,5 @@ public interface StudentRegistrationService {
 	
 	List<Map<String ,Object>> searchMyRegistarion(String userid);
 	
-	
+	int insertMyRegistarion(RegistrationVO registrationVo);
 }

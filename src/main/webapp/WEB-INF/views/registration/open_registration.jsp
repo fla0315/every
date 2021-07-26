@@ -145,11 +145,11 @@
 										<c:forEach var="map" items="${list }">
 											<tr class="align_center">
 												<!-- 장바구니 -->
-												<td><input type="button" id="btCartSubj" value="장바구니"></td>
-
+												<td><a> <input type="text" width="10" value="	${map['OPEN_SUB_CODE'] }"> 	</a> <input type="button" id="btCartSubj" value="장바구니"></td>
+														
 												<!-- 년도 -->
-												<td><fmt:formatDate value="${map['OPEN_DATE']}"
-														pattern="yyyy" /></td>
+												<td>
+												<fmt:formatDate value="${map['OPEN_DATE']}" pattern="yyyy" /></td>
 												<!-- 학기 -->
 												<td>${map['SEMESTER'] }</td>
 												<!-- 과목명 -->

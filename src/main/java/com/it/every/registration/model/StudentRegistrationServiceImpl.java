@@ -17,6 +17,12 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	public List<Map<String, Object>> searchMyRegistarion(String userid) {
 		return studentRegistrationDao.searchMyRegistarion(userid);
 	}
+
+	
+	@Override
+	public int insertMyRegistarion(RegistrationVO registrationVo) {
+		return studentRegistrationDao.insertMyRegistarion(registrationVo);
+	}
 	
 	
 	
