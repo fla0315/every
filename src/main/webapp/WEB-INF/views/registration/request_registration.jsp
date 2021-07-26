@@ -127,6 +127,7 @@
 										<th scope="col">학년</th>
 										<th scope="col">이수구분</th>
 										<th scope="col">학점</th>
+										<th scope="col">총원</th>
 										<th scope="col">담당교수</th>
 										<th scope="col">강의실/시간</th>
 										<th scope="col">강의계획서</th>
@@ -144,9 +145,15 @@
 									<c:if test="${!empty list }">
 										<c:forEach var="map" items="${list }">
 											<tr class="align_center">
-												<!-- 장바구니 -->
-												<td><input type="button" id="btRequest" value="수강신청"></td>
-
+											
+								
+											
+											<td>
+												<form name="frmRequest" method="post" action="<c:url value='/registration/request_registration'/>">
+													<input type="hidden" name="openSubCode"  value="${map['OPEN_SUB_CODE'] }">
+													<input type="submit" id="btRequest" value="수강신청">
+												</form>
+											</td>
 												<!-- 년도 -->
 												<td><fmt:formatDate value="${map['OPEN_DATE']}"
 														pattern="yyyy" /></td>
@@ -163,19 +170,86 @@
 												<td>${map['TYPE'] }</td>
 												<!-- 학점 -->
 												<td>${map['CREDIT'] }</td>
+												<!-- 총원 -->
+												<td> 1 / ${map['PERSONNEL'] }</td>
 												<!-- 담당교수 -->
 												<td>${map['PROF_NAME'] }</td>
 												<!-- 강의실/시간 -->
 												<td>${map['TIMETABLE'] }</td>
 												<!-- 강의계획서 -->
 												<td><input type="button" id="btSyllabus" value="강의계획서"></td>
-
 											</tr>
 										</c:forEach>
 									</c:if>
-
-
 								</tbody>
 							</table>
+						</div>
+<!-- --------------------------------------------------------------수강신청을 위한 개설교과목 조회 끝---------------------------------------------------------------------  -->
 
-						</div> <%@ include file="../inc/bottom.jsp"%>
+
+
+
+
+
+
+
+
+
+
+
+
+						<br><hr><h4 class="mt-4" style="background-color: white;">수강신청</h4> <br>
+						<div class="table-wrapper-scroll-y my-custom-scrollbar">
+							<table class="table table-bordered table-striped mb-0">
+								<thead>
+									<tr>
+										<th scope="col">취소</th>
+										<th scope="col">년도</th>
+										<th scope="col">학기</th>
+										<th scope="col">과목명</th>
+										<th scope="col">학부(과)</th>
+										<th scope="col">학년</th>
+										<th scope="col">이수구분</th>
+										<th scope="col">학점</th>
+										<th scope="col">담당교수</th>
+										<th scope="col">강의실/시간</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<!-- 데이터 없을 때  -->
+									<c:if test="${empty list }">
+										<tr>
+											<td colspan="6" class="align_center">개설된 과목이 없습니다.</td>
+										</tr>
+									</c:if>
+
+									<c:if test="${!empty list }">
+										<c:forEach var="map" items="${list }">
+											
+										</c:forEach>
+									</c:if>
+								</tbody>
+							</table>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <%@ include file="../inc/bottom.jsp"%>
