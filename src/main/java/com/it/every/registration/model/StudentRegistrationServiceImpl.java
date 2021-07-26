@@ -23,6 +23,18 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	public int insertMyRegistarion(RegistrationVO registrationVo) {
 		return studentRegistrationDao.insertMyRegistarion(registrationVo);
 	}
+
+
+	@Override
+	public List<Map<String, Object>> selectMyRegistarion(String userid) {
+		return studentRegistrationDao.selectMyRegistarion(userid);
+	}
+
+
+	@Override
+	public int deleteMyRegistarion(RegistrationVO registrationVo) {
+		return studentRegistrationDao.deleteMyRegistarion(registrationVo);
+	}
 	
 	
 	
