@@ -17,6 +17,7 @@
 			$('.card-body table tbody input[type=checkbox]').prop('checked', this.checked);
 		});
 		
+		
 		$('.attend1').change(function(){
 			var sum = 0;
 			$('.attend1').each(function(idx){
@@ -60,6 +61,26 @@
 			$('#point'+idx).val(sum);
 			sum = 0;
 		})
+		
+		
+		$('#btnSave').click(function(){
+			if($('#openSub option:selected').val()=='선택하세요'){
+				alert('개설교과목 번호를 선택하세요!');
+				return false;
+			} else if($('#weekCheck option:selected').val()==''){
+				alert('주차를 선택하세요!');
+				return false;
+			} else if($('#attendAll option:selected').val()==''){
+				alert('출석 여부를 선택하세요!');
+				return false;
+			} else{
+				var openSubCode = $('#openSub option:selected').val();
+				var week = $('#weekCheck option:selected').val();
+				var attend = $('#attendAll option:selected').val();
+				//location.href="<c:url value='/professor/attendanceAll?openSubCode="+openSubCode+"&week="+week+"&attend="+attend'/>";
+				//$('#btnSave').attr("formaction", "<c:url value='/professor/attendanceAll?openSubCode="+openSubCode+"&week="+week+"&attend="+attend'/>") */
+			}
+		});
 	});
 </script>
 
@@ -89,6 +110,32 @@ body {
 						</c:if>
 					</select>
 					<input type="button" id="btCheck" value="조회">
+					<div class="text-center">
+						<form method="post" id="frmAll">
+						<select class="custom-select" id="weekCheck" style="width:100px">
+							<option value=""></option>
+							<option value="first">1</option>
+							<option value="second">2</option>
+							<option value="third">3</option>
+							<option value="fourth">4</option>
+							<option value="fifth">5</option>
+							<option value="sixth">6</option>
+							<option value="seventh">7</option>
+							<option value="eighth">8</option>
+							<option value="ninth">9</option>
+							<option value="tenth">10</option>
+						</select>
+						주차 / 전체 출석 체크 : 
+						<select class="custom-select" id="attendAll" style="width:100px">
+							<option value=""></option>
+							<option value="출석">출석</option>
+							<option value="지각">지각</option>
+							<option value="결석">결석</option>
+							<option value="조퇴">조퇴</option>
+						</select>
+						<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
+						</form>
+					</div>
 				</div>
 				<div class="card mb-5">
                    <div class="card-header">
@@ -388,9 +435,6 @@ body {
                        </table>
                    </div>
                </div>
-			<div class="text-center">
-				<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
-			</div>
 		</div>
 	</article>
 

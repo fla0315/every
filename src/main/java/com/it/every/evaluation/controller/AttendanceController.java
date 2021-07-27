@@ -75,4 +75,12 @@ public class AttendanceController {
 		
 		return "common/message";
 	}
+	
+	/*
+	@PostMapping("/attendanceAll")
+	public void attendanceAll(@RequestParam String openSubCode,@RequestParam String week, @RequestParam String attend) {
+		logger.info("출석 주차 전체 등록");
+		AttendanceVO vo = new AttendanceVO();
+	}
+	*/
 }

@@ -7,4 +7,5 @@ public interface AttendanceService {
 	int registerAttendance(String openSubCode, String stuNo, String classification);
 	List<Map<String, Object>> showAttendance(String openSubCode);
 	int editBystuNo(AttendanceVO vo);
+	int attendanceAll(AttendanceVO vo);
 }

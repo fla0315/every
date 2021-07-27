@@ -1,6 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../inc/prof_top.jsp"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:choose>
+	<c:when test="${fn:contains(firstNo, 'P')}">
+		교수
+		<jsp:include page="../inc/prof_top.jsp"></jsp:include>
+	</c:when>
+	<c:when test="${fn:contains(firstNo, 'E')}">
+		<jsp:include page="../inc/admin_top.jsp"></jsp:include>
+	</c:when>
+	<c:otherwise>
+		${firstNo }
+		<jsp:include page="../inc/student_top.jsp"></jsp:include>
+	</c:otherwise>
+</c:choose>
+
 <style type="text/css">
 body {
 	padding-top: 70px;
@@ -21,6 +36,21 @@ body {
 			//새창 띄우기
 			window.open("${pageContext.request.contextPath }/chitchat/searchReceiver", "search", "top=0, left=0, width=500, height=500, location=yes, resizable=yes");
 	    });
+		
+		$('#btSend').click(function(){
+			if($('#receiver').val().length<1){
+				alert("받을 사람을 입력하세요");
+				$('#btSearch').focus();
+				event.preventDefault();
+				return false;
+			} else if($('#taContents').val().length<1){
+				alert("내용을 입력하세요");
+				$('#taContents').focus();
+				event.preventDefault();
+				return false;
+			}
+			
+		});
 	});
 </script>
 <article>
@@ -57,7 +87,7 @@ body {
 					<div class="card-header">
 						<i class="fas fa-envelope"></i> 발송하기
 					</div>
-					<div class="card-body">
+					<div class="card-body" style="height:450px">
 						<form name="frm" method="post"
 							action="<c:url value=''/>">
 							<div class="row mb-3">
@@ -81,11 +111,11 @@ body {
 								</div>
 							</div>
 							<div class="form-floating mb-3">
-								<textarea class="col-md-12" rows="10" cols="20" wrap="hard" name="contents"></textarea>
+								<textarea class="col-md-12" rows="10" cols="20" wrap="hard" name="contents" id="taContents"></textarea>
 							</div>
 							<div class="mt-4 mb-0">
 								<div class="d-grid">
-									<input type="submit" class="btn btn-primary btn-block" value="발송하기">
+									<input type="submit" id="btSend" class="btn btn-primary btn-block" value="발송하기">
 								</div>
 							</div>
 						</form>
@@ -97,7 +127,7 @@ body {
 						<div class="card-header">
 							<i class="fas fa-envelope-square"></i> 전체보기
 						</div>
-						<div class="card-body" style="height:427px">
+						<div class="card-body" style="height:450px">
 							<table class="table-bordered text-center" style="width: 100%">
 								<colgroup>
 									<col style="width: 10%" />
@@ -116,11 +146,12 @@ body {
 								<tbody>
 									<c:if test="${empty list }">
 										<tr>
-											<td colspan="3">데이터가 없습니다.</td>
+											<td colspan="4">데이터가 없습니다.</td>
 										</tr>
 									</c:if>
 									<c:if test="${!empty list }">
 										<c:forEach var="map" items="${list }">
+											<c:if test="${empty map['DEL_FLAG'] }">
 											<tr>
 												<td><input type="checkbox">
 												<td>
@@ -142,6 +173,7 @@ body {
 												</c:if>
 												</td>
 											</tr>
+											</c:if>
 										</c:forEach>
 									</c:if>
 								</tbody>

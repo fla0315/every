@@ -19,4 +19,9 @@ public class OutboxServiceImpl implements OutboxService {
 		return outboxDao.deleteMessage(msgNo);
 	}
 
+	@Override
+	public int deleteSent(int msgNo) {
+		return outboxDao.deleteSent(msgNo);
+	}
+
 }

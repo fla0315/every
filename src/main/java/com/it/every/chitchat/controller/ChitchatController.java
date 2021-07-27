@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +42,7 @@ public class ChitchatController {
 	@RequestMapping("/chitchatMain")
 	public void main(Model model, HttpSession session) {
 		String no = (String) session.getAttribute("no");
+		char firstNo = no.charAt(0);
 		logger.info("쪽지 메인 화면");
 		
 		/* 전체 발신/수신 쪽지 조회 */
@@ -71,6 +71,7 @@ public class ChitchatController {
 		}
 		
 		model.addAttribute("list", list);
+		model.addAttribute("firstNo", firstNo);
 		logger.info("쪽지 리스트 불러오기 list.size={}", list.size());
 	}
 	
@@ -125,7 +126,7 @@ public class ChitchatController {
 		}
 		
 		if(receiver.equals(no)) {	//받은 메시지 수신 확인
-			if(readDate=="") {
+			if(readDate=="" || readDate.isEmpty()) {
 				int read = inboxService.updateReadDate(msgNo);
 				if(read>0) {
 					logger.info("수신확인 성공");
@@ -187,6 +188,22 @@ public class ChitchatController {
 		model.addAttribute("msg", msg);
 		return "common/message";
 	}
+	
+	@PostMapping("/delete")
+	public String delete_post(@RequestParam int msgNo, Model model) {
+		logger.info("쪽지 삭제, 파라미터 msgNo={}", msgNo);
+		
+		String msg="삭제 실패하였습니다.", url="/chitchat/chitchatMain";
+		int cnt = outboxService.deleteSent(msgNo);
+		if(cnt>0) {
+			msg = "삭제되었습니다.";
+		}
+		
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		return "common/message";
+	}
+	
 	
 	@PostMapping("/searchReceiver")
 	public String searchReceiver_post(@RequestParam(required=false) String keyword, Model model) {

@@ -11,16 +11,17 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
-<script>
-	$(document).on('click', '#btnSave', function(e){
-		e.preventDefault();
-		$("#form").submit();
-	});
-
-	$(document).on('click', '#btnList', function(e){
-		e.preventDefault();
-		location.href="${pageContext.request.contextPath}/board/getBoardList";
-	});
+<script type="text/javascript">
+	/* $(function(){	//개설과목
+		$('#btnSave').click(function(){
+			if($('#openSub option:selected').val()!='선택하세요'){
+				var openSubCode = $('#openSub option:selected').val();
+				location.href="<c:url value='/professor/notice/noticeWrite?openSubCode="+openSubCode+"'/>";
+			} else{
+				alert('개설교과목 번호를 선택하세요!');
+			}
+		});
+	}); */
 </script>
 
 <style type="text/css">
@@ -32,13 +33,22 @@ body {
 	<article>
 		<div class="container col-lg-10" role="main">
 			<h2>공지사항 등록</h2>
-			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
+			<form name="form" id="form" role="form" method="post" action="">
 				<br>
 				<div class="mb-3">
 					<label for="title">개설교과목</label>
-					<select>
+					<select id="openSub" class="dataTable-selector">
 						<option>선택하세요</option>
-						<!-- 개설교과목 번호/이름 교수님 번호로 조회해 for문 돌리기 -->
+						<c:if test="${!empty osList }">
+							<c:forEach var="vo" items="${osList}">
+								<c:if test="${open == vo.openSubCode }">
+									<option selected>${vo.openSubCode }</option>
+								</c:if>
+								<c:if test="${open != vo.openSubCode }">
+									<option>${vo.openSubCode }</option>
+								</c:if>
+							</c:forEach>
+						</c:if>
 					</select>
 				</div>
 				<div class="mb-3">

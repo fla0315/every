@@ -11,10 +11,18 @@
 		values(#{msgNo}, #{officialNo}, #{contents}, sysdate, #{officialName})
 	</insert>
 	
+	<!-- 발송 취소 (수신 확인 전에만 가능) -->
 	<delete id="deleteMessage" parameterType="int">
 		delete from outbox
 		where msg_no = ${msgNo}
 	</delete>
+	
+	<!-- 보낸 쪽지 지우기(발신자) -->
+	<update id="deleteSent" parameterType="int">
+		update outbox
+		set del_flag = 'Y'
+		where msg_no=#{msgNo}
+	</update>
 </mapper>
 
 

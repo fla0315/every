@@ -20,4 +20,20 @@
 		ninth=#{ninth}, tenth=#{tenth}, point=#{point}
 		where open_sub_code=#{openSubCode} and stu_no=#{stuNo}
 	</update>
+	
+	<update id="attendanceAll" parameterType="attendanceVo">
+		update attendance
+		set 
+		first = case when first is null then #{first} else first end,
+		second = case when second is null then #{second} else second end,
+		third = case when third is null then #{third} else third end,
+		fourth = case when fourth is null then #{fourth} else fourth end,
+		fifth = case when fifth is null then #{fifth} else fifth end,
+		sixth = case when sixth is null then #{sixth} else sixth end,
+		seventh = case when seventh is null then #{seventh} else seventh end,
+		eighth = case when eighth is null then #{eighth} else eighth end,
+		ninth = case when ninth is null then #{ninth} else ninth end,
+		tenth = case when tenth is null then #{tenth} else tenth end
+		where open_sub_code=#{openSubCode}
+	</update>
 </mapper>

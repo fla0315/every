@@ -19,6 +19,7 @@
 	<select id="chitchatAll" parameterType="String" resultType="map">
 		select * from chitchatView
 		where official_no=#{no} or receiver=#{no}
+		order by send_date desc
 	</select>
 	
 	<select id="chitchatDetail" parameterType="int" resultType="map">

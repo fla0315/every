@@ -26,5 +26,10 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public int editBystuNo(AttendanceVO vo) {
 		return attendanceDao.editBystuNo(vo);
 	}
+
+	@Override
+	public int attendanceAll(AttendanceVO vo) {
+		return attendanceDao.attendanceAll(vo);
+	}
 	
 }

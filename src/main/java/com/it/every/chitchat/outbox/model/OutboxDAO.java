@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface OutboxDAO {
 	int sendMessage(OutboxVO vo);
 	int deleteMessage(int msgNo);
+	int deleteSent(int msgNo);
 }
