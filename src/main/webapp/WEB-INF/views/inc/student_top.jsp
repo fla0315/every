@@ -149,7 +149,7 @@
                                  	  <a class="nav-link" href="<c:url value='/registration/registration'/>">수강취소</a>
 	                               </nav>
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="<c:url value='/registration/registration'/>">강의평가</a>
+                                 	  <a class="nav-link" href="<c:url value='/subj_eval/subj_eval'/>">강의평가</a>
 	                               </nav>
 	                              <nav class="sb-sidenav-menu-nested nav">
                                  	  <a class="nav-link" href="<c:url value='/registration/registration'/>">성적조회</a>
