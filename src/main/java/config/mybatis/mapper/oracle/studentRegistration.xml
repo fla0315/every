@@ -3,12 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.it.every.registration.model.StudentRegistrationDAO">
-		<sql id="searchWhere">
+<!-- 
+				<sql id="searchWhere">
 			<if test="searchKeyword!=null and searchKeyword!=''">
 				where ${searchCondition}  like '%' || #{searchKeyword} || '%'
 			</if>
 		</sql>
-		
+		 -->
 	<!-- 나의 수강신청 내역조회 -->
 		<select id="searchMyRegistarion" parameterType="searchVo" resultType="map">
 				select * from 
@@ -53,5 +54,12 @@
 		where stu.student_id=#{studentId} and st.semester = '2학기' and st.subj_year = '2021'
 	</select>
 		
-	
+			
+		
+	<!-- 장바구니 등록 -->	
+	<insert id="insertCart" parameterType="RegistrationCartVO">
+		insert into registrationCart(open_sub_code, stu_no)
+		values((#{openSubCode},#{stuNo})
+	</insert>
+		
 </mapper>
