@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.subjEval.model.SubjEvalService;
@@ -39,6 +40,15 @@ public class SubjEvalController {
 		model.addAttribute("Mylist", Mylist);
 		
 		return "subj_eval/subj_eval";
+		
+	}
+	@RequestMapping("/subj_eval_survey")
+	public void  subjEvelSurvey(@ModelAttribute SubjEvalVO subjEvalVo,@RequestParam String openSubCode,HttpSession session, Model model ) {
+		logger.info("강의평가 하는 페이지");
+		String userid = (String)session.getAttribute("user_id");
+		String stuNo = (String)session.getAttribute("no");
+		
+		
 		
 	}
 

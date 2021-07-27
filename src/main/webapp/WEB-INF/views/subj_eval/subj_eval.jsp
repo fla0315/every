@@ -3,11 +3,16 @@
 <%@ include file="../inc/student_top.jsp"%>
 
 <script type="text/javascript">
-	$(function(){
+$(function(){
+/* 	$('#btScholarship').click(function(){
 		
+		open('http://localhost:9091/every/subj_eval/subj_eval_survey','chk',
+		 'width=1000,height=1000,left=0,top=0,location=yes,resizable=yes');
 		
-		
-	});  
+		action="<c:url value='/subj_eval/subj_eval_survey?openSubCode='/>${myMap['OPEN_SUB_CODE'] }">
+	}); */
+});
+  
 </script>
 
 				<div class="container-fluid px-4" style="background-color: white;">
@@ -71,14 +76,13 @@
 												
 												
 												<td>
-													<form name="frmRegistration" method="post"
-														action="<c:url value='/registration/request_registrationDelete'/>">
-														<input type="hidden" name="openSubCode"
+													<%-- <form name="frmRegistration" method="post"	action="<c:url value='/subj_eval/subj_eval_survey?openSubCode='/>${myMap['OPEN_SUB_CODE'] }"> --%>
+													<form name="frmRegistration" method="post"	onclick="window.open('${pageContext.request.contextPath }/subj_eval/subj_eval_survey?openSubCode=${myMap['OPEN_SUB_CODE'] }', 'detail', 'top=100, left=600, width=650, height=560, location=yes, resizable=yes')">
+														<input type="text" name="openSubCode"
 															value="${myMap['OPEN_SUB_CODE'] }"> <input
 															type="submit" id="btSurvey" value="강의평가" class="buttons">
 													</form>
 												</td>
-												
 												
 											</tr>
 										</c:forEach>
