@@ -59,7 +59,32 @@
 	<!-- 장바구니 등록 -->	
 	<insert id="insertCart" parameterType="RegistrationCartVO">
 		insert into registrationCart(open_sub_code, stu_no)
-		values((#{openSubCode},#{stuNo})
+		values(#{openSubCode},#{stuNo})
 	</insert>
+	
+	<!-- 장바구니 조회 -->
+	<select id="selectCart" parameterType="String" resultType="map">
+		select * from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join registrationCart rsc
+		on rsc.open_sub_code = os.open_sub_code
+		join student stu
+		on stu.stu_no = rsc.stu_no
+		where stu.student_id=#{studentId} and st.semester = '2학기' and st.subj_year = '2021'
+	</select>	
 		
+			
+	<!-- 장바구니 취소 -->
+	<delete id="deleteCart"  parameterType="RegistrationCartVO" >
+		delete from registrationCart 
+		where stu_No= #{stuNo} and open_sub_code =#{openSubCode}
+	</delete>
+	
+	
+	
 </mapper>

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.it.every.registrationCart.model.RegistrationCartVO;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -34,6 +36,24 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	@Override
 	public int deleteMyRegistarion(RegistrationVO registrationVo) {
 		return studentRegistrationDao.deleteMyRegistarion(registrationVo);
+	}
+
+
+	@Override
+	public int insertCart(RegistrationCartVO registrationCartVo) {
+		return studentRegistrationDao.insertCart(registrationCartVo);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectCart(String userid) {
+		return studentRegistrationDao.selectCart(userid);
+	}
+
+
+	@Override
+	public int deleteCart(RegistrationCartVO registrationCartVo) {
+		return studentRegistrationDao.deleteCart(registrationCartVo);
 	}
 	
 	
