@@ -66,7 +66,7 @@ public class RequestRegistrationController {
 	
 	
 	@RequestMapping("/request_registration")
-	public String myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo ,Model model) {
+	public String myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo ,@RequestParam String mode ,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
@@ -74,48 +74,18 @@ public class RequestRegistrationController {
 		//String userid ="fla0315";
 		logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
 		
-		int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
-		logger.info("수강신청 결과, cnt={}", cnt);
 		
-		//cnt = studentRegistrationService.deleteMyRegistarion(registrationVo);
-		logger.info("수강신청 삭제, cnt={}", cnt);
-		
-		
-		String msg="수강신청 실패!", url="/registration/request_registration";
-		if(cnt>0) {
-			msg="수강신청되었습니다.";
-			url="/registration/request_registration";
+		String resultPage="/registration/request_registration";
+		if(mode.equals("request")) {  //수강신청하기
+			int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
+			logger.info("수강신청 결과, cnt={}", cnt);
+		}else if(mode.equals("delete")) { //수강취소하기
+			int cnt = studentRegistrationService.deleteMyRegistarion(registrationVo);
+			logger.info("수강신청 삭제, cnt={}", cnt);
 		}
 		
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
+		return "redirect:" + resultPage;
+	
 		
-		return "common/message";
 	}
-	
-	
-	/*
-	 * @RequestMapping("/request_registration") public String
-	 * myregistrationDelete(HttpSession session,@ModelAttribute RegistrationVO
-	 * registrationVo ,Model model) {
-	 * 
-	 * String userid = (String)session.getAttribute("user_id"); String stuNo =
-	 * (String)session.getAttribute("no"); registrationVo.setStuNo(stuNo); //String
-	 * userid ="fla0315"; logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
-	 * 
-	 * 
-	 * 
-	 * String msg="수강취소 실패!", url="/registration/request_registration"; if(cnt>0) {
-	 * msg="수강취소되었습니다."; url="/registration/request_registration"; }
-	 * 
-	 * model.addAttribute("msg", msg); model.addAttribute("url", url);
-	 * 
-	 * return "common/message"; }
-	 */
-
-	
-	
-	
-	
-	
 }
