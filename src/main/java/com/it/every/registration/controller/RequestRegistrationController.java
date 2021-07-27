@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.every.openSubj.model.OpenSubjService;
@@ -65,8 +64,8 @@ public class RequestRegistrationController {
 	
 	
 	
-	@RequestMapping("/request_registration")
-	public String myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo ,@RequestParam String mode ,Model model) {
+	@RequestMapping("/request_registrationInsert")
+	public String myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo  ,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
@@ -74,18 +73,52 @@ public class RequestRegistrationController {
 		//String userid ="fla0315";
 		logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
 		
-		
-		String resultPage="/registration/request_registration";
-		if(mode.equals("request")) {  //수강신청하기
 			int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
-			logger.info("수강신청 결과, cnt={}", cnt);
-		}else if(mode.equals("delete")) { //수강취소하기
-			int cnt = studentRegistrationService.deleteMyRegistarion(registrationVo);
-			logger.info("수강신청 삭제, cnt={}", cnt);
-		}
+			String msg ="수상신청 완료!" , url ="/registration/request_registration";
+			if(cnt>0) {
+				msg="수강신청완료.";
+				url="/registration/request_registration";
+			}else {
+				msg="수강신청실패.";
+				url="/registration/request_registration";
+			}
+			
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+			return "common/message";
 		
-		return "redirect:" + resultPage;
-	
 		
 	}
+	
+	@RequestMapping("/request_registrationDelete")
+	public String myregistrationDelete(HttpSession session,@ModelAttribute RegistrationVO registrationVo  ,Model model) {
+		
+		String userid = (String)session.getAttribute("user_id");
+		String stuNo = (String)session.getAttribute("no");
+		registrationVo.setStuNo(stuNo);
+		//String userid ="fla0315";
+		logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
+		
+			int cnt = studentRegistrationService.deleteMyRegistarion(registrationVo);
+			
+			String msg ="수상취소 완료!" , url ="/registration/request_registration";
+			if(cnt>0) {
+				msg="수강취소완료.";
+				url="/registration/request_registration";
+			}else {
+				msg="수강취소실패.";
+				url="/registration/request_registration";
+			}
+			
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+			return "common/message";
+		
+	}
+	
+	
+	
+	
 }

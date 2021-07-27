@@ -3,7 +3,7 @@
 <%@ include file="../inc/student_top.jsp"%>
 
 <script type="text/javascript">
-	$(function(){
+/* 	$(function(){
 		$('.buttons').click(function(){
 			var type="";
 			
@@ -19,7 +19,7 @@
 		});	
 		
 		
-	});
+	}); */
 	
 </script>
 
@@ -164,7 +164,7 @@
 								
 											
 											<td>
-												<form name="frmRegistration" method="post" action="<c:url value='/registration/request_registration'/>">
+												<form name="frmRegistration" method="post" action="<c:url value='/registration/request_registrationInsert'/>">
 													<input type="hidden" name="openSubCode"  value="${map['OPEN_SUB_CODE'] }">
 													<input type="submit" id="btRequest" value="수강신청" class="buttons">
 												</form>
@@ -236,7 +236,7 @@
 												<tr class="align_center">
 											
 											<td>
-												<form name="frmRegistration" method="post" action="<c:url value='/registration/request_registration'/>">
+												<form name="frmRegistration" method="post" action="<c:url value='/registration/request_registrationDelete'/>">
 													<input type="hidden" name="openSubCode"  value="${myMap['OPEN_SUB_CODE'] }">
 													<input type="submit" id="btDelete" value="삭제" class="buttons">
 												</form>
