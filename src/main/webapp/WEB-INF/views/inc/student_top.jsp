@@ -15,7 +15,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-        
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
         
     </head>
     
@@ -136,7 +136,7 @@
                                 </nav>
                             
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="#">장바구니</a>
+                                 	  <a class="nav-link" href="<c:url value='/registration/registration_cart'/>">장바구니</a>
 	                               </nav>
 	                              <nav class="sb-sidenav-menu-nested nav">
                                  	  <a class="nav-link" href="<c:url value='/registration/request_registration'/>">수강신청</a>

@@ -38,22 +38,15 @@ public class OpenSubjController {
 	public String open_rregistration(@ModelAttribute OpenSubjVO openSubjVo , HttpSession session,  Model model) {
 		
 		logger.info("개설교과과정페이지");
-		
-		String userid = (String)session.getAttribute("user_id");
-		String stuNo = (String)session.getAttribute("no");
-		
+	
 		List<OpenSubjVO> list = openSubjService.OpenRegistraionALL();
 		List<Map<String, Object>> facultyMap=openSubjService.selectFacultyS();
 		List<Map<String, Object>> typeMap= openSubjService.selectTypeS();
-		List<Map<String, Object>> Clist = studentRegistrationService.selectCart(userid);
 		
-		logger.info("개설교과과정페이지 전체 ,Clist.size()={}", Clist.size());
 		logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
 		logger.info("학과 전체 ,facultyMap={}", facultyMap);
 		logger.info("이수구분 전체 ,typeMap={}", typeMap);
 		
-		
-		model.addAttribute("Clist", Clist);
 		model.addAttribute("list", list);
 		model.addAttribute("facultyMap", facultyMap);
 		model.addAttribute("typeMap", typeMap);
@@ -88,7 +81,6 @@ public class OpenSubjController {
 	}
 	
 	
-	
 	@RequestMapping("/open_registrationCartDelete")
 	public String myregistrationDelete(HttpSession session,@ModelAttribute RegistrationCartVO registrationCartVo  ,Model model) {
 		
@@ -117,7 +109,19 @@ public class OpenSubjController {
 	}
 	
 	
-	
+	@RequestMapping("/registration_cart")
+	public String cart(HttpSession session, @ModelAttribute RegistrationCartVO registrationCartVo  ,Model model) {
+		
+		String userid = (String)session.getAttribute("user_id");
+		String stuNo = (String)session.getAttribute("no");
+		
+		List<Map<String, Object>> Clist = studentRegistrationService.selectCart(userid);
+		logger.info("장바구니 전체 ,Clist.size()={}", Clist.size());
+		model.addAttribute("Clist", Clist);
+		
+		return "registration/registration_cart";
+		
+	}
 	
 	
 	
