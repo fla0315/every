@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.it.every.student.state.model.StudentStateDAO">
+<mapper namespace="com.it.every.admin.student.state.model.StudentStateDAO">
 
 	<select id="selectAllState" resultType="studentStateVO">
 		select * from student_state order by state

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.lecture.model.LectureDAO">
+
+	<select id="selectLecture" resultType="HashMap">
+		select d.dept_name department, st.type subjectType, sj.subj_name subjectName, 
+				p.prof_name profName, t.timetable_name timetableName, 
+				c.classroom_name classroomName, b.building_name buildingName
+		from subj_time s 
+		join open_subj o
+		on s.open_sub_code = o.open_sub_code
+		join subject sj
+		on sj.subj_code = o.subj_code
+		join classroom c
+		on c.classroom_code = s.classroom_code
+		join timetable t
+		on t.timetable_code = s.timetable_code
+		join professor p
+		on p.prof_no = o.prof_no
+		join subj_type st
+		on st.type_code = sj.type_code
+		join department d
+		on p.dept_no = d.dept_no
+		join building b
+		on c.building_code = b.building_code
+	</select>
+		
+	<insert id="registerOpenSubj" parameterType="lectureVo">
+		<selectKey keyProperty="openSubCode" resultType="int" order="BEFORE">
+			select open_subj_seq.nextval from dual
+		</selectKey>
+		insert into open_subj(open_sub_code, subj_code, prof_no, semester, open_year) 
+		values(#{openSubCode}, #{subjCode}, #{profNo}, #{semester}, #{openYear})
+	</insert>
+	
+	<update id="registerSubjTime" parameterType="lectureVo">
+		insert into subj_time(lecture_time_no, open_sub_code, classroom_code, 
+			timetable_code) 
+		values(subj_time_seq.nextval, #{openSubCode}, #{classroomCode}, 
+			#{timetableCode})
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

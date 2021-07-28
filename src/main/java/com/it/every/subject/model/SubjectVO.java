@@ -1,7 +1,5 @@
 package com.it.every.subject.model;
 
-import java.sql.Timestamp;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,17 +9,18 @@ import lombok.ToString;
 @ToString
 public class SubjectVO {
 	
-	private String subjCode;	/* 과목코드 */
-	private String profNo; 	/* 교수번호 */
-	private String typeCode; 	/* 구분코드 */
-	private String subjName; 	/* 과목명 */
-	private String semester;	 /* 학기 */
-	private String facultyName; /* 학부 */
-	private String grade ; 		/* 학년 */
-	private String timetable;	/* 시간표 */
-	private String  explanation; /* 과목설명 */
-	private int credit;			/* 학점 */
-	private int personnel;		/* 인원수 */
-	
+	private String subjCode;		/* 과목코드 */
+	private String profNo; 			/* 교수번호 */
+	private String typeCode;		/* 구분코드 */
+	private String subjName; 		/* 과목명 */
+	private String semester;		/* 학기 */
+	private String facultyName; 	/* 학부 */
+	private String grade ; 			/* 학년 */
+	private String timetable;		/* 시간표 */
+	private String explanation; 	/* 과목설명 */
+	private int credit;				/* 학점 */
+	private int personnel;			/* 인원수 */
+	private String type;			/* 교과구분 */
+	private String profName;		/* 교수명	 */
 	
 }

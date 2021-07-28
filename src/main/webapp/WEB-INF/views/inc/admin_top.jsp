@@ -33,6 +33,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
         <script src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
         <script src="<c:url value='/resources/js/id-validate.js'/>"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=46a41c1e7c20d77119a3710f087caae5&libraries=services"></script> -->
 		
 <style type="text/css">
@@ -77,7 +78,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                         <div class="nav" id="accordion">
                         
                         	<!-- 회원관리 -->
-                            <div class="sb-sidenav-menu-heading">회원관리</div>
+                            <div class="sb-sidenav-menu-heading">회원</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseStudent" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
                                 학생
@@ -99,7 +100,6 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                             <div class="collapse" id="collapseProf" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<c:url value='/admin/professor/professorList'/>">교수정보관리</a>
-                                    <a class="nav-link" href="#">강의등록</a>
                                 </nav>
                             </div>
                              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmin" aria-expanded="false" aria-controls="collapseLayouts">
@@ -113,10 +113,26 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                                 </nav>
                             </div>
                             
+                            <!-- 강의 관리 -->
+                            <div class="sb-sidenav-menu-heading">강의</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLecture" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                                강의 관리
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLecture" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<c:url value='/admin/lecture/subjectList'/>">과목관리</a>
+                                    <a class="nav-link" href="<c:url value='/admin/lecture/lectureList'/>">강의개설관리</a>
+                                    <a class="nav-link" href="<c:url value='/admin/lecture/classroomList'/>">강의실관리</a>
+                                </nav>
+                            </div>
+                            
+                            
                             <!-- 게시판 관리 -->
-                            <div class="sb-sidenav-menu-heading">게시판 관리</div>
+                            <div class="sb-sidenav-menu-heading">게시판</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMain" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-tv"></i></div>
                                 메인화면
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -153,7 +169,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                             </div>
                             
                             <!-- 시스템통계 -->
-                            <div class="sb-sidenav-menu-heading">시스템통계</div>
+                            <div class="sb-sidenav-menu-heading">통계</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMember" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
                                 회원

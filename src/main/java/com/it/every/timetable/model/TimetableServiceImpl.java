@@ -1,0 +1,21 @@
+package com.it.every.timetable.model;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class TimetableServiceImpl implements TimetableService{
+
+	private final TimetableDAO timetableDao;
+
+	@Override
+	public List<TimetableVO> selectTimetable() {
+		return timetableDao.selectTimetable();
+	}
+	
+	
+}

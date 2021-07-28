@@ -34,6 +34,24 @@
 				$('#admissionDate').focus();
 				event.preventDefault();
 			}
+			
+		});
+		
+		$('#major').change(function() {
+			var idx = $("#major option").index( $("#major option:selected") );
+			if(idx != 0) {
+				if(idx<10) {
+					idx = "0" + idx;
+				}
+				$('#deptNo').attr("value", idx);	
+			} else {
+				$('#deptNo').attr("value", '');
+			}
+		});
+			
+		$('#admissionDate').change(function() {
+			var year = $('#admissionDate').val().substring(0,4);
+			$('#admissionYear').attr("value", year);	
 		});
 		
 	});	
@@ -49,18 +67,18 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">학생 등록</h3></div>
                                     <div class="card-body">
-                                        <form name="registerfrm" method="post" action="<c:url value='/admin/register_post'/>">
+                                        <form name="registerfrm" method="post" action="<c:url value='/admin/student/register_post'/>">
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <!-- <input class="form-control" id="inputFirstName" type="text" placeholder="학과" /> -->
                                                         <select class="form-control" name="major" id="major">
 														    <option value="">--선택하세요--</option>
 														    <!-- 반복문 시작 -->	
-											            	<c:forEach var="deptVo" items="${deptList }">
-																<option value="${deptVo.deptName }">${deptVo.deptName }</option>            	
+											            	<c:forEach var="deptVo" items="${deptList }" varStatus="status">
+																<option value="${deptVo.deptName }">${deptVo.deptName }</option>
 											            	</c:forEach>
 														</select>
+														<input type="hidden" name="deptNo" id="deptNo">	            
                                                         <label for="inputFirstName">학과</label>
                                                     </div>
                                                     
@@ -95,7 +113,6 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <!-- <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="학적상태" /> -->
                                                         <select class="form-control" name="state" id="state">
 														    <option value="">--선택하세요--</option>
 														    <c:forEach var="stateVo" items="${stateList }">
@@ -110,14 +127,13 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <!-- <input class="form-control" id="inputLastName" type="text" placeholder="입학일자" /> -->
                                                         <input class="form-control" type='date' name='admissionDate' id='admissionDate' placeholder="입학일자"/>
                                                         <label for="inputLastName">입학일자</label>
+                                                        <input type="hidden" name="admissionYear" id="admissionYear">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <!-- <input class="form-control" id="inputLastName" type="text" placeholder="입학일자" /> -->
                                                         <input class="form-control" type='date' name='graduationDate' id='graduationDate' placeholder="졸업일자"/>
                                                         <label for="inputLastName">졸업일자</label>
                                                     </div>

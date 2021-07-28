@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.admin.student.model.StudentManageDAO">
+
+	<insert id="studentRegister" parameterType="studentManageVo">
+		insert into student(stu_no, student_id, name, pwd, major, 
+			admission_date, graduation_date, state, dept_no, phonenum)
+		values(#{stuNo}, #{stuNo}, #{name}, #{pwd}, #{major}, 
+			#{admissionDate}, #{graduationDate}, #{state}, #{deptNo}, #{phoneNum})
+	</insert>
+
+	<select id="selectByYear" parameterType="studentManageVo" resultType="studentManageVo">
+		select * from student 
+		where substr(stu_no, 1, 4)=#{admissionYear} and major=#{major}
+	</select>
+
+	<select id="selectAll" resultType="studentManageVo">
+		select *
+		from student s join student_state st
+		on s.state = st.state
+		order by s.major, s.stu_no desc
+	</select>
+	
+	<select id="selectByStuNo" parameterType="String" resultType="studentManageVo">
+		select * from student where stu_no=#{stuNo}
+	</select>
+	
+	<update id="updateStudent" parameterType="studentManageVo">
+		update student
+		set major=#{major}, stu_no=#{stuNo}, student_id=#{studentId}, name=#{name}, 
+			pwd=#{pwd}, semester=#{semester}, admission_date=#{admissionDate},
+			graduation_date=#{graduationDate}, credits=#{credits}, state=#{state},
+			phonenum=#{phoneNum}
+		where stu_no = #{stuNo}
+	</update>
+	
+	<delete id="deleteStudent" parameterType="string">
+		delete from student where stu_no=#{stuNo}
+	</delete>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+

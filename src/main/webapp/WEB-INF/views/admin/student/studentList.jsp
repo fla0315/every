@@ -39,7 +39,7 @@
 				<tbody>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="8" style="text-align: center">글 정보가 없습니다.</td>
+							<td colspan="8" style="text-align: center">등록된 학생정보가 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list}">
@@ -64,9 +64,9 @@
 					            </td>
 			               </c:if>
 			               <td style="vertical-align: middle; text-align: center;">${vo.semester }</td>
-			               <td style="vertical-align: middle; text-align: center;">${vo.state }</td>
+			               <td style="vertical-align: middle; text-align: center;">${vo.stateName }</td>
 			               <td style="vertical-align: middle; text-align: center;">
-								<a href="<c:url value='/student/studentEdit?stuNo=${vo.stuNo }'/>">
+								<a href="<c:url value='/admin/student/studentEdit?stuNo=${vo.stuNo }'/>">
 									<button class="btn btn-primary btn-sm">
 										수정
 									</button>

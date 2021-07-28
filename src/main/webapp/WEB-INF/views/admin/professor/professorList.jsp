@@ -2,138 +2,85 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/admin_top.jsp" %>
 
+<script type="text/javascript">
+	$(function(){
+		$('.btnDel').each(function(index, item) {
+			$(item).click(function(){
+				var result = confirm('삭제하시겠습니까?');
+				
+				if(!result) {
+					return false;
+				} 
+				
+			});
+		});
+	}); 
+</script>
+
 	<div class="card mb-4" style="width: 90%; margin: 0 auto; margin-top: 50px">
 		<div class="card-header" style="font-size: 1.5em">
 			<i class="fas fa-user-alt"></i>&nbsp; 교수목록
 		</div>
 		<div class="card-body">
-			
-			
-			
 			<table id="datatablesSimple">
 				<thead>
 					<tr>
-						<th style="text-align: center">학부</th>
-						<th style="text-align: center">학과</th>
 						<th style="text-align: center">교수번호</th>
+						<th style="text-align: center">학과</th>
 						<th style="text-align: center">이름</th>
 						<th style="text-align: center">직책</th>
 						<th style="text-align: center">부임년도</th>
+						<th style="text-align: center">퇴임년도</th>
 						<th style="text-align: center">수정</th>
 						<th style="text-align: center">삭제</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td style="vertical-align: middle; text-align: center;">OO학부</td>
-						<td style="vertical-align: middle; text-align: center;">OO학과</td>
-						<td style="vertical-align: middle; text-align: center;">000001</td>
-						<td style="vertical-align: middle; text-align: center;">김길동</td>
-						<td style="vertical-align: middle; text-align: center;">정교수</td>
-						<td style="vertical-align: middle; text-align: center;">2015</td>
-						<td style="vertical-align: middle; text-align: center;">
-							<a href="<c:url value='/admin/professor/professorEdit'/>">
-								<button class="btn btn-primary btn-sm">
-									수정
-								</button>
-							</a>
-						</td>
-						<td style="vertical-align: middle; text-align: center;">
-							<a href="<c:url value='/admin/professor/professorDelete'/>">
-								<button class="btn btn-danger btn-sm">
-									삭제
-								</button>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td style="vertical-align: middle; text-align: center;">OO학부</td>
-						<td style="vertical-align: middle; text-align: center;">OO학과</td>
-						<td style="vertical-align: middle; text-align: center;">000002</td>
-						<td style="vertical-align: middle; text-align: center;">정길동</td>
-						<td style="vertical-align: middle; text-align: center;">부교수</td>
-						<td style="vertical-align: middle; text-align: center;">2019</td>
-						<td style="vertical-align: middle; text-align: center;">
-							<a href="<c:url value='/admin/professor/professorEdit'/>">
-								<button class="btn btn-primary btn-sm">
-									수정
-								</button>
-							</a>
-						</td>
-						<td style="vertical-align: middle; text-align: center;">
-							<a href="<c:url value='/admin/professor/professorDelete'/>">
-								<button class="btn btn-danger btn-sm">
-									삭제
-								</button>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td style="vertical-align: middle; text-align: center;">OO학부</td>
-						<td style="vertical-align: middle; text-align: center;">OO학과</td>
-						<td style="vertical-align: middle; text-align: center;">000003</td>
-						<td style="vertical-align: middle; text-align: center;">이길동</td>
-						<td style="vertical-align: middle; text-align: center;">정교수</td>
-						<td style="vertical-align: middle; text-align: center;">2014</td>
-						<td style="vertical-align: middle; text-align: center;">
-							<a href="<c:url value='/admin/professor/professorEdit'/>">
-								<button class="btn btn-primary btn-sm">
-									수정
-								</button>
-							</a>
-						</td>
-						<td style="vertical-align: middle; text-align: center;">
-							<a href="<c:url value='/admin/professor/professorDelete'/>">
-								<button class="btn btn-danger btn-sm">
-									삭제
-								</button>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td style="vertical-align: middle; text-align: center;">OO학부</td>
-						<td style="vertical-align: middle; text-align: center;">OO학과</td>
-						<td style="vertical-align: middle; text-align: center;">000004</td>
-						<td style="vertical-align: middle; text-align: center;">유길동</td>
-						<td style="vertical-align: middle; text-align: center;">정교수</td>
-						<td style="vertical-align: middle; text-align: center;">2008</td>
-						<td style="vertical-align: middle; text-align: center;">
-							<a href="<c:url value='/admin/professor/professorEdit'/>">
-								<button class="btn btn-primary btn-sm">
-									수정
-								</button>
-							</a>
-						</td>
-						<td style="vertical-align: middle; text-align: center;">
-							<a href="<c:url value='/admin/professor/professorDelete'/>">
-								<button class="btn btn-danger btn-sm">
-									삭제
-								</button>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td style="vertical-align: middle; text-align: center;">OO학부</td>
-						<td style="vertical-align: middle; text-align: center;">OO학과</td>
-						<td style="vertical-align: middle; text-align: center;">000005</td>
-						<td style="vertical-align: middle; text-align: center;">고길동</td>
-						<td style="vertical-align: middle; text-align: center;">부교수</td>
-						<td style="vertical-align: middle; text-align: center;">2017</td>
-						<td style="vertical-align: middle; text-align: center;">
-							<a href="<c:url value='/admin/professor/professorEdit'/>">
-								<button class="btn btn-primary btn-sm">
-									수정
-								</button>
-							</a>
-						</td>
-						<td style="vertical-align: middle; text-align: center;">
-							<a href="<c:url value='/admin/professor/professorDelete'/>">
-								<button class="btn btn-danger btn-sm">
-									삭제
-								</button>
-							</a>
-						</td>
-					</tr>
+					<c:if test="${empty list}">
+						<tr>
+							<td colspan="8" style="text-align: center">등록된 교수 정보가 없습니다.</td>
+						</tr>
+					</c:if>
+					<c:if test="${!empty list}">
+					<c:forEach var="vo" items="${list }">          
+						<c:set var="profStartDate" value="${vo.profStartDate}"/>
+						<c:set var="profEndDate" value="${vo.profEndDate}"/>
+			            <tr>
+			               <td style="vertical-align: middle; text-align: center;">${vo.profNo }</td>
+			               <td style="vertical-align: middle; text-align: center;">${vo.deptName }</td>
+			               <td style="vertical-align: middle; text-align: center;">${vo.profName }</td>
+			               <td style="vertical-align: middle; text-align: center;">${vo.positionName }</td>
+			               <td style="vertical-align: middle; text-align: center;">
+			               	${fn:substring(profStartDate,0,4) }
+			               </td>
+			               <c:if test="${profEndDate == null }">
+			               		<td style="vertical-align: middle; text-align: center;">
+					               	-
+					            </td>
+			               </c:if>
+			               <c:if test="${profEndDate != null }">
+			               		<td style="vertical-align: middle; text-align: center;">
+					               	${fn:substring(profEndDate,0,4) }
+					            </td>
+			               </c:if>
+			               <td style="vertical-align: middle; text-align: center;">
+								<a href="<c:url value='/admin/professor/professorEdit?profNo=${vo.profNo }'/>">
+									<button class="btn btn-primary btn-sm">
+										수정
+									</button>
+								</a>
+							</td>
+							<td style="vertical-align: middle; text-align: center;">
+								<a href="<c:url value='/admin/professor/professorDelete?profNo=${vo.profNo }'/>" 
+									class="btnDel">
+									<button class="btn btn-danger btn-sm" >
+										삭제
+									</button>
+								</a>
+							</td>
+			            </tr> 
+			         	</c:forEach>
+					</c:if>
 				</tbody>
 			</table>
 			<div style="text-align: right; margin-right: 30px">

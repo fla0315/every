@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.classroom.model.ClassroomDAO">
+
+	<select id="selectClassroom" resultType="classroomVO">
+		select * 
+		from classroom c join building b
+		on c.building_code = b.building_code
+		left outer join subj_time st
+		on st.classroom_code = c.classroom_code
+		left outer join open_subj o
+		on o.open_sub_code = st.open_sub_code
+		left outer join subject sj
+		on sj.subj_code = o.subj_code
+		left outer join timetable t
+		on t.timetable_code = st.timetable_code
+		order by c.classroom_code
+	</select>
+	
+	<select id="selectUsableY" resultType="classroomVO">
+		select * 
+		from classroom c join building b
+		on c.building_code = b.building_code
+		left outer join subj_time st
+		on st.classroom_code = c.classroom_code
+		left outer join open_subj o
+		on o.open_sub_code = st.open_sub_code
+		left outer join subject sj
+		on sj.subj_code = o.subj_code
+		where c.usable = 'Y'
+		order by c.classroom_code
+	</select>
+	
+	<update id="changeUsable" parameterType="String">
+		update classroom
+		set usable=#{usable}
+		where classroom_code=#{classroomCode}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

@@ -2,6 +2,76 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/admin_top.jsp" %>
 
+<script type="text/javascript">
+	$(function(){
+		$('#update').click(function(){
+			if($('#dept').val().length<1){
+				alert('부서를 선택하세요');
+				$('#dept').focus();
+				event.preventDefault();
+			} else if($('#position').val().length<1){
+				alert('직책을 입력하세요');
+				$('#position').focus();
+				event.preventDefault();
+			} else if($('#empName').val().length<1){
+				alert('이름을 입력하세요');
+				$('#empName').focus();
+				event.preventDefault();
+			} else if($('#empId').val().length<1){
+				alert('아이디를 입력하세요');
+				$('#empId').focus();
+				event.preventDefault();
+			} else if($('#pwd').val().length<1){
+				alert('비밀번호를 입력하세요');
+				$('#pwd').focus();
+				event.preventDefault();
+			} else if($('#pwd').val()!=$('#pwdChk').val()){
+				alert('비밀번호가 일치하지 않습니다.');
+				$('#pwdChk').focus();
+				event.preventDefault();				
+			} else if($('#startDate').val().length<1){
+				alert('입사일자를 입력하세요');
+				$('#startDate').focus();
+				event.preventDefault();
+			} else if($('#authority').val().length<1){
+				alert('권한을 입력하세요');
+				$('#authority').focus();
+				event.preventDefault();
+			}
+			
+		});
+		
+		$('#dept').change(function() {
+			var idx = $("#dept option").index( $("#dept option:selected") );
+			if(idx != 0) {
+				$('#depCode').attr("value", idx);	
+			} else {
+				$('#depCode').attr("value", '');
+			}
+		});
+		
+		$('#position').change(function() {
+			var idx = $("#position option").index( $("#position option:selected") );
+			if(idx != 0) {
+				$('#positionCode').attr("value", idx);	
+			} else {
+				$('#positionCode').attr("value", '');
+			}
+		});
+		
+		$('#authority').change(function() {
+			var idx = $("#authority option").index( $("#authority option:selected") );
+			if(idx != 0) {
+				$('#authCode').attr("value", idx);	
+			} else {
+				$('#authCode').attr("value", '');
+			}
+		});
+		
+	});	
+	
+</script>
+
 <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -9,48 +79,121 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">임직원정보 수정</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        <form name="registerfrm" method="post" action="<c:url value='/admin/employee/employeeEdit'/>">
+                                            <input type="hidden" name="empNo" id="empNo" value="${vo.empNo }">
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" />
-                                                        <label for="inputFirstName">First name</label>
+                                                        <select class="form-control" name="dept" id="dept">
+														    <option value="">--선택하세요--</option>
+														    <!-- 반복문 시작 -->	
+											            	<c:forEach var="deptVo" items="${deptList }" varStatus="status">
+																<option value="${deptVo.depName }"
+																	<c:if test="${vo.depCode == deptVo.depCode }">
+																		selected="selected"
+																	</c:if>
+																>${deptVo.depName }</option>
+											            	</c:forEach>
+														</select>
+														<input type="hidden" name="depCode" id="depCode" value="${vo.depCode }">
+                                                        <label for="inputFirstName">부서</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" />
-                                                        <label for="inputLastName">Last name</label>
+                                                        <select class="form-control" name="position" id="position">
+														    <option value="">--선택하세요--</option>
+														    <!-- 반복문 시작 -->	
+											            	<c:forEach var="posVo" items="${posList }" varStatus="status">
+																<option value="${posVo.positionName }"
+																	<c:if test="${vo.positionCode == posVo.positionCode }">
+																		selected="selected"
+																	</c:if>
+																>${posVo.positionName }</option>
+											            	</c:forEach>
+														</select>
+														<input type="hidden" name="positionCode" id="positionCode" value="${vo.positionCode }">
+                                                        <label for="inputLastName">직책</label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Email address</label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
-                                                        <label for="inputPassword">Password</label>
+                                                        <input class="form-control" name="empName" id="empName" value="${vo.empName }" type="text" placeholder="Enter your first name" />
+                                                        <label for="inputFirstName">이름</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
-                                                        <label for="inputPasswordConfirm">Confirm Password</label>
+                                                        <input class="form-control" name="empId" id="empId" value="${vo.empId }" type="text" placeholder="Enter your first name" />
+                                                        <label for="inputFirstName">아이디</label>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html">Create Account</a></div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" name="pwd" id="pwd" value="${vo.pwd }" type="password" placeholder="Create a password" />
+                                                        <label for="inputPassword">초기 비밀번호</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" name="pwdChk" id="pwdChk" type="password" placeholder="Confirm password" />
+                                                        <label for="inputPasswordConfirm">비밀번호 확인</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                    	<c:set var="startDate" value="${vo.startDate}"/>
+                                                    	<c:set var="resignDate" value="${vo.resignationDate}"/>
+                                                        <input class="form-control" type='date' name='startDate' id='startDate' value="${fn:substring(startDate,0,10) }" placeholder="입사일자"/>
+                                                        <label for="inputLastName">입사일자</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input class="form-control" type='date' name='resignationDate' id='resignationDate' value="${fn:substring(resignDate,0,10) }" placeholder="퇴사일자"/>
+                                                        <label for="inputLastName">퇴직일자</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <select class="form-control" name="authority" id="authority">
+														    <option value="">--선택하세요--</option>
+														    <!-- 반복문 시작 -->	
+											            	<c:forEach var="authVo" items="${authList }" varStatus="status">
+																<option value="${authVo.authDesc }"
+																	<c:if test="${vo.authCode == authVo.authCode }">
+																		selected="selected"
+																	</c:if>
+																>${authVo.authDesc }</option>
+											            	</c:forEach>
+														</select>
+														<input type="hidden" name="authCode" id="authCode" value="${vo.authCode }">
+                                                        <label for="inputLastName">권한</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+	                                            <div class="mt-4 mb-0" style="width: 48%; float: left">
+	                                                <div class="d-grid">
+	                                                	<input type="submit" id="update" class="btn btn-primary btn-block" value="수정">
+	                                                </div>
+	                                            </div>
+	                                            <div class="mt-4 mb-0" style="width: 48%; float: right">
+	                                                <div class="d-grid"><a class="btn btn-secondary btn-block" 
+	                                                	href="<c:url value='/admin/employee/employeeList'/>">취소</a></div>
+	                                            </div>
                                             </div>
                                         </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.html">Have an account? Go to login</a></div>
                                     </div>
                                 </div>
                             </div>

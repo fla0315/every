@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.admin.employee.model.EmployeeManageDAO">
+
+	<insert id="employeeRegister" parameterType="employeeManageVo">
+		<selectKey resultType="string" keyProperty="empNo" order="BEFORE">
+			select 'E' || to_char(employee_seq.nextval, 'FM00000') from dual
+		</selectKey>
+		insert into employee(emp_no, emp_id, emp_name, pwd, 
+			start_date, resignation_date, dep_code, position_code, auth_code)
+		values(#{empNo}, #{empNo}, #{empName}, #{pwd}, 
+			#{startDate}, #{resignationDate}, #{depCode}, #{positionCode}, #{authCode})
+	</insert>
+
+
+	<select id="selectAll" resultType="employeeManageVo">
+		select *
+		from employee e join emp_depart d
+		on e.dep_code = d.dep_code
+		join emp_position p
+		on e.position_code = p.position_code
+		join authority a
+		on e.auth_code = a.auth_code
+		order by e.emp_no desc
+	</select>
+	
+	<select id="selectByEmpNo" parameterType="String" resultType="employeeManageVo">
+		select * from employee where emp_no=#{empNo}
+	</select>
+	
+	<update id="updateEmployee" parameterType="employeeManageVo">
+		update employee
+		set dep_code=#{depCode}, position_code=#{positionCode}, emp_name=#{empName}, 
+			emp_id=#{empId}, pwd=#{pwd}, start_date=#{startDate},
+			resignation_date=#{resignationDate}, auth_code=#{authCode}
+		where emp_no = #{empNo}
+	</update>
+	
+	<delete id="deleteEmployee" parameterType="string">
+		delete from employee where emp_no=#{empNo}
+	</delete>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+

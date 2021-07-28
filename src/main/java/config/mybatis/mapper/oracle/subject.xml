@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.subject.model.SubjectDAO">
+
+	<select id="selectSubject" resultType="subjectVO">
+		select *
+		from subject sj join subj_type st
+		on sj.type_code = st.type_code
+		join professor p
+		on sj.prof_no = p.prof_no
+		order by sj.subj_code desc
+	</select>
+	
+	<insert id="subjectRegister" parameterType="subjectVo">
+		<selectKey resultType="String" keyProperty="subjCode" order="BEFORE">
+			select subject_seq.nextval from dual
+		</selectKey>
+		insert into subject(subj_code, prof_no, type_code, subj_name, explanation,
+			credit, personnel)
+		values(#{subjCode}, #{profNo}, #{typeCode}, #{subjName}, #{explanation}, 
+			#{credit}, #{personnel})
+	</insert>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

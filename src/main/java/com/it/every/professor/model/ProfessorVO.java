@@ -18,9 +18,9 @@ public class ProfessorVO {
 	private String profPwd;				//비밀번호
 	private String profPh;				//전화번호
 	private String profEmail;			//이메일
-	private Timestamp profStartDate;	//임용일
-	private Timestamp profEndDate;		//퇴직일
+	private String profStartDate;	//임용일
+	private String profEndDate;		//퇴직일
 	private char identityState;			//본인인증상태
 	private String identityCode;		//본인인증코드
-	private Timestamp changeDate;		//비밀번호 변경일
+	private String changeDate;		//비밀번호 변경일
 }
