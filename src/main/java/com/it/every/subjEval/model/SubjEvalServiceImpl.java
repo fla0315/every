@@ -18,6 +18,11 @@ public class SubjEvalServiceImpl implements SubjEvalService{
 	public List<Map<String, Object>> selectMyRegistarion(String userid) {
 		return subjEvalDao.selectMyRegistarion(userid);
 	}
+
+	@Override
+	public int insertSubjEvalStudent(SubjEvalVO subjEvalVo) {
+		return subjEvalDao.insertSubjEvalStudent(subjEvalVo);
+	}
 	
 	
 	

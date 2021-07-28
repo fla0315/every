@@ -21,6 +21,15 @@
 	</select>
 	
 	
+	
+	<insert id="insertSubjEvalStudent" parameterType="SubjEvalVO">
+		insert into subj_eval(open_sub_code,stu_no,classification,q1,q2,q3,q4,q5,content)
+		values(#{openSubCode},#{stuNo},#{classification},#{q1},#{q2},#{q3},#{q4},#{q5},#{content});
+
+	
+	</insert>
+	
+	
 </mapper>
 
 

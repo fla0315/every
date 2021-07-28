@@ -77,7 +77,7 @@ $(function(){
 												
 												<td>
 													<%-- <form name="frmRegistration" method="post"	action="<c:url value='/subj_eval/subj_eval_survey?openSubCode='/>${myMap['OPEN_SUB_CODE'] }"> --%>
-													<form name="frmRegistration" method="post"	onclick="window.open('${pageContext.request.contextPath }/subj_eval/subj_eval_survey?openSubCode=${myMap['OPEN_SUB_CODE'] }', 'detail', 'top=100, left=600, width=650, height=560, location=yes, resizable=yes')">
+													<form name="frmRegistration" method="post" onclick="window.open('${pageContext.request.contextPath }/subj_eval/subj_eval_survey?openSubCode=${myMap['OPEN_SUB_CODE'] }', 'detail', 'top=100, left=600, width=650, height=560, location=yes, resizable=yes')">
 														<input type="text" name="openSubCode"
 															value="${myMap['OPEN_SUB_CODE'] }"> <input
 															type="submit" id="btSurvey" value="강의평가" class="buttons">

@@ -42,15 +42,40 @@ public class SubjEvalController {
 		return "subj_eval/subj_eval";
 		
 	}
+	
 	@RequestMapping("/subj_eval_survey")
 	public void  subjEvelSurvey(@ModelAttribute SubjEvalVO subjEvalVo,@RequestParam String openSubCode,HttpSession session, Model model ) {
 		logger.info("강의평가 하는 페이지");
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		
-		
-		
 	}
 
+	
+	
+	@RequestMapping("/insertSurvey")
+	public String insertSurvey(@ModelAttribute SubjEvalVO subjEvalVo , @RequestParam String openSubCode,HttpSession session, Model model) {
+		
+		String userid = (String)session.getAttribute("user_id");
+		String stuNo = (String)session.getAttribute("no");
+				
+		int cnt = subjEvalService.insertSubjEvalStudent(subjEvalVo);
+		
+		String msg ="강의평가 완료", url="/subj_eval/subj_eval";
+		if(cnt>0) {
+			msg ="강의평가 완료";
+			url="/subj_eval/subj_eval";
+		}else {
+			msg ="강의평가 실패";
+			url="/subj_eval/subj_eval";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	
 	
 }
