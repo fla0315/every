@@ -35,13 +35,11 @@ public class SubjEvalController {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
-		List<Map<String, Object>> Mylist = subjEvalService.selectMyRegistarion(userid); //
-		List<Map<String, Object>> Glist = subjEvalService.searchEvalFlag(stuNo);
+		//<Map<String, Object>> Mylist = subjEvalService.selectMyRegistarion(userid); //
+		List<Map<String, Object>> Mylist = subjEvalService.searchEvalFlag(stuNo);
 		
-		
-		logger.info("개설교과과정페이지 전체 ,Mylist.size()={},Glist.size()={}",Mylist.size(), Glist.size());
+		logger.info("개설교과과정페이지 전체 ,Mylist.size()={}",Mylist.size());
 		model.addAttribute("Mylist", Mylist);
-		model.addAttribute("Glist", Glist);
 		
 		return "subj_eval/subj_eval";
 		
@@ -83,6 +81,23 @@ public class SubjEvalController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
+	}
+	
+	
+	@RequestMapping("/searchMyGrade")
+	public String  searchMyGrade(@ModelAttribute SubjEvalVO subjEvalVo,HttpSession session, Model model ) {
+		logger.info("성적 조회 페이지");
+		
+		String userid = (String)session.getAttribute("user_id");
+		String stuNo = (String)session.getAttribute("no");
+		//<Map<String, Object>> Mylist = subjEvalService.selectMyRegistarion(userid); //
+		List<Map<String, Object>> MyGradeList = subjEvalService.searchMyGrade(stuNo);
+		
+		logger.info("개설교과과정페이지 전체 ,MyGradeList.size()={}",MyGradeList.size());
+		model.addAttribute("MyGradeList", MyGradeList);
+		
+		return "subj_eval/subj_eval";
+		
 	}
 	
 	

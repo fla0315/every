@@ -28,12 +28,47 @@
 	</insert>
 	
 	
-	
+	<!-- 강의 평가 부분 -->
 	<select id="searchEvalFlag" parameterType="String" resultType="map">
-		select open_sub_code, count(*) as count from subj_eval
-		where stu_no =#{stuNo}
-		group by open_sub_code
+		select * from
+		evaluation eval left join registration regi
+		on eval.sub_code = regi.open_sub_code 
+		left join subj_eval subEval 
+		on subEval.open_sub_code = regi.open_sub_code
+		join open_subj opensub 
+		on opensub.open_sub_code = regi.open_sub_code
+		join subject subj 
+		on subj.subj_code = opensub.subj_code
+		join professor prof 
+		on prof.prof_no = subj.prof_no
+		join subj_type suvjt
+		on suvjt.type_code = subj.type_code
+		where regi.stu_no=#{stuNo}
 	</select>
+	
+	<!-- 성적조회부분 -->
+	<select id="searchMyGrade" parameterType="String" resultType="map">
+		select * from
+		evaluation eval left join registration regi
+		on eval.sub_code = regi.open_sub_code 
+		left join subj_eval subEval 
+		on subEval.open_sub_code = regi.open_sub_code
+		join open_subj opensub 
+		on opensub.open_sub_code = regi.open_sub_code
+		join subject subj 
+		on subj.subj_code = opensub.subj_code
+		join professor prof 
+		on prof.prof_no = subj.prof_no
+		join subj_type suvjt
+		on suvjt.type_code = subj.type_code
+		where regi.stu_no=#{stuNo}
+	</select>
+	
+	
+	
+	
+	
+	
 	
 	
 </mapper>

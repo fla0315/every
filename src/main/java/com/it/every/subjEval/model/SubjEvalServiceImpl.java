@@ -28,6 +28,11 @@ public class SubjEvalServiceImpl implements SubjEvalService{
 	public List<Map<String, Object>> searchEvalFlag(String userid) {
 		return subjEvalDao.searchEvalFlag(userid);
 	}
+
+	@Override
+	public List<Map<String, Object>> searchMyGrade(String userid) {
+		return subjEvalDao.searchMyGrade(userid);
+	}
 	
 	
 	

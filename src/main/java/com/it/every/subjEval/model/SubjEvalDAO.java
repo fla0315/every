@@ -13,4 +13,6 @@ public interface SubjEvalDAO {
 	int insertSubjEvalStudent(SubjEvalVO subjEvalVo); //학생이 강의평가하기
 	
 	List<Map<String ,Object>> searchEvalFlag(String userid); //강의평가 유무 확인
+	
+	List<Map<String ,Object>> searchMyGrade(String userid); //성적조회
 }
