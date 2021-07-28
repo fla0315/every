@@ -35,9 +35,13 @@ public class SubjEvalController {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
-		List<Map<String, Object>> Mylist = subjEvalService.selectMyRegistarion(userid);
-		logger.info("개설교과과정페이지 전체 ,Mylist.size()={}", Mylist.size());
+		List<Map<String, Object>> Mylist = subjEvalService.selectMyRegistarion(userid); //
+		List<Map<String, Object>> Glist = subjEvalService.searchEvalFlag(stuNo);
+		
+		
+		logger.info("개설교과과정페이지 전체 ,Mylist.size()={},Glist.size()={}",Mylist.size(), Glist.size());
 		model.addAttribute("Mylist", Mylist);
+		model.addAttribute("Glist", Glist);
 		
 		return "subj_eval/subj_eval";
 		
@@ -48,17 +52,22 @@ public class SubjEvalController {
 		logger.info("강의평가 하는 페이지");
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
-		
 	}
 
 	
 	
 	@RequestMapping("/insertSurvey")
-	public String insertSurvey(@ModelAttribute SubjEvalVO subjEvalVo , @RequestParam String openSubCode,HttpSession session, Model model) {
+	public String insertSurvey(@ModelAttribute SubjEvalVO subjEvalVo ,@RequestParam String openSubCode, HttpSession session, Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 				
+		
+		subjEvalVo.setStuNo(stuNo);
+		subjEvalVo.setOpenSubCode(openSubCode);
+		subjEvalVo.setClassification("Y");
+		
+		logger.info("강의평가 등록 ,subjEvalVo={},userid={},stuNo={}",subjEvalVo,userid,stuNo);
 		int cnt = subjEvalService.insertSubjEvalStudent(subjEvalVo);
 		
 		String msg ="강의평가 완료", url="/subj_eval/subj_eval";

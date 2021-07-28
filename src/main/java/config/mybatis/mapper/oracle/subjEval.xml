@@ -24,10 +24,16 @@
 	
 	<insert id="insertSubjEvalStudent" parameterType="SubjEvalVO">
 		insert into subj_eval(open_sub_code,stu_no,classification,q1,q2,q3,q4,q5,content)
-		values(#{openSubCode},#{stuNo},#{classification},#{q1},#{q2},#{q3},#{q4},#{q5},#{content});
-
-	
+		values(#{openSubCode}, #{stuNo}, #{classification}, #{q1}, #{q2}, #{q3}, #{q4}, #{q5}, #{content})
 	</insert>
+	
+	
+	
+	<select id="searchEvalFlag" parameterType="String" resultType="map">
+		select open_sub_code, count(*) as count from subj_eval
+		where stu_no =#{stuNo}
+		group by open_sub_code
+	</select>
 	
 	
 </mapper>

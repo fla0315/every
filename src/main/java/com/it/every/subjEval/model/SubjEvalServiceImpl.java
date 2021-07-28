@@ -23,6 +23,11 @@ public class SubjEvalServiceImpl implements SubjEvalService{
 	public int insertSubjEvalStudent(SubjEvalVO subjEvalVo) {
 		return subjEvalDao.insertSubjEvalStudent(subjEvalVo);
 	}
+
+	@Override
+	public List<Map<String, Object>> searchEvalFlag(String userid) {
+		return subjEvalDao.searchEvalFlag(userid);
+	}
 	
 	
 	

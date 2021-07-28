@@ -16,7 +16,7 @@ $(function(){
 </script>
 
 				<div class="container-fluid px-4" style="background-color: white;">
-	<h4 class="mt-4" style="background-color: white;">수강신청</h4> <br>
+	<h4 class="mt-4" style="background-color: white;">성적조회</h4> <br>
 
 	<div class="card mb-4">
 		<div class="card-body">
@@ -36,21 +36,26 @@ $(function(){
 										<th scope="col">구분</th>
 										<th scope="col">강의실/시간</th>
 										<th scope="col">강의평가</th>
+										<th scope="col">성적조회</th>
 									</tr>
 								</thead>
 								<tbody>
-
+								
+								<c:forEach var="gMap" items="${Glist }">
+									<c:set var="count" value="${gMap[COUNT]}"/>
+								</c:forEach>
+								
 									<!-- 데이터 없을 때  -->
 									<c:if test="${empty Mylist }">
 										<tr>
 											<td colspan="6" class="align_center">개설된 과목이 없습니다.</td>
 										</tr>
 									</c:if>
-
+								
+									
 									<c:if test="${!empty Mylist }">
 										<c:forEach var="myMap" items="${Mylist }">
 											<tr class="align_center">
-
 												<!-- 년도 -->
 												<td><fmt:formatDate value="${myMap['OPEN_DATE']}"
 														pattern="yyyy" /></td>
@@ -77,13 +82,19 @@ $(function(){
 												
 												<td>
 													<%-- <form name="frmRegistration" method="post"	action="<c:url value='/subj_eval/subj_eval_survey?openSubCode='/>${myMap['OPEN_SUB_CODE'] }"> --%>
-													<form name="frmRegistration" method="post" onclick="window.open('${pageContext.request.contextPath }/subj_eval/subj_eval_survey?openSubCode=${myMap['OPEN_SUB_CODE'] }', 'detail', 'top=100, left=600, width=650, height=560, location=yes, resizable=yes')">
-														<input type="text" name="openSubCode"
+													<form name="frmRegistration" method="post" onclick="window.open('${pageContext.request.contextPath }/subj_eval/subj_eval_survey?openSubCode=${myMap['OPEN_SUB_CODE'] }', 'detail', 'top=100, left=600, width=800, height=600, location=yes, resizable=yes')">
+														<input type="hidden" name="openSubCode"
 															value="${myMap['OPEN_SUB_CODE'] }"> <input
 															type="submit" id="btSurvey" value="강의평가" class="buttons">
 													</form>
 												</td>
-												
+												<!-- 성적조회 -->
+												<td>
+													<form name="frmRegistration1" method="post" onclick="#" >
+														<input type="text" name="openSubCode"value="count"> 
+														<input type="button" id="btGrade" value="성적조회" class="buttons">
+													</form>
+												</td>
 											</tr>
 										</c:forEach>
 									</c:if>

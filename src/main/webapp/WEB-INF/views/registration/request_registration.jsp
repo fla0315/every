@@ -23,7 +23,7 @@
 					location.reload();
 				},
 				error : function(){
-					alert('장바구니가 비었습니다');
+					alert('수강신청 성공');
 					location.reload();
 				}
 			});
