@@ -1,6 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../inc/student_top.jsp" %>
 
+
+<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		
+		$('#search').click(function(){
+			var sum =0;
+			var count=0;
+			$('tr #credit').each(function(idx,item){
+				sum += Number($(this).text());
+			});
+			$('input[name=sumCredit]').val(sum);
+			
+			
+			$('tr #credit').each(function(idx,item){
+				count+=1;
+			});
+			$('input[name=sumCount]').val(count);
+			
+		});	
+	}); 
+	
+
+</script>
+
+
    <div class="container-fluid px-4" style="background-color: white;">
         <h4 class="mt-4" style="background-color: white;">수강신청내역조회</h4>
         
@@ -8,9 +35,7 @@
         <div class="card mb-4">
             <div class="card-body">
                 
-            
-
-
+			
                 <table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
                     <tr>
                         <td class="">
@@ -43,97 +68,88 @@
 
   									<td style="padding-left:10px"><span class=""><label for="학기">학번</label></span></td>
                                     <td>
-                                        <input type="text" >
+                                        <input type="text" value="${map['STU_NO']}" readonly>
                                     </td>
 
 									<td style="padding-left:10px"><span class=""><label for="학기">이름</label></span></td>
                                     <td>
-                                        <input type="text" >
+                                        <input type="text" value="${map['NAME']}" readonly>
                                     </td>
 
 
 									<td>
-                                        <button>조회</button>
-                                        <button>출력</button>
+                                        <button  type="button" id="search">조회</button>
                                     </td>
 								</tr>
 								
                                 <!-- 2행완료 -->
                             </table>
-							
-							<hr>
-							
-							<table border="0" cellpadding="0" cellspacing="0" style="width:70%;">
-
-							<tr>
-
-								<td><span class=""><label for="학기">학번</label></span></td>
-								<td>
-									<input type="text" style="width: 50%;">
-								</td>
-
-
-								<td><span class=""><label for="학기" >이름</label></span></td>
-								<td>
-									<input type="text" style="width: 50%">
-								</td>
-								
-								<td><span class=""><label for="학기">학년</label></span></td>
-								<td>
-								<input type="text" style="width: 50%">
-								</td>
-								
-							</tr>
-								
-							<tr>
-								<td><span class=""><label for="학기">학부(과)</label></span></td>
-								<td>
-									<input type="text" style="width: 50%">
-								</td>
-
-								<td><span class=""><label for="학기">전공</label></span></td>
-								<td>
-									<input type="text" style="width: 50%">
-								</td>
-
-							</tr>
-
-						</table>
-
                             <hr> <br>
-
+							<label>신청과목</label> <input  name="sumCount" type="text" value=""  readonly="readonly">
+							<label>신청학점</label> <input name="sumCredit" type="text" value="" readonly="readonly"><br>
 
                             <div class="table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-striped mb-0">
-                                <thead>
-                                <tr>
-                                    <th scope="col">학기</th>
-                                    <th scope="col">이수구분</th>
-                                    <th scope="col">과목코드</th>
-                                    <th scope="col">과목명</th>
-                                    <th scope="col">학점</th>
-                                    <th scope="col">담당교수</th>
-                                    <th scope="col">재수강(년도/학기/과목/등급)</th>
-                                    <th scope="col">요일/교시</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    <tr>
-                                        <td>학기</td>
-                                        <td>이수구분</td>
-                                        <td>과목코드</td>
-                                        <td>과목명</td>
-                                        <td>학점</td>
-                                        <td>담당교수</td>
-                                        <td>재수강(년도/학기/과목/등급)</td>
-                                        <td>요일/교시</td>
-                                        
-                                    </tr>
+                             <thead>
+									<tr>
+										<th scope="col">년도</th>
+										<th scope="col">학기</th>
+										<th scope="col">과목명</th>
+										<th scope="col">학부(과)</th>
+										<th scope="col">학년</th>
+										<th scope="col">이수구분</th>
+										<th scope="col">학점</th>
+										<th scope="col">담당교수</th>
+										<th scope="col">강의실/시간</th>
+										<th scope="col">강의계획서</th>
+									</tr>
+								</thead>
+                 <tbody>
 
-                                </tbody>
+									<!-- 데이터 없을 때  -->
+									<c:if test="${empty list }">
+									<c:set var="totalCredit" value="0" />
+										<tr>
+											<td colspan="6" class="align_center">개설된 과목이 없습니다.</td>
+										</tr>
+									</c:if>
+
+									<c:if test="${!empty list }">
+										<c:forEach var="map" items="${list }">
+										<c:set var="sum" value="${map['CREDIT']}" />
+											<tr class="align_center">
+
+												<!-- 년도 -->
+												<td><fmt:formatDate value="${map['OPEN_DATE']}"
+														pattern="yyyy" /></td>
+												<!-- 학기 -->
+												<td>${map['SEMESTER'] }</td>
+												<!-- 과목명 -->
+												<td>${map['SUBJ_NAME'] }</td>
+												<!-- 학부(과)  -->
+												<td>${map['FACULTY_NAME'] }</td>
+												<!-- 학년 -->
+												<!-- 이수구분 -->
+												<td>${map['GRADE'] }</td>
+												<!-- 이수구분 -->
+												<td>${map['TYPE'] }</td>
+												<!-- 학점 -->
+												<td id="credit">${map['CREDIT'] }</td>
+												<!-- 담당교수 -->
+												<td>${map['PROF_NAME'] }</td>
+												<!-- 강의실/시간 -->
+												<td>${map['TIMETABLE'] }</td>
+												<!-- 강의계획서 -->
+												<td><input type="button" id="btSyllabus" value="강의계획서"></td>
+
+											</tr>
+										</c:forEach>
+			
+									</c:if>
+				
+
+								</tbody>
                             </table>
-                            
                             </div>
 
 

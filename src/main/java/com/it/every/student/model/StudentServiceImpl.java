@@ -3,6 +3,8 @@ package com.it.every.student.model;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService{
+	private static final Logger logger = LoggerFactory.getLogger(StudentService.class);
 	
 	private final StudentDAO studentDao;
 
@@ -76,6 +79,21 @@ public class StudentServiceImpl implements StudentService{
 	public StudentVO selectByid(String userid) {
 		return studentDao.selectByid(userid);
 	}
-	
-	
+
+	@Override
+	public StudentVO selectByStuNo(String stuNo) {
+		return studentDao.selectByStuNo(stuNo);
+	}
+
+
+	@Override
+	public List<StudentVO> searchForChat(String keyword) {
+		return studentDao.searchForChat(keyword);
+	}
+
+
+	@Override
+	public String nameByStuNo(String no) {
+		return studentDao.nameByStuNo(no);
+	}
 }

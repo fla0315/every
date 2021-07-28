@@ -13,6 +13,15 @@ body {
 		$('#btWrite').click(function(){
 			location.href="<c:url value='/professor/notice/noticeWrite'/>";
 		});
+		
+		$('#btCheck').click(function(){
+			if($('#openSub option:selected').val()!='선택하세요'){
+				var openSubCode = $('#openSub option:selected').val();
+				location.href="<c:url value='/professor/notice/noticeWrite?openSubCode="+openSubCode+"'/>";
+			} else{
+				alert('개설교과목 번호를 선택하세요!');
+			}
+		});
 	});
 </script>
 <article>
@@ -20,10 +29,21 @@ body {
 		<h2>공지사항</h2>
 		<br>
 		<div class="mb-3">
-			<label for="title">개설교과목</label> <select>
-				<option>선택하세요</option>
-				<!-- 개설교과목 번호/이름 교수님 번호로 조회해 for문 돌리기 -->
-			</select>
+			<label for="title">개설교과목</label>
+					<select id="openSub" class="dataTable-selector">
+						<option>선택하세요</option>
+						<c:if test="${!empty osList }">
+							<c:forEach var="vo" items="${osList}">
+								<c:if test="${open == vo.openSubCode }">
+									<option selected>${vo.openSubCode }</option>
+								</c:if>
+								<c:if test="${open != vo.openSubCode }">
+									<option>${vo.openSubCode }</option>
+								</c:if>
+							</c:forEach>
+						</c:if>
+					</select>
+					<input type="button" id="btCheck" value="조회">
 			<div class="text-end">
 				<button type="button" class="btn btn-sm btn-primary" id="btWrite">등록</button>
 			</div>

@@ -18,4 +18,7 @@ public interface ProfessorService {
 	int checkDuplicate(String userid);
 	int loginProc(String userid, String pwd);
 	int updateProf(ProfessorVO vo);
+	
+	List<Map<String, Object>> searchForChat(String keyword);
+	String nameByProfNo(String no);
 }

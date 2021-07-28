@@ -21,12 +21,17 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         
-        
+      	<style type="text/css">
+      		#chitchat {
+      			margin: 0 10px;
+      			font-size : 1.4em;
+      		}
+      	</style>
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-light" style="background-color: #8DBABD;">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="<c:url value='/professor/profMain'/>">에브리학사</a>
+            <a class="navbar-brand ps-3" href="<c:url value='/professor/profMain'/>"><i class="fas fa-user-graduate"></i>&nbsp;에브리학사</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -36,6 +41,8 @@
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div> -->
             </form>
+            <a id="chitchat" href="<c:url value='/chitchat/chitchatMain'/>"><i class="fas fa-envelope"></i></a>
+            <div style="color: white">${sessionScope.name }님 환영합니다.</div>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -128,7 +135,7 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">**교수님 환영합니다.</div>
+                        <div class="small">${sessionScope.name }님 로그인 중입니다.</div>
                     </div>
                 </nav>
             </div>

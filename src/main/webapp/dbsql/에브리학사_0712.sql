@@ -167,7 +167,12 @@ DROP TABLE board_file
 DROP TABLE certification_type 
 	CASCADE CONSTRAINTS;
 
+/* 출석부 */
+DROP TABLE attendance
+	CASCADE CONSTRAINTS;
 
+DROP SEQUENCE INBOX_SEQ;
+DROP SEQUENCE OUTBOX_SEQ;
 
 /* 학부생 */
 CREATE TABLE student (
@@ -203,7 +208,7 @@ ALTER TABLE student
 
 /* 장학금 수여 */
 CREATE TABLE award (
-	no NUMBER NOT NULL, /* 장학금수여번호 */
+	award_no NUMBER NOT NULL, /* 장학금수여번호 */
 	stu_no VARCHAR2(500), /* 학번 */
 	scholarship_no NUMBER, /* 장학금번호 */
 	awarding_date DATE /* 수여일 */
@@ -211,14 +216,14 @@ CREATE TABLE award (
 
 CREATE UNIQUE INDEX PK_award
 	ON award (
-		no ASC
+		award_no ASC
 	);
 
 ALTER TABLE award
 	ADD
 		CONSTRAINT PK_award
 		PRIMARY KEY (
-			no
+			award_no
 		);
 
 /* 장학금 */
@@ -456,8 +461,8 @@ ALTER TABLE registration
 /* 성적 */
 CREATE TABLE evaluation (
 	sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	stu_no VARCHAR2(500), /* 학번 */
-	classification VARCHAR2(500), /* 수강구분 */
+	stu_no VARCHAR2(500) NOT NULL, /* 학번 */
+	classification VARCHAR2(500) NOT NULL, /* 수강구분 */
 	midterm NUMBER, /* 중간고사 */
 	finals NUMBER, /* 기말고사 */
 	assignment NUMBER, /* 과제 */
@@ -470,14 +475,18 @@ CREATE TABLE evaluation (
 
 CREATE UNIQUE INDEX PK_evaluation
 	ON evaluation (
-		sub_code ASC
+		sub_code ASC,
+		stu_no ASC,
+		classification ASC
 	);
 
 ALTER TABLE evaluation
 	ADD
 		CONSTRAINT PK_evaluation
 		PRIMARY KEY (
-			sub_code
+			sub_code,
+			stu_no,
+			classification
 		);
 
 /* 개설교과과정 */
@@ -719,7 +728,7 @@ ALTER TABLE official_info
 CREATE TABLE outbox (
 	msg_no NUMBER NOT NULL, /* 쪽지번호 */
 	official_no VARCHAR2(500), /* 발신인 번호 */
-	contents CLOB, /* 내용 */
+	contents VARCHAR2(4000), /* 내용 */
 	send_date DATE, /* 발송일 */
 	official_name VARCHAR2(500), /* 발신인명 */
 	del_flag CHAR(1) /* 삭제여부 */
@@ -1087,6 +1096,39 @@ ALTER TABLE certification_type
 			certification_code
 		);
 
+/* 출석부 */
+CREATE TABLE attendance (
+	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
+	stu_no VARCHAR2(500) NOT NULL, /* 학번 */
+	classification VARCHAR2(500) NOT NULL, /* 수강구분 */
+	first VARCHAR2(30), /* 1주차 */
+	second VARCHAR2(30), /* 2주차 */
+	third VARCHAR2(30), /* 3주차 */
+	fourth VARCHAR2(30), /* 4주차 */
+	fifth VARCHAR2(30), /* 5주차 */
+	sixth VARCHAR2(30), /* 6주차 */
+	seventh VARCHAR2(30), /* 7주차 */
+	eighth VARCHAR2(30), /* 8주차 */
+	ninth VARCHAR2(30), /* 9주차 */
+	tenth VARCHAR2(30), /* 10주차 */
+	point NUMBER /* 출석점수 */
+);
+
+CREATE UNIQUE INDEX PK_attendance
+	ON attendance (
+		open_sub_code ASC,
+		stu_no ASC,
+		classification ASC
+	);
+
+ALTER TABLE attendance
+	ADD
+		CONSTRAINT PK_attendance
+		PRIMARY KEY (
+			open_sub_code,
+			stu_no,
+			classification
+		);
 
 ALTER TABLE student
 	ADD
@@ -1267,7 +1309,20 @@ ALTER TABLE evaluation
 			stu_no,
 			classification
 		);
-
+ALTER TABLE attendance
+	ADD
+		CONSTRAINT FK_registration_TO_attendance
+		FOREIGN KEY (
+			open_sub_code,
+			stu_no,
+			classification
+		)
+		REFERENCES registration (
+			open_sub_code,
+			stu_no,
+			classification
+		);
+        
 ALTER TABLE open_subj
 	ADD
 		CONSTRAINT FK_professor_TO_open_subj
@@ -1348,6 +1403,8 @@ ALTER TABLE account_info
 			bank_code
 		);
 
+
+
 ALTER TABLE inbox
 	ADD
 		CONSTRAINT FK_outbox_TO_inbox
@@ -1356,7 +1413,7 @@ ALTER TABLE inbox
 		)
 		REFERENCES outbox (
 			msg_no
-		);
+		) on delete cascade;
 
 ALTER TABLE classroom
 	ADD
@@ -1487,3 +1544,24 @@ ALTER TABLE board_file
 		REFERENCES post (
 			post_no
 		);
+        
+alter table classroom add usable char(2) default 'Y' not null;
+
+create sequence outbox_seq 
+start with 1
+increment by 1
+nocache;
+
+create sequence inbox_seq 
+start with 1
+increment by 1
+nocache;
+
+
+create or replace trigger tr_chitchat
+    after insert on outbox
+    for each row
+BEGIN
+    insert into inbox(no, msg_no, keep_flag)
+    values(inbox_seq.nextval, :NEW.msg_no, 'N');
+END;

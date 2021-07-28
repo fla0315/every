@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.chitchat.inbox.model.InboxDAO">
+	<!-- 수신 쪽지 불러오기, official_no로 받아와야함 -->
+	<select id="selectInbox">
+		select * from inbox
+		where no=#{no} 
+		order by msg_no
+	</select>
+	
+	<update id="receiveMessage" parameterType="inboxVo" >
+		update inbox
+		set official_no=#{officialNo} 
+		where msg_no=#{msgNo}
+	</update>
+	
+	<select id="chitchatAll" parameterType="String" resultType="map">
+		select * from chitchatView
+		where official_no=#{no} or receiver=#{no}
+		order by send_date desc
+	</select>
+	
+	<select id="chitchatDetail" parameterType="int" resultType="map">
+		select * from chitchatView
+		where msg_no = ${msgNo}
+	</select>
+	
+	<update id="storeMessage" parameterType="inboxVo">
+		update inbox
+		set keep_flag=#{keepFlag}
+		where msg_no=#{msgNo}
+	</update>
+	
+	<update id="updateReadDate" parameterType="int">
+		update inbox
+		set read_date=sysdate
+		where msg_no=${msgNo}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+

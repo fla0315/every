@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.employee.model.EmployeeDAO">
+	<!-- 쪽지용 검색 -->
+	<select id="searchForChat" parameterType="String" resultType="map">
+		select * from chitchatEmployee
+		where emp_name like '%' || #{keyword} || '%'
+	</select>
+	<!-- 번호로 이름 찾기 -->
+	<select id="nameByEmpNo" parameterType="string" resultType="string">
+		select emp_name from employee where emp_no = #{no}
+	</select>
+</mapper>

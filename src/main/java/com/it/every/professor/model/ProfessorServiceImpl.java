@@ -1,5 +1,6 @@
 package com.it.every.professor.model;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -53,4 +54,15 @@ public class ProfessorServiceImpl implements ProfessorService {
 	public int updateProf(ProfessorVO vo) {
 		return professorDao.updateProf(vo);
 	}
+
+	@Override
+	public List<Map<String, Object>> searchForChat(String keyword) {
+		return professorDao.searchForChat(keyword);
+	}
+
+	@Override
+	public String nameByProfNo(String no) {
+		return professorDao.nameByProfNo(no);
+	}
+
 }

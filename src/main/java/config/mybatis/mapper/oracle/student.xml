@@ -9,9 +9,13 @@
 		select * from student where student_id = #{studentId}
 	</select>
 	
+	<select id="selectByStuNo" parameterType="String" resultType="studentVo">
+		select * from student where stu_No = #{stuNo}
+	</select>
+	
 	<select id="selectStudentDeptView" parameterType="String" resultType="map">
 		select * from studentDeptView
-		where student_id=#{123}
+		where student_id=#{studentId}
 	</select> 
 	
 	<select id="selectPwd" parameterType="String" resultType="String">
@@ -29,26 +33,39 @@
 		where stu_no=#{stuNo}
 	</update>
 	
+	
 	<!-- 등록금조회 -->
-	<select id="selectByStuId" parameterType="String" resultType="map">
+	<select id="selectByStuId" parameterType="studentVo" resultType="map">
 		select * from tuitionView
-		where student_id=#{123}
+		where student_id=#{studentId}
 	</select>
 	
-	<!-- 등록금 PDF -->
-	<!-- <select id="selectByTuitionNo" parameterType="String" resultType="map">
-		select * from tuitionView
-		where student_id=#{123} and tuition_no='#{2}'
-	</select> -->
 	
 	<!-- 장학금 조회 -->
 	<select id="selectByScholarship" parameterType="String" resultType="map">
-			select *
+			<!-- select *
 			from scholarshipView a
 			join student s
 			on a.stu_no = s.stu_no
-			where s.student_id=#{123}
+			where s.student_id=#{studentId} -->
+			select sch.* , a.award_no, a.stu_no, a.awarding_date
+			from scholarship sch join award a
+			on sch.scholarship_no = a.scholarship_no
+			join student s
+			on a.stu_no = s.stu_no
+			where s.student_id=#{studentId}
 	</select>	
+	
+	<!-- 쪽지용 이름으로 검색 -->
+	<select id="searchForChat" parameterType="String" resultType="studentVo">
+		select name, stu_no, major
+		from student
+		where name like '%' || #{keyword} || '%'
+	</select>
+	<!-- 번호로 이름 찾기 -->
+	<select id="nameByStuNo" parameterType="string" resultType="string">
+		select name from student where stu_no = #{no}
+	</select>
 </mapper>
 
 

@@ -11,6 +11,7 @@ import com.it.every.professor.model.ProfessorVO;
 public interface StudentDAO {
 	
 	StudentVO selectByid(String userid);
+	StudentVO selectByStuNo(String stuNo);
 	Map<String, Object> selectStudentDeptView(String userid);
 	int checkDuplicate(String userid);
 	String selectPwd(String userid);
@@ -19,6 +20,10 @@ public interface StudentDAO {
 	//등록금조회
 	List<Map<String, Object>> selectByStuId (String userid);
 	Map<String, Object> selectByTuitionNo (String userid ,int tuitionNo);
-	
+	//장학금조회
 	List<Map<String, Object>> selectByScholarship (String userid);
+	
+	//쪽지조회
+	List<StudentVO> searchForChat(String keyword);
+	String nameByStuNo(String no);
 }

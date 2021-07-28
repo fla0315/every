@@ -17,16 +17,18 @@ public interface StudentService {
 	public static final int ID_NONE=3; //아이디 존재하지 않음
 	
 	StudentVO selectByid(String userid);
+	StudentVO selectByStuNo(String stuNo);
 	Map<String, Object> selectStudentDeptView(String userid);
 	int checkDuplicate(String userid);
 	int loginProc(String userid, String pwd);
 	int updateStudent(StudentVO vo);
 	
+	//등록금 장학금 조회
 	List<Map<String, Object>> selectByStuId (String userid);
 	Map<String, Object> selectByTuitionNo (String userid ,int tuitionNo);
-	
-	
 	List<Map<String, Object>> selectByScholarship (String userid);
 	
-	
+	//쪽지조회
+	List<StudentVO> searchForChat(String keyword);
+	String nameByStuNo(String no);
 }

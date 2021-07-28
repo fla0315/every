@@ -125,7 +125,7 @@ body {
                                				</c:if>
                                			</td>
                                		</tr>
-                               		<c:set var="no" value="${no }+1" />
+                               		<c:set var="no" value="${no+1 }" />
                                	</c:forEach>
                                </c:if>
                            </tbody>

@@ -19,4 +19,10 @@
 		set midterm=#{midterm}, finals=#{finals}, assignment=#{assignment}, attendance=#{attendance}, total_grade=#{totalGrade}, edit_date=sysdate
 		where sub_code=#{subCode} and stu_no=#{stuNo}
 	</update>
+	
+	<update id="updateAttend" parameterType="attendanceVo">
+		update evaluation
+		set attendance=#{point}
+		where sub_code=#{openSubCode} and stu_no=#{stuNo}
+	</update>
 </mapper>
