@@ -35,11 +35,18 @@ public class SubjEvalController {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
+		
 		//<Map<String, Object>> Mylist = subjEvalService.selectMyRegistarion(userid); //
 		List<Map<String, Object>> Mylist = subjEvalService.searchEvalFlag(stuNo);
 		
 		logger.info("개설교과과정페이지 전체 ,Mylist.size()={}",Mylist.size());
 		model.addAttribute("Mylist", Mylist);
+
+
+		List<Map<String, Object>> MyGradeList = subjEvalService.searchMyGrade(stuNo);
+		logger.info("개설교과과정페이지 전체 ,MyGradeList.size()={}",MyGradeList.size());
+		model.addAttribute("MyGradeList", MyGradeList);
+		
 		
 		return "subj_eval/subj_eval";
 		

@@ -106,7 +106,7 @@ $(function(){
 	<br>
 	<hr>
 	<h4 class="mt-4" style="background-color: white;">성적조회</h4>
-	<form name="frmSearchGrade" method="post" action="<c:url value='#'/>">
+	<form name="frmSearchGrade" method="post" action="<c:url value='/subj_eval/searchMyGrade'/>">
 		<input type="button" id="btGrade" value="성적조회">
 	</form>
 	<br>
@@ -141,7 +141,7 @@ $(function(){
 					<c:forEach var="gradeMap" items="${MyGradeList }">
 						<tr class="align_center cart">
 
-							<td style="display: none;" class="cart_code"><span>${gradeMap['OPEN_SUB_CODE']}</span>
+							<td style="display: none;" class="cart_code"><span>${gradeMap['SUB_CODE']}</span>
 							</td>
 							<!-- 년도 -->
 							<td><fmt:formatDate value="${gradeMap['OPEN_DATE']}"
@@ -150,7 +150,6 @@ $(function(){
 							<td>${gradeMap['SEMESTER'] }</td>
 							<!-- 과목코드 -->
 							<td>${gradeMap['OPEN_SUB_CODE']}</td>
-							
 							<!-- 과목명 -->
 							<td>${gradeMap['SUBJ_NAME'] }</td>
 							<!-- 담당교수 -->
@@ -158,19 +157,60 @@ $(function(){
 							<!-- 이수구분 -->
 							<td>${gradeMap['TYPE'] }</td>
 							<!-- 학점 -->
-							<td>${CMap['CREDIT'] }</td>
+							<td>${gradeMap['CREDIT'] }</td>
 							<!-- 실점 -->
-							<td>${gradeMap['GRADE'] }</td>
+							<td>${gradeMap['TOTAL_GRADE'] }</td>
 							<!-- 평점 -->
-							<td>${gradeMap['GRADE'] }</td>
+							<td>
+								<c:if test="${!empty gradeMap['TOTAL_GRADE']}">
+                  					<fmt:parseNumber var="grade" type="number" value="${gradeMap['TOTAL_GRADE'] }" integerOnly="true"/>
+                  					<c:choose>
+                  						<c:when test="${grade>=90 }">
+                  							A
+                  						</c:when>
+                  						<c:when test="${grade>=80 }">
+                  							B
+                  						</c:when>
+                  						<c:when test="${grade>=70 }">
+                  							C
+                  						</c:when>
+                  						<c:when test="${grade>=60 }">
+                  							D
+                  						</c:when>
+                  						<c:when test="${grade<60 }">
+                  							F
+                  						</c:when>
+                  					</c:choose>
+                  				</c:if>
+							</td>
 							<!-- 표기성적 -->
-							<td>${gradeMap['TIMETABLE'] }</td>
+							<td>
+								<c:if test="${!empty gradeMap['TOTAL_GRADE']}">
+                  					<fmt:parseNumber var="grade" type="number" value="${gradeMap['TOTAL_GRADE'] }" integerOnly="true"/>
+                  					<c:choose>
+                  						<c:when test="${grade>=90 }">
+                  							3.0
+                  						</c:when>
+                  						<c:when test="${grade>=80 }">
+                  							B
+                  						</c:when>
+                  						<c:when test="${grade>=70 }">
+                  							C
+                  						</c:when>
+                  						<c:when test="${grade>=60 }">
+                  							D
+                  						</c:when>
+                  						<c:when test="${grade<60 }">
+                  							F
+                  						</c:when>
+                  					</c:choose>
+                  				</c:if>
+							</td>
 							<!-- 개설학과 학부 -->
 							<td>${gradeMap['FACULTY_NAME'] }</td>
 						</tr>
 					</c:forEach>
 				</c:if>
-
 			</tbody>
 		</table>
 	</div>

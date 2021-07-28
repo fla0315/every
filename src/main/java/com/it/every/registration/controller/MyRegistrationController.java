@@ -51,10 +51,4 @@ public class MyRegistrationController {
 	}
 	
 	
-	
-	@RequestMapping("/Test")
-	public void Test() {
-		
-	}
-	
 }
