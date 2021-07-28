@@ -123,10 +123,10 @@ $('#user_id').keyup(function(){
 			success:function(res){
 				//alert(res);
 				if(res){
-					$('#check_id').html("있는 아이디").css("color", "blue");
+				
 					$('#chkId').val('Y').css("color","red");
 				}else{
-					$('#check_id').html("없는 아이디").css("color", "red");
+			
 					$('#chkId').val('N');
 				}
 				

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.custom.model.customDAO">
+
+
+<!-- <select id="subj_type" resultType="subjtypeVO">
+	select * form subj_type
+</select> -->
+
+<!-- 넌 필수로 들어가 카테고리 명 불러오기-->
+<select id="selectcategory" parameterType="registerVO" resultType="String">
+		select category_name from Category	
+		<if test='chk_info=="professor"'>
+			where category_code=1 or category_code=4
+		</if>
+		
+		
+	</select>
+	
+	
+	<select id = "deptname"  resultType="departmentVO">
+		select * from department
+	</select>
+	
+	<select id= "subjname" resultType="subjectVO">
+		select * from subject
+	</select>
+	
+	
+	
+	<!-- 너로 교수 학과명 출력 만들고 -->
+	<select id= "professordeptname" parameterType="String" resultType="DepartmentVO">
+		select dept_name from department 
+   			 where dept_no=(
+				select dept_no from professor where prof_name=#{prof_name})
+	</select> 	
+	
+	<!-- 너로 관리자 출력 만든다. -->
+	<select id="admincustompage" resultType="DepartmentVO">
+		select dept_name from department
+	</select>
+	
+	<!--(교수) 게시판 생성 검색조건 -->
+	<select id="proselectoption" parameterType="String" resultType="map">
+		select dept_name,type,subj_name,prof_name 
+			from customboardview where prof_no=#{prof_no}
+	</select>
+	
+	
+	<!-- 아무래도 이수구분 선택 후에는 강좌명 차이도 줘야겠지? 
+	<select id= "divideclass" parameterType="String" resultType="map">
+		select subj_name from customboardview
+			
+		 where 
+	</select> -->
+	
+
+	
+	<!--(관리자) 게시판 생성 검색조건
+	<select id="adminselectoption" parameterType="String" resultType="map">
+		select *
+			from department da, professor pro, subj_type su, subject sub
+			where da.dept_no=pro.dept_no and pro.prof_no=sub.prof_no 
+					and sub.type_code=su.type_code and pro.prof_no=#{prof_no};
+	</select>
+	 -->
+	
+
+
+</mapper>
