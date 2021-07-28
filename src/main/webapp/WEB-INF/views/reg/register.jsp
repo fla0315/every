@@ -77,7 +77,7 @@ $(function(){
 			$('#pwd').focus();
 			event.preventDefault();	
 	}else if($('#pwd').val().length<5||$('#pwd').val().length>11){
-			alert('비밀번호 기준 확인');
+			alert('사용하실 수 있는 비밀번호 입니다.');
 			$('#pwd').focus();
 			event.preventDefault();	
 	
@@ -130,7 +130,7 @@ $('#userid').keyup(function(){
 					$('#check_id').html("이미 등록된 아이디").css("color", "red");
 					$('#chkId').val('N');
 				}else{
-					$('#check_id').html("사용가능한 아이디").css("color", "blue");
+					$('#check_id').html("사용가능한 아이디입니다.").css("color", "blue");
 					$('#chkId').val('Y').css("color","red");
 				}
 			},
@@ -156,10 +156,10 @@ $('#pwd').keyup(function(){
 			success:function(res){
 				//alert(res);
 				if(res){
-					$('.checkpwd').html("문제없음!").css("color", "blue");
+					$('.checkpwd').html("사용하실 수 있는 비밀번호입니다.").css("color", "blue");
 					 $('#chkpwd').val('Y').css("color","red"); 
 				}else{
-					$('.checkpwd').html("비밀번호는 5~10자리로!").css("color", "red");								
+					$('.checkpwd').html("비밀번호는 5~10자리로 입력해주세요.").css("color", "red");								
 					 $('#chkpwd').val('N'); 
 				}
 				if (data2.length>2) {
@@ -239,7 +239,7 @@ $('#phone_check').keyup(function(){
 			success:function(res){
 				//alert(res);
 				if(res){
-					$('#checknum').html("인증되셨습니다.").css("color", "blue");
+					$('#checknum').html("휴대폰 인증되셨습니다.").css("color", "blue");
 					
 				}else{
 					$('#checknum').html("인증실패").css("color", "red");								
@@ -287,7 +287,7 @@ $('#email_check').keyup(function(){
 			success:function(res){
 				//alert(res);
 				if(res){
-					$('#checkemail').html("인증되셨습니다.").css("color", "blue");
+					$('#checkemail').html("이메일 인증되셨습니다.").css("color", "blue");
 					
 				}else{
 					$('#checkemail').html("인증실패").css("color", "red");								
@@ -323,18 +323,20 @@ $('#email_check').keyup(function(){
 				<div class="id" style="width: 200px;">
 					<label for="user_id">아이디</label> <br> 
 					<input type="text" class="userid" id="userid" name="userid" placeholder="ID" required
-						style="ime-mode: inactive"> <br> <span
-						class="check_id" id="check_id" style=""></span>
+						style="ime-mode: inactive"> <br> 
+						<div class="check_id" id="check_id"></div>
 				</div>
 				<br>
 
 				<!-- 비밀번호 -->
 				<div class="pwd" style="width: 200px;">
-					<label for="pwd">비밀번호</label> <br> <input type="password"
-						class="form" id="pwd" name="pwd" placeholder="password" required
+					<label for="pwd">비밀번호</label> 
+					<br> 
+					<input type="password" class="form" id="pwd" name="pwd" placeholder="password" required
 						style="ime-mode: inactive"> 
-						<div class="checkpwd" id="checkpwd"></div>
+					
 				</div>
+				<div class="checkpwd" id="checkpwd" style="width: 350px;"></div>
 				<br>
 
 				<!-- 비밀번호 확인용 -->
@@ -343,8 +345,8 @@ $('#email_check').keyup(function(){
 					<br> 
 					<input type="password"
 						class="form" id="pwd2" name="pwd2" placeholder="pass" required>
-					<div class="check_pwd2" id="check_pwd2"></div>
 				</div>
+				<div class="check_pwd2" id="check_pwd2" style="width: 350px;"></div>
 				<br>
 
 				<!-- 이메일 -->
@@ -391,9 +393,10 @@ $('#email_check').keyup(function(){
 					 <br>
 					
 					<input type="text" class="phone_check" id="phone_check" placeholder="인증번호" required>
-					<span class="checknum" id="checknum"></span>
 					
 				</div>
+					<div class="checknum" id="checknum"></div>
+					
 				<br>
 
 				<div class="center"></div>
@@ -406,7 +409,7 @@ $('#email_check').keyup(function(){
 			
 		<input type ="hidden" name="chkId" id="chkId"> 
 			  <input type ="hidden" name="chkpwd" id="chkpwd">
-			   <input type ="text" name="chkphone" id="chkphone">
+			   <input type ="hidden" name="chkphone" id="chkphone">
 			   <input type= "hidden" name ="chkmail" id="chkmail">
 			   
 	</article>

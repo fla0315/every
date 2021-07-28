@@ -320,6 +320,9 @@ public class registerController {
 		HttpSession session = request.getSession();
 		String url="address";
 		
+		logger.info("사용자 타입={}", chk_info);
+		session.setAttribute("usertype", chk_info);
+		
 		if (chk_info.equals("student")) {
 			result = service.logincheck1(id,pwd);
 			StudentVO svo = service.selectByuserid(id);

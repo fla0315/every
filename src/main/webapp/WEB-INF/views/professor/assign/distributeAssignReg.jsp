@@ -18,64 +18,64 @@ body {
 </style>
 <script type="text/javascript">
 	$(function(){
-		$('#btnSearch').click(function(){
-			//새창 띄우기
-			window.open("${pageContext.request.contextPath }/chitchat/searchReceiver", "search", "top=0, left=0, width=500, height=500, location=yes, resizable=yes");
-	    });
+		$('#openSub').change(function(){
+			$('#openSubCode').val($('#openSub option:selected').val());
+		});
 		
 		$('#btSend').click(function(){
-			if($('#receiver').val().length<1){
-				alert("받을 사람을 입력하세요");
-				$('#btSearch').focus();
-				event.preventDefault();
+			if($('#openSub option:selected').val()!=''){
+				location.href="<c:url value='/professor/assign/distributeAssignReg?openSubCode="+openSubCode+"'/>";
+			} else{
 				return false;
-			} else if($('#taContents').val().length<1){
-				alert("내용을 입력하세요");
-				$('#taContents').focus();
-				event.preventDefault();
-				return false;
+				alert('개설교과목 번호를 선택하세요!');
 			}
-			
 		});
 	});
 </script>
 <article>
 	<div class="container col-lg-10" role="main">
+			<h2>과제 개설</h2>
+			<br>
 				<div class="row">
 				<div class="col-xl-6">
 				<div class="card mb-4">
 					<div class="card-header">
-						<i class="fas fa-envelope"></i> 발송하기
+						<i class="far fa-file-alt"></i> 과제 개설
 					</div>
-					<div class="card-body" style="height:450px">
+					<div class="card-body">
 						<form name="frm" method="post"
 							action="<c:url value=''/>">
 							<div class="row mb-3">
-								<div class="col-md-5">
-									<div class="form-floating">
-										<input class="form-control" name="officialName" id="name"
-											type="text" value="${sessionScope.name }" readonly/> <label
-											for="name">보내는 사람</label>
+								<div class="col-md-6">
+									<div class="form-floating mb-3 mb-md-0">
+										<select id="openSub" name="openSub" class="dataTable-selector" style="width:100%">
+											<option></option>
+											<c:if test="${!empty osList }">
+												<c:forEach var="vo" items="${osList}">
+													<c:if test="${open == vo.openSubCode }">
+														<option selected>${vo.openSubCode }</option>
+													</c:if>
+													<c:if test="${open != vo.openSubCode }">
+														<option>${vo.openSubCode }</option>
+													</c:if>
+												</c:forEach>
+											</c:if>
+										</select>
+										<label for="openSub">개설교과목번호</label>
 										<input type="hidden" name="officialNo" value="${sessionScope.no }"> 
 									</div>
 								</div>
-								<div class="col-md-5">
+								<div class="col-md-6">
 									<div class="form-floating mb-3 mb-md-0">
-										<input class="form-control" name="receiver" type="text" id="receiver"
-											value=""/ readonly> <label for="receiver">받는 사람</label>
-											<input type="hidden" value="" id="code" name="code">
+										<input class="form-control" name="title" type="text" id="title"
+											value=""/> <label for="receiver">과제명</label>
+											<input type="text" value="" id="openSubCode" name="openSubCode">
 									</div>
 								</div>
-								<div class="col-md-2">
-									<input type="button" class="btn btn-secondary btn-block" id="btnSearch" value="조회" style="height:55px">
-								</div>
-							</div>
-							<div class="form-floating mb-3">
-								<textarea class="col-md-12" rows="10" cols="20" wrap="hard" name="contents" id="taContents"></textarea>
 							</div>
 							<div class="mt-4 mb-0">
 								<div class="d-grid">
-									<input type="submit" id="btSend" class="btn btn-primary btn-block" value="발송하기">
+									<input type="submit" id="btSend" class="btn btn-primary btn-block" value="등록">
 								</div>
 							</div>
 						</form>
@@ -85,7 +85,7 @@ body {
 					<div class="col-xl-6">
 					<div class="card mb-4">
 						<div class="card-header">
-							<i class="fas fa-envelope-square"></i> 전체보기
+							<i class="far fa-file-alt"></i> 전체보기
 						</div>
 						<div class="card-body" style="height:450px">
 							<table class="table-bordered text-center" style="width: 100%">

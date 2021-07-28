@@ -216,6 +216,7 @@ $('#pwd').keyup(function(){
 				<input type="radio" name="chk_info" id="chk_info" value="professor">교수
 				
 				<br>
+				<br>
 
 				<div class="center"></div>
 				<input type="submit" id="submit" class="btn btn-danger" value="로그인"  style="width:80px;">
