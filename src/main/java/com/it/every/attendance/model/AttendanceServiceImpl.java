@@ -29,6 +29,37 @@ public class AttendanceServiceImpl implements AttendanceService {
 
 	@Override
 	public int attendanceAll(AttendanceVO vo) {
+		if(vo.getFirst()==null) {
+			vo.setFirst("");
+		}
+		if (vo.getSecond()==null) {
+			vo.setSecond("");
+		}
+		if (vo.getThird()==null) {
+			vo.setThird("");
+		}
+		if(vo.getFourth()==null) {
+			vo.setFourth("");
+		}
+		if(vo.getFifth()==null) {
+			vo.setFifth("");
+		}
+		if(vo.getSixth()==null) {
+			vo.setSixth("");
+		}
+		if(vo.getSeventh()==null) {
+			vo.setSeventh("");
+		}
+		if(vo.getEighth()==null) {
+			vo.setEighth("");
+		}
+		if(vo.getNinth()==null) {
+			vo.setNinth("");
+		}
+		if(vo.getTenth()==null) {
+			vo.setTenth("");
+		}
+		
 		return attendanceDao.attendanceAll(vo);
 	}
 	

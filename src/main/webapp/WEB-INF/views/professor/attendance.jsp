@@ -4,6 +4,21 @@
 
 <script type="text/javascript">
 	$(function(){
+		$('#weekCheck').change(function(){
+			$('#week').val($('#weekCheck option:selected').val());
+		});
+		
+		$('#btSave').click(function(){
+			if($('#openSub option:selected').val()!='선택하세요'){
+				var openSubCode = $('#openSub option:selected').val();
+				var week = $('#week').val();
+				location.href="<c:url value='/professor/attendanceAll?week="+week+"&openSubCode="+openSubCode+"'/>";
+			}else {
+				alert('개설교과목 번호를 선택하세요!');
+			}
+		});
+		
+		
 		$('#btCheck').click(function(){
 			if($('#openSub option:selected').val()!='선택하세요'){
 				var openSubCode = $('#openSub option:selected').val();
@@ -62,25 +77,6 @@
 			sum = 0;
 		})
 		
-		
-		$('#btnSave').click(function(){
-			if($('#openSub option:selected').val()=='선택하세요'){
-				alert('개설교과목 번호를 선택하세요!');
-				return false;
-			} else if($('#weekCheck option:selected').val()==''){
-				alert('주차를 선택하세요!');
-				return false;
-			} else if($('#attendAll option:selected').val()==''){
-				alert('출석 여부를 선택하세요!');
-				return false;
-			} else{
-				var openSubCode = $('#openSub option:selected').val();
-				var week = $('#weekCheck option:selected').val();
-				var attend = $('#attendAll option:selected').val();
-				//location.href="<c:url value='/professor/attendanceAll?openSubCode="+openSubCode+"&week="+week+"&attend="+attend'/>";
-				//$('#btnSave').attr("formaction", "<c:url value='/professor/attendanceAll?openSubCode="+openSubCode+"&week="+week+"&attend="+attend'/>") */
-			}
-		});
 	});
 </script>
 
@@ -110,32 +106,23 @@ body {
 						</c:if>
 					</select>
 					<input type="button" id="btCheck" value="조회">
-					<div class="text-center">
-						<form method="post" id="frmAll">
-						<select class="custom-select" id="weekCheck" style="width:100px">
-							<option value=""></option>
-							<option value="first">1</option>
-							<option value="second">2</option>
-							<option value="third">3</option>
-							<option value="fourth">4</option>
-							<option value="fifth">5</option>
-							<option value="sixth">6</option>
-							<option value="seventh">7</option>
-							<option value="eighth">8</option>
-							<option value="ninth">9</option>
-							<option value="tenth">10</option>
-						</select>
-						주차 / 전체 출석 체크 : 
-						<select class="custom-select" id="attendAll" style="width:100px">
-							<option value=""></option>
-							<option value="출석">출석</option>
-							<option value="지각">지각</option>
-							<option value="결석">결석</option>
-							<option value="조퇴">조퇴</option>
-						</select>
-						<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
-						</form>
-					</div>
+				</div>
+				<div class="text-center">
+					<select class="custom-select" id="weekCheck" style="width:100px">
+									<option value=""></option>
+									<option value="first">1</option>
+									<option value="second">2</option>
+									<option value="third">3</option>
+									<option value="fourth">4</option>
+									<option value="fifth">5</option>
+									<option value="sixth">6</option>
+									<option value="seventh">7</option>
+									<option value="eighth">8</option>
+									<option value="ninth">9</option>
+									<option value="tenth">10</option>
+					</select>
+                       주차 <button type="button" class="btn btn-sm btn-primary" id="btSave" formaction="">출석</button>
+					<br><br>
 				</div>
 				<div class="card mb-5">
                    <div class="card-header">
@@ -154,6 +141,7 @@ body {
                                 <c:forEach var="i" begin="1" end="10">
                                    	<th>${i}주차 </th>
                                 </c:forEach>
+                                <th>출석 점수</th>
                                 <th>수정</th>
                                </tr>
                            </thead>
@@ -168,11 +156,11 @@ body {
                                	<c:forEach var="map" items="${atList}">
                                <tr>
                                	<td><input type="checkbox"></td>
-                                   <td>${noCheck }</td>
-                                   <td>${map['NAME'] }</td>
-                                   <td>${map['STU_NO'] }</td>
-                                   <td>${map['MAJOR'] }</td>
-                                   <form name="form" id="form" role="form" method="post">
+                                <td>${noCheck }</td>
+                                <td>${map['NAME'] }</td>
+                                <td>${map['STU_NO'] }</td>
+                                <td>${map['MAJOR'] }</td>
+                                <form name="form" id="form" role="form" method="post">
                                    <td>
                                    	<select class="custom-select attend${noCheck }" name="first">
                                    		<option value=""></option>
@@ -423,12 +411,17 @@ body {
                                    		>조퇴</option>
                                    	</select>
                                    </td>
-                                   <td><input type="hidden" id="point${noCheck }" name="point">
-                                   <input type="hidden" name="open" value="${open }">
-                                   <input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/attendanceEdit?stuNo=${map["STU_NO"] }'/>"></td>
+                                   <td><input type="text" id="point${noCheck }" name="point" size="1" class="text-center" readonly></td>
+                                   <td>
+                                   <input type="hidden" name="openSubCode" value="${open }">
+                                   <input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/attendanceEdit?stuNo=${map["STU_NO"] }'/>">
+                                   </td>
+                                   
+                                   
                                </tr>
-                               </form>
                                	<c:set var="noCheck" value="${noCheck+1 }" />
+                               	<input type="hidden" value="" id="week" name="week">
+                               	</form>
                                </c:forEach>
                                </c:if>
                            </tbody>

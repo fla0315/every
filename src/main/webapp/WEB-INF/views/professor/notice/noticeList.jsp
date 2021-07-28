@@ -17,7 +17,7 @@ body {
 		$('#btCheck').click(function(){
 			if($('#openSub option:selected').val()!='선택하세요'){
 				var openSubCode = $('#openSub option:selected').val();
-				location.href="<c:url value='/professor/notice/noticeWrite?openSubCode="+openSubCode+"'/>";
+				location.href="<c:url value='/professor/notice/noticeList?openSubCode="+openSubCode+"'/>";
 			} else{
 				alert('개설교과목 번호를 선택하세요!');
 			}
