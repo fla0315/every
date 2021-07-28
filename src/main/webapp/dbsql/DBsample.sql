@@ -145,7 +145,7 @@ Insert into EVERY.ATTENDANCE (OPEN_SUB_CODE,STU_NO,CLASSIFICATION,FIRST,SECOND,T
 
 
 
---뷰
+--��
 create or replace view professorDeptView
 as
 select p.*, d.dept_name, pp.position_name

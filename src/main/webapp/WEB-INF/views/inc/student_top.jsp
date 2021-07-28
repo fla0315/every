@@ -15,7 +15,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-        
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
         
     </head>
     
@@ -28,8 +28,9 @@
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                <div style="color: white">${sessionScope.user_id }, 환영합니다.</div>
+                    <!-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button> -->
                 </div>
             </form>
             <a id="chitchat" href="<c:url value='/chitchat/chitchatMain'/>"><i class="fas fa-envelope"></i></a>
@@ -96,18 +97,19 @@
                                         </nav>
                                     </div>
                                 </nav>
+                                
+                                   <nav class="sb-sidenav-menu-nested nav">
+	                                	  <a class="nav-link" href="<c:url value='/student/studentEdit'/>">졸업시뮬레이션</a>
+	                              </nav>
+                            
                             </div>
                           <!-- 마이페이지 끝 -->  
                             
-                            
-                            
-                            
-                            
-                            
-                            
+                         
+                           
+                           
                           <!-- 수강신청 시작 -->
                           <div class="sb-sidenav-menu-heading">수강관리</div>
-                          
                               <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSugang" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 수강신청
@@ -120,16 +122,14 @@
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSub" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        개설과목조회
+                                        수업정보
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
-                                    
                                     
                                     <div class="collapse" id="collapseSub" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="<c:url value='/registration/open_registration'/>">개설과목조회</a>
                                             <a class="nav-link" href="<c:url value='/timetable/timetable'/>">강의계획서조회</a>
-                                            <a class="nav-link" href="#">수강취소</a>
                                         </nav>
                                     </div>
                                     
@@ -137,13 +137,26 @@
                                 </nav>
                             
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="<c:url value='/registration/registration'/>">수강신청내역조회</a>
+                                 	  <a class="nav-link" href="<c:url value='/registration/registration_cart'/>">장바구니</a>
 	                               </nav>
-                           
-                           
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="#">장바구니</a>
+                                 	  <a class="nav-link" href="<c:url value='/registration/request_registration'/>">수강신청</a>
 	                               </nav>
+	                               
+	                              <nav class="sb-sidenav-menu-nested nav">
+                                 	  <a class="nav-link" href="<c:url value='/registration/myregistration'/>">수강신청내역조회</a>
+	                               </nav>
+	                              <nav class="sb-sidenav-menu-nested nav">
+                                 	  <a class="nav-link" href="<c:url value='/registration/registration'/>">수강취소</a>
+	                               </nav>
+	                              <nav class="sb-sidenav-menu-nested nav">
+                                 	  <a class="nav-link" href="<c:url value='/subj_eval/subj_eval'/>">강의평가</a>
+	                               </nav>
+	                              <nav class="sb-sidenav-menu-nested nav">
+                                 	  <a class="nav-link" href="<c:url value='/registration/registration'/>">성적조회</a>
+	                               </nav>
+                           
+                           
                             </div>
                            <!-- 수강신청끝 -->
                             

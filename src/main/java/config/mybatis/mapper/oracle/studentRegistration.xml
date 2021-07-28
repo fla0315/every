@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.registration.model.StudentRegistrationDAO">
+<!-- 
+				<sql id="searchWhere">
+			<if test="searchKeyword!=null and searchKeyword!=''">
+				where ${searchCondition}  like '%' || #{searchKeyword} || '%'
+			</if>
+		</sql>
+		 -->
+	<!-- 나의 수강신청 내역조회 -->
+		<select id="searchMyRegistarion" parameterType="searchVo" resultType="map">
+				select * from 
+				subject st join subj_type sj
+				on st.type_code= sj.type_code
+				join professor prof
+				on prof.prof_no = st.prof_no
+				join open_subj os
+				on os.subj_code = st.subj_code
+				join registration rs
+				on rs.open_sub_code = os.open_sub_code
+				join student stu
+				on stu.stu_no = rs.stu_no
+				where stu.student_id=#{studentId}
+		</select>
+	
+	<!-- 수강신청  -->
+	<insert id="insertMyRegistarion" parameterType="registrationVo">
+		insert into registration(open_sub_code,stu_no,classification)
+		values(#{openSubCode},#{stuNo},'y')
+	</insert>
+	
+	<!-- 수강신청 취소 -->
+	<delete id="deleteMyRegistarion"  parameterType="registrationVo" >
+		delete from registration 
+		where stu_No= #{stuNo} and open_sub_code =#{openSubCode}
+	</delete>
+	
+	<!-- 수강신청화면에서 보여지는 수강신청 내역들 -->
+	<select id="selectMyRegistarion" parameterType="String" resultType="map">
+		select * from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join registration rs
+		on rs.open_sub_code = os.open_sub_code
+		join student stu
+		on stu.stu_no = rs.stu_no
+		where stu.student_id=#{studentId} and st.semester = '2학기' and st.subj_year = '2021'
+	</select>
+		
+			
+		
+	<!-- 장바구니 등록 -->	
+	<insert id="insertCart" parameterType="RegistrationCartVO">
+		insert into registrationCart(open_sub_code, stu_no)
+		values(#{openSubCode},#{stuNo})
+	</insert>
+	
+	<!-- 장바구니 조회 -->
+	<select id="selectCart" parameterType="String" resultType="map">
+		select * from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join registrationCart rsc
+		on rsc.open_sub_code = os.open_sub_code
+		join student stu
+		on stu.stu_no = rsc.stu_no
+		where stu.student_id=#{studentId} and st.semester = '2학기' and st.subj_year = '2021'
+	</select>	
+		
+			
+	<!-- 장바구니 취소 -->
+	<delete id="deleteCart"  parameterType="RegistrationCartVO" >
+		delete from registrationCart 
+		where stu_No= #{stuNo} and open_sub_code =#{openSubCode}
+	</delete>
+	
+	
+	
+</mapper>

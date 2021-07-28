@@ -20,7 +20,7 @@ public interface StudentDAO {
 	//등록금조회
 	List<Map<String, Object>> selectByStuId (String userid);
 	Map<String, Object> selectByTuitionNo (String userid ,int tuitionNo);
-	
+	//장학금조회
 	List<Map<String, Object>> selectByScholarship (String userid);
 	
 	//쪽지조회
