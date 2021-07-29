@@ -4,13 +4,47 @@
 
 <script type="text/javascript">
 $(function(){
-/* 	$('#btScholarship').click(function(){
+	
+	var num = 0;
+	
+	$('#btGrade').click(function(){
+		$(".evalFlag span").each(function(idx,item){
+			if($(this).text()=='N'){
+				num++
+			};
+		});
 		
-		open('http://localhost:9091/every/subj_eval/subj_eval_survey','chk',
-		 'width=1000,height=1000,left=0,top=0,location=yes,resizable=yes');
-		
-		action="<c:url value='/subj_eval/subj_eval_survey?openSubCode='/>${myMap['OPEN_SUB_CODE'] }">
-	}); */
+		if(num>0){
+			alert('모든강의평가를 완료해주세요');
+			event.preventDefault();
+		}else{
+				$.ajax({
+					type : "POST",
+					url : "<c:url value='/subj_eval/searchMyGrade'/>",
+					data : $(this).serialize(),
+					success : function(res) {
+						
+						for(var i=0; i< res.length; i++){
+							var score = 0;
+							switch(grade){
+							case 93:
+								score = 4.5;
+							}
+							var option = "askdjaskdj" + score + 'dsffds'
+							
+						}
+						
+						
+					},
+					error :  function() {
+						alert('강의등록실패');
+					}
+				})
+			
+			
+			
+		}
+	});
 });
   
 </script>
@@ -36,6 +70,7 @@ $(function(){
 							<th scope="col">담당교수</th>
 							<th scope="col">구분</th>
 							<th scope="col">강의실/시간</th>
+							<th scope="col">강의평가구분</th>
 							<th scope="col">강의평가</th>
 						</tr>
 					</thead>
@@ -78,6 +113,8 @@ $(function(){
 									<td>${myMap['CLASSIFICATION'] }</td>
 									<!-- 강의실/시간 -->
 									<td>${myMap['TIMETABLE'] }</td>
+									<!-- 강의평가구분 -->
+									<td class="evalFlag"><span>${myMap['LECTURE_EVAL_FLAG'] }</span></td>
 
 
 									<td>
@@ -103,12 +140,17 @@ $(function(){
 
 
 
+
+
+
+
+
 	<br>
 	<hr>
 	<h4 class="mt-4" style="background-color: white;">성적조회</h4>
 	<form name="frmSearchGrade" method="post" action="<c:url value='/subj_eval/searchMyGrade'/>">
 		<input type="button" id="btGrade" value="성적조회">
-	</form>
+	
 	<br>
 
 	<div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -160,16 +202,26 @@ $(function(){
 							<td>${gradeMap['CREDIT'] }</td>
 							<!-- 실점 -->
 							<td>${gradeMap['TOTAL_GRADE'] }</td>
-							<!-- 평점 -->
+							
+							<!-- 평점 a,b,c -->
 							<td>
 								<c:if test="${!empty gradeMap['TOTAL_GRADE']}">
                   					<fmt:parseNumber var="grade" type="number" value="${gradeMap['TOTAL_GRADE'] }" integerOnly="true"/>
                   					<c:choose>
+                  						<c:when test="${grade>=95 }">
+                  							A+
+                  						</c:when>
                   						<c:when test="${grade>=90 }">
                   							A
                   						</c:when>
+                  						<c:when test="${grade>=85 }">
+                  							B+
+                  						</c:when>
                   						<c:when test="${grade>=80 }">
                   							B
+                  						</c:when>
+                  						<c:when test="${grade>=75 }">
+                  							C+
                   						</c:when>
                   						<c:when test="${grade>=70 }">
                   							C
@@ -188,20 +240,29 @@ $(function(){
 								<c:if test="${!empty gradeMap['TOTAL_GRADE']}">
                   					<fmt:parseNumber var="grade" type="number" value="${gradeMap['TOTAL_GRADE'] }" integerOnly="true"/>
                   					<c:choose>
-                  						<c:when test="${grade>=90 }">
+                  						<c:when test="${grade>=95 }"> <!-- A+ -->
+                  							4.5
+                  						</c:when>
+                  						<c:when test="${grade>=90 }"> <!-- A -->
+                  							4.0
+                  						</c:when>
+                  						<c:when test="${grade>=85 }"> <!-- B+ -->
+                  							3.5
+                  						</c:when>
+                  						<c:when test="${grade>=80 }"> <!-- B -->
                   							3.0
                   						</c:when>
-                  						<c:when test="${grade>=80 }">
-                  							B
+                  						<c:when test="${grade>=75 }"> <!-- C+ -->
+                  							2.5
                   						</c:when>
-                  						<c:when test="${grade>=70 }">
-                  							C
+                  						<c:when test="${grade>=70 }"> <!-- C -->
+                  							2.0
                   						</c:when>
-                  						<c:when test="${grade>=60 }">
-                  							D
+                  						<c:when test="${grade>=60 }"> <!-- D -->
+                  							1.0
                   						</c:when>
-                  						<c:when test="${grade<60 }">
-                  							F
+                  						<c:when test="${grade<60 }"> <!-- f -->
+                  							0
                   						</c:when>
                   					</c:choose>
                   				</c:if>
@@ -213,9 +274,8 @@ $(function(){
 				</c:if>
 			</tbody>
 		</table>
+		</form>
 	</div>
-
-
 
 
 

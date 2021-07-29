@@ -65,9 +65,13 @@
 	</select>
 	
 	
+	<!-- 강의평가하면 강의평가 구분 변경 -->
+	<update id="updateEvalFlag" parameterType="SubjEvalVO">
+		update registration
+		set lecture_eval_flag ='Y'
+		where open_sub_code=#{openSubCode} and stu_no=#{stuNo}
 	
-	
-	
+	</update>
 	
 	
 	

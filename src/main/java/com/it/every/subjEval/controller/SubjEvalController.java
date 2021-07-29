@@ -10,8 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.subjEval.model.SubjEvalService;
@@ -36,16 +38,16 @@ public class SubjEvalController {
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		
-		//<Map<String, Object>> Mylist = subjEvalService.selectMyRegistarion(userid); //
-		List<Map<String, Object>> Mylist = subjEvalService.searchEvalFlag(stuNo);
+		List<Map<String, Object>> Mylist = subjEvalService.selectMyRegistarion(userid); //
+		//List<Map<String, Object>> Mylist = subjEvalService.searchEvalFlag(stuNo);
 		
 		logger.info("개설교과과정페이지 전체 ,Mylist.size()={}",Mylist.size());
 		model.addAttribute("Mylist", Mylist);
 
 
-		List<Map<String, Object>> MyGradeList = subjEvalService.searchMyGrade(stuNo);
-		logger.info("개설교과과정페이지 전체 ,MyGradeList.size()={}",MyGradeList.size());
-		model.addAttribute("MyGradeList", MyGradeList);
+		//List<Map<String, Object>> MyGradeList = subjEvalService.searchMyGrade(stuNo);
+		//logger.info("개설교과과정페이지 전체 ,MyGradeList.size()={}",MyGradeList.size());
+		//model.addAttribute("MyGradeList", MyGradeList);
 		
 		
 		return "subj_eval/subj_eval";
@@ -78,6 +80,7 @@ public class SubjEvalController {
 		String msg ="강의평가 완료", url="/subj_eval/subj_eval";
 		if(cnt>0) {
 			msg ="강의평가 완료";
+			cnt = subjEvalService.updateEvalFlag(subjEvalVo);
 			url="/subj_eval/subj_eval";
 		}else {
 			msg ="강의평가 실패";
@@ -92,7 +95,8 @@ public class SubjEvalController {
 	
 	
 	@RequestMapping("/searchMyGrade")
-	public String  searchMyGrade(@ModelAttribute SubjEvalVO subjEvalVo,HttpSession session, Model model ) {
+	@ResponseBody
+	public List<Map<String, Object>>  searchMyGrade(@ModelAttribute SubjEvalVO subjEvalVo,HttpSession session, Model model ) {
 		logger.info("성적 조회 페이지");
 		
 		String userid = (String)session.getAttribute("user_id");
@@ -103,7 +107,7 @@ public class SubjEvalController {
 		logger.info("개설교과과정페이지 전체 ,MyGradeList.size()={}",MyGradeList.size());
 		model.addAttribute("MyGradeList", MyGradeList);
 		
-		return "subj_eval/subj_eval";
+		return MyGradeList;
 		
 	}
 	
