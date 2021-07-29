@@ -18,7 +18,7 @@ public class DistributeAssignServiceImpl implements DistributeAssignService{
 	}
 
 	@Override
-	public List<Map<String, Object>> distributeAssignView(String openSubCode) {
-		return distributeAssignDao.distributeAssignView(openSubCode);
+	public List<Map<String, Object>> distributeAssignView(String profNo) {
+		return distributeAssignDao.distributeAssignView(profNo);
 	}
 }

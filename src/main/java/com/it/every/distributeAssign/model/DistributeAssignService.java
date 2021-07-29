@@ -7,5 +7,5 @@ public interface DistributeAssignService {
 	//새로운 과제 개설
 	int newAssign(DistributeAssignVO vo);
 	//개설된 과제 불러오기(뷰)
-	List<Map<String, Object>> distributeAssignView(String openSubCode);	
+	List<Map<String, Object>> distributeAssignView(String profNo);	
 }

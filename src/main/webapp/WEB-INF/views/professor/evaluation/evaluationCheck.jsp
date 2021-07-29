@@ -106,14 +106,26 @@ body {
                                				<c:if test="${!empty map['TOTAL_GRADE']}">
                                					<fmt:parseNumber var="grade" type="number" value="${map['TOTAL_GRADE'] }" integerOnly="true"/>
                                					<c:choose>
+                               						<c:when test="${grade>=95 }">
+                               							A+
+                               						</c:when>
                                						<c:when test="${grade>=90 }">
                                							A
+                               						</c:when>
+                               						<c:when test="${grade>=85 }">
+                               							B+
                                						</c:when>
                                						<c:when test="${grade>=80 }">
                                							B
                                						</c:when>
+                               						<c:when test="${grade>=75 }">
+                               							C+
+                               						</c:when>
                                						<c:when test="${grade>=70 }">
                                							C
+                               						</c:when>
+                               						<c:when test="${grade>=65 }">
+                               							D+
                                						</c:when>
                                						<c:when test="${grade>=60 }">
                                							D

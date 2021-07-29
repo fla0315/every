@@ -6,11 +6,11 @@
 	<!-- 과제 개설 -->
 	<insert id="newAssign" parameterType="distributeAssignVo">
 		insert into distribute_Assign
-		values(DISTRIBUTE_ASSIGN_SEQ.nextval, #{openSubCode}, #{assignName}, sysdate);
+		values(DISTRIBUTE_ASSIGN_SEQ.nextval, #{openSubCode}, #{assignName}, sysdate)
 	</insert>
 	<!-- 개설한 과제 뷰 -->
 	<select id="distributeAssignView" parameterType="string" resultType="map">
 		select * from distributeassignview
-		where open_sub_code = #{openSubCode}
+		where prof_no = #{profNo}
 	</select>
 </mapper>

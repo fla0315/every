@@ -416,8 +416,6 @@ body {
                                    <input type="hidden" name="openSubCode" value="${open }">
                                    <input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/attendanceEdit?stuNo=${map["STU_NO"] }'/>">
                                    </td>
-                                   
-                                   
                                </tr>
                                	<c:set var="noCheck" value="${noCheck+1 }" />
                                	<input type="hidden" value="" id="week" name="week">

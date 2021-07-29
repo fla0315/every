@@ -77,23 +77,42 @@ public class EvaluationController {
 		return "/professor/evaluation/evaluationRecord";
 	}
 	
-	@RequestMapping("/evaluationEdit")
-	public String evaluationEdit(@ModelAttribute EvaluationVO vo, @RequestParam String open, Model model) {
-		logger.info("성적 등록/수정 처리, 파라미터 vo={}, open={}", vo, open);
+	@GetMapping("/evaluationEdit")
+	public void evaluationEdit(@RequestParam String stuNo, @RequestParam String openSubCode, Model model) {
+		logger.info("성적 개별 수정, 파라미터 stuNo={}, openSubCode={}", stuNo, openSubCode);
+		EvaluationVO vo = new EvaluationVO();
+		vo.setSubCode(openSubCode);
+		vo.setStuNo(stuNo);
 		
-		vo.setSubCode(open);
+		Map<String, Object> map = evaluationService.selectBystuNo(vo);
+		model.addAttribute("map", map);
+	}
+	
+	@PostMapping("/evaluationEdit")
+	public String evaluationEdit_post(@ModelAttribute EvaluationVO vo, Model model) {
+		logger.info("성적 등록/수정 처리, 파라미터 vo={}", vo);
+
 		int cnt = evaluationService.editBystuNo(vo);
 		logger.info("성적 등록/수정 처리 결과, cnt={}", cnt);
 		
-		String msg="등록/수정 실패!", url="/professor/evaluation/evaluationRecord?openSubCode="+open;
+		
 		if(cnt>0) {
-			msg = "등록/수정 성공!";
+			Map<String, Object> map = evaluationService.selectBystuNo(vo);
+			int mid = Integer.parseInt(String.valueOf(map.get("MIDTERM")));
+			int fin = Integer.parseInt(String.valueOf(map.get("FINALS")));
+			int assign = Integer.parseInt(String.valueOf(map.get("ASSIGNMENT")));
+			int attend = Integer.parseInt(String.valueOf(map.get("ATTENDANCE")));
+			
+			int avg = (mid+fin+assign+attend)/4;
+			logger.info("avg={}", avg);
+			vo.setTotalGrade(avg);
+			int cnt2 = evaluationService.totalGrade(vo);
+			if(cnt2>0) {
+				logger.info("총점 저장 성공");
+			}
 		}
 		
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
-		
-		return "common/message";
+		return "/professor/evaluation/evaluationRecord?openSubCode="+vo.getSubCode();
 	}
 	
 	@GetMapping("/evaluationCheck")

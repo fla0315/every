@@ -44,7 +44,7 @@ body {
 					</div>
 					<div class="card-body">
 						<form name="frm" method="post"
-							action="<c:url value=''/>">
+							action="<c:url value='/professor/assign/distributeAssignReg'/>">
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<div class="form-floating mb-3 mb-md-0">
@@ -67,9 +67,9 @@ body {
 								</div>
 								<div class="col-md-6">
 									<div class="form-floating mb-3 mb-md-0">
-										<input class="form-control" name="title" type="text" id="title"
-											value=""/> <label for="receiver">과제명</label>
-											<input type="text" value="" id="openSubCode" name="openSubCode">
+										<input class="form-control" name="assignName" type="text" id="assignName"
+											value=""/> <label for="assignName">과제명</label>
+											<input type="hidden" value="" id="openSubCode" name="openSubCode">
 									</div>
 								</div>
 							</div>
@@ -90,50 +90,34 @@ body {
 						<div class="card-body" style="height:450px">
 							<table class="table-bordered text-center" style="width: 100%">
 								<colgroup>
-									<col style="width: 10%" />
-									<col style="width: 10%" />
-									<col style="width: 50%" />
-									<col style="width: 30%" />
+									<col style="width: 20%" />
+									<col style="width: 20%" />
+									<col style="width: 40%" />
+									<col style="width: 20%" />
 								</colgroup>
 								<thead>
 									<tr>
-										<th><input type="checkbox" name="chkAll"></th>
-										<th></th>
-										<th>내용</th>
-										<th>보낸 사람</th>
+										<th>개설교과목번호</th>
+										<th>교과목명</th>
+										<th>과제명</th>
+										<th>등록일</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${empty list }">
+									<c:if test="${empty aList }">
 										<tr>
 											<td colspan="4">데이터가 없습니다.</td>
 										</tr>
 									</c:if>
-									<c:if test="${!empty list }">
-										<c:forEach var="map" items="${list }">
-											<c:if test="${empty map['DEL_FLAG'] }">
+									<c:if test="${!empty aList }">
+										<c:forEach var="map" items="${aList }">
 											<tr>
-												<td><input type="checkbox">
-												<td>
-													<c:if test="${map['OFFICIAL_NO'] eq no }">
-														<i class="fas fa-envelope"></i>
-													</c:if>
-													<c:if test="${!(map['OFFICIAL_NO'] eq no) }">
-														<i class="far fa-envelope"></i>
-													</c:if>
-												</td>
+												<td>${map['OPEN_SUB_CODE'] }</td>
+												<td>${map['SUBJ_NAME'] }</td>
 												<td class="ccdetail text-left">&nbsp;
-												<a href="#" onclick="window.open('${pageContext.request.contextPath }/chitchat/chitchatDetail?msgNo=${map['MSG_NO'] }&readDate=${map['READ_DATE'] }', 'detail', 'top=100, left=600, width=500, height=500, location=yes, resizable=yes')">${map['CONTENTS'] }</a></td>
-												<td>
-												<c:if test="${map['OFFICIAL_NO'] eq no }">
-														나
-												</c:if>
-												<c:if test="${!(map['OFFICIAL_NO'] eq no) }">
-													${map['OFFICIAL_NAME'] }
-												</c:if>
-												</td>
+												<a href="#" onclick="window.open('${pageContext.request.contextPath }/chitchat/chitchatDetail?msgNo=${map['ASSIGN_NO'] }', 'detail', 'top=100, left=600, width=500, height=500, location=yes, resizable=yes')">${map['ASSIGN_NAME'] }</a></td>
+												<td><fmt:formatDate value="${map['REG_DATE'] }" pattern="yyyy-MM-dd" /></td>
 											</tr>
-											</c:if>
 										</c:forEach>
 									</c:if>
 								</tbody>
