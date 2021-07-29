@@ -4,20 +4,27 @@
 
 <script type="text/javascript">
 $(function(){
-	
 	var num = 0;
-	
 	$('#btGrade').click(function(){
 		$(".evalFlag span").each(function(idx,item){
 			if($(this).text()=='N'){
 				num++
 			};
 		});
-		
 		if(num>0){
 			alert('모든강의평가를 완료해주세요');
 			event.preventDefault();
 		}else{
+			$("#gradeTable").show();
+		}
+	});
+});
+  
+</script>
+
+
+
+<%-- {
 				$.ajax({
 					type : "POST",
 					url : "<c:url value='/subj_eval/searchMyGrade'/>",
@@ -43,11 +50,9 @@ $(function(){
 			
 			
 			
-		}
-	});
-});
-  
-</script>
+		} --%>
+
+
 
 <div class="container-fluid px-4" style="background-color: white;">
 	<h4 class="mt-4" style="background-color: white;">성적조회</h4>
@@ -147,14 +152,13 @@ $(function(){
 
 	<br>
 	<hr>
-	<h4 class="mt-4" style="background-color: white;">성적조회</h4>
+	<h4 class="mt-4"  style="background-color: white;">성적조회</h4>
 	<form name="frmSearchGrade" method="post" action="<c:url value='/subj_eval/searchMyGrade'/>">
 		<input type="button" id="btGrade" value="성적조회">
-	
 	<br>
 
 	<div class="table-wrapper-scroll-y my-custom-scrollbar">
-		<table class="table table-bordered table-striped mb-0">
+		<table class="table table-bordered table-striped mb-0" id="gradeTable" style="display: none;">
 			<thead>
 				<tr>
 					<th scope="col">년도</th>
