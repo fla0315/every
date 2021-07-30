@@ -145,8 +145,6 @@ body {
                    </div>
                </div>
 			<div >
-				<p>최종 수정 날짜 : </p>
-				<button type="button" class="btn btn-sm btn-primary" id="btnSave">제출</button>
 			</div>
 		</div>
 	</article>

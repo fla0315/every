@@ -16,4 +16,5 @@ public class AssignmentVO {
 	private long fileSize;				//파일사이즈
 	private String originalFileName;	//원본파일이름
 	private Timestamp applyDate;		//제출일
+	private int assignPoint;			//과제점수
 }

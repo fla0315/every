@@ -78,7 +78,7 @@ body {
                            <tbody>
                                <c:if test="${empty evList }">
                                	<tr>
-                               		<td colspan="12" class="text-center">등록된 학생이 없습니다.</td>
+                               		<td colspan="13" class="text-center">등록된 학생이 없습니다.</td>
                                	</tr>
                                </c:if>
                                <c:if test="${!empty evList }">
@@ -141,14 +141,7 @@ body {
                        </table>
                    </div>
                </div>
-			<div >
-				<button type="button" class="btn btn-sm btn-primary" id="btnSave">제출</button>
-				<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
-			</div>
-
 		</div>
-
 	</article>
-
 
 <%@ include file="../../inc/bottom.jsp" %>

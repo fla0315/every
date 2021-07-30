@@ -6,6 +6,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.it.every.interceptor.LoginInterceptor;
+
 
 @Configuration
 public class MvcConfiguration implements WebMvcConfigurer{
@@ -13,10 +15,10 @@ public class MvcConfiguration implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
-		/*
-		registry.addInterceptor(new LoginInterceptor())
-		.addPathPatterns("/shop/cart/*", "/shop/order/*","/member/memberEdit","/member/memberOut");
-		*/
+		//registry.addInterceptor(new LoginInterceptor())
+		//.addPathPatterns("/shop/cart/*", "/shop/order/*","/member/memberEdit","/member/memberOut");
+		//.addPathPatterns("/professor/*", "/chitchat/*");
+		
 		/*
 		registry.addInterceptor(new AdminLoginInterceptor())
 		.excludePathPatterns("/admin/login/adminLogin") //제외할꺼 이거 안넣으면 계속 삥삥돈다

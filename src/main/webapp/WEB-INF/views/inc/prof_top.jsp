@@ -108,7 +108,7 @@
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="<c:url value='/professor/assign/distributeAssignReg'/>">과제 개설</a>
-                                            <a class="nav-link" href="#">과제 조회</a><!-- 평가 포함 -->
+                                            <a class="nav-link" href="<c:url value='/professor/assign/assignmentCheck'/>">과제 조회</a><!-- 평가 포함 -->
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">

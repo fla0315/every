@@ -9,8 +9,12 @@
 		values(DISTRIBUTE_ASSIGN_SEQ.nextval, #{openSubCode}, #{assignName}, sysdate)
 	</insert>
 	<!-- 개설한 과제 뷰 -->
-	<select id="distributeAssignView" parameterType="string" resultType="map">
+	<select id="distributeAssignView" parameterType="map" resultType="map">
 		select * from distributeassignview
 		where prof_no = #{profNo}
+		<if test="#{openSubcode!=null and openSubCode!=''}">
+			and open_sub_code = #{openSubCode}
+		</if>
+		order by reg_date desc
 	</select>
 </mapper>
