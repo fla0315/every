@@ -31,7 +31,8 @@
 	
 		//조회버튼 누르면 동작하는 부분
 		$('#selectBt').click(function(){
-			subjList(1);
+			event.preventDefault();
+			subjList();
 		});
 	});
 
@@ -56,9 +57,9 @@
 		
 		
 		$.ajax({
-			url:"<c:url value='/registration/open_registration1'/>",
+			url:"<c:url value='/registration/open_registration'/>",
 			data:{
-				"FACULTY_NAME":facultyName, //위에서 만들어준거
+				"facultyName":facultyName, //위에서 만들어준거
 				"subjName":subjName,
 				"type":type,
 				"grade":grade,
@@ -68,6 +69,7 @@
 			dataType:"json",
 			type:"post",
 			success:function(res){
+				console.log(res)
 				var str = "";
 				
 			/* 	pageMake(res);
@@ -92,11 +94,14 @@
 					str+="</tr>"; //테이블 닫는거
 				});
  
-				$('#showTable tbody').html(str); //조회누르면 뿌려주는 바디부분
+				$('#showTable tbody').append(str); //조회누르면 뿌려주는 바디부분
 
 				//$('#meta_1').find('em').text(res.count); //총 조회건수
 
-			} //석세스 끝나는 부분
+			}, //석세스 끝나는 부분
+			error: function(err) {
+				console.log(err)
+			}
 		});
 	}
 
@@ -126,7 +131,7 @@
 			<!-- ========================================검색조건 시작====================================================================== -->
 
 			<form name="frmSearch" method="post"
-				action='<c:url value="/registration/open_registration1"/>'>
+				action='<c:url value="/registration/open_registration"/>'>
 				<!-- ********************** 검색조건 테이블 시작 ********************** -->
 				<table border="0" cellspacing="5">
 					<tr>
@@ -151,9 +156,9 @@
 
 						<td>
 							<select id="semester" name="semester"
-								class="ctl_select" tabindex="1" title="이수구분">
-									<option value="10">1학기</option>
-									<option value="20">2학기</option>
+								class="ctl_select" tabindex="1" title="학기">
+									<option value="1">1학기</option>
+									<option value="2">2학기</option>
 							</select>
 						</td>
 
@@ -181,9 +186,9 @@
 								for="searchCptnDcd">이수구분</label></span></td>
 						<td><select id="type" name="type"
 							class="ctl_select" tabindex="1" title="이수구분">
-								<option value="">ALL</option>
-								<c:forEach var="typeMap" items="${typeMap }">
-									<option value="${typeMap['TYPE_CODE']}">${typeMap['TYPE'] }</option>
+								<option value="0">ALL</option>
+								<c:forEach var="typeMap" items="${typeMap}">
+									<option value="${typeMap['TYPE_CODE']}">${typeMap['TYPE']}</option>
 								</c:forEach>
 						</select></td>
 					</tr>
@@ -200,13 +205,13 @@
 
 					
 						<td style="padding-left: 10px"><span class=""><label
-								for="전공">전공</label></span></td>
+								for="학부">학과/학부</label></span></td>
 						<td id="major_1">
 							<select id="facultyName" name="facultyName"
 								class="ctl_select" tabindex="1" title="전공">
 									<option value="0">ALL</option>
-								<c:forEach var="fMap" items="${facultyMap }">
-									<option value="${fMap['FACULTY_NO']}">${fMap['FACULTY_NAME'] }</option>
+								<c:forEach var="fMap" items="${facultyMap}">
+									<option value="${fMap['FACULTY_NAME']}">${fMap['FACULTY_NAME']}</option>
 								</c:forEach>
 							</select>
 						</td>

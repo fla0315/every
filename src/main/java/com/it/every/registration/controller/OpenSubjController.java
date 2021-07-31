@@ -34,26 +34,21 @@ public class OpenSubjController {
 	private final OpenSubjService openSubjService;
 	private final StudentRegistrationService studentRegistrationService;
 
-	@RequestMapping("/open_registration1")
+	@RequestMapping("/open_registration")
 	@ResponseBody
 	public List<OpenSubjVO> open_rregistration(@ModelAttribute RegistrationSearchVO regiSearchVo,
 			HttpSession session, Model model) {
 
 		logger.info("개설교과과정페이지");
+		logger.info("regiSearchVo={}",regiSearchVo);
 
 		List<OpenSubjVO> list = openSubjService.OpenRegistraionSearch(regiSearchVo);
 
-		List<Map<String, Object>> facultyMap = openSubjService.selectFacultyS();
-		List<Map<String, Object>> typeMap = openSubjService.selectTypeS();
-
 		logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
-		logger.info("학과 전체 ,facultyMap={}", facultyMap);
-		logger.info("이수구분 전체 ,typeMap={}", typeMap);
 
 		model.addAttribute("list", list);
-		model.addAttribute("facultyMap", facultyMap);
-		model.addAttribute("typeMap", typeMap);
-
+		
+		
 		return list;
 
 	}
@@ -66,16 +61,20 @@ public class OpenSubjController {
 	  logger.info("개설교과과정페이지");
 	  
 	  List<OpenSubjVO> list = openSubjService.OpenRegistraionALL();
-	  List<Map<String, Object>> facultyMap=openSubjService.selectFacultyS();
-	  List<Map<String, Object>> typeMap= openSubjService.selectTypeS();
+	  List<Map<String, Object>> facultyMap=openSubjService.selectFacultyS(); //학부이름
+	  List<Map<String, Object>> typeMap= openSubjService.selectTypeS(); //이수구분
 	  
 	  logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
-	  logger.info("학과 전체 ,facultyMap={}", facultyMap);
+	  logger.info("학과 전체 ,facultyMap={}", facultyMap); //서브젝트부분에서 찾기
 	  logger.info("이수구분 전체 ,typeMap={}", typeMap);
 	  
+	  System.out.println(list);
+	  System.out.println("TypeMap--");
+	  System.out.println(typeMap);
 	  
-	  model.addAttribute("list", list); model.addAttribute("facultyMap",
-	  facultyMap); model.addAttribute("typeMap", typeMap);
+	  model.addAttribute("list", list); 
+	  model.addAttribute("facultyMap", facultyMap); 
+	  model.addAttribute("typeMap", typeMap);
 	  
 	  return "registration/open_registration";
 	  
