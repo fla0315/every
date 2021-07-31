@@ -23,6 +23,7 @@ import com.it.every.distributeAssign.model.DistributeAssignService;
 import com.it.every.distributeAssign.model.DistributeAssignVO;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
+import com.it.every.registration.model.StudentRegistrationService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,6 +36,7 @@ public class DistributeAssignController {
 	private final DistributeAssignService distributeAssignService;
 	private final OpenSubjService openSubjService;
 	private final AssignmentService assignmentService;
+	private final StudentRegistrationService studentRegistrationService;
 	
 	@GetMapping("/distributeAssignReg")
 	public void distributeAssignReg(HttpSession session, Model model) {
@@ -93,6 +95,8 @@ public class DistributeAssignController {
 		}
 		
 		if(assignNo>0) {
+			List<Map<String, Object>> sList = studentRegistrationService.selectByOpenSubCode(openSubCode);
+			model.addAttribute("sList", sList);
 			List<AssignmentVO> assignList = assignmentService.showAssignment(assignNo);
 			logger.info("assignList.size={}", assignList.size());
 			model.addAttribute("assignList", assignList);

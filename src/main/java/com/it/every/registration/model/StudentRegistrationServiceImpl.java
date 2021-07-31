@@ -55,6 +55,12 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	public int deleteCart(RegistrationCartVO registrationCartVo) {
 		return studentRegistrationDao.deleteCart(registrationCartVo);
 	}
+
+
+	@Override
+	public List<Map<String, Object>> selectByOpenSubCode(String openSubCode) {
+		return studentRegistrationDao.selectByOpenSubCode(openSubCode);
+	}
 	
 	
 	

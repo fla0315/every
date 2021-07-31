@@ -86,7 +86,7 @@
                             </a>
                             <div class="collapse" id="collapseLecture" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                	<a class="nav-link" href="#">강의 개설 신청</a>
+                                	<a class="nav-link" href="#">강의 개설 수락</a>
                                     <a class="nav-link" href="#">강의 현황</a>
                                     <a class="nav-link" href="#">학생 현황</a>
                                 </nav>

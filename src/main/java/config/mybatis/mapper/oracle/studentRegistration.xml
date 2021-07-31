@@ -85,6 +85,11 @@
 		where stu_No= #{stuNo} and open_sub_code =#{openSubCode}
 	</delete>
 	
-	
-	
+	<!-- 개설교과목별 조회 -->
+	<select id="selectByOpenSubCode" parameterType="String" resultType="map">
+		select r.*, s.name from registration r join student s
+		on r.stu_no = s.stu_no
+		where open_sub_code = #{openSubCode}
+		order by name
+	</select>
 </mapper>

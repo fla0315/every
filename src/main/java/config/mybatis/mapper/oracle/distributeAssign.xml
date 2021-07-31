@@ -12,7 +12,7 @@
 	<select id="distributeAssignView" parameterType="map" resultType="map">
 		select * from distributeassignview
 		where prof_no = #{profNo}
-		<if test="#{openSubcode!=null and openSubCode!=''}">
+		<if test="openSubCode!=null and !openSubCode.isEmpty()">
 			and open_sub_code = #{openSubCode}
 		</if>
 		order by reg_date desc

@@ -87,7 +87,7 @@ body {
 										<c:forEach var="map" items="${aList }">
 											<tr>
 												<td>${map['OPEN_SUB_CODE'] }</td>
-												<td>${map['SUBJ_NAME'] }<input type="text" id="rightNo" value="${map['ASSIGN_NO'] }"></td>
+												<td>${map['SUBJ_NAME'] }</td>
 												<td class="ccdetail text-left">&nbsp;
 												<a href='<c:url value="/professor/assign/assignmentCheck?openSubCode=${open}&assignNo=${map['ASSIGN_NO'] }"/>'>${map['ASSIGN_NAME'] }</a></td>
 												<td><fmt:formatDate value="${map['REG_DATE'] }" pattern="yyyy-MM-dd" /></td>
@@ -105,35 +105,42 @@ body {
 							<i class="far fa-file-alt"></i> 과제별 목록
 						</div>
 						<div class="card-body" style="height:450px">
-							<table class="table-bordered text-center" style="width: 100%">
+							<table class="table-bordered text-center" id="datatablesSimple" style="width: 100%">
 								<colgroup>
-									<col style="width: 30%" />
 									<col style="width: 20%" />
-									<col style="width: 30%" />
 									<col style="width: 20%" />
+									<col style="width: 15%" />
+									<col style="width: 25%" />
+									<col style="width: 10%" />
 								</colgroup>
 								<thead>
 									<tr>
 										<th>학번</th>
 										<th>이름</th>
+										<th>제출여부</th>
 										<th>제출시간</th>
 										<th>점수</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${empty assignList }">
+									<c:if test="${empty sList }">
 										<tr>
-											<td colspan="4">데이터가 없습니다.</td>
+											<td colspan="5">데이터가 없습니다.</td>
 										</tr>
 									</c:if>
-									<c:if test="${!empty assignList }">
-										<c:forEach var="vo" items="${assignList }">
-											<tr>
-												<td>${vo.stuNo }</td>
-												<td>${vo.fileName }</td>
-												<td><fmt:formatDate value="${vo.applyDate }" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-												<td>${vo.assignPoint }</td>
-											</tr>
+									<c:if test="${!empty sList }">
+										<c:forEach var="map" items="${sList }">
+												<tr>
+													<td>${map['STU_NO'] }</td>
+													<td class="ccdetail"><a href="#">${map['NAME'] }</a></td>
+											<c:forEach var="vo" items="${assignList }">
+													<c:if test="${vo.stuNo eq map['STU_NO'] }">
+														<td>O</td>
+														<td><fmt:formatDate value="${vo.applyDate }" pattern="yyyy-MM-dd hh:mm:ss" /></td>
+														<td>${vo.assignPoint }</td>
+													</c:if>
+											</c:forEach>
+												</tr>
 										</c:forEach>
 									</c:if>
 								</tbody>

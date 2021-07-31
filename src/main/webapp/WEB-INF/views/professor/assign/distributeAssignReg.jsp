@@ -23,11 +23,18 @@ body {
 		});
 		
 		$('#btSend').click(function(){
-			if($('#openSub option:selected').val()!=''){
-				location.href="<c:url value='/professor/assign/distributeAssignReg?openSubCode="+openSubCode+"'/>";
-			} else{
-				return false;
+			if($('#openSub option:selected').val()=='선택하세요'){
 				alert('개설교과목 번호를 선택하세요!');
+				event.preventDefault();
+				return false;
+				
+			} else if($('#assignName').val().length<1){
+				alert("과제명을 입력하세요");
+				$('#assignName').focus();
+				event.preventDefault();
+				return false;
+			} else{
+				location.href="<c:url value='/professor/assign/distributeAssignReg?openSubCode="+openSubCode+"'/>";
 			}
 		});
 	});
@@ -49,7 +56,7 @@ body {
 								<div class="col-md-6">
 									<div class="form-floating mb-3 mb-md-0">
 										<select id="openSub" name="openSub" class="dataTable-selector" style="width:100%">
-											<option></option>
+											<option>선택하세요</option>
 											<c:if test="${!empty osList }">
 												<c:forEach var="vo" items="${osList}">
 													<c:if test="${open == vo.openSubCode }">
@@ -115,7 +122,7 @@ body {
 												<td>${map['OPEN_SUB_CODE'] }</td>
 												<td>${map['SUBJ_NAME'] }</td>
 												<td class="ccdetail text-left">&nbsp;
-												<a href="#" onclick="window.open('${pageContext.request.contextPath }/chitchat/chitchatDetail?msgNo=${map['ASSIGN_NO'] }', 'detail', 'top=100, left=600, width=500, height=500, location=yes, resizable=yes')">${map['ASSIGN_NAME'] }</a></td>
+												<a href="${pageContext.request.contextPath }/professor/assign/assignmentCheck?openSubCode=${map['OPEN_SUB_CODE'] }&assignNo=${map['ASSIGN_NO'] }" onclick="">${map['ASSIGN_NAME'] }</a></td>
 												<td><fmt:formatDate value="${map['REG_DATE'] }" pattern="yyyy-MM-dd" /></td>
 											</tr>
 										</c:forEach>
