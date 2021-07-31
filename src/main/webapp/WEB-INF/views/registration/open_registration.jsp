@@ -7,7 +7,7 @@
 
 	
 	$(function(){
-		subjList(1);
+	/* 	subjList(1) */;
 		//학부 선택시 해당되는 학과만 나오도록 함
 		/* $('#FACULTY_NAME').change(function(){
 			var facultyName=$('#FACULTY_NAME option:selected').val();
@@ -29,8 +29,6 @@
 			});
 		}); */
 	
-	
-	
 		//조회버튼 누르면 동작하는 부분
 		$('#selectBt').click(function(){
 			subjList(1);
@@ -39,19 +37,26 @@
 
 	
 	
-
+	/* 에이젝스로 받는 거  */
 	function subjList(){
-		var facultyName=$('#FACULTY_NAME').val(); //년도 //학과11
-		var subjName=$('#subjName').val(); //과목명
-		var type=$('#type').val(); //이수구분
-		var grade=$('#grade').val(); //학년
+		var subjYear=$('#subjYear').val(); //년도
 		var semester=$('#semester').val(); //학기
-		var subjYear=$('#subjYear').val(); //학기
-
-		console.log(facultyName+","+subjName);
+		var grade=$('#grade').val(); //학년
+		var type=$('#type').val(); //이수구분
+		var facultyName=$('#facultyName').val(); //학과
+		var subjName=$('#subjName').val(); //과목명
+		
+		
+		console.log(subjYear);
+		console.log(semester);
+		console.log(grade);
+		console.log(type);
+		console.log(facultyName);
+		console.log(subjName);
+		
 		
 		$.ajax({
-			url:"<c:url value='/registration/open_registration'/>",
+			url:"<c:url value='/registration/open_registration1'/>",
 			data:{
 				"FACULTY_NAME":facultyName, //위에서 만들어준거
 				"subjName":subjName,
@@ -65,42 +70,33 @@
 			success:function(res){
 				var str = "";
 				
-				pageMake(res);
-				$('#meta_1 em').text(count);
-							$.each(res.list, function(idx, item){
-							var fileName=item.syllabus;
-							var fileNameIdx=fileName.lastIndexOf("_");
-							var extIdx=fileName.lastIndexOf(".");
-							console.log(fileNameIdx);
-							var ext=fileName.substr(extIdx);
-							var originalFileName=fileName.substr(0, fileNameIdx)+ext;
-							console.log(originalFileName);
-							str+="<tr class='jqgfirstrow' role='row' id='subjects'>";
-							str+="<td role='gridcell' style='height: 0px; width: 7%;'><button type='button' class='applyBt'>신청</button></td>";
-							str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.openSubCode+"</td>";
-							str+="<td role='gridcell' style='height: 0px; width: 18%; text-align: center'>"+item.subjName+"</td>";
-							str+="<td role='gridcell' style='height: 0px; width: 7%;'>"+(item.count/item.credit)+ "/" +item.personnel+"</td>";
-							str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.profName+"</td>";
-							str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.credit+"</td>";
-							str+="<td role='gridcell' style='height: 0px; width: 14%;'>"+item.shortNames+"/"+item.classroomName+"</td>";
-							str+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.type+"</td>";
-							str+="<td role='gridcell' style='height: 0px; width: 9%;'>한국어</td>";
-							str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+
-							"<a href='<c:url value='/registration/download?fileName="+fileName+"&originalFileName="+originalFileName+"'/>'>"+
-							originalFileName+"</a></td>";
-							str+="</tr>";
-						});
+			/* 	pageMake(res);
+				$('#meta_1 em').text(count); */
+				
+				$.each(res.list, function(idx, item){
+					str+="<tr class='' role='row' id=''>"; //테이블 여는거 
+						str+="<td role='gridcell' style='height: 0px; width: 7%;'><button type='button' class='applyBt'>신청</button></td>"; //장바구니
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.subjYear+"</td>"; //년도
+						str+="<td role='gridcell' style='height: 0px; width: 18%; text-align: center'>"+item.semester+"</td>"; //학기
+						str+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.subjName+"</td>"; //과목명
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.facultyName+"</td>"; //학부(과)
+						str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.grade+"</td>";  //학년
+						str+="<td role='gridcell' style='height: 0px; width: 14%;'>" +item.type+"</td>"; //이수구분
+						str+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.CREDIT+"</td>"; //학점
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>한국어</td>"; //담당교수
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>한국어</td>"; //강의실 / 시간
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>한국어</td>"; //강의 계획서
+						/* str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+
+						"<a href='<c:url value='/registration/download?fileName="+fileName+"&originalFileName="+originalFileName+"'/>'>"+
+						originalFileName+"</a></td>"; */
+					str+="</tr>"; //테이블 닫는거
+				});
  
 				$('#showTable tbody').html(str); //조회누르면 뿌려주는 바디부분
 
 				//$('#meta_1').find('em').text(res.count); //총 조회건수
 
-
-
 			} //석세스 끝나는 부분
-
-
-
 		});
 	}
 
@@ -130,7 +126,7 @@
 			<!-- ========================================검색조건 시작====================================================================== -->
 
 			<form name="frmSearch" method="post"
-				action='<c:url value="/registration/open_registrationBysearch"/>'>
+				action='<c:url value="/registration/open_registration1"/>'>
 				<!-- ********************** 검색조건 테이블 시작 ********************** -->
 				<table border="0" cellspacing="5">
 					<tr>
@@ -140,6 +136,7 @@
 							<!-- 년도  -->
 							<div id="">
 								<select name="subjYear" id="subjYear">
+									<option value='2021'>2021</option>
 									<option value='2020'>2020</option>
 									<option value='2019'>2019</option>
 									<option value='2018'>2018</option>
@@ -191,19 +188,21 @@
 						</select></td>
 					</tr>
 					<!-- 1행 완료 -->
-
+						
+						
+						
+					<!-- 여기는 과목명으로하자 -->
 					<!-- 2행 시작 -->
 					<tr>
-						<td><span class=""><label for="학과">학과</label></span></td>
+						<td><span class=""><label for="과목명">과목명</label></span></td>
 							<td><input type="text" name="subjName" id="subjName" size="15"
 							placeholder="검색어 (Search Word)"></td>
 
-
-
+					
 						<td style="padding-left: 10px"><span class=""><label
 								for="전공">전공</label></span></td>
 						<td id="major_1">
-							<select id="major" name="major"
+							<select id="facultyName" name="facultyName"
 								class="ctl_select" tabindex="1" title="전공">
 									<option value="0">ALL</option>
 								<c:forEach var="fMap" items="${facultyMap }">
@@ -240,9 +239,10 @@
 
 			<!-- ========================================검색조건 끝====================================================================== -->
 
-
 			<hr>
 			<br>
+			
+			
 			<div class="table-wrapper-scroll-y my-custom-scrollbar">
 				<table class="table table-bordered table-striped mb-0" id="showTable">
 					<thead>
@@ -261,7 +261,17 @@
 						</tr>
 					</thead>
 					<tbody>
+					
+					
+					
 						<!-- 뿌려주는부븐 -->
+						
+						
+						
+						
+						
+						
+						
 					</tbody>
 				</table>
 

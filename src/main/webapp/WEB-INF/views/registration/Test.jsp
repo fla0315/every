@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/regi_lec.css'/>">
@@ -845,7 +845,39 @@
 
 	<select id="openSubjList" resultType="openSubjListVo"
 		parameterType="registrationSearchVo">
-	
+		select * from
+		(select C.* from 
+		(select rownum as RNUM,B.* from
+		(select A.*, length(short_names) - length(replace(short_names, ',', ''))
+		CHAR_COUNT
+		from
+		(select o.open_sub_code, s.subj_name, s.personnel, p.prof_name, s.credit,
+		rt.short_names, cr.classroom_name, st.type, sy.syllabus,
+		count(r.stu_no) as count
+		from open_subj o join subject s
+		on
+		o.subj_code=s.subj_code
+		join professor p
+		on s.prof_no=p.prof_no
+		join
+		subj_time stime
+		on stime.open_sub_code=o.open_sub_code
+		join
+		regi_timetable rt
+		on rt.open_sub_code=o.open_sub_code
+		join classroom cr
+		on cr.classroom_code=stime.classroom_code
+		join subj_type st
+		on
+		st.type_code=s.type_code
+		join syllabus sy
+		on
+		sy.open_sub_code=o.open_sub_code
+		left join registration r
+		on r.sub_code=o.open_sub_code
+		join department d
+		on d.dep_no=substr(o.open_sub_code, 1, 3)
+		where o.close_date is null
 			<if test="facultyNo!=0">and d.faculty_no=#{facultyNo}</if>
 			<if test="depNo!=0">and d.dep_no=#{depNo}</if>
 			<if test="subjName!=null">and s.subj_name like '%' || #{subjName} || '%'</if>
@@ -862,7 +894,7 @@
 		where RNUM>#{firstRecordIndex}
 		  and RNUM<=#{firstRecordIndex }+ #{recordCountPerPage}]]>
 	</select>
-	<select id="openSubjCount" resultType="int"
+	<%-- <select id="openSubjCount" resultType="int"
 		parameterType="registrationSearchVo">
 		select count(*) from
 		(select C.* from 
@@ -990,7 +1022,7 @@
 	<select id="shortNameByCode" parameterType="String" resultType="String">
 		select short_names from regi_timetable where open_sub_code=#{openSubCode}
 	</select>
-
+ --%>
 </mapper>
 
 
@@ -1017,7 +1049,7 @@ public class RegistrationController {
 		
 		logger.info("개설된 강의 읽어가기 파라미터 registrationsearchvo={}", regSearchVo);
 
-		String checkNull = "";
+		String checkNull = "";\
 		List<OpenSubjListVO> list = registServ.openSubjList(regSearchVo);
 		
 		
@@ -1052,50 +1084,201 @@ public class RegistrationController {
 		String[]timeArr=shortName.split(",");
 		String shortTimeNames = "";
 		List<String> codeList = registServ.codeListByStuNo(stuNo);
-		if(codeList.size() < 1) {
-			return "N";
-		}else {
-			for(int i=0; i< codeList.size(); i++) {
-				String openSubCode = codeList.get(i);
-				shortTimeNames +=  registServ.shortNameByCode(openSubCode)+",";
-			}
-		}
-		for(int i = 0; i< timeArr.length; i++) {
-			int result = shortTimeNames.indexOf(timeArr[i]);
-			if(result != -1) {
-				return "Y";
-			}else {
-				isDup="N";
-			}
-		}
+		if(codeList.size() < 1) { return "N"; }else { for(int i=0; i<
+		codeList.size(); i++) { String openSubCode = codeList.get(i);
+		shortTimeNames += registServ.shortNameByCode(openSubCode)+","; } }
+		for(int i = 0; i< timeArr.length; i++) { int result =
+		shortTimeNames.indexOf(timeArr[i]); if(result != -1) { return "Y";
+		}else { isDup="N"; } } return isDup; } } <!-- S: 조회 그리드 -->
 		
-		return isDup;
-	}
-	
-	
-	
-	
-}
+		
+		
+		
+		
+		
+		
+		
+		
+		<div class="sw-header">
+			<span style="font-weight: bold; font-size: 15px;">개설과목</span>
+			<!-- <h2>종합시간표 조회</h2>-->
+			<div class="buttonset">
+				<span class="item" id="meta_1">총 조회건수<em>0</em>건
+				</span>
+				<!-- <button type="button" class="btn-icon">
+				<i class="icon-refresh"></i>
+				<span>새로고침</span>
+			</button> -->
+			</div>
+		</div>
+		<!-- E: 조회 그리드 --> <!-- S: 안내문구 -->
+		<div class="wrap-grid">
+			<div class="ui-jqgrid ui-widget ui-widget-content ui-corner-all"
+				id="gbox_gridLecture" dir="ltr" style="width: 100%;">
+				<div class="ui-state-default ui-jqgrid-hdiv ui-corner-top"
+					style="width: 100%;">
+					<div class="ui-jqgrid-hbox">
+						<table class="ui-jqgrid-htable ui-common-table"
+							role="presentation" aria-labelledby="gbox_gridLecture">
+							<thead>
+								<tr class="ui-jqgrid-labels" role="row">
+									<th id="gridLecture_rn" role="columnheader"
+										class="ui-state-default ui-th-column ui-th-ltr"
+										style="width: 7%;">
+										<div id="jqgh_gridLecture_rn">
+											<span class="s-ico" style="display: none"> <span
+												sort="asc"
+												class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span>
+												<span sort="desc"
+												class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span>
+											</span>
+										</div>
+									</th>
+									<th id="gridLecture_lecture_cd_disp" role="columnheader"
+										class="ui-state-default ui-th-column ui-th-ltr"
+										style="width: 9%;"><span
+										class="ui-jqgrid-resize ui-jqgrid-resize-ltr"
+										style="cursor: col-resize;">&nbsp;</span>
+										<div id="jqgh_gridLecture_lecture_cd_disp"
+											class="ui-jqgrid-sortable">
+											학수번호-분반<span class="s-ico" style="display: none"> <span
+												sort="asc"
+												class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span>
+												<span sort="desc"
+												class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span>
+										</div></th>
+									<th id="gridLecture_subjt_name" role="columnheader"
+										class="ui-state-default ui-th-column ui-th-ltr"
+										style="width: 18%;"><span
+										class="ui-jqgrid-resize ui-jqgrid-resize-ltr"
+										style="cursor: col-resize;">&nbsp;</span>
+										<div id="jqgh_gridLecture_subjt_name"
+											class="ui-jqgrid-sortable">
+											강좌명<span class="s-ico" style="display: none"> <span
+												sort="asc"
+												class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span>
+												<span sort="desc"
+												class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span>
+										</div></th>
+									<th id="gridLecture_lect_grade" role="columnheader"
+										class="ui-state-default ui-th-column ui-th-ltr"
+										style="width: 7%;"><span
+										class="ui-jqgrid-resize ui-jqgrid-resize-ltr"
+										style="cursor: col-resize;">&nbsp;</span>
+										<div id="jqgh_gridLecture_asign_pcnt"
+											class="ui-jqgrid-sortable">
+											정원<span class="s-ico" style="display: none"><span
+												sort="asc"
+												class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span
+												sort="desc"
+												class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span>
+										</div></th>
+									<th id="gridLecture_teach_na" role="columnheader"
+										class="ui-state-default ui-th-column ui-th-ltr"
+										style="width: 9%;"><span
+										class="ui-jqgrid-resize ui-jqgrid-resize-ltr"
+										style="cursor: col-resize;">&nbsp;</span>
+										<div id="jqgh_gridLecture_teach_na" class="ui-jqgrid-sortable">
+											교수명<span class="s-ico" style="display: none"><span
+												sort="asc"
+												class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span
+												sort="desc"
+												class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span>
+										</div></th>
+									<th id="gridLecture_unit_num" role="columnheader"
+										class="ui-state-default ui-th-column ui-th-ltr"
+										style="width: 5%;"><span
+										class="ui-jqgrid-resize ui-jqgrid-resize-ltr"
+										style="cursor: col-resize;">&nbsp;</span>
+										<div id="jqgh_gridLecture_unit_num" class="ui-jqgrid-sortable">
+											학점<span class="s-ico" style="display: none"><span
+												sort="asc"
+												class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span
+												sort="desc"
+												class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span>
+										</div></th>
+									<th id="gridLecture_timetable" role="columnheader"
+										class="ui-state-default ui-th-column ui-th-ltr"
+										style="width: 14%;"><span
+										class="ui-jqgrid-resize ui-jqgrid-resize-ltr"
+										style="cursor: col-resize;">&nbsp;</span>
+										<div id="jqgh_gridLecture_timetable"
+											class="ui-jqgrid-sortable">
+											강의시간/강의실<span class="s-ico" style="display: none"><span
+												sort="asc"
+												class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span
+												sort="desc"
+												class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span>
+										</div></th>
+									<th id="gridLecture_field_gb" role="columnheader"
+										class="ui-state-default ui-th-column ui-th-ltr"
+										style="width: 6%;"><span
+										class="ui-jqgrid-resize ui-jqgrid-resize-ltr"
+										style="cursor: col-resize;">&nbsp;</span>
+										<div id="jqgh_gridLecture_field_gb" class="ui-jqgrid-sortable">
+											이수구분<span class="s-ico" style="display: none"><span
+												sort="asc"
+												class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span
+												sort="desc"
+												class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span>
+										</div></th>
+									<th id="gridLecture_eng_yn_nm" role="columnheader"
+										class="ui-state-default ui-th-column ui-th-ltr"
+										style="width: 9%;"><span
+										class="ui-jqgrid-resize ui-jqgrid-resize-ltr"
+										style="cursor: col-resize;">&nbsp;</span>
+										<div id="jqgh_gridLecture_eng_yn_nm"
+											class="ui-jqgrid-sortable">
+											언어구분<span class="s-ico" style="display: none"><span
+												sort="asc"
+												class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span
+												sort="desc"
+												class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span>
+										</div></th>
+									<th id="gridLecture_bigo" role="columnheader"
+										class="ui-state-default ui-th-column ui-th-ltr"
+										style="width: 9%;"><span
+										class="ui-jqgrid-resize ui-jqgrid-resize-ltr"
+										style="cursor: col-resize;">&nbsp;</span>
+
+										<div id="jqgh_gridLecture_lectPlan" class="ui-jqgrid-sortable">
+											강의계획서<span class="s-ico" style="display: none"><span
+												sort="asc"
+												class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span
+												sort="desc"
+												class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span>
+										</div></th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
 
 
 
 
+				<div class="ui-jqgrid-bdiv">
+					<div style="position: relative;">
+						<table id="gridLecture1" tabindex="0" cellspacing="0"
+							cellpadding="0" border="0" role="presentation"
+							aria-multiselectable="false" aria-labelledby="gbox_gridLecture"
+							class="ui-jqgrid-btable"
+							style="text-align: center; font-size: 15px;">
+							<tbody>
+
+							</tbody>
+							<tfoot>
+							</tfoot>
+						</table>
+					</div>
+				</div>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- --%>
+			</div>
+			<div class="ui-jqgrid-resize-mark" id="rs_mgridLecture">
+				&nbsp;
+				<div id="divPage"></div>
+			</div>
+		</div>

@@ -6,8 +6,8 @@
 
 	
 	<!-- 시간표 수정해야함  -->
-<!-- 	<select id="" parameterType="string" resultType="">
-		 select s.subj_code, s.subj_name, s.explanation, s.credit, p.prof_name, c.classroom_name, st.timetable_code, r.lecture_eval_flag
+ 	<select id="" parameterType="string" resultType="">
+		select s.subj_code, s.subj_name, s.explanation, s.credit, p.prof_name, c.classroom_name, st.timetable_code, r.lecture_eval_flag
 		from subject s join registration r
 		on s.subj_code=r.sub_code
 		join professor p 
@@ -17,7 +17,7 @@
 		join classroom c
 		on c.classroom_code=st.classroom_code
 		where r.stu_no=#{stuNo} 
-	</select> -->
+	</select> 
 	
 	
 	

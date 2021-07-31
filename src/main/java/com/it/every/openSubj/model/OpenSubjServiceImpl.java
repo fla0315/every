@@ -38,7 +38,7 @@ public class OpenSubjServiceImpl implements OpenSubjService {
 	}
 
 	@Override
-	public List<Map<String, Object>> OpenRegistraionSearch(RegistrationSearchVO regiSearchVo) {
+	public List<OpenSubjVO>  OpenRegistraionSearch(RegistrationSearchVO regiSearchVo) {
 		return openSubjDao.OpenRegistraionSearch(regiSearchVo);
 	}
 	
