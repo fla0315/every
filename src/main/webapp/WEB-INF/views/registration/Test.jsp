@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../inc/student_top.jsp"%>
+<%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/regi_lec.css'/>">
 <style type="text/css">
 #divPage{
@@ -12,7 +12,6 @@
 	$(function(){
 		getDate();
 		subjList(1);
-		getRegistList()
 		//학부 선택시 해당되는 학과만 나오도록 함
 		$('#p_daehak').change(function(){
 			var facultyNo=$('#p_daehak option:selected').val();
@@ -42,7 +41,9 @@
 		});
 	});
 
-	function pageMake(obj) {
+	
+	//페이징처리 필요없음
+/* 	function pageMake(obj) {
 		var pagingInfo = obj.pagingInfo;
 
 		var str = "";
@@ -80,8 +81,12 @@
 		str += '</ul></nav>';
 
 		$("#divPage").html(str);
-	}
+	} */
 	
+	
+	
+	
+	/* 검색하면 밑에 뿌려주는 부분 */
 	//수강신청 모든 리스트(검색기능 사용시 검색할 내용만 sort)
 	function subjList(currentPage){
 		var facultyNo=$('#p_daehak').val();
@@ -142,13 +147,18 @@
 							str+="</tr>";
 						});
 					}
+ 
+				$('#gridLecture1 tbody').html(str); //조회누르면 뿌려주는 바디부분
 
-				$('#gridLecture1 tbody').html(str);
+				$('#meta_1').find('em').text(res.count); //총 조회건수
 
-				$('#meta_1').find('em').text(res.count);
-
-
-				$('.applyBt').click(function(){
+				
+				
+				
+				
+				
+ 
+			/* 	$('.applyBt').click(function(){ //수강신청부분 => 나는 이거 장바구니로 바꿔야함
 					var tdArr= new Array();
 					var checkBtn= $(this);
 
@@ -207,12 +217,12 @@
 						
 					}
 
-				});
+				}); */
 
 
 
 
-			}
+			} //석세스 끝나는 부분
 
 
 
@@ -220,7 +230,7 @@
 	}
 
 
-	//해당학생이 수강신청 한 리스트만 검색 후 출력
+	/* //해당학생이 수강신청 한 리스트만 검색 후 출력
 	function getRegistList(){
 		$.ajax({
 			url:"<c:url value='/registration/registList'/>",
@@ -284,7 +294,7 @@
 
 			}
 		});
-	}
+	} */
 
 
 
@@ -368,6 +378,7 @@
 									<option value="25">&gt;겨울계절</option>
 							</select>
 						</td>
+						
 						<th id="hide4">학부</th>
 						<td>
 							<select name="p_daehak" id="p_daehak" style="width: 100%">
@@ -462,8 +473,6 @@
 								aria-labelledby="gbox_gridLecture">
 								<thead>
 									<tr class="ui-jqgrid-labels" role="row">
-									
-									
 										<th id="gridLecture_rn" role="columnheader"
 											class="ui-state-default ui-th-column ui-th-ltr"
 											style="width: 7%;">
@@ -476,9 +485,6 @@
 												</span>
 											</div>
 										</th>
-										
-										
-										
 										<th id="gridLecture_lecture_cd_disp" role="columnheader"
 											class="ui-state-default ui-th-column ui-th-ltr"
 											style="width: 9%;"><span
@@ -645,7 +651,6 @@
 								aria-labelledby="gbox_gridLecture">
 								<thead>
 									<tr class="ui-jqgrid-labels" role="row">
-									
 										<th id="gridLecture_rn" role="columnheader"
 											class="ui-state-default ui-th-column ui-th-ltr"
 											style="width: 7%;">
@@ -658,10 +663,6 @@
 												</span>
 											</div>
 										</th>
-										
-										
-										
-										
 										<th id="gridLecture_lecture_cd_disp" role="columnheader"
 											class="ui-state-default ui-th-column ui-th-ltr"
 											style="width: 9%;"><span
@@ -781,8 +782,6 @@
 								</thead>
 							</table>
 						</div>
-						
-						
 					</div>
 					<div class="ui-jqgrid-bdiv" >
 						<div style="position: relative;">
@@ -814,3 +813,288 @@
 	</div>
 
 <%@ include file="../inc/bottom.jsp"%>
+
+
+
+
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.registration">
+	<select id="selectFaculty" resultType="facultyVo">
+		select * from faculty
+		order by faculty_name
+	</select>
+
+	<select id="selectDepartment" resultType="departmentVo"
+		parameterType="int">
+		select * from department
+		<if test="value!=0">
+			where faculty_no=#{facultyNo}
+		</if>
+		order by dep_name
+	</select>
+
+	<select id="openSubjList" resultType="openSubjListVo"
+		parameterType="registrationSearchVo">
+	
+			<if test="facultyNo!=0">and d.faculty_no=#{facultyNo}</if>
+			<if test="depNo!=0">and d.dep_no=#{depNo}</if>
+			<if test="subjName!=null">and s.subj_name like '%' || #{subjName} || '%'</if>
+			<if test="time1!='all' and time2=='all'">and rt.short_names like '%' || #{time1} || '%'</if>
+			<if test="time2!='all' and time1=='all'">and rt.short_names like '%' || #{time2} || '%'</if>
+			<if test="time1!='all' and time2!='all'">and rt.short_names like '%' || #{time} || '%'</if>
+			<if test="profName!=null">and p.prof_name like '%' || #{profName} || '%'</if>
+			<if test="openSubCode!=null">and o.open_sub_code like '%' || #{openSubCode} || '%'
+			</if>
+		group by o.open_sub_code, s.subj_name, s.personnel, p.prof_name,
+		s.credit, rt.short_names, cr.classroom_name, st.type, sy.syllabus)A)B
+		where credit = char_count + 1)C)
+		<![CDATA[ 
+		where RNUM>#{firstRecordIndex}
+		  and RNUM<=#{firstRecordIndex }+ #{recordCountPerPage}]]>
+	</select>
+	<%-- <select id="openSubjCount" resultType="int"
+		parameterType="registrationSearchVo">
+		select count(*) from
+		(select C.* from 
+		(select rownum as RNUM,B.* from
+		(select A.*, length(short_names) - length(replace(short_names, ',', ''))
+		CHAR_COUNT
+		from
+		(select o.open_sub_code, s.subj_name, s.personnel, p.prof_name, s.credit,
+		rt.short_names, cr.classroom_name, st.type, sy.syllabus,
+		count(r.stu_no) as count
+		from open_subj o join subject s
+		on
+		o.subj_code=s.subj_code
+		join professor p
+		on s.prof_no=p.prof_no
+		join
+		subj_time stime
+		on stime.open_sub_code=o.open_sub_code
+		join
+		regi_timetable rt
+		on rt.open_sub_code=o.open_sub_code
+		join classroom cr
+		on cr.classroom_code=stime.classroom_code
+		join subj_type st
+		on
+		st.type_code=s.type_code
+		join syllabus sy
+		on
+		sy.open_sub_code=o.open_sub_code
+		left join registration r
+		on r.sub_code=o.open_sub_code
+		join department d
+		on d.dep_no=substr(o.open_sub_code, 1, 3)
+		where o.close_date is null
+			<if test="facultyNo!=0">and d.faculty_no=#{facultyNo}</if>
+			<if test="depNo!=0">and d.dep_no=#{depNo}</if>
+			<if test="subjName!=null">and s.subj_name like '%' || #{subjName} || '%'</if>
+			<if test="time1!='all' and time2=='all'">and rt.short_names like '%' || #{time1} || '%'</if>
+			<if test="time2!='all' and time1=='all'">and rt.short_names like '%' || #{time2} || '%'</if>
+			<if test="time1!='all' and time2!='all'">and rt.short_names like '%' || #{time} || '%'</if>
+			<if test="profName!=null">and p.prof_name like '%' || #{profName} || '%'</if>
+			<if test="openSubCode!=null">and o.open_sub_code like '%' || #{openSubCode} || '%'
+			</if>
+		group by o.open_sub_code, s.subj_name, s.personnel, p.prof_name,
+		s.credit, rt.short_names, cr.classroom_name, st.type, sy.syllabus)A)B
+		where credit = char_count + 1)C)
+	</select>
+
+
+
+	<select id="selectRegisted" parameterType="string"
+		resultType="string">
+		select * from registration where stu_no=#{value}
+	</select>
+
+
+
+	<select id="registedList" parameterType="list"
+		resultType="openSubjListVo">
+		<if test="list!=null">
+			select o.open_sub_code, s.subj_name, s.personnel, p.prof_name,
+			s.credit, rt.short_names, cr.classroom_name, st.type, sy.syllabus,
+			count(r.stu_no) as count
+			from open_subj o join subject s
+			on o.subj_code=s.subj_code
+			join professor p
+			on s.prof_no=p.prof_no
+			join subj_time stime
+			on stime.open_sub_code=o.open_sub_code
+			join regi_timetable rt
+			on rt.open_sub_code=o.open_sub_code
+			join classroom cr
+			on cr.classroom_code=stime.classroom_code
+			join subj_type st
+			on st.type_code=s.type_code
+			join syllabus sy
+			on sy.open_sub_code=o.open_sub_code
+			left join registration r
+			on r.sub_code=o.open_sub_code
+			where o.close_date is null
+			and r.sub_code in
+			<foreach collection="list" item="item" index="index" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+			group by o.open_sub_code, s.subj_name, s.personnel, p.prof_name,
+			s.credit, rt.short_names, cr.classroom_name, st.type, sy.syllabus
+		</if>
+
+	</select>
+
+	<insert id="insertReg" parameterType="hashMap">
+		insert into
+		registration(sub_code, stu_no, classification)
+		values(#{openSubCode},
+		#{stuNo}, (select type_code from subj_type where type=#{type}))
+	</insert>
+	<insert id="insertEval" parameterType="hashMap">
+		insert into
+		evaluation(sub_code, stu_no, classification)
+		values(#{openSubCode},
+		#{stuNo}, (select type_code from subj_type where type=#{type}))
+	</insert>
+
+	<select id="countForDup" parameterType="hashMap"
+		resultType="int">
+		select count(*) from registration where
+		sub_code=#{openSubCode} and stu_no=#{stuNo}
+	</select>
+
+	<delete id="deleteReg" parameterType="hashMap">
+		delete from registration
+		where stu_no=#{stuNo} and sub_code=#{openSubCode}
+	</delete>
+
+	<delete id="deleteEval" parameterType="hashMap">
+		delete from evaluation
+		where stu_no=#{stuNo} and sub_code=#{openSubCode}
+	</delete>
+	
+	<select id="codeListByStuNo" parameterType="string" resultType="string">
+		select sub_code from registration where stu_no=#{stuNo}
+	</select>
+	
+	<select id="shortNameByCode" parameterType="String" resultType="String">
+		select short_names from regi_timetable where open_sub_code=#{openSubCode}
+	</select>
+ --%>
+</mapper>
+
+
+
+
+
+
+@Controller
+public class RegistrationController {
+	private static final Logger logger=LoggerFactory.getLogger(RegistrationController.class);
+	@Autowired
+	private RegistrationService registServ;
+	@Autowired 
+	private FileUploadUtil fileUploadUtil;
+	
+	
+	@RequestMapping(value = "/registration/openSubjList", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> openSubjList(@ModelAttribute RegistrationSearchVO regSearchVo, Model model) {
+		
+		if(!regSearchVo.getTime1().equals("all") && !regSearchVo.getTime2().equals("all")) {
+			regSearchVo.setTime(regSearchVo.getTime1()+regSearchVo.getTime2());
+		}
+		
+		logger.info("개설된 강의 읽어가기 파라미터 registrationsearchvo={}", regSearchVo);
+
+		String checkNull = "";
+		List<OpenSubjListVO> list = registServ.openSubjList(regSearchVo);
+		
+		
+		Map<String, Object> map = new HashedMap<String, Object>();
+		map.put("list", list);
+		map.put("count", count);
+		map.put("checkNull", checkNull);
+		map.put("pagingInfo", pagingInfo);
+		return map;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/registration/checkDupTime", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String checkDupTime(Principal principal,@RequestParam String shortName) {
+		MemberDetails user = (MemberDetails)((Authentication)principal).getPrincipal();
+		String stuNo=user.getOfficialNo();
+		logger.info("수강신청 시 겹치는 시간이 있는지 체크 처리 shortName={}, stuNo={}", shortName, stuNo);
+		String isDup="";
+		String[]timeArr=shortName.split(",");
+		String shortTimeNames = "";
+		List<String> codeList = registServ.codeListByStuNo(stuNo);
+		if(codeList.size() < 1) {
+			return "N";
+		}else {
+			for(int i=0; i< codeList.size(); i++) {
+				String openSubCode = codeList.get(i);
+				shortTimeNames +=  registServ.shortNameByCode(openSubCode)+",";
+			}
+		}
+		for(int i = 0; i< timeArr.length; i++) {
+			int result = shortTimeNames.indexOf(timeArr[i]);
+			if(result != -1) {
+				return "Y";
+			}else {
+				isDup="N";
+			}
+		}
+		
+		return isDup;
+	}
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

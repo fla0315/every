@@ -91,9 +91,9 @@
 							str+="</tr>";
 						});
  
-				$('#showTable tbody').html(str); //조회누르면 뿌려주는 바디부분
+				$('#gridLecture1 tbody').html(str); //조회누르면 뿌려주는 바디부분
 
-				//$('#meta_1').find('em').text(res.count); //총 조회건수
+				$('#meta_1').find('em').text(res.count); //총 조회건수
 
 
 
@@ -244,7 +244,7 @@
 			<hr>
 			<br>
 			<div class="table-wrapper-scroll-y my-custom-scrollbar">
-				<table class="table table-bordered table-striped mb-0" id="showTable">
+				<table class="table table-bordered table-striped mb-0">
 					<thead>
 						<tr>
 							<th scope="col">장바구니</th>
@@ -261,7 +261,53 @@
 						</tr>
 					</thead>
 					<tbody>
-						<!-- 뿌려주는부븐 -->
+
+						<!-- 데이터 없을 때  -->
+						<c:if test="${empty list }">
+							<tr>
+								<td colspan="6" class="align_center">개설된 과목이 없습니다.</td>
+							</tr>
+						</c:if>
+
+						<c:if test="${!empty list }">
+							<c:forEach var="map" items="${list }">
+								<tr class="align_center">
+									<!-- 장바구니 -->
+									<td>
+										<form name="frmCart" method="post"
+											action="<c:url value='/registration/open_registrationCart'/>">
+											<input type="hidden" name="openSubCode"
+												value="${map['OPEN_SUB_CODE'] }"> <input
+												type="submit" id="btCart" value="장바구니" class="buttons">
+										</form>
+									</td>
+									<!-- 년도 -->
+									<td><fmt:formatDate value="${map['OPEN_DATE']}"
+											pattern="yyyy" /></td>
+									<!-- 학기 -->
+									<td>${map['SEMESTER'] }</td>
+									<!-- 과목명 -->
+									<td>${map['SUBJ_NAME'] }</td>
+									<!-- 학부(과)  -->
+									<td>${map['FACULTY_NAME'] }</td>
+									<!-- 학년 -->
+									<!-- 이수구분 -->
+									<td>${map['GRADE'] }</td>
+									<!-- 이수구분 -->
+									<td>${map['TYPE'] }</td>
+									<!-- 학점 -->
+									<td>${map['CREDIT'] }</td>
+									<!-- 담당교수 -->
+									<td>${map['PROF_NAME'] }</td>
+									<!-- 강의실/시간 -->
+									<td>${map['TIMETABLE'] }</td>
+									<!-- 강의계획서 -->
+									<td><input type="button" id="btSyllabus" value="강의계획서"></td>
+
+								</tr>
+							</c:forEach>
+						</c:if>
+
 					</tbody>
 				</table>
 

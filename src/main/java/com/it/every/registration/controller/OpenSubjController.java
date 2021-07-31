@@ -12,7 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.every.common.RegistrationSearchVO;
+import com.it.every.common.SearchVO;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.registration.model.RegistrationVO;
@@ -34,12 +37,16 @@ public class OpenSubjController {
 	private final OpenSubjService openSubjService;
 	private final StudentRegistrationService studentRegistrationService;
 	
-	@GetMapping("/open_registration")
-	public String open_rregistration(@ModelAttribute OpenSubjVO openSubjVo , HttpSession session,  Model model) {
+	@RequestMapping("/open_registration")
+	@ResponseBody
+	public List<Map<String, Object>> open_rregistration(@ModelAttribute RegistrationSearchVO regiSearchVo, HttpSession session,  Model model) {
+		
+		
 		
 		logger.info("개설교과과정페이지");
 	
-		List<OpenSubjVO> list = openSubjService.OpenRegistraionALL();
+		List<Map<String, Object>> list = openSubjService.OpenRegistraionSearch(regiSearchVo);
+		
 		List<Map<String, Object>> facultyMap=openSubjService.selectFacultyS();
 		List<Map<String, Object>> typeMap= openSubjService.selectTypeS();
 		
@@ -47,13 +54,72 @@ public class OpenSubjController {
 		logger.info("학과 전체 ,facultyMap={}", facultyMap);
 		logger.info("이수구분 전체 ,typeMap={}", typeMap);
 		
+		
 		model.addAttribute("list", list);
 		model.addAttribute("facultyMap", facultyMap);
 		model.addAttribute("typeMap", typeMap);
 		
-		return "registration/open_registration";
+		return list;
 		
 	}
+	
+	
+	
+	
+	
+	/*
+	 * @GetMapping("/open_registration") public String
+	 * open_rregistration(@ModelAttribute OpenSubjVO openSubjVo , HttpSession
+	 * session, Model model) {
+	 * 
+	 * logger.info("개설교과과정페이지");
+	 * 
+	 * List<OpenSubjVO> list = openSubjService.OpenRegistraionALL();
+	 * List<Map<String, Object>> facultyMap=openSubjService.selectFacultyS();
+	 * List<Map<String, Object>> typeMap= openSubjService.selectTypeS();
+	 * 
+	 * logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
+	 * logger.info("학과 전체 ,facultyMap={}", facultyMap);
+	 * logger.info("이수구분 전체 ,typeMap={}", typeMap);
+	 * 
+	 * 
+	 * model.addAttribute("list", list); model.addAttribute("facultyMap",
+	 * facultyMap); model.addAttribute("typeMap", typeMap);
+	 * 
+	 * return "registration/open_registration";
+	 * 
+	 * }
+	 */
+	
+	
+//	@GetMapping("/open_registrationBysearch")
+//	public String open_registrationBysearch(@ModelAttribute SearchVO searchVo , HttpSession session,  Model model) {
+//		
+//		logger.info("년도로 검색하는 페이지");
+//		
+//		List<Map<String, Object>> facultyMap=openSubjService.selectFacultyS();
+//		List<Map<String, Object>> typeMap= openSubjService.selectTypeS();
+//		
+//		List<OpenSubjVO> searchList = openSubjService.OpenRegistraionSearch(searchVo);
+//		
+//		logger.info("학과 전체 ,facultyMap={}", facultyMap);
+//		logger.info("이수구분 전체 ,typeMap={}", typeMap);
+//		
+//		logger.info("검색하는조건으로 ,searchList={}", searchList);
+//		model.addAttribute("searchList", searchList);
+//		
+//		model.addAttribute("facultyMap", facultyMap);
+//		model.addAttribute("typeMap", typeMap);
+//		
+//		return "registration/open_registration";
+//		
+//	}
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping("/open_registrationCart")
@@ -124,8 +190,11 @@ public class OpenSubjController {
 	}
 	
 	
-	
-	
+	@RequestMapping("/Test")
+	public String test () {
+		
+		return "registration/Test";
+	}
 	
 	
 	

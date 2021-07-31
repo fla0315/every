@@ -110,6 +110,108 @@
 </style>
 
 
+<script>
+	
+	function getTimetable(){
+		$.ajax({
+			url:"<c:url value='#'/>",
+			type:"post",
+			dataType:"json",
+			success:function(res){
+				$.each(res, function(idx, item){
+					var subjName=item.subjName;
+					var shortsbjName;
+					if(subjName.length > 10){
+						shortsbjName=subjName.substr(0,9) + "...";
+					}else{
+						shortsbjName=item.subjName;
+					}
+					var subjCode=item.subjCode;
+					var profName=item.profName;
+					var explanation=item.explanation;
+					if(explanation.length > 30){
+						explanation = explanation.substr(0,29) + "...";	
+					}
+					var classroomName=item.classroomName;
+					var credit=item.credit;
+					var tdId=item.timetableCode;
+					tdId = '#'+tdId;
+					var lectureEvalFlag=item.lectureEvalFlag;
+					console.log(item.timetableCode);
+					console.log(tdId);
+					var content= "<a class='lectureInLink'>"+
+                				"<div class='lectureIn'>"+"<input type='hidden' id='idSubjName' value='"+subjName +"'>"+
+                        		"<span class='lectureName'>"+shortsbjName+"</span><br>"+
+                        		"<span class='profName'>"+profName+" 교수님</span>"+
+                        		"<input type='hidden' class='credit' value='"+credit+"'/>"+
+                        		"<input type='hidden' class='classroom' value='"+classroomName +"'/>"+
+                        		"<input type='hidden' class='explanation' value='"+explanation +"'/>"+
+                        		"<input type='hidden' class='subjCode' value='"+subjCode +"'/>"+
+                				"</div>"+
+                				"</a>";
+					$(tdId).html(content);
+				});
+				/* <td class="input" id="WE3"></td> */
+				$('.lectureInLink').click(function() {
+					$('#pop div:eq(0) .popSubjName').html($(this).find('#idSubjName').val());
+					$('#pop div:eq(1) .popCredit').html($(this).children().children('input:eq(0)').val()+'학점');
+					$('#pop div:eq(2) .popProfName').html($(this).children().children('span:eq(1)').html());
+					$('#pop div:eq(3) .popClassroom').html($(this).children().children('input:eq(1)').val());
+					$('#pop div:eq(4) .popTime').html($(this).parent().parent().children('.time').children('span').html());
+					$('#pop div:eq(5) .popExplanation').html($(this).children().children('input:eq(3)').val());
+					$('#pop div:eq(6) .subjectCode').val($(this).children().children('input:eq(4)').val());
+					$('#pop').toggleClass("hidden");
+				});
+				
+				$('#evalBt').click(function() {
+					var sendSubCode = $(this).parent().children('input').val();
+					$.ajax({
+						url : "<c:url value='/lecture/ajax/evalCheck'/>",
+						type : "post",
+						data : "subjCode=" + sendSubCode,
+						success : function(res) {
+							console.log(res);
+							if (res) {//Y이면
+								alert('해당 강의평가를 이미 완료하였습니다.');
+								event.preventDefault();
+							}else{
+								location.href = "<c:url value='/student/subjEval?subjCode="+sendSubCode+"'/>";/* 강의평가 페이지로 이동 */
+							}
+						},error : function(xhr,status,error){
+							alert(status + ", "+ error);
+						}
+						
+					});
+					
+				});
+				
+				/* $('html').click(function(e) {
+					if(!$(e.target).hasClass("pop")) { 
+						if($('#pop').hasClass("hidden")){
+							$('#pop').toggleClass("hidden");
+						}						
+						
+					} 
+				}); */
+			}
+		});
+	}
+	
+	$(function() {
+		getTimetable();
+		$('#pop').addClass("hidden");
+		
+		
+		/* $('.lectureInLink').click(function() {
+			$('#pop').toggleClass("hidden");
+		}); */
+		
+		
+	});
+</script>
+
+
+
 <body>
     <div class="container">
         <div id="timeTableDiv">

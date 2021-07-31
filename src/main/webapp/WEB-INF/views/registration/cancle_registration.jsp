@@ -46,7 +46,7 @@
 
 									<td>
 										<form name="frmRegistration" method="post"
-											action="<c:url value='/registration/request_registrationDelete'/>">
+											action="<c:url value='/registration/cancle_registration'/>">
 											<input type="hidden" name="openSubCode"
 												value="${myMap['OPEN_SUB_CODE'] }"> <input
 												type="submit" id="btDelete" value="삭제" class="buttons">
