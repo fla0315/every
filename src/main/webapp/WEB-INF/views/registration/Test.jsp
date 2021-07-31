@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/regi_lec.css'/>">
@@ -862,7 +862,7 @@
 		where RNUM>#{firstRecordIndex}
 		  and RNUM<=#{firstRecordIndex }+ #{recordCountPerPage}]]>
 	</select>
-	<%-- <select id="openSubjCount" resultType="int"
+	<select id="openSubjCount" resultType="int"
 		parameterType="registrationSearchVo">
 		select count(*) from
 		(select C.* from 
@@ -990,7 +990,7 @@
 	<select id="shortNameByCode" parameterType="String" resultType="String">
 		select short_names from regi_timetable where open_sub_code=#{openSubCode}
 	</select>
- --%>
+
 </mapper>
 
 
@@ -1098,3 +1098,4 @@ public class RegistrationController {
 
 
 
+ --%>

@@ -35,15 +35,15 @@
 		join open_subj os
 		on os.subj_code = st.subj_code
 		where 1=1
-			<if test="facultyNo!=0">and d.faculty_no=#{facultyNo}</if> <!-- 년도 -->
-			<if test="depNo!=0">and d.dep_no=#{depNo}</if> <!-- 학기 -->
-			<if test="subjName!=null">and s.subj_name like '%' || #{subjName} || '%'</if> <!-- 학년 -->
-			<if test="time1!='all' and time2=='all'">and rt.short_names like '%' || #{time1} || '%'</if> <!-- 이수구분 -->
-			<if test="time2!='all' and time1=='all'">and rt.short_names like '%' || #{time2} || '%'</if> <!-- 학과 --> <!-- 학과는 인풋박스로 할까? -->
-			<if test="time1!='all' and time2!='all'">and rt.short_names like '%' || #{time} || '%'</if> <!-- 전공은 셀렉트 박스?  -->
-			<if test="profName!=null">and p.prof_name like '%' || #{profName} || '%'</if> <!-- 교과목번호  -->
+			<!-- <if test="facultyNo!=0">and d.faculty_no=#{facultyNo}</if> 년도
+			<if test="depNo!=0">and d.dep_no=#{depNo}</if> 학기
+			<if test="subjName!=null">and s.subj_name like '%' || #{subjName} || '%'</if> 학년
+			<if test="time1!='all' and time2=='all'">and rt.short_names like '%' || #{time1} || '%'</if> 이수구분
+			<if test="time2!='all' and time1=='all'">and rt.short_names like '%' || #{time2} || '%'</if> 학과 학과는 인풋박스로 할까?
+			<if test="time1!='all' and time2!='all'">and rt.short_names like '%' || #{time} || '%'</if> 전공은 셀렉트 박스? 
+			<if test="profName!=null">and p.prof_name like '%' || #{profName} || '%'</if> 교과목번호 
 			<if test="openSubCode!=null">and o.open_sub_code like '%' || #{openSubCode} || '%'
-			</if>
+			</if> -->
 	</select>
 
 
