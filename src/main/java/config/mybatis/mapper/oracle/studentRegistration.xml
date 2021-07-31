@@ -51,7 +51,7 @@
 		on rs.open_sub_code = os.open_sub_code
 		join student stu
 		on stu.stu_no = rs.stu_no
-		where stu.student_id=#{studentId} and st.semester = '2학기' and st.subj_year = '2021'
+		where stu.student_id=#{studentId}
 	</select>
 		
 			
@@ -75,7 +75,7 @@
 		on rsc.open_sub_code = os.open_sub_code
 		join student stu
 		on stu.stu_no = rsc.stu_no
-		where stu.student_id=#{studentId} and st.semester = '2학기' and st.subj_year = '2021'
+		where stu.student_id=#{studentId}
 	</select>	
 		
 			

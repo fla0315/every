@@ -75,26 +75,29 @@
 			/* 	pageMake(res);
 				$('#meta_1 em').text(count); */
 				
-				$.each(res.list, function(idx, item){
+				$("#subjectInfo").empty();
+				
+				$.each(res, function(idx, item){
+					console.log(item)
 					str+="<tr class='' role='row' id=''>"; //테이블 여는거 
-						str+="<td role='gridcell' style='height: 0px; width: 7%;'><button type='button' class='applyBt'>신청</button></td>"; //장바구니
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.subjYear+"</td>"; //년도
-						str+="<td role='gridcell' style='height: 0px; width: 18%; text-align: center'>"+item.semester+"</td>"; //학기
-						str+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.subjName+"</td>"; //과목명
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.facultyName+"</td>"; //학부(과)
-						str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.grade+"</td>";  //학년
-						str+="<td role='gridcell' style='height: 0px; width: 14%;'>" +item.type+"</td>"; //이수구분
-						str+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.CREDIT+"</td>"; //학점
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>한국어</td>"; //담당교수
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>한국어</td>"; //강의실 / 시간
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>한국어</td>"; //강의 계획서
+					str+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmCart' method='post' action='<c:url value='/registration/open_registrationCart'/>'><input type='hidden' name='openSubCode' value='"+item.OPEN_SUB_CODE+"'> <input type='submit' id='btCart' value='장바구니' class='buttons'> </form> </td>"; //장바구니
+						str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.SUBJ_YEAR+"</td>"; //년도
+						str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.SEMESTER+"학기"+"</td>"; //학기
+						str+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SUBJ_NAME+"</td>"; //과목명
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.FACULTY_NAME+"</td>"; //학부(과)
+						str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.GRADE+"학년"+"</td>";  //학년
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>" +item.TYPE+"</td>"; //이수구분
+						str+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.CREDIT+"학점"+"</td>"; //학점
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //담당교수
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'><button type='button' class='applyBt'>강의계획서</button></td>"; //장바구니
 						/* str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+
 						"<a href='<c:url value='/registration/download?fileName="+fileName+"&originalFileName="+originalFileName+"'/>'>"+
 						originalFileName+"</a></td>"; */
 					str+="</tr>"; //테이블 닫는거
 				});
- 
-				$('#showTable tbody').append(str); //조회누르면 뿌려주는 바디부분
+ 				
+				$('#subjectInfo ').append(str); //조회누르면 뿌려주는 바디부분
 
 				//$('#meta_1').find('em').text(res.count); //총 조회건수
 
@@ -105,20 +108,25 @@
 		});
 	}
 
+	/* str+="<td role='gridcell' style='height: 0px; width: 7%;'><button type='button' class='applyBt'>신청</button></td>"; //장바구니
+	str+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmCart' method='post' action='<c:url value='/registration/open_registrationCart'/>'><input type='hidden' name='openSubCode' value='"+item.OPEN_SUB_CODE+"'> <input type='submit' id='btCart' value='장바구니' class='buttons'> </form> </td>"; //장바구니
+ */
+	/*
+	
+	<td>
+		<form name="frmCart" method="post"
+			action="<c:url value='/registration/open_registrationCart'/>">
+			<input type="hidden" name="openSubCode"
+				value="${map['OPEN_SUB_CODE'] }"> <input
+				type="submit" id="btCart" value="장바구니" class="buttons">
+		</form>
+	</td>
 
-
-
-
-
+	*/
 
 
 
 </script>
-
-
-
-
-
 
 
 <div class="container-fluid px-4" style="background-color: white;">
@@ -200,8 +208,8 @@
 					<!-- 2행 시작 -->
 					<tr>
 						<td><span class=""><label for="과목명">과목명</label></span></td>
-							<td><input type="text" name="subjName" id="subjName" size="15"
-							placeholder="검색어 (Search Word)"></td>
+							<td><input type="text" name="subjName" id="subjName" size="20"
+							placeholder="과목명을 입력해주세요"></td>
 
 					
 						<td style="padding-left: 10px"><span class=""><label
@@ -217,21 +225,8 @@
 						</td>
 
 
-						<td style="padding-left: 10px"><span class="ctl_label">
-								<label for="searchSbNo">교과목번호/명</label>
-						</span></td>
-
-						<td><input type="text" id="searchSbNo" name="searchSbNo"
-							value="" class="ctl_input" title="교과목번호/명" style="width: 60px"
-							size="30" tabindex="1" />
-							<button>
-								<i class="fas fa-search"></i>
-							</button> <input type="text" id="searchNm" name="searchNm" value=""
-							class="ctl_input" style="width: 120px" readonly="readonly"
-							size="30" tabindex="2" /></td>
-
 						<td>
-							<div class="buttonset">
+							<div class="buttonset" style="float:right">
 								<button class="btn-search"  id="selectBt" >조회</button>
 							</div>
 						</td>
@@ -265,9 +260,9 @@
 							<th scope="col">강의계획서</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="subjectInfo">
 					
-					
+						
 					
 						<!-- 뿌려주는부븐 -->
 						

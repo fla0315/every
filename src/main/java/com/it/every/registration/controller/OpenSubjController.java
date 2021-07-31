@@ -166,7 +166,7 @@ public class OpenSubjController {
 		List<Map<String, Object>> Clist = studentRegistrationService.selectCart(userid);
 		logger.info("장바구니 전체 ,Clist.size()={}", Clist.size());
 		model.addAttribute("Clist", Clist);
-
+		System.out.println(Clist);
 		return "registration/registration_cart";
 
 	}
