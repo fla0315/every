@@ -7,29 +7,7 @@
 
 	
 	$(function(){
-	/* 	subjList(1) */;
-		//학부 선택시 해당되는 학과만 나오도록 함
-		/* $('#FACULTY_NAME').change(function(){
-			var facultyName=$('#FACULTY_NAME option:selected').val();
-			$.ajax({
-				url:"<c:url value='/registration/open_registration'/>",
-				type:"post",
-				data:{"facultyName":facultyName},
-				success:function(res){
-					var str="<select name='major' id='major' style='width: 100%'>";
-					str+="<option value='0'>ALL</option>";
-	
-					$.each(res, function(index, item){
-						str+="<option value='"+item.FACULTY_NO+"'>"+item.FACULTY_NAME+"</option>";
-					});
-						str+="</select>";
-						$('#major_1').html(str);
-				}
-	
-			});
-		}); */
-	
-		//조회버튼 누르면 동작하는 부분
+		
 		$('#selectBt').click(function(){
 			event.preventDefault();
 			subjList();
@@ -149,6 +127,7 @@
 							<!-- 년도  -->
 							<div id="">
 								<select name="subjYear" id="subjYear">
+									<option value='0'>All</option>
 									<option value='2021'>2021</option>
 									<option value='2020'>2020</option>
 									<option value='2019'>2019</option>
@@ -165,6 +144,7 @@
 						<td>
 							<select id="semester" name="semester"
 								class="ctl_select" tabindex="1" title="학기">
+									<option value="0">All</option>
 									<option value="1">1학기</option>
 									<option value="2">2학기</option>
 							</select>

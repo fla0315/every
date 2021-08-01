@@ -133,7 +133,7 @@
 			<!-- ---------------------------------------------------------------------------------------------------------------------------  -->
 			<table border="0" cellpadding="0" cellspacing="0" style="width: 70%;">
 				<tr>
-<!-- 
+
 					<td><span class=""><label for="년도">년도</label></span></td>
 					<td>
 						<div id="">
@@ -162,7 +162,7 @@
 					<td>
 						<button id="selectBt">조회</button>
 					</td>
- -->
+
 				</tr>
 
 				<tr>
@@ -212,7 +212,7 @@
 				</tr>
 			</thead>
 			<tbody id="subjectInfo">
-
+<%-- 
 				<c:if test="${empty list }">
 					<tr>
 						<td colspan="6" class="align_center">조회된 장학금이 없습니다.</td>
@@ -238,7 +238,7 @@
 							<td><input type="button" id="btScholarship" value="출력"></td>
 						</tr>
 					</c:forEach>
-				</c:if>
+				</c:if> --%>
 
 			</tbody>
 		</table>

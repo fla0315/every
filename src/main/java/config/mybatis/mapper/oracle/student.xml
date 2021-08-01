@@ -42,18 +42,21 @@
 	
 	
 	<!-- 장학금 조회 -->
-	<select id="selectByScholarship" parameterType="String" resultType="map">
-			<!-- select *
-			from scholarshipView a
-			join student s
-			on a.stu_no = s.stu_no
-			where s.student_id=#{studentId} -->
-			select sch.* , a.award_no, a.stu_no, a.awarding_date
+	<select id="selectByScholarship" parameterType="RegistrationSearchVO" resultType="map">
+			select *
 			from scholarship sch join award a
 			on sch.scholarship_no = a.scholarship_no
 			join student s
 			on a.stu_no = s.stu_no
 			where s.student_id=#{studentId}
+ 			<!-- <if test='subjYear!=0'>and subj_year=#{subjYear} </if> -->
+		    <if test='semester!=0'>and semester=#{semester}</if>
+		<!-- 	select sch.* , a.award_no, a.stu_no, a.awarding_date
+			from scholarship sch join award a
+			on sch.scholarship_no = a.scholarship_no
+			join student s
+			on a.stu_no = s.stu_no
+			where s.student_id=#{studentId} -->
 	</select>	
 	
 	<!-- 쪽지용 이름으로 검색 -->

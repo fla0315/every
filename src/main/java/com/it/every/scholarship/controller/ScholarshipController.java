@@ -1,4 +1,4 @@
-package com.it.every.scholarship;
+package com.it.every.scholarship.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -9,8 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.every.common.RegistrationSearchVO;
+import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.student.model.StudentService;
 
 import lombok.RequiredArgsConstructor;
@@ -44,18 +48,46 @@ public class ScholarshipController {
 	}
 	
 	
+	
+	
+	@RequestMapping("/scholarshipListSearch")
+	@ResponseBody
+	public List<Map<String, Object>> scholarshipList11(@ModelAttribute RegistrationSearchVO regiSearchVo,
+			HttpSession session, Model model) {
+
+		logger.info("개설교과과정페이지");
+		logger.info("regiSearchVo={}",regiSearchVo);
+
+		List<Map<String, Object>> list = studentService.selectByScholarship(regiSearchVo);
+		System.out.println(list);
+		logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
+
+		model.addAttribute("list", list);
+		
+		
+		return list;
+
+	}
+	
+	
+	
 	@RequestMapping("/scholarshipList")
-	public String scholarshipList(HttpSession session, Model model) {
+	public String scholarshipList(@ModelAttribute RegistrationSearchVO  regiSearchVo, HttpSession session, Model model) {
 
 		String userid = (String)session.getAttribute("user_id");
 		//String userid ="fla0315";
 		
+		regiSearchVo.setStudentId(userid);
+		
+		  regiSearchVo.setSemester("0"); 
+		  regiSearchVo.setYear("0");
 		logger.info("장학금 조회 , 매개변수 userid={}", userid);
 		
-		
-		List<Map<String, Object>> list = studentService.selectByScholarship(userid);
-	
+		List<Map<String, Object>> list = studentService.selectByScholarship(regiSearchVo);
+		System.out.println(list);
+		System.out.println("==================================");
 		Map<String, Object> map = studentService.selectStudentDeptView(userid);
+		System.out.println(map);
 		
 		logger.info("장학금 조회 결과 list.size={}", list.size());
 		

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.every.common.RegistrationSearchVO;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.registration.model.RegistrationVO;
@@ -34,6 +35,26 @@ public class RequestRegistrationController {
 	private final StudentRegistrationService studentRegistrationService;
 	
 	
+	@RequestMapping("/request_registration")
+	@ResponseBody
+	public List<OpenSubjVO> open_registration(@ModelAttribute RegistrationSearchVO regiSearchVo,
+			HttpSession session, Model model) {
+
+		logger.info("개설교과과정페이지");
+		logger.info("regiSearchVo={}",regiSearchVo);
+
+		List<OpenSubjVO> list = openSubjService.OpenRegistraionSearch(regiSearchVo);
+
+		logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
+
+		model.addAttribute("list", list);
+		
+		
+		return list;
+
+	}
+	
+	
 	@GetMapping("/request_registration")
 	public String registration(@ModelAttribute OpenSubjVO openSubjVo ,HttpSession session, Model model) {
 		String userid = (String)session.getAttribute("user_id");
@@ -48,20 +69,20 @@ public class RequestRegistrationController {
 		List<Map<String, Object>> facultyMap=openSubjService.selectFacultyS();
 		List<Map<String, Object>> typeMap= openSubjService.selectTypeS();
 		List<Map<String, Object>> Mylist = studentRegistrationService.selectMyRegistarion(userid);
-		
 		List<Map<String, Object>> Clist = studentRegistrationService.selectCart(userid);
+		
 		logger.info("장바구니 전체 ,Clist.size()={}", Clist.size());
-		
-		model.addAttribute("Clist", Clist);
-		
 		logger.info("개설교과과정페이지 전체 ,Mylist.size()={}", Mylist.size());
 		logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
 		logger.info("학과 전체 ,facultyMap={}", facultyMap);
 		logger.info("이수구분 전체 ,typeMap={}", typeMap);
-		model.addAttribute("Mylist", Mylist);
+		
+		System.out.println("TypeMap--");
 		model.addAttribute("list", list);
 		model.addAttribute("facultyMap", facultyMap);
 		model.addAttribute("typeMap", typeMap);
+		model.addAttribute("Mylist", Mylist);
+		model.addAttribute("Clist", Clist);
 		
 		return "registration/request_registration";
 		

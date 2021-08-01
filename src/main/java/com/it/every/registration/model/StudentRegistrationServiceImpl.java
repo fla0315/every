@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.it.every.common.RegistrationSearchVO;
 import com.it.every.registrationCart.model.RegistrationCartVO;
 
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,8 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	private final StudentRegistrationDAO studentRegistrationDao;
 
 	@Override
-	public List<Map<String, Object>> searchMyRegistarion(String userid) {
-		return studentRegistrationDao.searchMyRegistarion(userid);
+	public List<Map<String, Object>> searchMyRegistarion(RegistrationSearchVO registrationSearchVo) {
+		return studentRegistrationDao.searchMyRegistarion(registrationSearchVo);
 	}
 
 	

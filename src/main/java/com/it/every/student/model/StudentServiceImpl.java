@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.it.every.common.RegistrationSearchVO;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -70,8 +72,8 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectByScholarship(String userid) {
-		return studentDao.selectByScholarship(userid);
+	public List<Map<String, Object>> selectByScholarship(RegistrationSearchVO regiSearchVo) {
+		return studentDao.selectByScholarship(regiSearchVo);
 	}
 
 

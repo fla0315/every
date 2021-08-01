@@ -2,98 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/student_top.jsp"%>
 
-
-
-
-
 <script type="text/javascript">
-
-
-
-$(function(){
-	
-		$('#selectBt').click(function(){
-			event.preventDefault();
-			subjList();
-		});
-	});
-
-
-	
-	/* 에이젝스로 받는 거  */
-	function subjList(){
-		var subjYear=$('#subjYear').val(); //년도
-		var semester=$('#semester').val(); //학기
-		var grade=$('#grade').val(); //학년
-		var type=$('#type').val(); //이수구분
-		var facultyName=$('#facultyName').val(); //학과
-		var subjName=$('#subjName').val(); //과목명
-		
-		
-		console.log(subjYear);
-		console.log(semester);
-		console.log(grade);
-		console.log(type);
-		console.log(facultyName);
-		console.log(subjName);
-		
-		
-		$.ajax({
-			url:"<c:url value='/registration/open_registration'/>",
-			data:{
-				"facultyName":facultyName, //위에서 만들어준거
-				"subjName":subjName,
-				"type":type,
-				"grade":grade,
-				"semester":semester,
-				"subjYear":"0"
-			},
-			dataType:"json",
-			type:"post",
-			success:function(res){
-				console.log(res)
-				var str = "";
-				
-			/* 	pageMake(res);
-				$('#meta_1 em').text(count); */
-				
-				$("#subjectInfo").empty();
-				
-				$.each(res, function(idx, item){
-					console.log(item)
-					str+="<tr class='' role='row' id=''>"; //테이블 여는거 
-					str+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmRegistration' method='post' action='<c:url value='/registration/request_registrationInsert'/>'><input type='hidden' name='openSubCode' value='"+item.OPEN_SUB_CODE+"'> <input type='submit' value='수강신청' class='buttons'> </form> </td>"; //장바구니
-						str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.SEMESTER+"학기"+"</td>"; //학기
-						str+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SUBJ_NAME+"</td>"; //과목명
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.FACULTY_NAME+"</td>"; //학부(과)
-						str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.GRADE+"학년"+"</td>";  //학년
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>" +item.TYPE+"</td>"; //이수구분
-						str+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.CREDIT+"학점"+"</td>"; //학점
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+"/"+item.PERSONNEL+"</td>"; //담당교수
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //담당교수
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'><button type='button' class='applyBt'>강의계획서</button></td>"; //장바구니
-						/* str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+
-						"<a href='<c:url value='/registration/download?fileName="+fileName+"&originalFileName="+originalFileName+"'/>'>"+
-						originalFileName+"</a></td>"; */
-						
-						
-					str+="</tr>"; //테이블 닫는거
-				});
-					
-				$('#subjectInfo ').append(str); //조회누르면 뿌려주는 바디부분
-	
-				//$('#meta_1').find('em').text(res.count); //총 조회건수
-	
-			}, //석세스 끝나는 부분
-			error: function(err) {
-				console.log(err)
-			}
-		});
-	}
-	
-
-
 	$(function(){
 		var openSubCode = []
 		$('#btCTR').click(function(){
@@ -114,7 +23,7 @@ $(function(){
 					location.reload();
 				},
 				error : function(){
-					alert('수강신청 실패');
+					alert('수강신청 성공');
 					location.reload();
 				}
 			});
@@ -136,110 +45,101 @@ $(function(){
 					<td class="">
 						<!-- ********************** 검색조건 테이블 시작 ********************** -->
 						<table border="0" cellspacing="5">
-					<tr>
-						<!-- <!-- 년도는 5개로 고정 -->
-						<!-- <td id="hide1"><span class=""><label for="년도"></label></span></td>
-						<td>
-							년도 
-							<div id="">
-								<select name="subjYear" id="subjYear">
-									<option value='0'>All</option>
-									<option value='2021'>2021</option>
-									<option value='2020'>2020</option>
-									<option value='2019'>2019</option>
-									<option value='2018'>2018</option>
-									<option value='2017'>2017</option>
-									<option value='2016'>2016</option>
-								</select>
-							</div>
-						</td>  -->
+							<tr>
+								<!-- 년도는 5개로 고정 -->
+								<td><span class=""><label for="년도">년도</label></span></td>
+								<td>
+									<!-- 년도  -->
+									<div id="">
+										<select>
+											<option value=''>2021</option>
+										</select>
 
-						<!-- 학기 -->
-						<td style="padding-left: 10px"><span class=""><labelfor="학기">학기</label></span></td>
+									</div>
+								</td>
 
-						<td>
-							<select id="semester" name="semester"
-								class="ctl_select" tabindex="1" title="학기">
-									<option value="0">All</option>
-									<option value="1">1학기</option>
-									<option value="2">2학기</option>
-							</select>
-						</td>
+								<!-- 학기 -->
+								<td style="padding-left: 10px"><span class=""><labelfor="학기">학기</label></span></td>
 
+								<td><select id="searchCptnDcd" name="searchCptnDcd"
+									class="ctl_select" tabindex="1" title="이수구분">
+										<option value="">1학기</option>
+								</select></td>
 
-						<!-- 학년 -->
-						<td style="padding-left: 10px"><span class=""><label
-								for="학년">학년</label></span></td>
-						<td>
-							<select style="vertical-align: middle;"
-								id="grade" name="grade" title="학년" class=""
-								notnull="true">
-									<option value="0">All</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-							</select>
-						</td>
+								<td style="padding-left: 10px"><span class=""><label
+										for="학년">학년</label></span></td>
+								<td><select style="vertical-align: middle;"
+									id="searchCuriShyy" name="searchCuriShyy" title="학년" class=""
+									notnull="true">
+										<option value="">ALL</option>
+										<option value="">1</option>
+										<option value="">2</option>
+										<option value="">3</option>
+										<option value="">4</option>
+								</select></td>
 
+								<!-- 이수구분 -->
+								<td><span class="ctl_label"> <label
+										for="searchCptnDcd">이수구분</label></span></td>
+								<td><select id="searchCptnDcd" name="searchCptnDcd"
+									class="ctl_select" tabindex="1" title="이수구분">
+										<option value="">ALL</option>
+										<c:forEach var="typeMap" items="${typeMap }">
+											<option value="${typeMap['TYPE_CODE']}">${typeMap['TYPE'] }</option>
+										</c:forEach>
+								</select></td>
+							</tr>
+							<!-- 1행 완료 -->
 
+							<!-- 2행 시작 -->
+							<tr>
+								<td><span class=""><label for="학과">학과</label></span></td>
 
+								<td><select id="searchCptnDcd" name="searchCptnDcd"
+									class="ctl_select" tabindex="1" title="이수구분">
+										<option value="">ALL</option>
+										<c:forEach var="fMap" items="${facultyMap }">
+											<option value="${fMap['FACULTY_NO']}">${fMap['FACULTY_NAME'] }</option>
+										</c:forEach>
+								</select></td>
 
-						<!-- 이수구분 -->
-						<td><span class="ctl_label"> <label
-								for="searchCptnDcd">이수구분</label></span></td>
-						<td><select id="type" name="type"
-							class="ctl_select" tabindex="1" title="이수구분">
-								<option value="0">All</option>
-								<c:forEach var="typeMap" items="${typeMap}">
-									<option value="${typeMap['TYPE_CODE']}">${typeMap['TYPE']}</option>
-								</c:forEach>
-						</select></td>
-					</tr>
-					<!-- 1행 완료 -->
-						
-						
-						
-					<!-- 여기는 과목명으로하자 -->
-					<!-- 2행 시작 -->
-					<tr>
-						<td><span class=""><label for="과목명">과목명</label></span></td>
-							<td><input type="text" name="subjName" id="subjName" size="20"
-							placeholder="과목명을 입력해주세요"></td>
-
-					
-						<td style="padding-left: 10px"><span class=""><label
-								for="학부">학과/학부</label></span></td>
-						<td id="major_1">
-							<select id="facultyName" name="facultyName"
-								class="ctl_select" tabindex="1" title="전공">
-									<option value="0">All</option>
-								<c:forEach var="fMap" items="${facultyMap}">
-									<option value="${fMap['FACULTY_NAME']}">${fMap['FACULTY_NAME']}</option>
-								</c:forEach>
-							</select>
-						</td>
+								<%--  <td style="padding-left:10px"><span class=""><label for="전공">전공</label></span></td>
+                                    <td>
+                                          <select id="searchCptnDcd" name="searchCptnDcd" class="ctl_select" tabindex="1" title="이수구분">
+									            <option value="">ALL</option>
+									            <c:forEach var="fMap" items="${facultyMap }">
+										            <option value="${fMap['FACULTY_NO']}">${fMap['FACULTY_NAME'] }</option>            	
+									            </c:forEach>                     
+                                        </select>
+                                    </td> --%>
 
 
-						<td>
-							<div class="buttonset" style="float:right">
-								<button class="btn-search"  id="selectBt" >조회</button>
-							</div>
-						</td>
+								<td style="padding-left: 10px"><span class="ctl_label">
+										<label for="searchSbNo">교과목번호/명</label>
+								</span></td>
 
-					</tr>
-					<!-- 2행완료 -->
+								<td><input type="text" id="searchSbNo" name="searchSbNo"
+									value="" class="ctl_input" title="교과목번호/명" style="width: 60px"
+									size="30" tabindex="1" />
+									<button>
+										<i class="fas fa-search"></i>
+									</button> 
+									<input type="text" id="searchNm" name="searchNm" value="" class="ctl_input" style="width: 120px" readonly="readonly" size="30" tabindex="2" /></td>
 
-				</table>
-	</div>
-		</div>
-		
+								<td><input type="button" value="조회"></td>
+
+							</tr>
+							<!-- 2행완료 -->
+
+						</table>
+
 						<hr> <br>
 						<div class="table-wrapper-scroll-y my-custom-scrollbar">
 							<table class="table table-bordered table-striped mb-0">
 								<thead>
 									<tr>
 										<th scope="col">수강신청</th>
+										<th scope="col">년도</th>
 										<th scope="col">학기</th>
 										<th scope="col">과목명</th>
 										<th scope="col">학부(과)</th>
@@ -252,11 +152,56 @@ $(function(){
 										<th scope="col">강의계획서</th>
 									</tr>
 								</thead>
-								<tbody id="subjectInfo">
-								
-								<!-- 여기에 데이터 뿌려주는 곳  -->
-								
-								
+								<tbody>
+
+									<!-- 데이터 없을 때  -->
+									<c:if test="${empty list }">
+										<tr>
+											<td colspan="6" class="align_center">개설된 과목이 없습니다.</td>
+										</tr>
+									</c:if>
+
+									<c:if test="${!empty list }">
+										<c:forEach var="map" items="${list }">
+											<tr class="align_center">
+
+
+
+												<td>
+													<form name="frmRegistration" method="post"
+														action="<c:url value='/registration/request_registrationInsert'/>">
+														<input type="hidden" name="openSubCode"
+															value="${map['OPEN_SUB_CODE'] }"> <input
+															type="submit" value="수강신청" class="buttons">
+													</form>
+												</td>
+												<!-- 년도 -->
+												<td><fmt:formatDate value="${map['OPEN_DATE']}"
+														pattern="yyyy" /></td>
+												<!-- 학기 -->
+												<td>${map['SEMESTER'] }</td>
+												<!-- 과목명 -->
+												<td>${map['SUBJ_NAME'] }</td>
+												<!-- 학부(과)  -->
+												<td>${map['FACULTY_NAME'] }</td>
+												<!-- 학년 -->
+												<!-- 이수구분 -->
+												<td>${map['GRADE'] }</td>
+												<!-- 이수구분 -->
+												<td>${map['TYPE'] }</td>
+												<!-- 학점 -->
+												<td>${map['CREDIT'] }</td>
+												<!-- 총원 -->
+												<td>1 / ${map['PERSONNEL'] }</td>
+												<!-- 담당교수 -->
+												<td>${map['PROF_NAME'] }</td>
+												<!-- 강의실/시간 -->
+												<td>${map['TIMETABLE'] }</td>
+												<!-- 강의계획서 -->
+												<td><input type="button" id="btSyllabus" value="강의계획서"></td>
+											</tr>
+										</c:forEach>
+									</c:if>
 								</tbody>
 							</table>
 						</div> <!-- --------------------------------------------------------------수강신청을 위한 개설교과목 조회 끝---------------------------------------------------------------------  -->
@@ -399,9 +344,4 @@ $(function(){
 
 								</tbody>
 							</table>
-						</div>
-						
-						
-						
-						
-						 <%@ include file="../inc/bottom.jsp"%>
+						</div> <%@ include file="../inc/bottom.jsp"%>

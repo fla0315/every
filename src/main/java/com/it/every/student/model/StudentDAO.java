@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.it.every.common.RegistrationSearchVO;
 import com.it.every.professor.model.ProfessorVO;
 
 @Mapper
@@ -21,7 +22,7 @@ public interface StudentDAO {
 	List<Map<String, Object>> selectByStuId (String userid);
 	Map<String, Object> selectByTuitionNo (String userid ,int tuitionNo);
 	//장학금조회
-	List<Map<String, Object>> selectByScholarship (String userid);
+	List<Map<String, Object>> selectByScholarship (RegistrationSearchVO regiSearchVo);
 	
 	//쪽지조회
 	List<StudentVO> searchForChat(String keyword);

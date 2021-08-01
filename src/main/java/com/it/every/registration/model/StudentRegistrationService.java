@@ -3,11 +3,13 @@ package com.it.every.registration.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.every.common.RegistrationSearchVO;
 import com.it.every.registrationCart.model.RegistrationCartVO;
 
 public interface StudentRegistrationService {
 	
-	List<Map<String ,Object>> searchMyRegistarion(String userid);
+	List<Map<String ,Object>> searchMyRegistarion(RegistrationSearchVO registrationSearchVo); //나의수강신청내역조회
+	
 	int insertMyRegistarion(RegistrationVO registrationVo);
 	int deleteMyRegistarion(RegistrationVO registrationVo); //수강취소
 	List<Map<String ,Object>> selectMyRegistarion(String userid); //해당학기 수강신청 내역들만 조회
