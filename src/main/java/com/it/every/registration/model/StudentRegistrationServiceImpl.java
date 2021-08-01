@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.it.every.common.RegistrationSearchVO;
 import com.it.every.registrationCart.model.RegistrationCartVO;
@@ -55,6 +56,25 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	@Override
 	public int deleteCart(RegistrationCartVO registrationCartVo) {
 		return studentRegistrationDao.deleteCart(registrationCartVo);
+	}
+
+
+	@Override
+	public int checkDuplicate(RegistrationVO registrationVo) {
+
+			int count = studentRegistrationDao.checkDuplicate(registrationVo);
+			
+			return count;
+		
+	}
+
+
+	@Override
+	public int checkDuplicateCart(RegistrationCartVO registrationCartVo) {
+		
+		int count = studentRegistrationDao.checkDuplicateCart(registrationCartVo);
+		
+		return count;
 	}
 	
 	

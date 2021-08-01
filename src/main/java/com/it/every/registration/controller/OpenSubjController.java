@@ -12,13 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.every.common.RegistrationSearchVO;
-import com.it.every.common.SearchVO;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
-import com.it.every.registration.model.RegistrationVO;
 import com.it.every.registration.model.StudentRegistrationService;
 import com.it.every.registrationCart.model.RegistrationCartVO;
 
@@ -106,29 +105,106 @@ public class OpenSubjController {
 //	}
 
 	@RequestMapping("/open_registrationCart")
-	public String insertCart(HttpSession session, @ModelAttribute RegistrationCartVO registrationCartVo, Model model) {
+	public String insertCart(HttpSession session, @ModelAttribute RegistrationCartVO registrationCartVo, @RequestParam String openSubCode, Model model) {
 
 		String userid = (String) session.getAttribute("user_id");
 		String stuNo = (String) session.getAttribute("no");
+		logger.info("장바구니 user_id={},no={},registrationCartVo={},openSubCode={}", userid, stuNo,registrationCartVo,openSubCode);
+
+		registrationCartVo.setOpenSubCode(openSubCode);
 		registrationCartVo.setStuNo(stuNo);
-		logger.info("장바구니 user_id={},no={}", userid, stuNo);
-
-		int cnt = studentRegistrationService.insertCart(registrationCartVo);
+		System.out.println(openSubCode);
+		System.out.println(stuNo);
+		
+		int result =0;
+		System.out.println(result+"초기값 0");
+		result = studentRegistrationService.checkDuplicateCart(registrationCartVo);
+		
+		System.out.println(result);
+		System.out.println("===========");
 		String msg = "장바구니!", url = "/registration/open_registrationCart";
-		if (cnt > 0) {
-			msg = "저장완료";
+		if(result>0) {
+			//실패
+			msg = "이미 등록된 과목입니다.";
 			url = "/registration/open_registration";
-		} else {
-			msg = "저장실패.";
-			url = "/registration/open_registration";
-		}
+			
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+		}else{
+			
+			int cnt = studentRegistrationService.insertCart(registrationCartVo);
+			if (cnt > 0) {
+				msg = "저장완료";
+				url = "/registration/open_registration";
+			} else {
+				msg = "저장실패.";
+				url = "/registration/open_registration";
+			}
 
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+		}
+		
 
 		return "common/message";
 	}
 
+	
+	/*
+	 
+	 	@RequestMapping("/checkUserid")
+		public String checkUserid(@RequestParam String userid, 	@RequestParam String type ,Model model) {
+		//1
+		logger.info("아이디 중복확인, 파라미터 userid={}, type={}", userid,type);
+		
+		//2
+		int result=0;
+		if(userid!=null && !userid.isEmpty()) {
+			if(type.equals("user")) {
+				result=memberService.checkDuplicate(userid);
+			}else if(type.equals("admin")){
+				result=managerService.checkDuplicate(userid);
+			}
+			logger.info("아이디 중복확인 결과, result={}", result);
+		}
+		
+		//3
+		model.addAttribute("result", result);
+		model.addAttribute("USABLE_ID", MemberService.USABLE_ID);
+		model.addAttribute("UNUSABLE_ID", MemberService.UNUSABLE_ID);
+		
+		return "member/checkUserid";
+	}
+	 
+	 
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/open_registrationCartDelete")
 	public String myregistrationDelete(HttpSession session, @ModelAttribute RegistrationCartVO registrationCartVo,
 			Model model) {
@@ -144,10 +220,10 @@ public class OpenSubjController {
 		String msg = "취소!", url = "/registration/open_registration";
 		if (cnt > 0) {
 			msg = "취소완료.";
-			url = "/registration/open_registration";
+			url = "/registration/registration_cart";
 		} else {
 			msg = "취소실패.";
-			url = "/registration/open_registration";
+			url = "/registration/registration_cart";
 		}
 
 		model.addAttribute("msg", msg);

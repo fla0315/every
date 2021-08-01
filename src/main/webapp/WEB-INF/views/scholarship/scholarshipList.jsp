@@ -23,7 +23,7 @@
 	
 		
 		$(function(){
-			$('#btScholarship').click(function(){
+			$('input[name=btTuition]').click(function(){
 				
 				open('http://localhost:9091/every/scholarship/scholarshipPDF','chk',
 				 'width=1000,height=1000,left=0,top=0,location=yes,resizable=yes');
@@ -235,7 +235,7 @@
 									pattern="#,###" />원 <!-- 금액 --></td>
 							<td><fmt:formatDate value="${map['AWARDING_DATE']}"
 									pattern="yyyy-MM-dd" /> <!-- 납입 날짜 --></td>
-							<td><input type="button" id="btScholarship" value="출력"></td>
+							<td><input type="button" name="btTuition" value="출력"></td>
 						</tr>
 					</c:forEach>
 				</c:if>

@@ -21,4 +21,10 @@ public interface StudentRegistrationDAO {
 	int insertCart(RegistrationCartVO registrationCartVo); //수강신청하기
 	List<Map<String ,Object>> selectCart(String userid); //해당학기 장바구니 내역들만 조회
 	int deleteCart(RegistrationCartVO registrationCartVo); //장바구니 취소
+	
+	
+	int checkDuplicate(RegistrationVO registrationVo);
+	int checkDuplicateCart(RegistrationCartVO registrationCartVo);
+	
+	
 }

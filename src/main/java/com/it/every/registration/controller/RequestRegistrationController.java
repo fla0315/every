@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -116,9 +117,9 @@ public class RequestRegistrationController {
 			if(cnt>0) {
 				registrationCartVo.setOpenSubCode(codeArr[i]);
 				cnt = studentRegistrationService.deleteCart(registrationCartVo);
-				  msg="수강신청완료."; 
+				  msg="수강신청완료!!!."; 
 				  url="/registration/request_registration"; 
-			  }else {
+			  }else{
 				  msg="수강신청실패."; 
 				  url="/registration/request_registration"; 
 			  }
@@ -136,25 +137,37 @@ public class RequestRegistrationController {
 		String stuNo = (String)session.getAttribute("no");
 		registrationVo.setStuNo(stuNo);
 		registrationCartVo.setStuNo(stuNo);
+			
 		
-		//String userid ="fla0315";
-		logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
-		  
-		  String msg ="수상신청 완료!" , url ="/registration/request_registration";
-		  int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
-		  registrationCartVo.setOpenSubCode(registrationVo.getOpenSubCode());
-		  
-		  if(cnt>0){ 
-			  cnt = studentRegistrationService.deleteCart(registrationCartVo);
-			  msg="수강신청완료."; 
+		String msg ="수상신청" , url ="/registration/request_registration";
+		int count = studentRegistrationService.checkDuplicate(registrationVo);
+		if(count > 0) {
+			//실패
+			  msg="이미 수강신청을 완료 했습니다."; 
 			  url="/registration/request_registration"; 
-		  }else {
-			  msg="수강신청실패."; 
-			  url="/registration/request_registration"; 
-		  }
+			  model.addAttribute("msg", msg); 
+			  model.addAttribute("url", url);
+		}else {
+			//여기서 수강신청
+			
+			logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
+			  int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
+			  registrationCartVo.setOpenSubCode(registrationVo.getOpenSubCode());
+			  
+			  if(cnt>0){ 
+				  cnt = studentRegistrationService.deleteCart(registrationCartVo);
+				  msg="수강신청완료!!!!!!!!!."; 
+				  url="/registration/request_registration"; 
+			  }else{
+				  msg="수강신청실패."; 
+				  url="/registration/request_registration"; 
+			  }
+			  model.addAttribute("msg", msg); 
+			  model.addAttribute("url", url);
+			
+		}
+	
 		
-		  model.addAttribute("msg", msg); 
-		  model.addAttribute("url", url);
 		 
 		return "common/message";
 	}

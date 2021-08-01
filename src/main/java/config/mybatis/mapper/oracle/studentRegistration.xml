@@ -87,6 +87,17 @@
 		where stu_No= #{stuNo} and open_sub_code =#{openSubCode}
 	</delete>
 	
+	<select id="checkDuplicate" parameterType="RegistrationCartVO" resultType="int">
+		select count(*) from registration
+		where stu_no=#{stuNo} and open_sub_code=#{openSubCode}
+	</select>
+	
+	<select id="checkDuplicateCart" parameterType="RegistrationCartVO" resultType="int">
+		select count(*) from registrationcart
+		where stu_no=#{stuNo} and open_sub_code=#{openSubCode}
+	</select>
+	
+	
 	
 	
 </mapper>

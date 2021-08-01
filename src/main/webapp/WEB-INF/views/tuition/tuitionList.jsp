@@ -17,7 +17,7 @@
 		}); */
 		
 		$(function(){
-			$('#btTuition').click(function(){
+			$('input[name=btTuition]').click(function(){
 				open('http://localhost:9091/every/tuition/tuitionPDF?tuitionNo=${map["TUITION_NO"] }','chk',
 				 'width=1000,height=1000,left=0,top=0,location=yes,resizable=yes');	
 			});
@@ -58,11 +58,6 @@
 					<td><span class=""><label for="학기">전공</label></span></td>
 					<td><input type="text" id="major" style="width: 50%" value="${map['MAJOR']}" readonly></td>
 					<td><span class=""><label for="학기"> </label></span></td>
-					<td>
-						<button>조회</button>
-						<button>출력</button>
-
-					</td>
 					<!-- 등록금번호 학번 학기 금액, 납부여부, 납부일   -->
 				</tr>
 			</table>
@@ -71,9 +66,9 @@
 
 	<hr><br>
 
-	<div class="container">
-		<table class="box2">
-			<caption>등록금 조회</caption>
+	
+	<div class="table-wrapper-scroll-y my-custom-scrollbar">
+		<table class="table table-bordered table-striped mb-0" id="showTable">
 			<colgroup>
 				<col style="width: 10%;" />
 				<col style="width: 10%;" />
@@ -120,7 +115,7 @@
 								<fmt:formatDate value="${map['DEPOSIT_DATE']}" pattern="yyyy-MM-dd"/> <!-- 납입 날짜 -->
 							</td>
 							<td>
-							<input type="button" class="btn btn-sm btn-secondary" id="btTuition" value="출력" formaction="<c:url value='/tuition/tuitionPDF?tuitionNo=${map["TUITION_NO"] }'/>">
+							<input type="button" class="btn btn-sm btn-secondary" name="btTuition" value="출력" formaction="<c:url value='/tuition/tuitionPDF?tuitionNo=${map["TUITION_NO"] }'/>">
 							</td>
 							
 						</tr>
