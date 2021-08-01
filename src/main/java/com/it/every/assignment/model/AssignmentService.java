@@ -5,4 +5,6 @@ import java.util.Map;
 
 public interface AssignmentService {
 	List<AssignmentVO> showAssignment(int assignNo);
+	Map<String, Object> checkAssignByStuNo(AssignmentVO vo);
+	int gradeForAssign(AssignmentVO vo);
 }

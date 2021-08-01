@@ -16,4 +16,14 @@ public class AssignmentServiceImple implements AssignmentService {
 	public List<AssignmentVO> showAssignment(int assignNo) {
 		return assignmentDao.showAssignment(assignNo);
 	}
+
+	@Override
+	public Map<String, Object> checkAssignByStuNo(AssignmentVO vo) {
+		return assignmentDao.checkAssignByStuNo(vo);
+	}
+
+	@Override
+	public int gradeForAssign(AssignmentVO vo) {
+		return assignmentDao.gradeForAssign(vo);
+	}
 }

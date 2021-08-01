@@ -72,4 +72,9 @@ public class ProfessorController {
 		
 		return "common/message";
 	}
+	
+	@RequestMapping("/lecture/openLectureList")
+	public void openLectureList() {
+		logger.info("개설된 담당 강의 목록");
+	}
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../../inc/prof_top.jsp" %>
-<!-- 성적 입력창 -->
+<!-- 과제 조회창 -->
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <!-- Bootstrap CSS -->
@@ -32,6 +32,11 @@ body {
 .ccdetail a:hover{
 	color:gray;
 }
+
+.red a {
+	color:red;
+}
+
 </style>
 	<article>
 		<div class="container col-lg-10" role="main">
@@ -61,7 +66,7 @@ body {
 						<div class="card-header">
 							<i class="far fa-file-alt"></i> 개설교과목별 목록 / ${open }
 						</div>
-						<div class="card-body" style="height:450px">
+						<div class="card-body" style="height:600px">
 							<table class="table-bordered text-center" style="width: 100%">
 								<colgroup>
 									<col style="width: 20%" />
@@ -104,7 +109,7 @@ body {
 						<div class="card-header">
 							<i class="far fa-file-alt"></i> 과제별 목록
 						</div>
-						<div class="card-body" style="height:450px">
+						<div class="card-body" style="height:600px">
 							<table class="table-bordered text-center" id="datatablesSimple" style="width: 100%">
 								<colgroup>
 									<col style="width: 20%" />
@@ -119,7 +124,7 @@ body {
 										<th>이름</th>
 										<th>제출여부</th>
 										<th>제출시간</th>
-										<th>점수</th>
+										<th data-sortable=false>점수</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -132,12 +137,13 @@ body {
 										<c:forEach var="map" items="${sList }">
 												<tr>
 													<td>${map['STU_NO'] }</td>
-													<td class="ccdetail"><a href="#">${map['NAME'] }</a></td>
+													<td class="ccdetail">${map['NAME'] }</td>
 											<c:forEach var="vo" items="${assignList }">
 													<c:if test="${vo.stuNo eq map['STU_NO'] }">
 														<td>O</td>
 														<td><fmt:formatDate value="${vo.applyDate }" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-														<td>${vo.assignPoint }</td>
+															<c:if test="${vo.assignPoint=='' }"><td class="red"><a href="#" onclick="window.open('${pageContext.request.contextPath }/professor/assign/assignDetail?stuNo=${vo.stuNo}&assignNo=${vo.assignNo}', 'detail', 'top=100, left=600, width=480, height=350, location=yes, resizable=yes')">미채점</a></td></c:if>
+															<c:if test="${vo.assignPoint>0 }"><td class="ccdetail"><a href="#" onclick="window.open('${pageContext.request.contextPath }/professor/assign/assignDetail?stuNo=${vo.stuNo}&assignNo=${vo.assignNo}', 'detail', 'top=100, left=600, width=480, height=350, location=yes, resizable=yes')">${vo.assignPoint }</a></td></c:if>
 													</c:if>
 											</c:forEach>
 												</tr>

@@ -3,27 +3,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<%@ include file="../inc/top.jsp"%>
 <script type="text/javascript"
 	src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
 	
 <style type ="text/css">
-	
 	.reg_box {
 		border: 1px solid #cce1e4;
-		margin: 100px auto; 
+		border-radius: 30px;
+		margin: 20% auto; 
 		padding: 30px; 
 		height: auto; 
 		width: 450px;
-		box-shadow: 0px 0px 14px 10px rgba(161,140,183,0.3);
+		background-color: rgba(255, 255, 255, 0.8);
+	}
+	
+	.log{
+		width:100%;
 	}
 	.col-md-8 border{
-		margin:100px auto;
 		padding: 10px;
 		width: 600px;
 	}
-</style>	
 	
+	.id, .password{
+		margin:0 auto;
+	}
+</style>	
 	
 <script type="text/javascript">
 
@@ -182,58 +187,46 @@ $('#pwd').keyup(function(){
 </script>
 
 <div class="reg_box">
-<div class="container">
 <div>
 	<article class="align_center">
 		<form name="register" method="post" action="<c:url value='/reg/checklogin'/>">
-			<div class="col-11 border" style="width:800">
 			<fieldset>
-			
-				<legend>로그인</legend>
+				<br>
+				<div class="text-center">
+					<h4>로그인</h4>
+				<br><br>
+					<input type="radio" name="chk_info" id="chk_info" value="student">학생
+					<input type="radio" name="chk_info" id="chk_info" value="professor">교수
+					<input type="radio" name="chk_info" id="chk_info" value="admin">관리자 
+				</div>
 				<br>
 			<div class="log">
 				<!-- 아이디 -->
-					
 				<div class="id" style="width: 200px;">
 					<label for="userid">아이디</label> <br> <input type="text"
-						class="user_id" id="user_id" name="user_id" placeholder="ID" required
+						class="user_id form-control" id="user_id" name="user_id" placeholder="ID" required
 						style="ime-mode: inactive"> <br> <span
 						class="check_id" id="check_id" style=""></span>
 				</div>
-				<br>
-
 				<!-- 비밀번호 -->
 				<div class="password" style="width: 200px;">
 					<label for="pass">비밀번호</label> 
 						<br> 
-						<input type="password" class="form" id="pwd" name="pwd" placeholder="password" required
+						<input type="password" class="form form-control" id="pwd" name="pwd" placeholder="Password" required
 						style="ime-mode: inactive"> 
 				</div>
 			</div>
-				<br>
-				<input type="radio" name="chk_info" id="chk_info" value="student">학생
-				<input type="radio" name="chk_info" id="chk_info" value="admin">관리자 
-				<input type="radio" name="chk_info" id="chk_info" value="professor">교수
-				
-				<br>
-				<br>
-
-				<div class="center"></div>
-				<input type="submit" id="submit" class="btn btn-danger" value="로그인"  style="width:80px;">
-			
+				<br><br>
+				<div class="text-center">
+				<input type="submit" id="submit" class="btn btn-dark" value="로그인"  style="width:80px;">
+				</div>
 			</fieldset>
 				<br>
-			</div>
 			 <input type ="hidden" name="chkId" id="chkId"> 
 			  <input type ="hidden" name="chkpwd" id="chkpwd">
 			  <!-- radio바꿨을때 초기화용 -->
 			   <input type ="hidden" name="changeradio" id="changeradio">
-
 		</form>
 	</article>
 	</div>
-	
 </div>
-</div>
-
-<%@ include file="../inc/bottom.jsp"%>

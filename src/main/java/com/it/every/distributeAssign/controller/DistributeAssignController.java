@@ -102,4 +102,28 @@ public class DistributeAssignController {
 			model.addAttribute("assignList", assignList);
 		}
 	}
+	
+	@GetMapping("/assignDetail")
+	public void assignDetail(@RequestParam String stuNo, @RequestParam int assignNo, Model model) {
+		logger.info("제출된 과제 채점화면, 파라미터 stuNo={}, assignNo={}", stuNo, assignNo);
+		AssignmentVO vo = new AssignmentVO();
+		vo.setStuNo(stuNo);
+		vo.setAssignNo(assignNo);
+		
+		Map<String, Object> map = assignmentService.checkAssignByStuNo(vo);
+		logger.info("map={}", map);
+		model.addAttribute("map", map);
+	}
+	
+	@PostMapping("/assignDetail")
+	public String assignDetail_post(@ModelAttribute AssignmentVO vo) {
+		logger.info("과제 채점 등록, vo={}", vo);
+		
+		int cnt = assignmentService.gradeForAssign(vo);
+		if(cnt>0) {
+			logger.info("점수 반영 성공");
+		}
+		
+		return "/professor/assign/assignmentCheck?openSubCode="+vo.getOpenSubCode()+"&assignNo="+vo.getAssignNo();
+	}
 }
