@@ -43,9 +43,9 @@ public class RequestRegistrationController {
 
 		logger.info("개설교과과정페이지");
 		logger.info("regiSearchVo={}",regiSearchVo);
-
+		System.out.println(regiSearchVo);
 		List<OpenSubjVO> list = openSubjService.OpenRegistraionSearch(regiSearchVo);
-
+		System.out.println(list);
 		logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
 
 		model.addAttribute("list", list);
@@ -90,7 +90,7 @@ public class RequestRegistrationController {
 	
 	
 	
-	
+	//장바구니에서 수강신청
 	@RequestMapping("/request_registrationCartInsert")
 	@ResponseBody
 	public String myregistrationCartInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo, @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode,Model model) {
@@ -101,7 +101,7 @@ public class RequestRegistrationController {
 		registrationCartVo.setStuNo(stuNo);
 		
 		//String userid ="fla0315";
-		logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
+		logger.info("장바구니에서 수강신청페이지 페이지 vo={} ",registrationVo);
 		
 		System.out.println(openSubCode);
 		
@@ -112,7 +112,6 @@ public class RequestRegistrationController {
 			registrationVo.setOpenSubCode(codeArr[i]);
 			
 			int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
-			
 			if(cnt>0) {
 				registrationCartVo.setOpenSubCode(codeArr[i]);
 				cnt = studentRegistrationService.deleteCart(registrationCartVo);
@@ -130,44 +129,53 @@ public class RequestRegistrationController {
 	}
 	
 	@RequestMapping("/request_registrationInsert")
-	public String myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo , @ModelAttribute RegistrationCartVO registrationCartVo ,Model model) {
+	public String myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode ,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		registrationVo.setStuNo(stuNo);
 		registrationCartVo.setStuNo(stuNo);
-			
+		registrationVo.setOpenSubCode(openSubCode);
 		
-		String msg ="수상신청" , url ="/registration/request_registration";
-		int count = studentRegistrationService.checkDuplicate(registrationVo);
-		if(count > 0) {
-			//실패
-			  msg="이미 수강신청을 완료 했습니다."; 
+		int personnel = studentRegistrationService.countPersonnel(registrationVo);
+		int countCount = studentRegistrationService.countCount(registrationVo);
+		System.out.println(personnel+"총원");
+		System.out.println(countCount+"현재 등록인원");
+		
+		String msg =" " , url ="/registration/request_registration";
+	
+		if(countCount>=personnel) {
+			  msg="정원초과하였습니다."; 
 			  url="/registration/request_registration"; 
 			  model.addAttribute("msg", msg); 
 			  model.addAttribute("url", url);
 		}else {
-			//여기서 수강신청
-			
-			logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
-			  int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
-			  registrationCartVo.setOpenSubCode(registrationVo.getOpenSubCode());
-			  
-			  if(cnt>0){ 
-				  cnt = studentRegistrationService.deleteCart(registrationCartVo);
-				  msg="수강신청완료!!!!!!!!!."; 
+			int count = studentRegistrationService.checkDuplicate(registrationVo);
+			if(count > 0) {
+				//실패
+				  msg="이미 수강신청을 완료 했습니다."; 
 				  url="/registration/request_registration"; 
-			  }else{
-				  msg="수강신청실패."; 
-				  url="/registration/request_registration"; 
-			  }
-			  model.addAttribute("msg", msg); 
-			  model.addAttribute("url", url);
-			
+				  model.addAttribute("msg", msg); 
+				  model.addAttribute("url", url);
+			}else {
+				//여기서 수강신청
+				logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
+				  int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
+				  registrationCartVo.setOpenSubCode(registrationVo.getOpenSubCode());
+				  
+				  if(cnt>0){ 
+					  cnt = studentRegistrationService.deleteCart(registrationCartVo);
+					  msg="수강신청완료!."; 
+					  url="/registration/request_registration"; 
+				  }else{
+					  msg="수강신청실패."; 
+					  url="/registration/request_registration"; 
+				  }
+				  model.addAttribute("msg", msg); 
+				  model.addAttribute("url", url);
+				
+			}
 		}
-	
-		
-		 
 		return "common/message";
 	}
 

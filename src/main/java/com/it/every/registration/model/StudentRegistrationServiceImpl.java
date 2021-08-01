@@ -76,6 +76,18 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 		
 		return count;
 	}
+
+
+	@Override
+	public int countPersonnel(RegistrationVO registrationVo) {
+		return studentRegistrationDao.countPersonnel(registrationVo);
+	}
+
+
+	@Override
+	public int countCount(RegistrationVO registrationVo) {
+		return studentRegistrationDao.countCount(registrationVo);
+	}
 	
 	
 	

@@ -69,7 +69,7 @@ $(function(){
 						str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.GRADE+"학년"+"</td>";  //학년
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>" +item.TYPE+"</td>"; //이수구분
 						str+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.CREDIT+"학점"+"</td>"; //학점
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+"/"+item.PERSONNEL+"</td>"; //담당교수
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.COUNT+"/"+item.PERSONNEL+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'><button type='button' class='applyBt'>강의계획서</button></td>"; //장바구니
@@ -84,7 +84,7 @@ $(function(){
 				$('#subjectInfo ').append(str); //조회누르면 뿌려주는 바디부분
 	
 				//$('#meta_1').find('em').text(res.count); //총 조회건수
-	
+				
 			}, //석세스 끝나는 부분
 			error: function(err) {
 				console.log(err)

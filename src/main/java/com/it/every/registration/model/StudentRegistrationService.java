@@ -27,6 +27,8 @@ public interface StudentRegistrationService {
 	int checkDuplicate(RegistrationVO registrationVo);
 	int checkDuplicateCart(RegistrationCartVO registrationCartVo);
 
-	
-	
+	//총원 카운트
+	int countPersonnel(RegistrationVO registrationVo);
+	int countCount(RegistrationVO registrationVo);
+		
 }

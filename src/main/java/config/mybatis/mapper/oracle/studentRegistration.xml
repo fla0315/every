@@ -97,6 +97,42 @@
 		where stu_no=#{stuNo} and open_sub_code=#{openSubCode}
 	</select>
 	
+	<!-- 각 수강코드별 학생수 뽑아오는거 -->
+	<select id="countPersonnel" parameterType="registrationVo" resultType="int">
+		select st.personnel
+		from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join
+		(select open_sub_code, count(*) as count
+		from registration
+		group by open_sub_code) g
+		on os.open_sub_code=g.open_sub_code
+		where os.open_sub_code=#{openSubCode}
+	</select>
+	<!-- 각 수강코드별 학생 총 수  뽑아오는거 -->
+	<select id="countCount" parameterType="registrationVo" resultType="int">
+		select g.count
+		from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join
+		(select open_sub_code, count(*) as count
+		from registration
+		group by open_sub_code) g
+		on os.open_sub_code=g.open_sub_code
+		where os.open_sub_code=#{openSubCode}
+	</select>
+	
+	
 	
 	
 	

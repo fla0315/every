@@ -40,9 +40,9 @@ public class OpenSubjController {
 
 		logger.info("개설교과과정페이지");
 		logger.info("regiSearchVo={}",regiSearchVo);
-
+		System.out.println(regiSearchVo);
 		List<OpenSubjVO> list = openSubjService.OpenRegistraionSearch(regiSearchVo);
-
+		System.out.println(list);
 		logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
 
 		model.addAttribute("list", list);

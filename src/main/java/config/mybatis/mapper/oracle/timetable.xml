@@ -6,17 +6,27 @@
 
 	
 	<!-- 시간표 수정해야함  -->
- <!-- 	<select id="" parameterType="string" resultType="">
-		select s.subj_code, s.subj_name, s.explanation, s.credit, p.prof_name, c.classroom_name, st.timetable_code, r.lecture_eval_flag
-		from subject s join registration r
-		on s.subj_code=r.sub_code
-		join professor p 
-		on p.prof_no=s.prof_no
-		join subj_time st
-		on st.open_sub_code=r.sub_code
-		join classroom c
-		on c.classroom_code=st.classroom_code
-		where r.stu_no=#{stuNo} 
+ <!-- 	<select id="selectTimetable" parameterType="string" resultType="">
+		select * from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join registration rs
+		on rs.open_sub_code = os.open_sub_code
+		join student stu
+		on stu.stu_no = rs.stu_no
+		join subj_time s
+		on rs.open_sub_code = s.open_sub_code 
+		join timetable t 
+		on t.timetable_code = s.timetable_code
+		join classroom class 
+		on class.classroom_code = s.classroom_code
+		join building b 
+		on b.building_code = class.building_code
+		where stu.student_id=#{studentId}
 	</select>  -->
 	
 	
