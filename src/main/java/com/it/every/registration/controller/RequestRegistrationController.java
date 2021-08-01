@@ -50,7 +50,6 @@ public class RequestRegistrationController {
 
 		model.addAttribute("list", list);
 		
-		
 		return list;
 
 	}
