@@ -6,7 +6,7 @@
 
 	
 	<!-- 시간표 수정해야함  -->
- <!-- 	<select id="selectTimetable" parameterType="string" resultType="">
+  	<select id="selectTimetableByID" parameterType="string" resultType="map">
 		select * from 
 		subject st join subj_type sj
 		on st.type_code= sj.type_code
@@ -27,7 +27,7 @@
 		join building b 
 		on b.building_code = class.building_code
 		where stu.student_id=#{studentId}
-	</select>  -->
+	</select> 
 	
 	
 	

@@ -68,10 +68,7 @@
 						str+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.CREDIT+"학점"+"</td>"; //학점
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //담당교수
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'><button type='button' class='applyBt'>강의계획서</button></td>"; //장바구니
-						/* str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+
-						"<a href='<c:url value='/registration/download?fileName="+fileName+"&originalFileName="+originalFileName+"'/>'>"+
-						originalFileName+"</a></td>"; */
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'><form name='frmCart' method='post' action='<c:url value='/registration/download'/>'><input type='hidden' name='openSubCode' value='"+item.OPEN_SUB_CODE+"'> <input type='submit' id='btCart' value='강의계획서' class='buttons'> </form> </td>";
 					str+="</tr>"; //테이블 닫는거
 				});
  				
@@ -85,22 +82,6 @@
 			}
 		});
 	}
-
-	/* str+="<td role='gridcell' style='height: 0px; width: 7%;'><button type='button' class='applyBt'>신청</button></td>"; //장바구니
-	str+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmCart' method='post' action='<c:url value='/registration/open_registrationCart'/>'><input type='hidden' name='openSubCode' value='"+item.OPEN_SUB_CODE+"'> <input type='submit' id='btCart' value='장바구니' class='buttons'> </form> </td>"; //장바구니
- */
-	/*
-	
-	<td>
-		<form name="frmCart" method="post"
-			action="<c:url value='/registration/open_registrationCart'/>">
-			<input type="hidden" name="openSubCode"
-				value="${map['OPEN_SUB_CODE'] }"> <input
-				type="submit" id="btCart" value="장바구니" class="buttons">
-		</form>
-	</td>
-
-	*/
 
 
 

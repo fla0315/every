@@ -24,8 +24,34 @@
 	
 	
 	
-	<!-- 개설교과과목 전체조회 + 검색  -->
+	<!-- 개설교과과목 전체조회 + 검색 + 강의계획서 추가한 것 -->
 	<select id="OpenRegistraionSearch" resultType="map"  parameterType="RegistrationSearchVO">
+		select sj.type, st.* ,prof.prof_name ,os.* ,g.* ,s.*
+		from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join
+		    (select open_sub_code, count(*) as count
+		    from registration
+		    group by open_sub_code) g
+		on os.open_sub_code=g.open_sub_code
+		join syllabus s
+		on s.open_sub_code=os.open_sub_code
+		where 1=1
+		    <if test='subjYear!=0'>and subj_year=#{subjYear} </if> 
+		    <if test='semester!=0'>and semester=#{semester}</if> 
+			<if test='subjName!="" and subjName!=null'>and subj_name like '%' || #{subjName} || '%'</if> 
+			<if test='grade!=0'>and grade like '%' || #{grade} || '%'</if> 
+			<if test='type!=0'>and st.type_code = #{type} </if>
+			<if test='facultyName!="0"'>and st.faculty_name like '%' || #{facultyName} || '%'</if> 
+	</select>
+	
+	<!-- 개설교과과목 전체조회 + 검색 백업본 -->
+	<!-- <select id="OpenRegistraionSearch" resultType="map"  parameterType="RegistrationSearchVO">
 		select sj.type, st.* ,prof.prof_name ,os.* ,g.*
 		from 
 		subject st join subj_type sj
@@ -46,7 +72,7 @@
 			<if test='grade!=0'>and grade like '%' || #{grade} || '%'</if> 
 			<if test='type!=0'>and st.type_code = #{type} </if>
 			<if test='facultyName!="0"'>and st.faculty_name like '%' || #{facultyName} || '%'</if> 
-	</select>
+	</select> -->
 
 
 

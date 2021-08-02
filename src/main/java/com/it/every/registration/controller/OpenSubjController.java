@@ -1,8 +1,11 @@
 package com.it.every.registration.controller;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,12 +17,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.it.every.common.ConstUtil;
+import com.it.every.common.FileUploadUtil;
 import com.it.every.common.RegistrationSearchVO;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.registration.model.StudentRegistrationService;
 import com.it.every.registrationCart.model.RegistrationCartVO;
+import com.it.every.syllabus.model.SyllabusVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,7 +39,9 @@ public class OpenSubjController {
 
 	private final OpenSubjService openSubjService;
 	private final StudentRegistrationService studentRegistrationService;
-
+	private final FileUploadUtil fileUploadUtil;
+	
+	
 	@RequestMapping("/open_registration")
 	@ResponseBody
 	public List<OpenSubjVO> open_rregistration(@ModelAttribute RegistrationSearchVO regiSearchVo,
@@ -79,30 +88,6 @@ public class OpenSubjController {
 	  
 	  }
 	  
-	 
-
-//	@GetMapping("/open_registrationBysearch")
-//	public String open_registrationBysearch(@ModelAttribute SearchVO searchVo , HttpSession session,  Model model) {
-//		
-//		logger.info("년도로 검색하는 페이지");
-//		
-//		List<Map<String, Object>> facultyMap=openSubjService.selectFacultyS();
-//		List<Map<String, Object>> typeMap= openSubjService.selectTypeS();
-//		
-//		List<OpenSubjVO> searchList = openSubjService.OpenRegistraionSearch(searchVo);
-//		
-//		logger.info("학과 전체 ,facultyMap={}", facultyMap);
-//		logger.info("이수구분 전체 ,typeMap={}", typeMap);
-//		
-//		logger.info("검색하는조건으로 ,searchList={}", searchList);
-//		model.addAttribute("searchList", searchList);
-//		
-//		model.addAttribute("facultyMap", facultyMap);
-//		model.addAttribute("typeMap", typeMap);
-//		
-//		return "registration/open_registration";
-//		
-//	}
 
 	@RequestMapping("/open_registrationCart")
 	public String insertCart(HttpSession session, @ModelAttribute RegistrationCartVO registrationCartVo, @RequestParam String openSubCode, Model model) {
@@ -149,62 +134,6 @@ public class OpenSubjController {
 		return "common/message";
 	}
 
-	
-	/*
-	 
-	 	@RequestMapping("/checkUserid")
-		public String checkUserid(@RequestParam String userid, 	@RequestParam String type ,Model model) {
-		//1
-		logger.info("아이디 중복확인, 파라미터 userid={}, type={}", userid,type);
-		
-		//2
-		int result=0;
-		if(userid!=null && !userid.isEmpty()) {
-			if(type.equals("user")) {
-				result=memberService.checkDuplicate(userid);
-			}else if(type.equals("admin")){
-				result=managerService.checkDuplicate(userid);
-			}
-			logger.info("아이디 중복확인 결과, result={}", result);
-		}
-		
-		//3
-		model.addAttribute("result", result);
-		model.addAttribute("USABLE_ID", MemberService.USABLE_ID);
-		model.addAttribute("UNUSABLE_ID", MemberService.UNUSABLE_ID);
-		
-		return "member/checkUserid";
-	}
-	 
-	 
-	 */
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping("/open_registrationCartDelete")
 	public String myregistrationDelete(HttpSession session, @ModelAttribute RegistrationCartVO registrationCartVo,
 			Model model) {
@@ -253,4 +182,107 @@ public class OpenSubjController {
 		return "registration/Test";
 	}
 
+	
+	/*===============================================================================*/
+	//강의계획서 업로드
+	
+	/*
+	 	@RequestMapping(value="/write.do", method =RequestMethod.POST)
+	public String write_post(@ModelAttribute ReBoardVO vo, 
+			HttpServletRequest request, Model model) {
+		//1
+		logger.info("글등록 처리, 파라미터   vo={}", vo);
+		
+		//2
+		//파일 업로드 처리
+		String fileName="", originalFileName="";
+		long fileSize=0;
+		try {
+			List<Map<String, Object>> list 
+				= fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_FILE_FLAG);
+			for(int i=0;i<list.size();i++) {
+				Map<String, Object> map =list.get(i);
+				fileName=(String) map.get("fileName");
+				originalFileName=(String) map.get("originalFileName");
+				fileSize= (Long) map.get("fileSize");				
+			}
+			
+			logger.info("파일 업로드 성공, fileName={}, fileSize={}", 
+					fileName, fileSize);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		vo.setFileName(fileName);
+		vo.setFileSize(fileSize);
+		vo.setOriginalFileName(originalFileName);
+		
+		String msg="", url="";
+		int cnt=reBoardService.insertReBoard(vo);		
+		logger.info("글쓰기 결과, cnt={}", cnt);
+		
+		if(cnt>0) {
+			msg="글쓰기 처리되었습니다.";
+			url="/reBoard/list.do";
+		}else {
+			msg="글쓰기 실패.";
+			url="/reBoard/write.do";
+		}
+		
+		//3
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	 */
+	
+	
+	/*===============================================================================*/
+	//강의 계획서 다운로드
+	
+	@RequestMapping("/download")
+	public ModelAndView download(@ModelAttribute SyllabusVO syllabusVo,	HttpServletRequest request) {
+		//1
+		logger.info("다운로드 처리, 파라미터 syllabusVo={}", syllabusVo);
+		//3
+		Map<String, Object> map = new HashMap<>();
+		//=====다운로드 맵
+		System.out.println(map);
+		
+		String uploadPath=fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+		File file = new File(uploadPath, syllabusVo.getSyllabus()); //실라버스 파일 이름 가져오는거 
+		map.put("file", file);
+		
+		ModelAndView mav = new ModelAndView("downloadView", map);
+		return mav;
+	}
+	 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

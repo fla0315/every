@@ -22,16 +22,19 @@ public interface ConstUtil {
 	
 	//자료실 - 파일 저장 경로
 	String FILE_UPLOAD_PATH="pds_upload";
-	String FILE_UPLOAD_PATH_TEST="E:\\workspace_list\\spboot_WS\\springherb\\src\\main\\webapp\\pds_upload";
-	
-	//관리자 페이지 - 상품 등록시 상품 이미지 저장 경로
-	String IMAGE_FILE_UPLOAD_PATH="pd_images";
-	String IMAGE_FILE_UPLOAD_PATH_TEST="D:\\workspace_list\\spboot_WS\\springherb\\src\\main\\webapp\\pd_images";
+	//String FILE_UPLOAD_PATH_TEST="E:\\workspace_list\\spboot_WS\\springherb\\src\\main\\webapp\\pds_upload";
+	String FILE_UPLOAD_PATH_TEST="C:\\Users\\yeongrim kim\\OneDrive - ikw.kr\\문서\\GitHub\\every\\src\\main\\webapp\\WEB-INF\\pds_upload";
 	
 	
-	//자료실 업로드인지, 상품 등록시 업로드인지 구분값
-	int UPLOAD_FILE_FLAG=1; //자료실 업로드
-	int UPLOAD_IMAGE_FLAG=2; //상품 등록시 이미지 업로드
+	/*
+	  //관리자 페이지 - 상품 등록시 상품 이미지 저장 경로 String IMAGE_FILE_UPLOAD_PATH="pd_images";
+	  String IMAGE_FILE_UPLOAD_PATH_TEST= "D:\\workspace_list\\spboot_WS\\springherb\\src\\main\\webapp\\pd_images";
+	 */
+	
+	
+	//강의계획서 업로드인지,  과제업로드
+	int UPLOAD_FILE_FLAG=1; //강의계획서 업로드
+	int UPLOAD_IMAGE_FLAG=2; //과제 업로드
 	
 	
 	
