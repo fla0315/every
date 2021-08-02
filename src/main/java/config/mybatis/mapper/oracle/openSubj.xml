@@ -8,6 +8,14 @@
 		where prof_no=#{prof_no}
 	</select>
 	
+	<select id="listByProfNo" parameterType="String" resultType="map">
+		select o.*, s.subj_name, s.personnel ,t.type ,(select count(*) from registration r where o.open_sub_code = r.open_sub_code) student
+		from open_subj o join subject s
+		on o.subj_code = s.subj_code
+		join subj_type t 
+		on s.type_code = t.type_code
+		where o.prof_no = #{profNo}
+	</select>
 	
 	<!-- 개설교과과목 전체조회  -->
 	<select id="OpenRegistraionALL" resultType="map" >

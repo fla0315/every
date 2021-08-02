@@ -31,12 +31,12 @@ body {
 </style>
 	<article>
 		<div class="container col-lg-10" role="main">
-			<h2>담당 개설교과목</h2>
+			<h2>개설교과목 수락</h2>
 				<br>
 				<div class="card mb-4">
                    <div class="card-header">
                        <i class="fas fa-table me-1"></i>
-                       개설 강의 목록
+                       강의 목록
                    </div>
                    <div class="card-body">
                        <table id="datatablesSimple">
@@ -45,10 +45,9 @@ body {
                                	<th>개설교과목번호</th>
                                 <th>과목명</th>
                                 <th>이수구분</th>
-                                <th>등록인원</th>
-                                <th>최대인원</th>
                                 <th>개설일자</th>
                                 <th>폐지일자</th>
+                                <th>강의계획서</th>
                                </tr>
                            </thead>
                            <tbody>
@@ -63,10 +62,9 @@ body {
                                			<td>${map['OPEN_SUB_CODE'] }</td>
                                			<td>${map['SUBJ_NAME'] }</td>
                                			<td>${map['TYPE'] }</td>
-                               			<td>${map['STUDENT'] }</td>
-                               			<td>${map['PERSONNEL'] }</td>
                                			<td><fmt:formatDate value="${map['OPEN_DATE'] }" pattern="yyyy-MM-dd"/></td>
                                			<td><fmt:formatDate value="${map['CLOSE_DATE'] }" pattern="yyyy-MM-dd"/></td>
+                               			<td></td>
                                			</tr>
                                	</c:forEach>
                                </c:if>

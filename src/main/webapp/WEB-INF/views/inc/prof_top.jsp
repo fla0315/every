@@ -86,9 +86,8 @@
                             </a>
                             <div class="collapse" id="collapseLecture" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                	<a class="nav-link" href="#">강의 개설 수락</a>
-                                    <a class="nav-link" href="<c:url value='/professor/lecture/openLectureList'/>"">강의 현황</a>
-                                    <a class="nav-link" href="#">학생 현황</a>
+                                	<a class="nav-link" href="<c:url value='/professor/lecture/openLectureCheck'/>">강의 개설 수락</a>
+                                    <a class="nav-link" href="<c:url value='/professor/lecture/openLectureList'/>">강의 현황</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
