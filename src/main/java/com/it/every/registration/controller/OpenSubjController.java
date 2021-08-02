@@ -245,10 +245,12 @@ public class OpenSubjController {
 	//강의 계획서 다운로드
 	
 	@RequestMapping("/download")
-	public ModelAndView download(@ModelAttribute SyllabusVO syllabusVo,	HttpServletRequest request) {
+	public ModelAndView download(@ModelAttribute SyllabusVO syllabusVo,	@RequestParam String openSubCode,HttpServletRequest request) {
 		//1
 		logger.info("다운로드 처리, 파라미터 syllabusVo={}", syllabusVo);
 		//3
+		syllabusVo.setOpenSubCode(openSubCode);
+		
 		Map<String, Object> map = new HashMap<>();
 		//=====다운로드 맵
 		System.out.println(map);

@@ -68,7 +68,7 @@
 						str+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.CREDIT+"학점"+"</td>"; //학점
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //담당교수
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'><form name='frmCart' method='post' action='<c:url value='/registration/download'/>'><input type='hidden' name='openSubCode' value='"+item.OPEN_SUB_CODE+"'> <input type='submit' id='btCart' value='강의계획서' class='buttons'> </form> </td>";
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'><form name='frmSyllabus' method='get' action='<c:url value='/registration/download'/>'><input type='hidden' name='openSubCode' value='"+item.OPEN_SUB_CODE+"'> <input type='submit' id='btSylla' value='강의계획서' class='buttons'> </form> </td>";
 					str+="</tr>"; //테이블 닫는거
 				});
  				
