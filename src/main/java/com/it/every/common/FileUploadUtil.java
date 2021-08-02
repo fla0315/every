@@ -90,15 +90,15 @@ public class FileUploadUtil {
 			
 			if(pathFlag==ConstUtil.UPLOAD_FILE_FLAG) {
 				path=ConstUtil.FILE_UPLOAD_PATH_TEST; //자료실 파일 경로
-			}else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {
-				//path=ConstUtil.IMAGE_FILE_UPLOAD_PATH_TEST; //관리자 이미지 파일 업로드 경로
+			}else if(pathFlag==ConstUtil.UPLOAD_ASSIGNMENT_FLAG) { //학생이 과제 제출하는거 
+				path=ConstUtil.ASSIGNMENT_FILE_UPLOAD_PATH_TEST; //학생이 과제 제출했을때 다운로드 폴더 경로
 			}
 			
 		}else { //deploy
 			if(pathFlag==ConstUtil.UPLOAD_FILE_FLAG) {
 				path=ConstUtil.FILE_UPLOAD_PATH; //pds_upload
-			}else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {
-				//path=ConstUtil.IMAGE_FILE_UPLOAD_PATH; //pds_upload
+			}else if(pathFlag==ConstUtil.UPLOAD_ASSIGNMENT_FLAG) {
+				path=ConstUtil.ASSIGNMENT_FILE_UPLOAD_PATH_TEST; //pds_assignment
 			}
 			//실제 물리적인 경로 구하기
 			path = request.getSession().getServletContext().getRealPath(path);

@@ -3,7 +3,9 @@ package com.it.every.student.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.every.assignment.model.AssignmentVO;
 import com.it.every.common.RegistrationSearchVO;
+import com.it.every.distributeAssign.model.DistributeAssignVo;
 import com.it.every.professor.model.ProfessorVO;
 
 public interface StudentService {
@@ -34,4 +36,11 @@ public interface StudentService {
 	//쪽지조회
 	List<StudentVO> searchForChat(String keyword);
 	String nameByStuNo(String no);
+	
+	int insertAssignment(AssignmentVO assignmentVo); //학생 과제 등록
+	List<Map<String, Object>> selectMyAssignmemt (DistributeAssignVo distributeAssignVo);
+	
+	
+	
+	
 }

@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.it.every.assignment.model.AssignmentVO;
 import com.it.every.common.RegistrationSearchVO;
+import com.it.every.distributeAssign.model.DistributeAssignVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -98,4 +100,19 @@ public class StudentServiceImpl implements StudentService{
 	public String nameByStuNo(String no) {
 		return studentDao.nameByStuNo(no);
 	}
+
+
+	@Override
+	public int insertAssignment(AssignmentVO assignmentVo) {
+		return studentDao.insertAssignment(assignmentVo);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectMyAssignmemt(DistributeAssignVo distributeAssignVo) {
+		return studentDao.selectMyAssignmemt(distributeAssignVo);
+	}
+	
+	
+	
 }

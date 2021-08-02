@@ -188,7 +188,7 @@
                                     </a>
                                     <div class="collapse" id="collapseHomework" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">과제등록</a>
+                                            <a class="nav-link" href="<c:url value='/student/assignment/StudentAssignment'/>">과제등록</a>
                                             <a class="nav-link" href="#">나의과제조회</a>
                                         </nav>
                                     </div>

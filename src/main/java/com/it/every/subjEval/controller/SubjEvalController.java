@@ -33,7 +33,7 @@ public class SubjEvalController {
 	
 	@RequestMapping("/subj_eval")
 	public String  subjEvelList(@ModelAttribute SubjEvalVO subjEvalVo,HttpSession session, Model model ) {
-		logger.info("강의평가 페이지");
+		logger.info("강의평가 페이지 보여주는");
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");

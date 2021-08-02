@@ -5,8 +5,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.it.every.assignment.model.AssignmentVO;
 import com.it.every.common.RegistrationSearchVO;
-import com.it.every.professor.model.ProfessorVO;
+import com.it.every.distributeAssign.model.DistributeAssignVo;
 
 @Mapper
 public interface StudentDAO {
@@ -27,4 +28,12 @@ public interface StudentDAO {
 	//쪽지조회
 	List<StudentVO> searchForChat(String keyword);
 	String nameByStuNo(String no);
+	
+	
+	
+	int insertAssignment(AssignmentVO assignmentVo); //학생 과제 등록
+	List<Map<String, Object>> selectMyAssignmemt (DistributeAssignVo distributeAssignVo);
+	
+	
+	
 }

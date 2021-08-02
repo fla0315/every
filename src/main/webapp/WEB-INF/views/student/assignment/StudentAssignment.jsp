@@ -1,155 +1,217 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="../../inc/student_top.jsp"%>
-<!-- 성적 입력창 -->
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-<script type="text/javascript">
-   $(function(){   //개설과목별 과제목록 조회
-      $('#btCheck').click(function(){
-         if($('#openSub option:selected').val()!='선택하세요'){
-            var openSubCode = $('#openSub option:selected').val();
-            location.href="<c:url value='/professor/assign/assignmentCheck?openSubCode="+openSubCode+"'/>";
-         } else{
-            alert('개설교과목 번호를 선택하세요!');
-         }
-      });
-   });
-</script>
 
 <style type="text/css">
 body {
-   padding-top: 70px;
-   padding-bottom: 30px;
+	padding-top: 70px;
+	padding-bottom: 30px;
 }
 
 .ccdetail a {
-   color:black;
+	color:black;
 }
 
 .ccdetail a:hover{
-   color:gray;
+	color:gray;
 }
 </style>
-   <article>
-      <div class="container col-lg-10" role="main">
-         <h2>과제 등록</h2>
-            <br>
-            <div class="mb-3">
-               <label for="title">개설교과목</label>
-               <select id="openSub" class="dataTable-selector">
-                  <option>선택하세요</option>
-                  <c:if test="${!empty osList }">
-                     <c:forEach var="vo" items="${osList}">
-                        <c:if test="${open == vo.openSubCode }">
-                           <option selected>${vo.openSubCode }</option>
-                        </c:if>
-                        <c:if test="${open != vo.openSubCode }">
-                           <option>${vo.openSubCode }</option>
-                        </c:if>
-                     </c:forEach>
-                  </c:if>
-                  <!-- 개설교과목 번호/이름 교수님 번호로 조회해 for문 돌리기 -->
-               </select>
-               <input type="button" id="btCheck" value="조회">
-            </div>
-            <div class="row">
-            <div class="col-xl-6">
-               <div class="card mb-4">
-                  <div class="card-header">
-                     <i class="far fa-file-alt"></i> 개설교과목별 목록 / ${open }
-                  </div>
-                  <div class="card-body" style="height:450px">
-                     <table class="table-bordered text-center" style="width: 100%">
-                        <colgroup>
-                           <col style="width: 20%" />
-                           <col style="width: 20%" />
-                           <col style="width: 40%" />
-                           <col style="width: 20%" />
-                        </colgroup>
-                        <thead>
-                           <tr>
-                              <th>개설교과목번호</th>
-                              <th>교과목명</th>
-                              <th>과제명</th>
-                              <th>등록일</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           <c:if test="${empty aList }">
-                              <tr>
-                                 <td colspan="4">데이터가 없습니다.</td>
-                              </tr>
-                           </c:if>
-                           <c:if test="${!empty aList }">
-                              <c:forEach var="map" items="${aList }">
-                                 <tr>
-                                    <td>${map['OPEN_SUB_CODE'] }</td>
-                                    <td>${map['SUBJ_NAME'] }</td>
-                                    <td class="ccdetail text-left">&nbsp;
-                                    <a href='<c:url value="/professor/assign/assignmentCheck?openSubCode=${open}&assignNo=${map['ASSIGN_NO'] }"/>'>${map['ASSIGN_NAME'] }</a></td>
-                                    <td><fmt:formatDate value="${map['REG_DATE'] }" pattern="yyyy-MM-dd" /></td>
-                                 </tr>
-                              </c:forEach>
-                           </c:if>
-                        </tbody>
-                     </table>
-                  </div>
-               </div>
-               </div>
-               <div class="col-xl-6">
-               <div class="card mb-4">
-                  <div class="card-header">
-                     <i class="far fa-file-alt"></i> 과제별 목록
-                  </div>
-                  <div class="card-body" style="height:450px">
-                     <table class="table-bordered text-center" id="datatablesSimple" style="width: 100%">
-                        <colgroup>
-                           <col style="width: 20%" />
-                           <col style="width: 20%" />
-                           <col style="width: 15%" />
-                           <col style="width: 25%" />
-                           <col style="width: 10%" />
-                        </colgroup>
-                        <thead>
-                           <tr>
-                              <th>학번</th>
-                              <th>이름</th>
-                              <th>제출여부</th>
-                              <th>제출시간</th>
-                              <th>점수</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           <c:if test="${empty sList }">
-                              <tr>
-                                 <td colspan="5">데이터가 없습니다.</td>
-                              </tr>
-                           </c:if>
-                           <c:if test="${!empty sList }">
-                              <c:forEach var="map" items="${sList }">
-                                    <tr>
-                                       <td>${map['STU_NO'] }</td>
-                                       <td class="ccdetail"><a href="#">${map['NAME'] }</a></td>
-                                 <c:forEach var="vo" items="${assignList }">
-                                       <c:if test="${vo.stuNo eq map['STU_NO'] }">
-                                          <td>O</td>
-                                          <td><fmt:formatDate value="${vo.applyDate }" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-                                          <td>${vo.assignPoint }</td>
-                                       </c:if>
-                                 </c:forEach>
-                                    </tr>
-                              </c:forEach>
-                           </c:if>
-                        </tbody>
-                     </table>
-                  </div>
-               </div>
-               </div>
-            </div>
-               </div>
-   </article>
+<script type="text/javascript">
+	$(function(){
+		$('#openSub').change(function(){
+			var openSubCode = $('#openSub option:selected').val(); //이렇게하면 오픈 서브젝트의 코드가 나온다 이 코드랑 내가 다시 뿌려주는 코드랑 같으면 보여주고 아니면 안보여주고
+			console.log(openSubCode);
+			//여기서 에이젝스 처리? 
+			// 누르면 값을 에이젝스로 컨트롤러로 보내서 그 값에 해당하는 과목명을 뽑아와서 밑에다 뿌려준다
+			
+			$('#hiddenSub').remove();
+			
+			$.ajax({
+				url:"<c:url value='/student/assignment/selectMySubj'/>",
+				data:{
+					"openSubCode":openSubCode //위에서 만들어준거
+				},
+				dataType:"json",
+				type:"post",
+				success:function(res){
+					console.log(res)
+					console.log('res : '+res);
+					
+					var str = "";
+					var openSubCode= "";
+					$("#mySubj").empty();
+					
+					str+="<option>선택하세요.</option>"; //테이블 여는거 
+					if(res.length > 0){
+						openSubCode+="<input type='text' value='"+res[0].OPEN_SUB_CODE+"' name='openSubCode' id='hiddenSub'>";
+					}
+					$('#subjectDiv').append(openSubCode);
+					
+					
+					$.each(res, function(idx, item){
+						console.log(item)
+						str+="<option value='"+item.ASSIGN_NO+"'>"+item.ASSIGN_NAME+"</option>"; //테이블 여는거 
+					});
+					
+					$('#mySubj').append(str); //조회누르면 뿌려주는 바디부분
 
-<%@ include file="../../inc/bottom.jsp" %>
+				}, //석세스 끝나는 부분
+				error: function(err) {
+					console.log(err)
+				}
+			});
+			
+		});
+		
+		
+		
+		
+		
+		
+		
+		$('#btSend').click(function(){
+			
+			if($('#openSub option:selected').val()=='선택하세요'){
+				alert('과목을 선택하세요!');
+				event.preventDefault();
+				return false;
+				
+			}else if($('#mySubj option:selected').val()=='선택하세요' && $('#mySubj option:selected').val().length<0){
+				alert("과제명을 선택하세요");
+				$('#mySubj').focus();
+				event.preventDefault();
+				return false;
+			}else if($('#assignName').val().length<1){
+				alert("과제명을 입력하세요");
+				$('#assignName').focus();
+				event.preventDefault();
+				return false;
+			} 
+			
+			
+		});
+	});
+</script>
+<article>
+	<div class="container col-lg-10" role="main">
+			<h2>과제 등록</h2>
+			<br>
+				<div class="row">
+				<div class="col-xl-6">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="far fa-file-alt"></i> 과제 등록
+					</div>
+					<div class="card-body">
+					
+				
+					<!-- 폼 네임  -->
+					
+					
+						<form name="frmAssign" method="post"  enctype="multipart/form-data"
+							action="<c:url value='/student/assignment/assignmentInsert'/>">
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<div class="form-floating mb-3 mb-md-0" id="subjectDiv">
+										<select id="openSub" name="openSub" class="dataTable-selector" style="width:100%">
+											<option>선택하세요</option>
+											<!-- 과목명 뿌려주는 곳 -->
+											<c:if test="${!empty Mylist }">
+												<c:forEach var="mySubj" items="${Mylist}">
+													<option value="${mySubj['OPEN_SUB_CODE']}">${mySubj['SUBJ_NAME']}</option>
+												</c:forEach>
+											</c:if>
+											
+											
+										</select>
+										<label for="openSub">과목명</label>
+									</div>
+								</div>
+								
+								<!-- 과목선택하면 과제목록 불러오게하는 셀렉션 -->
+								<div class="col-md-6">
+									<div class="form-floating mb-3 mb-md-0">
+										<select id="mySubj" name="mySubj" class="dataTable-selector" style="width:100%">
+											<!-- 여기다 과목명 뿌려줘여함 -->
+											<option> 선택하세요 </option>
+										</select>
+										<label for="openSub">과제명</label>
+									</div>
+								</div>
+								
+								<!-- ///////////////////////////////////////////////////// -->
+								
+							</div>
+							<div class="col-md-6">
+								<div class="form-floating mb-3 mb-md-0">
+									<input class="form-control"  type="text" name="title" id="title"
+										value=""/> <label for="assignName">과제 제목</label>
+								</div>
+							</div> <br>
+							
+							
+							<label for="assignName">과제파일</label>
+							<div class="col-md-6">
+									<input class="form-control"  type="file" name="upfile" id="upfile"
+										value=""/>  <span>(최대 20M)</span>
+							</div>
+							<div class="mt-4 mb-0">
+								<div class="d-grid">
+									<input type="submit" id="btSend" class="btn btn-primary btn-block" value="등록">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				</div>
+				
+				
+				<!--  여기는 내가 제출한 과제들 다보여주기  -->
+					<div class="col-xl-6">
+					<div class="card mb-4">
+						<div class="card-header">
+							<i class="far fa-file-alt"></i> 전체보기
+						</div>
+						<div class="card-body" style="height:450px">
+							<table class="table-bordered text-center" style="width: 100%">
+								<colgroup>
+									<col style="width: 20%" />
+									<col style="width: 20%" />
+									<col style="width: 40%" />
+									<col style="width: 20%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th>개설교과목번호</th>
+										<th>교과목명</th>
+										<th>과제명</th>
+										<th>등록일</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:if test="${empty aList }">
+										<tr>
+											<td colspan="4">데이터가 없습니다.</td>
+										</tr>
+									</c:if>
+									<c:if test="${!empty aList }">
+										<c:forEach var="map" items="${aList }">
+											<tr>
+												<td>${map['OPEN_SUB_CODE'] }</td>
+												<td>${map['SUBJ_NAME'] }</td>
+												<td class="ccdetail text-left">&nbsp;
+												<a href="${pageContext.request.contextPath }/professor/assign/assignmentCheck?openSubCode=${map['OPEN_SUB_CODE'] }&assignNo=${map['ASSIGN_NO'] }" onclick="">${map['ASSIGN_NAME'] }</a></td>
+												<td><fmt:formatDate value="${map['REG_DATE'] }" pattern="yyyy-MM-dd" /></td>
+											</tr>
+										</c:forEach>
+									</c:if>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+</article>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<%@ include file="../../inc/bottom.jsp"%>
