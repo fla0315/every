@@ -6,12 +6,11 @@
 <title>강의계획서 업로드</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <style type="text/css">
-	.table td, .table th {
-		border:none;
-		background-color:lightGray;
-		border-radius:15px;
-	}
+
 </style>
+</head>
+<BODY>
+
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
     // 파일 리스트 번호
@@ -120,7 +119,7 @@
         var html = "";
         html += "<tr id='fileTr_" + fIndex + "'>";
         html += "    <td class='left' >";
-        html +=         fileName + " / " + fileSize + "MB "  + "<a href='#' onclick='deleteFile(" + fIndex + "); return false;' class='btn small bg_02'>삭제</a><input type='text' name='syllabus' value='"+fileName+"'/>"
+        html +=         fileName + " / " + fileSize + "MB "  + "<a href='#' onclick='deleteFile(" + fIndex + "); return false;' class='btn small bg_02'>삭제</a>"
         html += "    </td>"
         html += "</tr>"
  
@@ -170,8 +169,8 @@
             }
             
             $.ajax({
-                url:"<c:url value='/professor/lecture/uploadSyllabus'/>",
-                data:$("#uploadForm").serialize(),
+                url:"업로드 경로",
+                data:formData,
                 type:'POST',
                 enctype:'multipart/form-data',
                 processData:false,
@@ -191,26 +190,12 @@
         }
     }
 </script>
-</head>
-<BODY>
  <div class="card-header">
 	<i class="fas fa-envelope"></i> 강의계획서
 </div>
 <div class="card-body">
-	<form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post">
-		<input type="hidden" name="openSubCode" value="${map['OPEN_SUB_CODE'] }">
-         		<div class="col-xs-6">
-                      <label for="">이론시간</label>
-                      <input style="width:400px" class="form-control" id="name" type="text" value=""/>
-              </div>
-              <div class="col-xs-6"><br>
-                      <label for="stuNo">실습시간</label>
-                      <input style="width:400px" class="form-control" name="stuNo" type="text" value=""/>
-              </div>
-    	<div>
-    	</div>
-		<br>
-        <table class="table" style="width:400px; height:100px; border-radius:15px">
+    <form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post">
+        <table class="table" width="100%" height="100px" style="background-color:lightGray; border-radius:15px">
             <tbody id="fileTableTbody">
                 <tr>
                     <td id="dropZone">
@@ -220,7 +205,7 @@
             </tbody>
         </table>
     </form>
-    <a href="#" onclick="uploadFile(); return false;" class="btn btn-primary">등록</a>
+    <a href="#" onclick="uploadFile(); return false;" class="btn btn-primary">파일 업로드</a>
 </div>
         
 </BODY>

@@ -8,6 +8,7 @@ import com.it.every.common.SearchVO;
 public interface OpenSubjService {
 	List<OpenSubjVO> selectByProfNo(String profNo);
 	List<Map<String, Object>> listByProfNo(String profNo); //교수 담당 세부
+	List<Map<String, Object>> checkClassRoom(String profNo); //교수별 개설교과목 강의실
 
 	List<OpenSubjVO> OpenRegistraionALL( );
 	

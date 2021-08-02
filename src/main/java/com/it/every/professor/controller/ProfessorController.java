@@ -3,6 +3,7 @@ package com.it.every.professor.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,10 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.professor.model.ProfessorService;
 import com.it.every.professor.model.ProfessorVO;
+import com.it.every.syllabus.model.SyllabusService;
+import com.it.every.syllabus.model.SyllabusVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,10 +33,15 @@ public class ProfessorController {
 	
 	private final ProfessorService professorService;
 	private final OpenSubjService openSubjService;
+	private final SyllabusService syllabusService;
 	
 	@RequestMapping("/profMain")
-	public void profMain() {
+	public void profMain(HttpSession session, Model model) {
+		String profNo = (String) session.getAttribute("no");
 		logger.info("교수님 메인 화면");
+		List<Map<String, Object>> oList = openSubjService.checkClassRoom(profNo);
+		logger.info("담당교과목 메인화면 리스트 oList={}", oList);
+		model.addAttribute("oList", oList);
 	}
 	
 	@GetMapping("/editProf")
@@ -91,12 +100,24 @@ public class ProfessorController {
 		logger.info("개설된 강의 수락 화면, profNo={}", profNo);
 		
 		List<Map<String, Object>> oList = openSubjService.listByProfNo(profNo);
-		logger.info("list.size={}", oList.size());
+		List<Map<String, Object>> sList = syllabusService.checkSyllabusList(profNo);
+	
+		logger.info("olist.size={}, sList.size={}", oList.size(), sList.size());
 		model.addAttribute("oList", oList);
+		model.addAttribute("sList", sList);
 	}
 	
-	@RequestMapping("/lecture/uploadSyllabus")
-	public void uploadSyllabus() {
-		logger.info("강의계획서 업로드");
+	@GetMapping("/lecture/uploadSyllabus")
+	public void uploadSyllabus(HttpServletRequest request, Model model, @RequestParam(defaultValue = "") String openSubCode) {
+		logger.info("강의계획서 업로드, openSubCode={}", openSubCode);
+	}
+	
+	@PostMapping("lecture/uploadSyllabus")
+	public void uploadSyllabus_post(@ModelAttribute SyllabusVO vo) {
+		logger.info("ajax이용 파일 업로드 vo={}", vo);
+		int cnt = syllabusService.insertSyllabus(vo);
+		if(cnt>0) {
+			logger.info("성공!");
+		}
 	}
 }

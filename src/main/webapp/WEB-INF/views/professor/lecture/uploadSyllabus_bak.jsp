@@ -120,7 +120,7 @@
         var html = "";
         html += "<tr id='fileTr_" + fIndex + "'>";
         html += "    <td class='left' >";
-        html +=         fileName + " / " + fileSize + "MB "  + "<a href='#' onclick='deleteFile(" + fIndex + "); return false;' class='btn small bg_02'>삭제</a><input type='text' name='syllabus' value='"+fileName+"'/>"
+        html +=         fileName + " / " + fileSize + "MB "  + "<a href='#' onclick='deleteFile(" + fIndex + "); return false;' class='btn small bg_02'>삭제</a>"
         html += "    </td>"
         html += "</tr>"
  
@@ -170,8 +170,8 @@
             }
             
             $.ajax({
-                url:"<c:url value='/professor/lecture/uploadSyllabus'/>",
-                data:$("#uploadForm").serialize(),
+                url:"업로드 경로",
+                data:formData,
                 type:'POST',
                 enctype:'multipart/form-data',
                 processData:false,
@@ -197,10 +197,10 @@
 	<i class="fas fa-envelope"></i> 강의계획서
 </div>
 <div class="card-body">
-	<form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post">
+    <form name="frm" method="post" action="<c:url value='/professor/assign/assignDetail'/>">
 		<input type="hidden" name="openSubCode" value="${map['OPEN_SUB_CODE'] }">
          		<div class="col-xs-6">
-                      <label for="">이론시간</label>
+                      <label for="name">이론시간</label>
                       <input style="width:400px" class="form-control" id="name" type="text" value=""/>
               </div>
               <div class="col-xs-6"><br>
@@ -209,7 +209,9 @@
               </div>
     	<div>
     	</div>
-		<br>
+	</form>
+	<br>
+	<form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post">
         <table class="table" style="width:400px; height:100px; border-radius:15px">
             <tbody id="fileTableTbody">
                 <tr>
@@ -220,7 +222,8 @@
             </tbody>
         </table>
     </form>
-    <a href="#" onclick="uploadFile(); return false;" class="btn btn-primary">등록</a>
+    <a href="#" onclick="uploadFile(); return false;" class="btn btn-primary">파일 업로드</a>
+	<input type="submit" class="btn btn-secondary" id="btSave" value="등록">
 </div>
         
 </BODY>

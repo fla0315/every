@@ -17,6 +17,22 @@
 		where o.prof_no = #{profNo}
 	</select>
 	
+	<!-- 교수님별 개설교과목 강의실 조회 -->
+	<select id="checkClassRoom" parameterType="String" resultType="map">
+		select o.*, s.subj_name, c.classroom_name, b.building_name, tt.timetable_name, tt.day, tt.period, tt.short_name
+		from open_subj o join subject s
+		on o.subj_code = s.subj_code
+		join subj_time t
+		on o.open_sub_code = t.open_sub_code
+		join classroom c
+		on c.classroom_code = t.classroom_code
+		join building b
+		on c.building_code = b.building_code
+		join timetable tt
+		on tt.timetable_code = t.timetable_code
+		where o.prof_no = #{profNo}
+	</select>
+	
 	<!-- 개설교과과목 전체조회  -->
 	<select id="OpenRegistraionALL" resultType="map" >
 		select sj.type, st.* ,prof.prof_name ,os.*

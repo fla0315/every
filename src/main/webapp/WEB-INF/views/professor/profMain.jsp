@@ -55,6 +55,23 @@
 								</tr>
 							</thead>
 							<tbody>
+								
+									<c:if test="${empty oList}">
+										<tr>
+										<td colspan="4">개설된 강의가 없습니다.</td>
+										</tr>
+									</c:if>
+									<c:if test="${!empty oList}">
+										<c:forEach var="map" items="${oList }">
+											<tr>
+											<td>${map['OPEN_SUB_CODE'] }</td>
+											<td>${map['SUBJ_NAME'] }</td>
+											<td>${map['BUILDING_NAME'] }</td>
+											<td>${map['CLASSROOM_NAME'] }</td>
+											</tr>
+										</c:forEach>
+									</c:if>
+								
 							</tbody>
 					</table>
 					</div>

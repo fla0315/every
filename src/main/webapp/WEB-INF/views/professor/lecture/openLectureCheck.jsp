@@ -28,6 +28,14 @@ body {
   padding-top: 70px;
   padding-bottom: 30px;
 }
+
+a{
+	color:black;
+}
+
+a:hover{
+	color:gray;
+}
 </style>
 	<article>
 		<div class="container col-lg-10" role="main">
@@ -64,7 +72,23 @@ body {
                                			<td>${map['TYPE'] }</td>
                                			<td><fmt:formatDate value="${map['OPEN_DATE'] }" pattern="yyyy-MM-dd"/></td>
                                			<td><fmt:formatDate value="${map['CLOSE_DATE'] }" pattern="yyyy-MM-dd"/></td>
-                               			<td></td>
+                               			<c:if test="${empty sList }">
+                               				<td class="text-center"><a href="#" onclick="window.open('${pageContext.request.contextPath }/professor/lecture/uploadSyllabus?openSubCode=${map['OPEN_SUB_CODE'] }', 'upload', 'top=100, left=600, width=480, height=550, location=yes, resizable=yes')">미작성</a></td>
+                               			</c:if>
+                               			<c:if test="${!empty sList }">
+                               				<c:forEach var="map1" items="${sList }">
+                               				<td class="text-center"><a href="#" onclick="window.open('${pageContext.request.contextPath }/professor/lecture/uploadSyllabus?openSubCode=${map['OPEN_SUB_CODE'] }', 'upload', 'top=100, left=600, width=480, height=550, location=yes, resizable=yes')">
+	                               				<c:choose>
+	                               					<c:when test="${map['OPEN_SUB_CODE'] eq map1['OPEN_SUB_CODE'] }">
+	                               						작성완료
+	                               					</c:when>
+	                               					<c:otherwise>
+	                               						<span style="color:red">미작성</span>
+	                               					</c:otherwise>
+	                               				</c:choose>
+                               				</a></td>
+                               			</c:forEach>
+                               			</c:if>
                                			</tr>
                                	</c:forEach>
                                </c:if>

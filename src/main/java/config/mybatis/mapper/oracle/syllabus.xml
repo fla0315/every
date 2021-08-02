@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.syllabus.model.SyllabusDAO">
+	<!-- 교수님 강의계획서 등록 -->
+	<insert id="insertSyllabus" parameterType="syllabusVo">
+		insert into syllabus
+		values(#{openSubCode}, #{syllabus}, #{theoryTime}, #{trainingTime})
+	</insert>
+	
+	<!-- 교수님별 강의계획서 목록 -->
+	<select id="checkSyllabusList" parameterType="String" resultType="map">
+		select s.*, o.prof_no 
+		from syllabus s join open_subj o
+		on s.open_sub_code = o.open_sub_code
+		where o.prof_no = #{profNo}
+	</select>
+</mapper>

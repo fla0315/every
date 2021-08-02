@@ -205,8 +205,7 @@ $('#pwd').keyup(function(){
 				<div class="id" style="width: 200px;">
 					<label for="userid">아이디</label> <br> <input type="text"
 						class="user_id form-control" id="user_id" name="user_id" placeholder="ID" required
-						style="ime-mode: inactive"> <br> <span
-						class="check_id" id="check_id" style=""></span>
+						style="ime-mode: inactive"> <br> 
 				</div>
 				<!-- 비밀번호 -->
 				<div class="password" style="width: 200px;">
@@ -214,6 +213,7 @@ $('#pwd').keyup(function(){
 						<br> 
 						<input type="password" class="form form-control" id="pwd" name="pwd" placeholder="Password" required
 						style="ime-mode: inactive"> 
+						<span class="check_id" id="check_id" style=""></span>
 				</div>
 			</div>
 				<br><br>
