@@ -14,20 +14,32 @@
 					<div style="height: 320px">
 						<table class="table-bordered text-center" style="width: 100%">
 							<colgroup>
-								<col style="width: 40%" />
-								<col style="width: 20%" />
-								<col style="width: 20%" />
-								<col style="width: 20%" />
+								<col style="width: 35%" />
+								<col style="width: 35%" />
+								<col style="width: 30%" />
 							</colgroup>
 							<thead>
 								<tr>
 									<th>개설과목번호</th>
 									<th>개설과목명</th>
-									<th>요일</th>
 									<th>시간</th>
 								</tr>
 							</thead>
 							<tbody>
+								<c:if test="${empty oList}">
+									<tr>
+									<td colspan="4">개설된 강의가 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:if test="${!empty oList}">
+									<c:forEach var="map" items="${oList }">
+										<tr>
+										<td>${map['OPEN_SUB_CODE'] }</td>
+										<td>${map['SUBJ_NAME'] }</td>
+										<td>${map['TIMETABLE_NAME'] }</td>
+										</tr>
+									</c:forEach>
+								</c:if>
 							</tbody>
 					</table>
 					</div>
@@ -41,8 +53,8 @@
 					<div style="height: 320px">
 						<table class="table-bordered text-center" style="width: 100%">
 							<colgroup>
-								<col style="width: 40%" />
-								<col style="width: 20%" />
+								<col style="width: 25%" />
+								<col style="width: 35%" />
 								<col style="width: 20%" />
 								<col style="width: 20%" />
 							</colgroup>
@@ -55,23 +67,21 @@
 								</tr>
 							</thead>
 							<tbody>
-								
-									<c:if test="${empty oList}">
+								<c:if test="${empty oList}">
+									<tr>
+									<td colspan="4">개설된 강의가 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:if test="${!empty oList}">
+									<c:forEach var="map" items="${oList }">
 										<tr>
-										<td colspan="4">개설된 강의가 없습니다.</td>
+										<td>${map['OPEN_SUB_CODE'] }</td>
+										<td>${map['SUBJ_NAME'] }</td>
+										<td>${map['BUILDING_NAME'] }</td>
+										<td>${map['CLASSROOM_NAME'] }</td>
 										</tr>
-									</c:if>
-									<c:if test="${!empty oList}">
-										<c:forEach var="map" items="${oList }">
-											<tr>
-											<td>${map['OPEN_SUB_CODE'] }</td>
-											<td>${map['SUBJ_NAME'] }</td>
-											<td>${map['BUILDING_NAME'] }</td>
-											<td>${map['CLASSROOM_NAME'] }</td>
-											</tr>
-										</c:forEach>
-									</c:if>
-								
+									</c:forEach>
+								</c:if>
 							</tbody>
 					</table>
 					</div>
@@ -96,7 +106,7 @@
 		</div>
        <div class="row">
            <div class="col-xl-6">
-               <div class="card mb-4">
+               <div class="card mb-4" style="height:520px">
                    <div class="card-header">
                        <i class="far fa-calendar-alt"></i>
                        학사일정
@@ -127,12 +137,34 @@
                    </div>
                </div>
 	           <div class="col-xl-6">
-	               <div class="card mb-4">
+	               <div class="card mb-4" style="height:520px">
 	                   <div class="card-header">
-	                       <i class="fas fa-chart-bar me-1"></i>
-	                       섹션
+	                       <i class="fas fa-exclamation-circle"></i>
+	                       공지사항
 	                   </div>
-	                   <div class="card-body"></div>
+	                   <div class="card-body">
+	                   	<table class="table-bordered text-center" style="width: 100%">
+							<colgroup>
+								<col style="width: 20%" />
+								<col style="width: 60%" />
+								<col style="width: 20%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th>개설교과목번호</th>
+									<th>제목</th>
+									<th>등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>21270001</td>
+									<td style="padding-left:2%" class="text-left">공지사항1</td>
+									<td>2021.08.03</td>
+								</tr>
+							</tbody>
+					</table>
+	                   </div>
 	               </div>
 	           </div>
            </div>

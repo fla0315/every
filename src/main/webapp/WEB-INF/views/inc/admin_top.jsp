@@ -67,7 +67,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">회원정보수정</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                        <li><a class="dropdown-item" href="<c:url value='/reg/logout'/>">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>

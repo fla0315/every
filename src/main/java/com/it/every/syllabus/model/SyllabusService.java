@@ -6,4 +6,5 @@ import java.util.Map;
 public interface SyllabusService {
 	List<Map<String, Object>> checkSyllabusList(String profNo);
 	int insertSyllabus(SyllabusVO vo);
+	SyllabusVO checkSyllabus(String openSubCode);
 }

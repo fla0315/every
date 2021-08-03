@@ -16,4 +16,10 @@
 		on s.open_sub_code = o.open_sub_code
 		where o.prof_no = #{profNo}
 	</select>
+	
+	<!-- 개설교과목별 강의계획서 -->
+	<select id="checkSyllabus" parameterType="String" resultType="syllabusVo">
+		select * from syllabus
+		where open_sub_code = #{openSubCode}
+	</select>
 </mapper>

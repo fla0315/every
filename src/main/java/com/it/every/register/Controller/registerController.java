@@ -331,7 +331,7 @@ public class registerController {
 			session.setAttribute("user_id", id);
 			logger.info("처리 결과(값을 잘 받아왔는지 확인함) result={} 회원번호={} 회원이름={} 회원아이디={}" 
 					,result,svo.getStuNo(),svo.getName(),id);
-			url= "student/studentMain";
+			url= "redirect:/student/studentMain";
 			
 		}else if (chk_info.equals("admin")) {
 			result = service.logincheck2(id,pwd);
@@ -341,7 +341,7 @@ public class registerController {
 			session.setAttribute("user_id", id);
 			logger.info("처리 결과(값을 잘 받아왔는지 확인함) result={} 회원번호={} 회원이름={} 회원아이디={}"  
 					,result,evo.getEmpNo(),evo.getEmpName(),id);
-			url= "admin/mainDisplay/notice";
+			url= "redirect:/admin/mainDisplay/notice";
 			
 		}else if (chk_info.equals("professor")) {
 			result = service.logincheck3(id,pwd);
@@ -351,10 +351,20 @@ public class registerController {
 			session.setAttribute("user_id", id);
 			logger.info("처리 결과(값을 잘 받아왔는지 확인함) result={} 회원번호={} 회원이름={} 회원아이디={}" 
 					,result,pvo.getProfNo(),pvo.getProfName(),id);
-			url= "professor/profMain";		
+			url= "redirect:/professor/profMain";		
 		}
-		
 		return url;
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		logger.info("로그아웃");
+		
+		session.removeAttribute("no");
+		session.removeAttribute("name");
+		session.removeAttribute("user_id");
+		
+		return "redirect:/";
 	}
 }
 

@@ -29,11 +29,11 @@ body {
   padding-bottom: 30px;
 }
 
-a{
+table a{
 	color:black;
 }
 
-a:hover{
+table a:hover{
 	color:gray;
 }
 </style>
@@ -73,20 +73,20 @@ a:hover{
                                			<td><fmt:formatDate value="${map['OPEN_DATE'] }" pattern="yyyy-MM-dd"/></td>
                                			<td><fmt:formatDate value="${map['CLOSE_DATE'] }" pattern="yyyy-MM-dd"/></td>
                                			<c:if test="${empty sList }">
-                               				<td class="text-center"><a href="#" onclick="window.open('${pageContext.request.contextPath }/professor/lecture/uploadSyllabus?openSubCode=${map['OPEN_SUB_CODE'] }', 'upload', 'top=100, left=600, width=480, height=550, location=yes, resizable=yes')">미작성</a></td>
+                               				<td class="text-center"><a href="#" onclick="window.open('${pageContext.request.contextPath }/professor/lecture/uploadSyllabus?openSubCode=${map['OPEN_SUB_CODE'] }', 'upload', 'top=100, left=600, width=480, height=550, location=yes, resizable=yes')"><span style="color:red">미작성</span></a></td>
                                			</c:if>
                                			<c:if test="${!empty sList }">
                                				<c:forEach var="map1" items="${sList }">
-                               				<td class="text-center"><a href="#" onclick="window.open('${pageContext.request.contextPath }/professor/lecture/uploadSyllabus?openSubCode=${map['OPEN_SUB_CODE'] }', 'upload', 'top=100, left=600, width=480, height=550, location=yes, resizable=yes')">
+                               				<td class="text-center">
 	                               				<c:choose>
 	                               					<c:when test="${map['OPEN_SUB_CODE'] eq map1['OPEN_SUB_CODE'] }">
-	                               						작성완료
+	                               						<a href="#" onclick="window.open('${pageContext.request.contextPath }/professor/lecture/editSyllabus?openSubCode=${map['OPEN_SUB_CODE'] }', 'upload', 'top=100, left=600, width=480, height=550, location=yes, resizable=yes')">작성완료</a>
 	                               					</c:when>
 	                               					<c:otherwise>
-	                               						<span style="color:red">미작성</span>
+	                               						<a href="#" onclick="window.open('${pageContext.request.contextPath }/professor/lecture/uploadSyllabus?openSubCode=${map['OPEN_SUB_CODE'] }', 'upload', 'top=100, left=600, width=480, height=550, location=yes, resizable=yes')"><span style="color:red">미작성</span></a>
 	                               					</c:otherwise>
 	                               				</c:choose>
-                               				</a></td>
+                               				</td>
                                			</c:forEach>
                                			</c:if>
                                			</tr>

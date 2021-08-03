@@ -1,5 +1,6 @@
 package com.it.every.professor.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.it.every.common.ConstUtil;
+import com.it.every.common.FileUploadUtil;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.professor.model.ProfessorService;
 import com.it.every.professor.model.ProfessorVO;
@@ -34,6 +37,7 @@ public class ProfessorController {
 	private final ProfessorService professorService;
 	private final OpenSubjService openSubjService;
 	private final SyllabusService syllabusService;
+	private final FileUploadUtil fileUploadUtil;
 	
 	@RequestMapping("/profMain")
 	public void profMain(HttpSession session, Model model) {
@@ -109,15 +113,55 @@ public class ProfessorController {
 	
 	@GetMapping("/lecture/uploadSyllabus")
 	public void uploadSyllabus(HttpServletRequest request, Model model, @RequestParam(defaultValue = "") String openSubCode) {
-		logger.info("강의계획서 업로드, openSubCode={}", openSubCode);
+		logger.info("강의계획서 업로드 화면, openSubCode={}", openSubCode);
 	}
 	
 	@PostMapping("lecture/uploadSyllabus")
-	public void uploadSyllabus_post(@ModelAttribute SyllabusVO vo) {
-		logger.info("ajax이용 파일 업로드 vo={}", vo);
-		int cnt = syllabusService.insertSyllabus(vo);
-		if(cnt>0) {
-			logger.info("성공!");
+	public String uploadSyllabus_post(@ModelAttribute SyllabusVO vo, HttpServletRequest request, Model model) {
+		logger.info("강의계획서 업로드 처리, 파라미터 vo={}", vo);
+		
+		String fileName = "", originalFileName = "";
+		long fileSize = 0;
+		try {
+			List<Map<String, Object>> list 
+			= fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_SYLLABUS_FLAG);
+			for(int i=0;i<list.size();i++) {
+				Map<String, Object> map = list.get(i);
+				fileName = (String) map.get("fileName");
+				originalFileName = (String) map.get("originalFileName");
+				fileSize = (long) map.get("fileSize");
+			}//for
+			
+			logger.info("파일 업로드 성공, fileName={}, fileSize={}", 
+					fileName, fileSize);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
+		vo.setSyllabus(fileName);
+		logger.info("vo={}", vo);
+		int cnt = syllabusService.insertSyllabus(vo);
+		logger.info("업로드 처리 결과 cnt={}", cnt);
+		
+		String msg="업로드 실패하였습니다.", url = "/professor/lecture/uploadSyllabus";
+		if(cnt>0) {
+			msg="업로드 성공하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	@GetMapping("lecture/editSyllabus")
+	public void editSyllabus(HttpServletRequest request, Model model, @RequestParam(defaultValue = "") String openSubCode) {
+		logger.info("강의계획서 세부 화면, openSubCode={}", openSubCode);
+		
+		SyllabusVO vo = syllabusService.checkSyllabus(openSubCode);
+		logger.info("vo = {}", vo);
+		model.addAttribute("vo", vo);
 	}
 }

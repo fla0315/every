@@ -21,4 +21,9 @@ public class SyllabusServiceImpl implements SyllabusService {
 	public int insertSyllabus(SyllabusVO vo) {
 		return syllabusDao.insertSyllabus(vo);
 	}
+
+	@Override
+	public SyllabusVO checkSyllabus(String openSubCode) {
+		return syllabusDao.checkSyllabus(openSubCode);
+	}
 }

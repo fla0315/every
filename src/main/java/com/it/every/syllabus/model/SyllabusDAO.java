@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface SyllabusDAO {
 	List<Map<String, Object>> checkSyllabusList(String profNo);
 	int insertSyllabus(SyllabusVO vo);
+	SyllabusVO checkSyllabus(String openSubCode);
 }

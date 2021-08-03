@@ -19,19 +19,23 @@
 			<input type="hidden" name="openSubCode" value="${param.openSubCode }">
 	         		<div class="col-xs-6">
 	                      <label for="theoryTime">이론시간</label>
-	                      <input style="width:400px" class="form-control" name="theoryTime" type="text" value=""/>
+	                      <input style="width:400px" class="form-control" name="theoryTime" type="text" value="${vo.theoryTime }"/>
 	              </div>
 	              <div class="col-xs-6"><br>
 	                      <label for="trainingTime">실습시간</label>
-	                      <input style="width:400px" class="form-control" name="trainingTime" type="text" value=""/>
+	                      <input style="width:400px" class="form-control" name="trainingTime" type="text" value="${vo.trainingTime }"/>
 	              </div>
 	    	<div>
 	    	</div>
 			<br>
 	        <label for="upfile">첨부파일</label>
+	        	<c:if test="${!empty vo.syllabus }">
+	        		<span>${vo.syllabus }</span>
+	        	</c:if>
 	       		<input type="file" id="upfile" name="upfile" />
 	   		<span>(최대 2M)</span>
-	    <input type="submit" class="btn btn-primary" value="등록"/>
+	   		<br><br>
+	    <input type="submit" class="btn btn-primary" value="수정"/>
 	    </form>
 	</div>
 </BODY>
