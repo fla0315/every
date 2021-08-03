@@ -112,6 +112,12 @@ public class StudentServiceImpl implements StudentService{
 	public List<Map<String, Object>> selectMyAssignmemt(DistributeAssignVo distributeAssignVo) {
 		return studentDao.selectMyAssignmemt(distributeAssignVo);
 	}
+
+
+	@Override
+	public List<Map<String, Object>> myAssignmemtList(String stuNo) {
+		return studentDao.myAssignmemtList(stuNo);
+	}
 	
 	
 	

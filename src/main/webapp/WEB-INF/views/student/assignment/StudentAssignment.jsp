@@ -189,19 +189,18 @@ body {
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${empty aList }">
+									<c:if test="${empty AssignList }">
 										<tr>
-											<td colspan="4">데이터가 없습니다.</td>
+											<td colspan="4">제출한 과제가 없습니다.</td>
 										</tr>
 									</c:if>
-									<c:if test="${!empty aList }">
-										<c:forEach var="map" items="${aList }">
+									<c:if test="${!empty AssignList }">
+										<c:forEach var="map" items="${AssignList }">
 											<tr>
 												<td>${map['OPEN_SUB_CODE'] }</td>
 												<td>${map['SUBJ_NAME'] }</td>
-												<td class="ccdetail text-left">&nbsp;
-												<a href="${pageContext.request.contextPath }/professor/assign/assignmentCheck?openSubCode=${map['OPEN_SUB_CODE'] }&assignNo=${map['ASSIGN_NO'] }" onclick="">${map['ASSIGN_NAME'] }</a></td>
-												<td><fmt:formatDate value="${map['REG_DATE'] }" pattern="yyyy-MM-dd" /></td>
+												<td>${map['FILE_NAME'] }</td>
+												<td><fmt:formatDate value="${map['APPLY_DATE'] }" pattern="yyyy-MM-dd" /></td>
 											</tr>
 										</c:forEach>
 									</c:if>

@@ -41,18 +41,20 @@ public class assignmentController {
 	
 	
 	@RequestMapping("/assignment/StudentAssignment")
-	public String assignment(@ModelAttribute RegistrationSearchVO regiVo,HttpSession session, Model model) {
+	public String assignment(@ModelAttribute RegistrationSearchVO regiVo,@ModelAttribute AssignmentVO  assignmentVo,HttpSession session, Model model) {
 		logger.info("과제 등록 페이지");
 		//여기다가는 과목명과 과제제목을 학번에 맞는걸 뿌려줘야한다
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String) session.getAttribute("no");
 		regiVo.setStudentId(userid);
-		//1 학생이 수강중인 과목
+		assignmentVo.setStuNo(stuNo);
 		
 		List<Map<String, Object>> Mylist =regiService.selectMyRegistarion(userid);
 		model.addAttribute("Mylist",Mylist);
-		//2. 그 과목에 맞는 과제 목록
-		//3여기는 내가 제출한 모든 과제들 보여주기?
+		logger.info("과목명 , Mylist.size()={}",Mylist.size());
+		List<Map<String, Object>> AssignList =studentService.myAssignmemtList(stuNo);
+		model.addAttribute("AssignList",AssignList);
+		logger.info("과목명 , AssignList.size()={}",AssignList.size());
 		
 		return "student/assignment/StudentAssignment";
 		

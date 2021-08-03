@@ -96,6 +96,17 @@
 		where stu.student_id=#{studentId} and b.open_sub_code =#{openSubCode}
 	</select>
 	
+	<!-- 내가 제출한 과제 목록들 보여주는 거 -->
+	<select id="myAssignmemtList" parameterType="String" resultType="map">
+		select * from 
+		assignment a join registration r
+		on a.open_sub_code = r.open_sub_code
+		join open_subj o
+		on o.open_sub_code = a.open_sub_code
+		join subject s
+		on s.subj_code =o.subj_code
+		where a.stu_no=#{stuNo}
+	</select>
 </mapper>
 
 

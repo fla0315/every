@@ -40,7 +40,7 @@ public interface StudentService {
 	int insertAssignment(AssignmentVO assignmentVo); //학생 과제 등록
 	List<Map<String, Object>> selectMyAssignmemt (DistributeAssignVo distributeAssignVo);
 	
-	
+	List<Map<String, Object>> myAssignmemtList(String stuNo); //내가 제출한 과제들 보여주는거 
 	
 	
 }
