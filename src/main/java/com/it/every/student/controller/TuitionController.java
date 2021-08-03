@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.every.student.model.StudentService;
-import com.it.every.student.model.StudentVO;
+import com.it.every.tuition.model.TuitionVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,7 +39,7 @@ public class TuitionController {
 		Map<String, Object> map = studentService.selectStudentDeptView(userid);
 		
 		logger.info("등록금 조회 결과 list.size={}", list.size());
-		logger.info("등록금 조회??? 결과 map={}", map);
+		logger.info("등록금 조회 결과 map={}", map);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);
@@ -49,19 +49,25 @@ public class TuitionController {
 	}
 	
 	@RequestMapping("/tuitionPDF")
-	public String tuitionPDF(HttpSession session, @RequestParam(defaultValue = "0") int tuitionNo, Model model) {
+	public String tuitionPDF(@ModelAttribute TuitionVO tuitionVo ,HttpSession session, @RequestParam(defaultValue = "0") String tuitionNo, Model model) {
 		String userid = (String)session.getAttribute("user_id");
-		//String userid ="fla0315";
-		tuitionNo =2;
-		logger.info("등록금 pdf 화면 , 파라미터 tuitionNo={}",tuitionNo);
+		String stuNo = (String) session.getAttribute("no");
 		
-		/*
-		Map<String, Object> map = studentService.selectByTuitionNo(userid, tuitionNo);
+		System.out.println(tuitionNo);
+		
+		tuitionVo.setStuNo(stuNo);
+		tuitionVo.setTuitionNo(Integer.parseInt(tuitionNo));
+		
+		System.out.println(stuNo);
+		
+		logger.info("등록금 pdf 화면 , 파라미터 tuitionVo={} tuitionNo={}",tuitionVo,tuitionNo);
+		
+		Map<String, Object> map = studentService.selectByTuitionNo(tuitionVo);
 		
 		logger.info("등록금 pdf 화면 map={}", map);
 		
 		model.addAttribute("map", map);
-		*/
+		
 		
 		return "tuition/tuitionPDF";
 		

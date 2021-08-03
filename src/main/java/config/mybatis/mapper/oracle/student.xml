@@ -40,6 +40,14 @@
 		where student_id=#{studentId}
 	</select>
 	
+	<!-- 등록금상세조회 -->
+	<select id="selectByTuitionNo" parameterType="TuitionVO" resultType="map">
+		select * from tuitionView t join (select * from department d join student s
+		on s.dept_no = d.dept_no) q
+		on t.stu_no = q.stu_no
+		where t.stu_no=#{stuNo} and t.tuition_No=#{tuitionNo}
+	</select>
+	
 	
 	<!-- 장학금 조회 -->
 	<select id="selectByScholarship" parameterType="RegistrationSearchVO" resultType="map">
@@ -58,6 +66,20 @@
 			on a.stu_no = s.stu_no
 			where s.student_id=#{studentId} -->
 	</select>	
+	
+	<!-- 장학금 상세 조회 -->
+	<select id="selectByScholashipNo" parameterType="ScholarshipVO" resultType="map">
+		select *
+		from scholarship sch join award a
+		on sch.scholarship_no = a.scholarship_no
+		join student s
+		on a.stu_no = s.stu_no
+		where s.student_id=#{studentId} and sch.scholarship_no=#{scholarshipNo}
+	</select>
+	
+	
+	
+	
 	
 	<!-- 쪽지용 이름으로 검색 -->
 	<select id="searchForChat" parameterType="String" resultType="studentVo">
@@ -105,6 +127,8 @@
 		on o.open_sub_code = a.open_sub_code
 		join subject s
 		on s.subj_code =o.subj_code
+		join distribute_assign d
+		on d.assign_no = a.assign_no
 		where a.stu_no=#{stuNo}
 	</select>
 </mapper>

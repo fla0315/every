@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.it.every.assignment.model.AssignmentVO;
 import com.it.every.common.RegistrationSearchVO;
 import com.it.every.distributeAssign.model.DistributeAssignVo;
+import com.it.every.scholarship.model.ScholarshipVO;
+import com.it.every.tuition.model.TuitionVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -68,10 +70,7 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.selectByStuId(userid);
 	}
 
-	@Override
-	public Map<String, Object> selectByTuitionNo(String userid, int tuitionNo) {
-		return studentDao.selectByTuitionNo(userid, tuitionNo);
-	}
+	
 
 	@Override
 	public List<Map<String, Object>> selectByScholarship(RegistrationSearchVO regiSearchVo) {
@@ -118,6 +117,28 @@ public class StudentServiceImpl implements StudentService{
 	public List<Map<String, Object>> myAssignmemtList(String stuNo) {
 		return studentDao.myAssignmemtList(stuNo);
 	}
+
+
+	@Override
+	public Map<String, Object> selectByTuitionNo(TuitionVO tuitionVo) {
+		return studentDao.selectByTuitionNo(tuitionVo);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectByScholashipNo(ScholarshipVO scholarshipVo) {
+		return studentDao.selectByScholashipNo(scholarshipVo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

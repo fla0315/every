@@ -11,10 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.every.common.RegistrationSearchVO;
-import com.it.every.openSubj.model.OpenSubjVO;
+import com.it.every.scholarship.model.ScholarshipVO;
 import com.it.every.student.model.StudentService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,9 +41,20 @@ public class ScholarshipController {
 	
 	
 	@RequestMapping("/scholarshipPDF")
-	public String scholarshipPDF() {
+	public String scholarshipPDF(@ModelAttribute ScholarshipVO scholarshipVo ,@RequestParam(defaultValue = "0") String scholarshipNo,HttpSession session, Model model) {
+		String userid = (String)session.getAttribute("user_id");
+		String stuNo = (String) session.getAttribute("no");
 		
 		logger.info("scholarshipPDF 화면 보여주기");
+		
+		scholarshipVo.setScholarshipNo(Integer.parseInt(scholarshipNo));
+		scholarshipVo.setStudentId(userid);
+		
+		List<Map<String, Object>> list = studentService.selectByScholashipNo(scholarshipVo);
+
+		logger.info("장학금 pdf 화면 list={}", list);
+		
+		model.addAttribute("list", list);
 		
 		return "scholarship/scholarshipPDF";
 	}

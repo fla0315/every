@@ -2,25 +2,39 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/student_top.jsp"%>
 
-
-
-
-
 <script type="text/javascript">
-
 
 
 $(function(){
 	
-		$('#selectBt').click(function(){
-			event.preventDefault();
-			subjList();
-		});
+	$('#selectBt').click(function(){
+		event.preventDefault();
+		subjList();
 	});
+	
+	$('button[name=btnOpenSubCode]').click(function(){
+		alert("들어와?");
+		/* var openSubCode ="";
+		//여기서 나온 값을 컨트롤러로 보낼 것
+		console.log(openSubCode);
+		$.ajax({
+			url : "<c:url value='/registration/request_registrationInsert'/>",
+			type : "post",
+			dataType : "json",
+			data: "openSubCode="+openSubCode,
+			success : function(data){
+				alert('성공');
+			},
+			error : function(){
+				alert('수강신청 실패');
+			}
+		}); */
+	});
+});
 
 
 	
-	/* 에이젝스로 받는 거  */
+	/* 에이젝스로 개설과목 받는 거  */
 	function subjList(){
 		var subjYear=$('#subjYear').val(); //년도
 		var semester=$('#semester').val(); //학기
@@ -29,14 +43,12 @@ $(function(){
 		var facultyName=$('#facultyName').val(); //학과
 		var subjName=$('#subjName').val(); //과목명
 		
-		
 		console.log(subjYear);
 		console.log(semester);
 		console.log(grade);
 		console.log(type);
 		console.log(facultyName);
 		console.log(subjName);
-		
 		
 		$.ajax({
 			url:"<c:url value='/registration/open_registration'/>",
@@ -62,7 +74,7 @@ $(function(){
 				$.each(res, function(idx, item){
 					console.log(item)
 					str+="<tr class='' role='row' id=''>"; //테이블 여는거 
-					str+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmRegistration' method='post' action='<c:url value='/registration/request_registrationInsert'/>'><input type='hidden' name='openSubCode' value='"+item.OPEN_SUB_CODE+"'> <input type='submit' value='수강신청' class='buttons'> </form> </td>"; //장바구니
+					str+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmRegistration' method='post' action='<c:url value='/registration/request_registrationInsert'/>'><button type='button' name='btnOpenSubCode' class='buttons' value='"+item.OPEN_SUB_CODE+"'>수강신청</button></form> </td>"; //장바구니
 						str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.SEMESTER+"학기"+"</td>"; //학기
 						str+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SUBJ_NAME+"</td>"; //과목명
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.FACULTY_NAME+"</td>"; //학부(과)
@@ -72,11 +84,6 @@ $(function(){
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.COUNT+"/"+item.PERSONNEL+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //담당교수
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'><button type='button' class='applyBt'>강의계획서</button></td>"; //장바구니
-						/* str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+
-						"<a href='<c:url value='/registration/download?fileName="+fileName+"&originalFileName="+originalFileName+"'/>'>"+
-						originalFileName+"</a></td>"; */
-						
 						
 					str+="</tr>"; //테이블 닫는거
 				});
@@ -90,10 +97,12 @@ $(function(){
 				console.log(err)
 			}
 		});
-	}
+	}//subjList
+	
+	
 	
 
-
+	/* 장바구니에서 수강신청 */
 	$(function(){
 		var openSubCode = []
 		$('#btCTR').click(function(){
@@ -111,17 +120,22 @@ $(function(){
 				data: "openSubCode="+openSubCode,
 				success : function(data){
 					alert('성공');
-					location.reload();
+					//location.reload();
 				},
 				error : function(){
 					alert('수강신청 실패');
-					location.reload();
+					//location.reload();
 				}
 			});
 		});
+		
+		
 	});  
+	
+	
 </script>
-
+<!-- 수강신청코드  -->
+<!-- <input type='hidden' name='openSubCode' value='"+item.OPEN_SUB_CODE+"'>  <input type='submit' value='수강신청' class='buttons'>  -->
 
 <div class="container-fluid px-4" style="background-color: white;">
 	<h4 class="mt-4" style="background-color: white;">수강신청</h4>
@@ -130,12 +144,8 @@ $(function(){
 	<div class="card mb-4">
 		<div class="card-body">
 
-			<table border="0" cellpadding="0" cellspacing="0"
-				style="width: 100%;">
-				<tr>
-					<td class="">
 						<!-- ********************** 검색조건 테이블 시작 ********************** -->
-						<table border="0" cellspacing="5">
+				<table border="0" cellspacing="5">
 					<tr>
 						<!-- <!-- 년도는 5개로 고정 -->
 						<!-- <td id="hide1"><span class=""><label for="년도"></label></span></td>
@@ -249,7 +259,6 @@ $(function(){
 										<th scope="col">총원</th>
 										<th scope="col">담당교수</th>
 										<th scope="col">강의실/시간</th>
-										<th scope="col">강의계획서</th>
 									</tr>
 								</thead>
 								<tbody id="subjectInfo">
@@ -401,7 +410,7 @@ $(function(){
 							</table>
 						</div>
 						
-						
+						</div>
 						
 						
 						 <%@ include file="../inc/bottom.jsp"%>

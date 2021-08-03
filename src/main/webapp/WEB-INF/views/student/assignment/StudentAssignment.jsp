@@ -43,7 +43,7 @@ body {
 					
 					str+="<option>선택하세요.</option>"; //테이블 여는거 
 					if(res.length > 0){
-						openSubCode+="<input type='text' value='"+res[0].OPEN_SUB_CODE+"' name='openSubCode' id='hiddenSub'>";
+						openSubCode+="<input type='hidden' value='"+res[0].OPEN_SUB_CODE+"' name='openSubCode' id='hiddenSub'>";
 					}
 					$('#subjectDiv').append(openSubCode);
 					
@@ -142,12 +142,12 @@ body {
 								<!-- ///////////////////////////////////////////////////// -->
 								
 							</div>
-							<div class="col-md-6">
+							<!-- <div class="col-md-6">
 								<div class="form-floating mb-3 mb-md-0">
 									<input class="form-control"  type="text" name="title" id="title"
 										value=""/> <label for="assignName">과제 제목</label>
 								</div>
-							</div> <br>
+							</div> <br> -->
 							
 							
 							<label for="assignName">과제파일</label>
@@ -199,7 +199,7 @@ body {
 											<tr>
 												<td>${map['OPEN_SUB_CODE'] }</td>
 												<td>${map['SUBJ_NAME'] }</td>
-												<td>${map['FILE_NAME'] }</td>
+												<td>${map['ASSIGN_NAME'] }</td>
 												<td><fmt:formatDate value="${map['APPLY_DATE'] }" pattern="yyyy-MM-dd" /></td>
 											</tr>
 										</c:forEach>

@@ -23,37 +23,6 @@ $(function(){
 </script>
 
 
-
-<%-- {
-				$.ajax({
-					type : "POST",
-					url : "<c:url value='/subj_eval/searchMyGrade'/>",
-					data : $(this).serialize(),
-					success : function(res) {
-						
-						for(var i=0; i< res.length; i++){
-							var score = 0;
-							switch(grade){
-							case 93:
-								score = 4.5;
-							}
-							var option = "askdjaskdj" + score + 'dsffds'
-							
-						}
-						
-						
-					},
-					error :  function() {
-						alert('강의등록실패');
-					}
-				})
-			
-			
-			
-		} --%>
-
-
-
 <div class="container-fluid px-4" style="background-color: white;">
 	<h4 class="mt-4" style="background-color: white;">성적조회</h4>
 	<br>
@@ -119,9 +88,15 @@ $(function(){
 									<!-- 강의실/시간 -->
 									<td>${myMap['TIMETABLE'] }</td>
 									<!-- 강의평가구분 -->
-									<td class="evalFlag"><span>${myMap['LECTURE_EVAL_FLAG'] }</span></td>
-
-
+									<td class="evalFlag">
+										<c:if test="${myMap['LECTURE_EVAL_FLAG']=='Y'}">
+											<span>[강의평가 완료]</span>						
+										</c:if>		
+										<c:if test="${myMap['LECTURE_EVAL_FLAG']=='N'}">
+											<span>[강의평가 미완료]</span>						
+										</c:if>		
+									</td>
+									
 									<td>
 										<%-- <form name="frmRegistration" method="post"	action="<c:url value='/subj_eval/subj_eval_survey?openSubCode='/>${myMap['OPEN_SUB_CODE'] }"> --%>
 										<form name="frmRegistration" method="post"

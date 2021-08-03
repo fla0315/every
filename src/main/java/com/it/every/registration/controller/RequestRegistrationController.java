@@ -128,14 +128,17 @@ public class RequestRegistrationController {
 			return msg;
 	}
 	
+	
+	//개설과목에서 수강신청
 	@RequestMapping("/request_registrationInsert")
-	public String myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode ,Model model) {
+	@ResponseBody
+	public String myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String btnOpenSubCode ,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		registrationVo.setStuNo(stuNo);
 		registrationCartVo.setStuNo(stuNo);
-		registrationVo.setOpenSubCode(openSubCode);
+		registrationVo.setOpenSubCode(btnOpenSubCode);
 		
 		int personnel = studentRegistrationService.countPersonnel(registrationVo);
 		int countCount = studentRegistrationService.countCount(registrationVo);
@@ -176,9 +179,62 @@ public class RequestRegistrationController {
 				
 			}
 		}
+		return msg;
+	}
+	
+	
+	/* 수강신청 에이젝스 백업본
+	@RequestMapping("/request_registrationInsert")
+	public String myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode ,Model model) {
+		
+		String userid = (String)session.getAttribute("user_id");
+		String stuNo = (String)session.getAttribute("no");
+		registrationVo.setStuNo(stuNo);
+		registrationCartVo.setStuNo(stuNo);
+		registrationVo.setOpenSubCode(openSubCode);
+		
+		int personnel = studentRegistrationService.countPersonnel(registrationVo);
+		int countCount = studentRegistrationService.countCount(registrationVo);
+		System.out.println(personnel+"총원");
+		System.out.println(countCount+"현재 등록인원");
+		
+		String msg =" " , url ="/registration/request_registration";
+		
+		if(countCount>=personnel) {
+			msg="정원초과하였습니다."; 
+			url="/registration/request_registration"; 
+			model.addAttribute("msg", msg); 
+			model.addAttribute("url", url);
+		}else {
+			int count = studentRegistrationService.checkDuplicate(registrationVo);
+			if(count > 0) {
+				//실패
+				msg="이미 수강신청을 완료 했습니다."; 
+				url="/registration/request_registration"; 
+				model.addAttribute("msg", msg); 
+				model.addAttribute("url", url);
+			}else {
+				//여기서 수강신청
+				logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
+				int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
+				registrationCartVo.setOpenSubCode(registrationVo.getOpenSubCode());
+				
+				if(cnt>0){ 
+					cnt = studentRegistrationService.deleteCart(registrationCartVo);
+					msg="수강신청완료!."; 
+					url="/registration/request_registration"; 
+				}else{
+					msg="수강신청실패."; 
+					url="/registration/request_registration"; 
+				}
+				model.addAttribute("msg", msg); 
+				model.addAttribute("url", url);
+				
+			}
+		}
 		return "common/message";
 	}
-
+	*/
 	
 	
 	@RequestMapping("/request_registrationDelete")

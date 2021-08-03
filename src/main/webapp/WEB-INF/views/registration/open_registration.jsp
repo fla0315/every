@@ -35,7 +35,7 @@
 		
 		
 		$.ajax({
-			url:"<c:url value='/student/assignment/selectMySubj'/>",
+			url:"<c:url value='/registration/open_registration'/>",
 			data:{
 				"facultyName":facultyName, //위에서 만들어준거
 				"subjName":subjName,
