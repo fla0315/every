@@ -6,29 +6,9 @@
 
 
 $(function(){
-	
 	$('#selectBt').click(function(){
 		event.preventDefault();
 		subjList();
-	});
-	
-	$('button[name=btnOpenSubCode]').click(function(){
-		alert("들어와?");
-		/* var openSubCode ="";
-		//여기서 나온 값을 컨트롤러로 보낼 것
-		console.log(openSubCode);
-		$.ajax({
-			url : "<c:url value='/registration/request_registrationInsert'/>",
-			type : "post",
-			dataType : "json",
-			data: "openSubCode="+openSubCode,
-			success : function(data){
-				alert('성공');
-			},
-			error : function(){
-				alert('수강신청 실패');
-			}
-		}); */
 	});
 });
 
@@ -66,15 +46,12 @@ $(function(){
 				console.log(res)
 				var str = "";
 				
-			/* 	pageMake(res);
-				$('#meta_1 em').text(count); */
-				
 				$("#subjectInfo").empty();
 				
 				$.each(res, function(idx, item){
 					console.log(item)
 					str+="<tr class='' role='row' id=''>"; //테이블 여는거 
-					str+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmRegistration' method='post' action='<c:url value='/registration/request_registrationInsert'/>'><button type='button' name='btnOpenSubCode' class='buttons' value='"+item.OPEN_SUB_CODE+"'>수강신청</button></form> </td>"; //장바구니
+					str+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmRegistration' method='post' action='<c:url value='/registration/request_registrationInsert'/>'><button type='button' name='openSubCode' class='buttons' value='"+item.OPEN_SUB_CODE+"'>수강신청</button></form> </td>"; //장바구니
 						str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.SEMESTER+"학기"+"</td>"; //학기
 						str+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SUBJ_NAME+"</td>"; //과목명
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.FACULTY_NAME+"</td>"; //학부(과)
@@ -89,8 +66,23 @@ $(function(){
 				});
 					
 				$('#subjectInfo ').append(str); //조회누르면 뿌려주는 바디부분
-	
-				//$('#meta_1').find('em').text(res.count); //총 조회건수
+				
+				$(function(){
+					 $('button[name=openSubCode]').on("click",function(){  
+						$.ajax({
+							url : "<c:url value='/registration/request_registrationInsert'/>",
+							type : "post",
+							dataType : "json",
+							data: "openSubCode="+$(this).val(),
+							success : function(data){
+								alert(data.msg);
+							},
+							error : function(e){
+								console.log(e);
+							}
+						}); 
+					});
+				});
 				
 			}, //석세스 끝나는 부분
 			error: function(err) {
@@ -128,10 +120,10 @@ $(function(){
 				}
 			});
 		});
-		
-		
 	});  
 	
+
+
 	
 </script>
 <!-- 수강신청코드  -->
@@ -307,7 +299,7 @@ $(function(){
 											<tr class="align_center">
 
 												<td>
-													<form name="frmRegistration" method="post"
+													<form name="frmDelete" method="post"
 														action="<c:url value='/registration/request_registrationDelete'/>">
 														<input type="hidden" name="openSubCode"
 															value="${myMap['OPEN_SUB_CODE'] }"> <input

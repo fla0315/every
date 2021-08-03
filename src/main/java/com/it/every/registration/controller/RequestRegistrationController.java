@@ -1,5 +1,6 @@
 package com.it.every.registration.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -132,13 +133,13 @@ public class RequestRegistrationController {
 	//개설과목에서 수강신청
 	@RequestMapping("/request_registrationInsert")
 	@ResponseBody
-	public String myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String btnOpenSubCode ,Model model) {
+	public Map<String, String> myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode ,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		registrationVo.setStuNo(stuNo);
 		registrationCartVo.setStuNo(stuNo);
-		registrationVo.setOpenSubCode(btnOpenSubCode);
+		registrationVo.setOpenSubCode(openSubCode);
 		
 		int personnel = studentRegistrationService.countPersonnel(registrationVo);
 		int countCount = studentRegistrationService.countCount(registrationVo);
@@ -179,7 +180,9 @@ public class RequestRegistrationController {
 				
 			}
 		}
-		return msg;
+		Map<String, String> list = new HashMap<String, String>();
+		list.put("msg", msg);
+		return list;
 	}
 	
 	
