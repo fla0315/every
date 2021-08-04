@@ -71,7 +71,8 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	@Override
 	public List<Map<String, Object>> selectByOpenSubCode(String openSubCode) {
 		return studentRegistrationDao.selectByOpenSubCode(openSubCode);
-
+	}
+	
 	@Override
 	public int checkDuplicateCart(RegistrationCartVO registrationCartVo) {
 		

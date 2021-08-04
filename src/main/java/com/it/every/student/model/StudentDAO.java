@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.it.every.assignment.model.AssignmentVO;
 import com.it.every.common.RegistrationSearchVO;
-import com.it.every.distributeAssign.model.DistributeAssignVo;
+import com.it.every.distributeAssign.model.DistributeAssignVO;
 import com.it.every.scholarship.model.ScholarshipVO;
 import com.it.every.tuition.model.TuitionVO;
 
@@ -36,7 +36,7 @@ public interface StudentDAO {
 	
 	
 	int insertAssignment(AssignmentVO assignmentVo); //학생 과제 등록
-	List<Map<String, Object>> selectMyAssignmemt (DistributeAssignVo distributeAssignVo);
+	List<Map<String, Object>> selectMyAssignmemt (DistributeAssignVO distributeAssignVo);
 	List<Map<String, Object>> myAssignmemtList(String stuNo); //내가 제출한 과제들 보여주는거 
 	
 }
