@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -133,7 +132,7 @@ public class RequestRegistrationController {
 	//개설과목에서 수강신청
 	@RequestMapping("/request_registrationInsert")
 	@ResponseBody
-	public Map<String, String> myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode ,Model model) {
+	public Map<String, String> myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo ,@ModelAttribute RegistrationSearchVO regiSearchVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode ,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
@@ -171,6 +170,7 @@ public class RequestRegistrationController {
 					  cnt = studentRegistrationService.deleteCart(registrationCartVo);
 					  msg="수강신청완료!."; 
 					  url="/registration/request_registration"; 
+					  
 				  }else{
 					  msg="수강신청실패."; 
 					  url="/registration/request_registration"; 
@@ -180,6 +180,10 @@ public class RequestRegistrationController {
 				
 			}
 		}
+		
+		
+		
+		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("msg", msg);
 		return list;

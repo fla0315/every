@@ -37,6 +37,7 @@ public class SyllabusDownloadView extends AbstractView{
 			out.print("</script>");
 			return;
 		}
+		
 		response.setContentType("application/octet-stream");
 		originalFileName 
 			= new String(originalFileName.getBytes("euc-kr"),"8859_1");

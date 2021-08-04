@@ -62,7 +62,6 @@ $(function(){
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.COUNT+"/"+item.PERSONNEL+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //담당교수
-						
 					str+="</tr>"; //테이블 닫는거
 				});
 					
@@ -79,6 +78,11 @@ $(function(){
 							success : function(data){
 								alert(data.msg);
 								
+								
+								$('#MyregiInfo ').append();	
+								
+								
+								
 							},
 							error : function(e){
 								console.log(e);
@@ -93,44 +97,6 @@ $(function(){
 			}
 		});
 	}//subjList
-	
-	/* 
-	function Mylist(){
-		$.ajax({
-			url : "<c:url value='/registration/request_Myregistration'/>",
-			type : "post",
-		    dataType: "json",
-	        data    : "",
-	        async    : false,
-			success : function(data){
-				var mystr = "";
-				$.each(data, function(idx, item){
-					console.log(item)
-					mystr+="<tr class='' role='row' id=''>"; //테이블 여는거 
-					mystr+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmRegistration' method='post' action='<c:url value='/registration/request_registrationInsert'/>'><button type='button' name='openSubCode' class='buttons' value='"+item.OPEN_SUB_CODE+"'>수강신청</button></form> </td>"; //삭제
-					mystr+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.OPEN_DATE+"학기"+"</td>"; //년도
-					mystr+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SEMESTER+"</td>"; //학기
-					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.SUBJ_NAME+"</td>"; //과목명
-					mystr+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.FACULTY_NAME+"학년"+"</td>";  //학부
-					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>" +item.GRADE+"</td>"; //학년
-					mystr+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.TYPE+"학점"+"</td>"; //이수구분
-					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.CREDIT+"</td>"; //학점
-					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
-					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //강의실 시ㄴ
-					str+="</tr>"; //테이블 닫는거
-				});
-				$('#MyregiInfo ').append(mystr); //조회누르면 뿌려주는 바디부분
-			}); 
-			error : function(e){
-				alert("망함");
-			}
-		}); 
-	}//Mylist */
-
-	
-	
-	
-	
 	
 	
 	/* 장바구니에서 수강신청 */
@@ -161,8 +127,6 @@ $(function(){
 		});
 	});  
 	
-
-
 	
 </script>
 <!-- 수강신청코드  -->
