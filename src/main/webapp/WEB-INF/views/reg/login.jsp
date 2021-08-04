@@ -216,17 +216,10 @@ $('#pwd').keyup(function(){
 						<span class="check_id" id="check_id" style=""></span>
 				</div>
 			</div>
-				<br>
-				<input type="radio" name="chk_info" id="chk_info" value="student">학생
-				<input type="radio" name="chk_info" id="chk_info" value="admin">관리자 
-				<input type="radio" name="chk_info" id="chk_info" value="professor">교수
-				
-				<br>
-				<br>
-
-				<div class="center"></div>
-				<input type="submit" id="submit" class="btn btn-danger" value="로그인"  style="width:80px;">
-			
+				<br><br>
+				<div class="text-center">
+				<input type="submit" id="submit" class="btn btn-dark" value="로그인"  style="width:80px;">
+				</div>
 			</fieldset>
 				<br>
 			 <input type ="hidden" name="chkId" id="chkId"> 

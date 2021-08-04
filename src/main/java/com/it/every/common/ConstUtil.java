@@ -27,7 +27,8 @@ public interface ConstUtil {
    
    
    //과제업로드
-   String ASSIGNMENT_FILE_UPLOAD_PATH_TEST= "C:\\Users\\yeongrim kim\\OneDrive - ikw.kr\\문서\\GitHub\\every\\src\\main\\webapp\\WEB-INF\\pds_assignment";
+   //String ASSIGNMENT_FILE_UPLOAD_PATH_TEST= "C:\\Users\\yeongrim kim\\OneDrive - ikw.kr\\문서\\GitHub\\every\\src\\main\\webapp\\WEB-INF\\pds_assignment";
+   String ASSIGNMENT_FILE_UPLOAD_PATH_TEST= "F:\\lecture\\project\\final\\every\\src\\main\\webapp\\WEB-INF\\pds_assignment";
     
    //강의계획서 업로드
    String SYLLABUS_FILE_UPLOAD_PATH_TEST="F:\\lecture\\project\\final\\every\\src\\main\\webapp\\pds_syllabus";

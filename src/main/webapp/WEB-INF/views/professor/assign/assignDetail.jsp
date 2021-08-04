@@ -75,7 +75,7 @@ $(function() {
     	<div class="row mb-3">
     	<div class="col-xs-12 right">
                   <div class="form-floating">
-                      <label for="midterm">제출한 과제 : </label> <a href="#">${map['FILE_NAME'] }</a>
+                      <label for="midterm">제출한 과제 : </label> <a href="<c:url value='/professor/assign/download?fileName=${map["FILE_NAME"] }&originalFileName=${map["ORIGINAL_FILE_NAME"] }'/>">${map['FILE_NAME'] }</a>
                   </div>
               </div>
         </div>
