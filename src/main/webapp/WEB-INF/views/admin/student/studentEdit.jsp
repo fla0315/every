@@ -9,10 +9,6 @@
 				alert('이름을 입력하세요');
 				$('#name').focus();
 				event.preventDefault();
-			} else if($('#studentId').val().length<1){
-				alert('아이디를 입력하세요');
-				$('#studentId').focus();
-				event.preventDefault();
 			} else if($('#pwd').val().length<1){
 				alert('비밀번호를 입력하세요');
 				$('#pwd').focus();
@@ -30,7 +26,7 @@
 				$('#state').focus();
 				event.preventDefault();
 			} else if($('#semester').val().length<1){
-				alert('학기를 선택하세요');
+				alert('이수학기를 선택하세요');
 				$('#semester').focus();
 				event.preventDefault();
 			} else if($('#admissionDate').val().length<1){
@@ -135,7 +131,7 @@
 															</c:forEach>
 														    
 														</select>
-                                                        <label for="inputFirstName">학기</label>
+                                                        <label for="inputFirstName">이수학기</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">

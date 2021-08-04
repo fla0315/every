@@ -258,10 +258,72 @@ public class StudentManageController {
 	}
 	
 	@GetMapping("/chart/majorStuChart")
-	public String majorStuChart() {
-		logger.info("학과별 학생통계 화면");
+	public String majorStuChart(Model model) {
+		logger.info("학과별 학생통계 초기화면");
+		
+		List<DepartmentVO> deptList = departmentService.selectDepartment();
+		List<Map<String, Object>> gradeList = studentManageService.selectGrade();
+		logger.info("gradeList.size={}", gradeList.size());
+		
+		String str ="[";
+		str +="['학년' , '재학생 수'] ,";
+		int num1 =0;
+		for (Map<String, Object> map1 : gradeList) {
+			
+			str +="['";
+			str += map1.get("GRADE");
+			str +="' , ";
+			str += map1.get("COUNT");
+			str +=" ]";
+			
+			num1 ++;
+			if(num1<gradeList.size()){
+				str +=",";
+			}		
+		}
+		str += "]";
+		
+		logger.info("str1 = {}", str);
+		
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("str1", str);
 		
 		return "admin/chart/majorStuChart";
 	}
 	
+	@RequestMapping("/chart/selectMajor")
+	public String selectMajorGrade(@RequestParam String major, Model model) {
+		
+		logger.info("학과별 학생통계 학과조회 화면, parmeter major={}", major);
+		
+		List<DepartmentVO> deptList = departmentService.selectDepartment();
+		List<Map<String, Object>> majorGradeList = studentManageService.selectMajorGrade(major);
+		logger.info("gradeList.size={}", majorGradeList.size());
+		
+		String str ="[";
+		str +="['학년' , '재학생 수'] ,";
+		int num1 =0;
+		for (Map<String, Object> map1 : majorGradeList) {
+			
+			str +="['";
+			str += map1.get("GRADE");
+			str +="' , ";
+			str += map1.get("COUNT");
+			str +=" ]";
+			
+			num1 ++;
+			if(num1<majorGradeList.size()){
+				str +=",";
+			}		
+		}
+		str += "]";
+		
+		logger.info("str1 = {}", str);
+		
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("str1", str);
+		model.addAttribute("major", major);
+		
+		return "admin/chart/majorStuChart";
+	}
 }
