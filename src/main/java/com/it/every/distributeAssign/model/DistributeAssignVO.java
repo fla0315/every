@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class DistributeAssignVo {
+public class DistributeAssignVO {
 	 
 	private int assignNo; //과제번호
 	private String openSubCode; //과제교과과목코드
