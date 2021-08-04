@@ -22,8 +22,7 @@ public class SyllabusDownloadView extends AbstractView{
 	
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, 
-			HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+			HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		File file=(File) model.get("file");
 		String originalFileName = (String) model.get("originalFileName");
 		String fileName=file.getName();
@@ -36,17 +35,13 @@ public class SyllabusDownloadView extends AbstractView{
 			out.print("<script>alert('파일이 존재하지 않거나 손상되었습니다.');");
 			out.print("history.back();");
 			out.print("</script>");
-			
 			return;
 		}
-		
 		response.setContentType("application/octet-stream");
-		
 		originalFileName 
 			= new String(originalFileName.getBytes("euc-kr"),"8859_1");
 		response.setHeader("Content-disposition", "attachment;filename=" 
 				+ originalFileName);
-		
 		OutputStream os=response.getOutputStream();
 		FileInputStream fis = null;
 		try {

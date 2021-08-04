@@ -42,6 +42,7 @@ $(function(){
 			},
 			dataType:"json",
 			type:"post",
+			async    : false,
 			success:function(res){
 				console.log(res)
 				var str = "";
@@ -73,9 +74,11 @@ $(function(){
 							url : "<c:url value='/registration/request_registrationInsert'/>",
 							type : "post",
 							dataType : "json",
+							async    : false,
 							data: "openSubCode="+$(this).val(),
 							success : function(data){
 								alert(data.msg);
+								
 							},
 							error : function(e){
 								console.log(e);
@@ -91,9 +94,45 @@ $(function(){
 		});
 	}//subjList
 	
-	
-	
+	/* 
+	function Mylist(){
+		$.ajax({
+			url : "<c:url value='/registration/request_Myregistration'/>",
+			type : "post",
+		    dataType: "json",
+	        data    : "",
+	        async    : false,
+			success : function(data){
+				var mystr = "";
+				$.each(data, function(idx, item){
+					console.log(item)
+					mystr+="<tr class='' role='row' id=''>"; //테이블 여는거 
+					mystr+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmRegistration' method='post' action='<c:url value='/registration/request_registrationInsert'/>'><button type='button' name='openSubCode' class='buttons' value='"+item.OPEN_SUB_CODE+"'>수강신청</button></form> </td>"; //삭제
+					mystr+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.OPEN_DATE+"학기"+"</td>"; //년도
+					mystr+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SEMESTER+"</td>"; //학기
+					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.SUBJ_NAME+"</td>"; //과목명
+					mystr+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.FACULTY_NAME+"학년"+"</td>";  //학부
+					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>" +item.GRADE+"</td>"; //학년
+					mystr+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.TYPE+"학점"+"</td>"; //이수구분
+					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.CREDIT+"</td>"; //학점
+					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
+					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //강의실 시ㄴ
+					str+="</tr>"; //테이블 닫는거
+				});
+				$('#MyregiInfo ').append(mystr); //조회누르면 뿌려주는 바디부분
+			}); 
+			error : function(e){
+				alert("망함");
+			}
+		}); 
+	}//Mylist */
 
+	
+	
+	
+	
+	
+	
 	/* 장바구니에서 수강신청 */
 	$(function(){
 		var openSubCode = []
@@ -273,7 +312,7 @@ $(function(){
 							<table class="table table-bordered table-striped mb-0">
 								<thead>
 									<tr>
-										<th scope="col">취소</th>
+										<th scope="col">삭제</th>
 										<th scope="col">년도</th>
 										<th scope="col">학기</th>
 										<th scope="col">과목명</th>
@@ -285,7 +324,7 @@ $(function(){
 										<th scope="col">강의실/시간</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="MyregiInfo">
 
 									<!-- 데이터 없을 때  -->
 									<c:if test="${empty Mylist }">
@@ -303,7 +342,7 @@ $(function(){
 														action="<c:url value='/registration/request_registrationDelete'/>">
 														<input type="hidden" name="openSubCode"
 															value="${myMap['OPEN_SUB_CODE'] }"> <input
-															type="submit" id="btDelete" value="삭제" class="buttons">
+															type="submit" value="삭제" class="buttons">
 													</form>
 												</td>
 												<!-- 년도 -->

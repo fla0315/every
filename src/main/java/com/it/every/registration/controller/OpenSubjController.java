@@ -245,19 +245,21 @@ public class OpenSubjController {
 	//강의 계획서 다운로드
 	
 	@RequestMapping("/download")
-	public ModelAndView download(@ModelAttribute SyllabusVO syllabusVo,	@RequestParam String openSubCode,HttpServletRequest request) {
+	public ModelAndView download(@ModelAttribute SyllabusVO syllabusVo ,HttpServletRequest request) {
 		//1
 		logger.info("다운로드 처리, 파라미터 syllabusVo={}", syllabusVo);
 		//3
-		syllabusVo.setOpenSubCode(openSubCode);
+		//syllabusVo.setOpenSubCode(openSubCode);
 		
 		Map<String, Object> map = new HashMap<>();
 		//=====다운로드 맵
 		System.out.println(map);
 		
-		String uploadPath=fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+		String uploadPath=fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG); //이거 실라버슨
 		File file = new File(uploadPath, syllabusVo.getSyllabus()); //실라버스 파일 이름 가져오는거 
 		map.put("file", file);
+		//map.put("originalFileName", syllabusVo.getSyllabus());
+		
 		
 		ModelAndView mav = new ModelAndView("downloadView", map);
 		return mav;

@@ -69,7 +69,7 @@ public class RequestRegistrationController {
 		List<OpenSubjVO> list = openSubjService.OpenRegistraionALL();
 		List<Map<String, Object>> facultyMap=openSubjService.selectFacultyS();
 		List<Map<String, Object>> typeMap= openSubjService.selectTypeS();
-		List<Map<String, Object>> Mylist = studentRegistrationService.selectMyRegistarion(userid);
+		List<Map<String, Object>> Mylist = studentRegistrationService.selectMyRegistarion(userid); //이게 내 수강신청 내역 보여주는거 
 		List<Map<String, Object>> Clist = studentRegistrationService.selectCart(userid);
 		
 		logger.info("장바구니 전체 ,Clist.size()={}", Clist.size());
@@ -273,6 +273,24 @@ public class RequestRegistrationController {
 	
 	
 	
+	//내 수강 과목들 에이젝스로 보여주기
+	@RequestMapping("/request_Myregistration")
+	@ResponseBody
+	public List<Map<String, Object>>  myregistration12(@ModelAttribute RegistrationSearchVO regiSearchVo, HttpSession session, Model model) {
+		logger.info("regiSearchVo={}",regiSearchVo);
+		
+		String userid = (String)session.getAttribute("user_id");
+		regiSearchVo.setStudentId(userid);
+		
+		logger.info("나의수상신청목록 페이지");
+		List<Map<String ,Object>> list = studentRegistrationService.searchMyRegistarion(regiSearchVo);
+		
+		logger.info("나의수상신청목록 , list.size()={}", list.size());
+		
+		model.addAttribute("list",list);
+		
+		return list;
+	}
 	
 	
 	

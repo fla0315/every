@@ -197,13 +197,9 @@
 
 				</table>
 			</form>
-
 			<!-- ========================================검색조건 끝====================================================================== -->
-
 			<hr>
 			<br>
-			
-			
 			<div class="table-wrapper-scroll-y my-custom-scrollbar">
 				<table class="table table-bordered table-striped mb-0" id="showTable">
 					<thead>
@@ -222,17 +218,7 @@
 						</tr>
 					</thead>
 					<tbody id="subjectInfo">
-					
-						
-					
 						<!-- 뿌려주는부븐 -->
-						
-						
-						
-						
-						
-						
-						
 					</tbody>
 				</table>
 

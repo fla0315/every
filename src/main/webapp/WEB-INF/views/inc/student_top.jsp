@@ -93,14 +93,9 @@
                                     <div class="collapse" id="collapseTuition" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="<c:url value='/tuition/tuitionList'/>">등록금 조회</a>
-                                            <a class="nav-link" href="">등록금 납부</a>
                                         </nav>
                                     </div>
                                 </nav>
-                                
-                                   <nav class="sb-sidenav-menu-nested nav">
-	                                	  <a class="nav-link" href="<c:url value='/student/studentEdit'/>">졸업시뮬레이션</a>
-	                              </nav>
                             
                             </div>
                           <!-- 마이페이지 끝 -->  
@@ -188,8 +183,7 @@
                                     </a>
                                     <div class="collapse" id="collapseHomework" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="<c:url value='/student/assignment/StudentAssignment'/>">과제등록</a>
-                                            <a class="nav-link" href="#">나의과제조회</a>
+                                            <a class="nav-link" href="<c:url value='/student/assignment/StudentAssignment'/>">나의 과제관리</a>
                                         </nav>
                                     </div>
                                 </nav>
