@@ -17,7 +17,7 @@
 		on rs.open_sub_code = os.open_sub_code
 		join student stu
 		on stu.stu_no = rs.stu_no
-		where stu.student_id=#{studentId} 
+		where stu.student_id=#{studentId}  
 	</select>
 	
 	
