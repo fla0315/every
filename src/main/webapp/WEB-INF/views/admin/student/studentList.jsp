@@ -30,22 +30,23 @@
 						<th style="text-align: center">이름</th>
 						<th style="text-align: center">입학년도</th>
 						<th style="text-align: center">졸업년도</th>
-						<th style="text-align: center">학기</th>
+						<th style="text-align: center">이수학기</th>
 						<th style="text-align: center">학적상태</th>
 						<th style="text-align: center">수정</th>
-						<th style="text-align: center">삭제</th>
+						<!-- <th style="text-align: center">삭제</th> -->
 					</tr>
 				</thead>
 				<tbody>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="8" style="text-align: center">등록된 학생정보가 없습니다.</td>
+							<td colspan="7" style="text-align: center">등록된 학생정보가 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list}">
 					<c:forEach var="vo" items="${list }">          
 						<c:set var="admissionDate" value="${vo.admissionDate}"/>
 						<c:set var="graduationDate" value="${vo.graduationDate}"/>
+						<c:set var="semester" value="${vo.semester}"/>
 			            <tr>
 			               <td style="vertical-align: middle; text-align: center;">${vo.major }</td>
 			               <td style="vertical-align: middle; text-align: center;">${vo.stuNo }</td>
@@ -63,20 +64,21 @@
 					               	${fn:substring(graduationDate,0,4) }
 					            </td>
 			               </c:if>
-			               <td style="vertical-align: middle; text-align: center;">${vo.semester }</td>
+			               <c:if test="${semester == null }">
+			               		<td style="vertical-align: middle; text-align: center;">
+					               	-
+					            </td>
+			               </c:if>
+			               <c:if test="${semester != null }">
+			               		<td style="vertical-align: middle; text-align: center;">
+					               	${semester}
+					            </td>
+			               </c:if>
 			               <td style="vertical-align: middle; text-align: center;">${vo.stateName }</td>
 			               <td style="vertical-align: middle; text-align: center;">
 								<a href="<c:url value='/admin/student/studentEdit?stuNo=${vo.stuNo }'/>">
 									<button class="btn btn-primary btn-sm">
 										수정
-									</button>
-								</a>
-							</td>
-							<td style="vertical-align: middle; text-align: center;">
-								<a href="<c:url value='/admin/student/studentDelete?stuNo=${vo.stuNo }'/>" 
-									class="btnDel">
-									<button class="btn btn-danger btn-sm" >
-										삭제
 									</button>
 								</a>
 							</td>

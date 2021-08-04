@@ -1,7 +1,7 @@
 package com.it.every.admin.student.controller;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +17,12 @@ import com.it.every.admin.student.model.StudentManageService;
 import com.it.every.admin.student.model.StudentManageVO;
 import com.it.every.admin.student.state.model.StudentStateService;
 import com.it.every.admin.student.state.model.StudentStateVO;
+import com.it.every.award.model.AwardService;
+import com.it.every.award.model.AwardVO;
 import com.it.every.department.model.DepartmentService;
 import com.it.every.department.model.DepartmentVO;
+import com.it.every.tuition.model.TuitionService;
+import com.it.every.tuition.model.TuitionVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,6 +35,7 @@ public class StudentManageController {
 	private final StudentManageService studentManageService;
 	private final DepartmentService departmentService;
 	private final StudentStateService studentStateService;
+	private final TuitionService tuitionService;
 	
 	@GetMapping("/student/studentList")
 	public String studentList(Model model) {
@@ -74,15 +79,6 @@ public class StudentManageController {
 		logger.info("파라미터 admissionYear={}", admissionYear);
 		logger.info("파라미터 deptNo={}", deptNo);
 		logger.info("파라미터 major={}", major);
-		
-		/*
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("admissionYear", admissionYear);
-		map.put("major", major);
-		
-		logger.info("admissionYear value={}", (String) map.get("admissionYear"));
-		logger.info("major value={}", (String) map.get("major"));
-		*/
 		
 		List<StudentManageVO> list 
 			= studentManageService.selectByYear(vo);
@@ -138,12 +134,12 @@ public class StudentManageController {
 		
 		String msg = "비밀번호 체크실패", url = "/admin/student/studentEdit?stuNo=" + vo.getStuNo();
 		int cnt = studentManageService.updateStudent(vo);
-		logger.info("회원수정 결과, cnt={}", cnt);
+		logger.info("학생정보수정 결과, cnt={}", cnt);
 		if(cnt > 0) {
-			msg = "회원정보 수정되었습니다.";
+			msg = "학생정보 수정되었습니다.";
 			url = "/admin/student/studentList";
 		} else {
-			msg = "회원정보 수정 실패!";
+			msg = "학생정보 수정 실패!";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -168,6 +164,91 @@ public class StudentManageController {
 		return "common/message";
 	}
 	
+	@GetMapping("/student/leaveManage")
+	public String leaveManage() {
+		logger.info("휴학관리 화면");
+		
+		return "admin/student/leaveManage";
+	}
+	
+	@GetMapping("/student/returnManage")
+	public String returnManage() {
+		logger.info("복학관리 화면");
+		
+		return "admin/student/returnManage";
+	}
+	
+	@GetMapping("/student/tuitionManage")
+	public String tuitionManage(Model model) {
+		logger.info("등록금관리 조회 화면");
+		
+		List<TuitionVO> list = tuitionService.selectTuition();
+		
+		logger.info("등록금관리 조회 결과, list.size={}", list.size());
+		
+		model.addAttribute("list", list);
+		
+		return "admin/student/tuitionManage";
+	}
+	
+	@RequestMapping("/student/tuitionStatistic")
+	public String tuitionStatistic(Model model) {
+		
+		logger.info("등록금 통계 페이지 조회");
+		
+		List<Map<String, Object>> listMajor = tuitionService.selectTopFive();
+		List<Map<String, Object>> listFaculty = tuitionService.selectFaculty();
+		
+		logger.info("listMajor.size={}", listMajor.size());
+		logger.info("listFaculty.size={}", listFaculty.size());
+		//logger.info("listFaculty={}", listFaculty.get(0));
+		
+		String str1 ="[";
+		str1 +="['학과' , '등록금 총액'] ,";
+		int num1 =0;
+		for (Map<String, Object> map1 : listMajor) {
+			
+			str1 +="['";
+			str1 += map1.get("MAJOR");
+			str1 +="' , ";
+			str1 += map1.get("TUITION");
+			str1 +=" ]";
+			
+			num1 ++;
+			if(num1<listMajor.size()){
+				str1 +=",";
+			}		
+		}
+		str1 += "]";
+		
+		logger.info("str1 = {}", str1);
+		
+		String str2 ="[";
+		str2 +="['학부' , '등록금 총액'] ,";
+		int num2 =0;
+		for (Map<String, Object> map2 : listFaculty) {
+			
+			str2 +="['";
+			str2 += map2.get("FACULTY");
+			str2 +="' , ";
+			str2 += map2.get("TUITION");
+			str2 +=" ]";
+			
+			num2 ++;
+			if(num2<listFaculty.size()){
+				str2 +=",";
+			}		
+		}
+		str2 += "]";
+		
+		logger.info("str2 = {}", str2);
+		
+		model.addAttribute("str1", str1);
+		model.addAttribute("str2", str2);
+		
+		return "admin/student/tuitionStatistic";
+	}
+	
 	
 	@GetMapping("/chart/studentChart")
 	public String studentChart() {
@@ -181,20 +262,6 @@ public class StudentManageController {
 		logger.info("학과별 학생통계 화면");
 		
 		return "admin/chart/majorStuChart";
-	}
-	
-	@GetMapping("/student/tuitionManage")
-	public String tuitionManage() {
-		logger.info("등록금관리 화면");
-		
-		return "admin/student/tuitionManage";
-	}
-	
-	@GetMapping("/student/scholarshipManage")
-	public String scholarshipManage() {
-		logger.info("장학금관리 화면");
-		
-		return "admin/student/scholarshipManage";
 	}
 	
 }

@@ -5,5 +5,8 @@ import java.util.List;
 public interface SubjectService {
 
 	public List<SubjectVO> selectSubject();
-	public int subjectRegister(SubjectVO vo);
+	public int registerSubject(SubjectVO vo);
+	public SubjectVO selectBySubjCode(String subjCode);
+	public int editSubject(SubjectVO vo);
+	public int deleteSubject(String subjCode);
 }

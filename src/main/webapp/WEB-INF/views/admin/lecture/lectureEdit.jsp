@@ -46,19 +46,6 @@
 			}
 		});
 		
-		/* $('#subject').change(function() {
-			var str = $("#subject option:selected").val();
-			var strArr = str.split('.');
-			var idx = $("#subject option").index( $("#subject option:selected") );
-			if(idx != 0) {
-				$('#subjCode').attr("value", strArr[0]);
-				$('#profNo').attr("value", strArr[1]);
-			} else {
-				$('#subjCode').attr("value", '');
-				$('#profNo').attr("value", '');
-			}
-		}); */
-		
 		$('#subject').change(function() {
 			var idx = $("#subject option").index( $("#subject option:selected") );
 			if(idx != 0) {
@@ -97,7 +84,7 @@
 		
 		var date = new Date();
 		var selYear = date.getFullYear();
-		var selMonth = date.getMonth()+1;
+		var selMonth = date.getMonth();
 		console.log(selMonth);
 		
 		//현재년도를 기준으로 호출
@@ -135,18 +122,23 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">강의 개설</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">개설강의 수정</h3></div>
                                     <div class="card-body">
-                                         <form name="registerfrm" method="post" action="<c:url value='/admin/lecture/lectureReg_post'/>">
+                                         <form name="registerfrm" method="post" action="<c:url value='/admin/lecture/lectureEdit'/>">
+                                         	<input name="openSubCode" id="openSubCode" type="hidden" value="${map['OPENSUBCODE']}" />
                                          	<div class="form-floating mb-3">
-                                                <select class="form-control" name="subject" id="subject" >
+                                                <select class="form-control" name="subjCode" id="subjCode" >
 													<option value="">---선택하세요---</option>
 													    <!-- 반복문 시작 -->	
 											        <c:forEach var="subjVo" items="${subjectList }" varStatus="status">
-														<option value="${subjVo.subjCode }" >${subjVo.subjName }</option>
+														<option value="${subjVo.subjCode }" 
+															<c:if test="${map['SUBJCODE'] == subjVo.subjCode }">
+																selected="selected"
+															</c:if>
+														>${subjVo.subjName }</option>
 											        </c:forEach>
 												</select>
-												<input type="hidden" name="subjCode" id="subjCode"/> 
+												<!-- <input type="hidden" name="subjCode" id="subjCode"/> --> 
                                                 <label for="inputFirstName">과목명</label>
                                             </div>
                                             <div class="row mb-3">
@@ -156,7 +148,11 @@
 														    <option value="">---선택하세요---</option>
 														    <!-- 반복문 시작 -->	
 											            	<c:forEach var="deptVo" items="${deptList }" varStatus="status">
-																<option value="${deptVo.deptNo }">${deptVo.deptName }</option>
+																<option value="${deptVo.deptNo }"
+																	<c:if test="${map['DEPTNO'] == deptVo.deptNo }">
+																		selected="selected"
+																	</c:if>
+																>${deptVo.deptName }</option>
 											            	</c:forEach>
 														</select>
                                                         <label for="inputFirstName">학과</label>
@@ -164,14 +160,18 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                    	<select class="form-control" name="professor" id="professor" >
+                                                    	<select class="form-control" name="profNo" id="profNo" >
 														    <option value="">---선택하세요---</option>
 														    <!-- 반복문 시작 -->	
 											            	<c:forEach var="profVo" items="${profList }" varStatus="status">
-																<option value="${profVo.profNo }" >${profVo.profName }</option>
+																<option value="${profVo.profNo }" 
+																	<c:if test="${map['PROFNO'] == profVo.profNo }">
+																		selected="selected"
+																	</c:if>
+																>${profVo.profName }</option>
 											            	</c:forEach>
 														</select>
-                                                        <input type="hidden" name="profNo" id="profNo"/> 
+                                                        <!-- <input type="hidden" name="profNo" id="profNo"/> --> 
                                                         <label for="inputFirstName">담당교수</label>
                                                     </div>
                                                 </div>
@@ -179,18 +179,38 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <select class="form-control" name="openYear" id="openYear"></select>
+                                                        <select class="form-control" name="openYear" id="openYear" value="${map['OPENYEAR'] } }"></select>
                                                         <label for="inputFirstName">연도</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <select class="form-control" name="semester" id="semester">
-														    <option value="">---선택하세요---</option>
-														    <option value="1학기">1학기</option>
-														    <option value="2학기">2학기</option>
-														    <option value="여름계절학기">여름계절학기</option>
-														    <option value="겨울계절학기">겨울계절학기</option>
+                                                        <select class="form-control" name="semester" id="semester" >
+														    <option value=""
+														    	<c:if test="${map['SEMESTER'] == '' }">
+																	selected="selected"
+																</c:if>
+														    >---선택하세요---</option>
+														    <option value="1학기"
+														    	<c:if test="${map['SEMESTER'] == '1학기' }">
+																	selected="selected"
+																</c:if>
+														    >1학기</option>
+														    <option value="2학기"
+														    	<c:if test="${map['SEMESTER'] == '2학기' }">
+																	selected="selected"
+																</c:if>
+														    >2학기</option>
+														    <option value="여름계절학기" 
+														    	<c:if test="${map['SEMESTER'] == '여름계절학기' }">
+																	selected="selected"
+																</c:if>
+														    >여름계절학기</option>
+														    <option value="겨울계절학기"
+														    	<c:if test="${map['SEMESTER'] == '겨울계절학기' }">
+																	selected="selected"
+																</c:if>
+														    >겨울계절학기</option>
 														</select>
                                                         <label for="inputFirstName">학기</label>
                                                     </div>
@@ -203,7 +223,11 @@
 														    <option value="">---선택하세요---</option>
 														    <!-- 반복문 시작 -->	
 											            	<c:forEach var="timeVo" items="${timetableList }" varStatus="status">
-																<option value="${timeVo.timetableCode }">${timeVo.timetableName }</option>
+																<option value="${timeVo.timetableCode }"
+																	<c:if test="${map['TIMETABLECODE'] == timeVo.timetableCode }">
+																		selected="selected"
+																	</c:if>
+																>${timeVo.timetableName }</option>
 											            	</c:forEach>
 														</select>
                                                         <label for="inputFirstName">시간표</label>
@@ -215,7 +239,11 @@
 														    <option value="">---선택하세요---</option>
 														    <!-- 반복문 시작 -->	
 											            	<c:forEach var="classroomVo" items="${classroomList }" varStatus="status">
-																<option value="${classroomVo.classroomCode }">${classroomVo.buildingName } ${classroomVo.classroomName }</option>
+																<option value="${classroomVo.classroomCode }"
+																	<c:if test="${map['CLASSROOMCODE'] == classroomVo.classroomCode }">
+																		selected="selected"
+																	</c:if>
+																>${classroomVo.buildingName } ${classroomVo.classroomName }</option>
 											            	</c:forEach>
 														</select>
                                                         <label for="inputFirstName">강의실</label>
@@ -225,7 +253,7 @@
                                             <div>
 	                                            <div class="mt-4 mb-0" style="width: 48%; float: left">
 	                                                <div class="d-grid">
-	                                                	<input type="submit" id="wr_submit" class="btn btn-primary btn-block" value="등록하기">
+	                                                	<input type="submit" id="wr_submit" class="btn btn-primary btn-block" value="수정하기">
 	                                                </div>
 	                                            </div>
 	                                            <div class="mt-4 mb-0" style="width: 48%; float: right">

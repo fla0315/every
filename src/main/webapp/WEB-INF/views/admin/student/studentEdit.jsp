@@ -5,17 +5,9 @@
 <script type="text/javascript">
 	$(function(){
 		$('#update').click(function(){
-			if($('#major').val().length<1){
-				alert('학과를 선택하세요');
-				$('#major').focus();
-				event.preventDefault();
-			} else if($('#name').val().length<1){
+			if($('#name').val().length<1){
 				alert('이름을 입력하세요');
 				$('#name').focus();
-				event.preventDefault();
-			} else if($('#stuNo').val().length<1){
-				alert('학번을 입력하세요');
-				$('#stuNo').focus();
 				event.preventDefault();
 			} else if($('#studentId').val().length<1){
 				alert('아이디를 입력하세요');
@@ -65,23 +57,13 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <select class="form-control" name="major" id="major">
-														    <option value="">--선택하세요--</option>
-														    <!-- 반복문 시작 -->	
-											            	<c:forEach var="deptVo" items="${deptList }">
-																<option value="${deptVo.deptName }"
-																	<c:if test="${vo.major == deptVo.deptName }">
-																		selected="selected"
-																	</c:if>
-																>${deptVo.deptName }</option>            	
-											            	</c:forEach>
-														</select>
+														<input class="form-control" name="major" id="major" type="text" value="${vo.major }" placeholder="학번" readonly="readonly"/>
                                                         <label for="inputFirstName">학과</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" name="stuNo" id="stuNo" type="text" value="${vo.stuNo }" placeholder="학번" />
+                                                        <input class="form-control" name="stuNo" id="stuNo" type="text" value="${vo.stuNo }" placeholder="학번" readonly="readonly"/>
                                                         <label for="inputFirstName">학번</label>
                                                     </div>
                                                 </div>
@@ -89,7 +71,7 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" name="studentId" id="studentId" type="text" value="${vo.studentId }" placeholder="이름" />
+                                                        <input class="form-control" name="studentId" id="studentId" type="text" value="${vo.studentId }" placeholder="이름" readonly="readonly"/>
                                                         <label for="inputFirstName">아이디</label>
                                                     </div>
                                                 </div>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.tuition.model.TuitionDAO">
+
+	<select id="selectTuition" resultType="tuitionVo">
+		select *
+		from tuition t left outer join student s
+		on t.stu_no = s.stu_no
+		left outer join award a
+		on s.stu_no = a.stu_no
+		left outer join scholarship sc
+		on a.scholarship_no = sc.scholarship_no
+		order by s.major
+	</select>
+	
+	<select id="selectTopFive" resultType="HashMap">
+		select rownum, T.major major, T.tuition tuition
+		from
+		(select major, sum(tuition) tuition
+		from
+		(select t.stu_no stuNo, s.major major, (t.tuition - nvl(A.scholarship, 0)) tuition 
+		from tuition t join student s
+		on t.stu_no = s.stu_no
+		left outer join 
+		(select a.award_no awardNo, a.stu_no stuNo, s.scholarship scholarship 
+		from award a join scholarship s
+		on a.scholarship_no = s.scholarship_no
+		where a.approved = 'Y') A
+		on t.stu_no = A.stuNo
+		where t.deposit_state = 'Y')
+		group by major
+		order by tuition desc) T
+		<![CDATA[
+		where rownum <= 5
+		]]>
+	</select>
+	
+	<select id="selectFaculty" resultType="HashMap">
+		select f.faculty_name faculty, sum((t.tuition - nvl(A.scholarship, 0))) tuition
+		from student s join tuition t
+		on s.stu_no = t.stu_no
+		join department d
+		on s.dept_no = d.dept_no
+		join faculty f
+		on d.faculty_no = f.faculty_no
+		left outer join
+		(select a.award_no awardNo, a.stu_no stuNo, s.scholarship scholarship 
+		from award a join scholarship s
+		on a.scholarship_no = s.scholarship_no
+		where a.approved = 'Y') A
+		on s.stu_no = A.stuNo
+		where t.deposit_state = 'Y'
+		group by f.faculty_name
+		order by tuition desc
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

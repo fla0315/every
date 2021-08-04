@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.award.model.AwardDAO">
+
+	<select id="selectAwardApproved" resultType="awardVo">
+		select *
+		from award a join student s
+		on a.stu_no = s.stu_no
+		join scholarship sc
+		on a.scholarship_no = sc.scholarship_no
+		where a.approved = 'Y'
+	</select>
+	
+	<insert id="applyAward" parameterType="awardVo">
+		insert into award(award_no, stu_no, scholarship_no)
+		values(award_seq.nextval, #{stuNo}, #{scholarshipNo})
+	</insert>
+	
+	<select id="selectApplyList" resultType="awardVo">
+		select *
+		from award a join student s
+		on a.stu_no = s.stu_no
+		join scholarship sc
+		on a.scholarship_no = sc.scholarship_no
+		where a.approved = 'N'
+	</select>
+	
+	<select id="scholarshipList" resultType="awardVo">
+		select * from scholarship
+	</select>
+	
+	<update id="scholarshipApproved" parameterType="String">
+		update award
+		set approved='Y'
+		where award_no=#{awardNo}
+	</update>
+	
+	<select id="selectAwardTopFive" resultType="HashMap">
+		select rownum, SC.major major, SC.scholarship scholarship
+		from
+		(select s.major major, sum(A.scholarship) scholarship
+		from
+		(select a.stu_no stuNo, sc.scholarship scholarship
+		from award a join scholarship sc
+		on a.scholarship_no = sc.scholarship_no
+		where a.approved = 'Y') A
+		join student s
+		on A.stuno = s.stu_no
+		join department d
+		on s.dept_no = d.dept_no
+		group by s.major
+		order by scholarship desc) SC
+		<![CDATA[
+		where rownum <= 5
+		]]>
+	</select>
+	
+	<select id="selectAwardType" resultType="HashMap">
+		select s.scholarship_type type, sum(s.scholarship) scholarship
+		from award a join scholarship s
+		on a.scholarship_no = s.scholarship_no
+		where a.approved = 'Y'
+		group by s.scholarship_type
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

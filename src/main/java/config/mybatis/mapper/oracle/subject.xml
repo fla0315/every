@@ -8,20 +8,33 @@
 		select *
 		from subject sj join subj_type st
 		on sj.type_code = st.type_code
-		join professor p
-		on sj.prof_no = p.prof_no
 		order by sj.subj_code desc
 	</select>
 	
-	<insert id="subjectRegister" parameterType="subjectVo">
+	<insert id="registerSubject" parameterType="subjectVo">
 		<selectKey resultType="String" keyProperty="subjCode" order="BEFORE">
 			select subject_seq.nextval from dual
 		</selectKey>
-		insert into subject(subj_code, prof_no, type_code, subj_name, explanation,
+		insert into subject(subj_code, type_code, subj_name, explanation,
 			credit, personnel)
-		values(#{subjCode}, #{profNo}, #{typeCode}, #{subjName}, #{explanation}, 
+		values(#{subjCode}, #{typeCode}, #{subjName}, #{explanation}, 
 			#{credit}, #{personnel})
 	</insert>
+	
+	<select id="selectBySubjCode" parameterType="String" resultType="subjectVo">
+		select * from subject where subj_code = #{subjCode}
+	</select>
+	
+	<update id="editSubject" parameterType="subjectVo">
+		update subject
+		set subj_name=#{subjName}, type_code=#{typeCode},
+			credit=#{credit}, personnel=#{personnel}, explanation=#{explanation}
+		where subj_code=#{subjCode}
+	</update>
+	
+	<delete id="deleteSubject" parameterType="string">
+		delete from subject where subj_code=#{subjCode}
+	</delete>
 	
 </mapper>
 

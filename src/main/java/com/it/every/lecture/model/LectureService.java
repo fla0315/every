@@ -5,8 +5,9 @@ import java.util.Map;
 
 public interface LectureService {
 
-	//public List<LectureVO> selectLecture();
 	public List<Map<String, Object>> selectLecture();
-	//public int registerLecture(Map<String, String> map);
 	public int registerOpenSubj(LectureVO vo);
+	public Map<String, String> selectByOsCode(String openSubCode);
+	public int editOpenSubj(LectureVO vo);
+	public int deleteOpenSubj(String openSubCode);
 }

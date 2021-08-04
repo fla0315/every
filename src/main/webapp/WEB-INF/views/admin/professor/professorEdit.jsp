@@ -119,7 +119,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" name="profId" id="profId" type="text" value="${vo.profId }" placeholder="Enter your last name" />
+                                                        <input class="form-control" name="profId" id="profId" type="text" value="${vo.profId }" placeholder="Enter your last name"/>
                                                         <label for="inputLastName">아이디</label>
                                                     </div>
                                                 </div>

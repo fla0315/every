@@ -39,14 +39,14 @@ public class StudentManageServiceImpl implements StudentManageService{
 		return studentDao.deleteStudent(stuNo);
 	}
 
-//	@Override
-//	public List<StudentManageVO> selectByYear(HashMap<String, Object> map) {
-//		return studentDao.selectByYear(map);
-//	}
-
 	@Override
 	public List<StudentManageVO> selectByYear(StudentManageVO vo) {
 		return studentDao.selectByYear(vo);
+	}
+
+	@Override
+	public List<StudentManageVO> selectBeingInSchool() {
+		return studentDao.selectBeingInSchool();
 	}
 	
 

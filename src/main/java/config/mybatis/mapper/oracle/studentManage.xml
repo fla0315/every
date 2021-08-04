@@ -5,9 +5,9 @@
 <mapper namespace="com.it.every.admin.student.model.StudentManageDAO">
 
 	<insert id="studentRegister" parameterType="studentManageVo">
-		insert into student(stu_no, student_id, name, pwd, major, 
+		insert into student(stu_no, name, pwd, major, 
 			admission_date, graduation_date, state, dept_no, phonenum)
-		values(#{stuNo}, #{stuNo}, #{name}, #{pwd}, #{major}, 
+		values(#{stuNo}, #{name}, #{pwd}, #{major}, 
 			#{admissionDate}, #{graduationDate}, #{state}, #{deptNo}, #{phoneNum})
 	</insert>
 
@@ -29,7 +29,7 @@
 	
 	<update id="updateStudent" parameterType="studentManageVo">
 		update student
-		set major=#{major}, stu_no=#{stuNo}, student_id=#{studentId}, name=#{name}, 
+		set name=#{name}, 
 			pwd=#{pwd}, semester=#{semester}, admission_date=#{admissionDate},
 			graduation_date=#{graduationDate}, credits=#{credits}, state=#{state},
 			phonenum=#{phoneNum}
@@ -40,6 +40,13 @@
 		delete from student where stu_no=#{stuNo}
 	</delete>
 	
+	<select id="selectBeingInSchool" resultType="studentManageVo">
+		select *
+		from student s join student_state st
+		on s.state = st.state
+		where st.state_name = '재학'
+		order by s.major, s.stu_no desc
+	</select>
 	
 </mapper>
 

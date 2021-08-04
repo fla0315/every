@@ -8,5 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface SubjectDAO {
 
 	public List<SubjectVO> selectSubject();
-	public int subjectRegister(SubjectVO vo);
+	public int registerSubject(SubjectVO vo);
+	public SubjectVO selectBySubjCode(String subjCode);
+	public int editSubject(SubjectVO vo);
+	public int deleteSubject(String subjCode);
 }

@@ -58,13 +58,14 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">과목 등록</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">과목정보 수정</h3></div>
                                     <div class="card-body">
-                                         <form name="registerfrm" method="post" action="<c:url value='/admin/lecture/register_post'/>">
+                                         <form name="registerfrm" method="post" action="<c:url value='/admin/lecture/subjectEdit'/>">
+                                            <input name="subjCode" id="subjCode" type="hidden" value="${vo.subjCode}" />
                                             <div class="row mb-3">
                                             	<div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" name="subjName" id="subjName" type="text" placeholder="Enter your first name" />
+                                                        <input class="form-control" name="subjName" id="subjName" type="text" value="${vo.subjName}" placeholder="Enter your first name" />
                                                 <label for="inputFirstName">과목명</label>
                                                     </div>
                                                 </div>
@@ -74,7 +75,11 @@
 														    <option value="">---선택하세요---</option>
 														    <!-- 반복문 시작 -->	
 											            	<c:forEach var="typeVo" items="${typeList }" varStatus="status">
-																<option value="${typeVo.typeCode }">${typeVo.type }</option>
+																<option value="${typeVo.typeCode }" 
+																	<c:if test="${vo.typeCode == typeVo.typeCode }">
+																		selected="selected"
+																	</c:if>
+																>${typeVo.type }</option>
 											            	</c:forEach>
 														</select>
 														<input type="hidden" name="typeCode" id="typeCode">	            
@@ -86,25 +91,25 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                    	<input class="form-control" name="credit" id="credit" type="number" min="1" max="3">
+                                                    	<input class="form-control" name="credit" id="credit" type="number" value="${vo.credit}" min="1" max="3">
                                                         <label for="inputFirstName">학점</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                    	<input class="form-control" name="personnel" id="personnel" type="number" min="10" max="100">
+                                                    	<input class="form-control" name="personnel" id="personnel" type="number" value="${vo.personnel}" min="10" max="100">
                                                         <label for="inputFirstName">수강인원</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="explanation" id="explanation" type="text" placeholder="Enter your first name" />
+                                                <input class="form-control" name="explanation" id="explanation" type="text" value="${vo.explanation}" placeholder="Enter your first name" />
                                                 <label for="inputFirstName">과목소개</label>
                                             </div>
                                             <div>
 	                                            <div class="mt-4 mb-0" style="width: 48%; float: left">
 	                                                <div class="d-grid">
-	                                                	<input type="submit" id="wr_submit" class="btn btn-primary btn-block" value="등록하기">
+	                                                	<input type="submit" id="wr_submit" class="btn btn-primary btn-block" value="수정하기">
 	                                                </div>
 	                                            </div>
 	                                            <div class="mt-4 mb-0" style="width: 48%; float: right">

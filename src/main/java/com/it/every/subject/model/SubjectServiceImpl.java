@@ -18,9 +18,26 @@ public class SubjectServiceImpl implements SubjectService{
 	}
 
 	@Override
-	public int subjectRegister(SubjectVO vo) {
-		return subjectDao.subjectRegister(vo);
+	public int registerSubject(SubjectVO vo) {
+		return subjectDao.registerSubject(vo);
 	}
+
+	@Override
+	public SubjectVO selectBySubjCode(String subjCode) {
+		return subjectDao.selectBySubjCode(subjCode);
+	}
+
+	@Override
+	public int editSubject(SubjectVO vo) {
+		return subjectDao.editSubject(vo);
+	}
+
+	@Override
+	public int deleteSubject(String subjCode) {
+		return subjectDao.deleteSubject(subjCode);
+	}
+
+	
 	
 	
 }

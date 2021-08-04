@@ -80,7 +80,7 @@ public class ProfessorManageController {
 	}
 	
 	
-	@RequestMapping("/professor/professorEdit")
+	@RequestMapping("/professorEdit")
 	public String professorEdit(@RequestParam(defaultValue = "0") String profNo, Model model) {
 		logger.info("교수정보 수정 화면");
 		
@@ -100,7 +100,7 @@ public class ProfessorManageController {
 	}
 	
 	
-	@PostMapping("/professor/professorEdit")
+	@PostMapping("/professorEdit")
 	public String professorEdit_post(@ModelAttribute ProfessorManageVO vo, Model model) {
 		
 		logger.info("교수정보수정 처리, 파라미터 vo={}", vo);

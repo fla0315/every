@@ -2,6 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/admin_top.jsp" %>
 
+<script type="text/javascript">
+	$(function(){
+		$('.btnDel').each(function(index, item) {
+			$(item).click(function(){
+				var result = confirm('삭제하시겠습니까?');
+				
+				if(!result) {
+					return false;
+				} 
+				
+			});
+		});
+	}); 
+</script>
+
 	<div class="card mb-4" style="width: 90%; margin: 0 auto; margin-top: 50px">
 		<div class="card-header" style="font-size: 1.5em">
 			<i class="fas fa-user-alt"></i>&nbsp; 수강과목 목록
@@ -15,6 +30,8 @@
 						<th style="text-align: center">과목명</th>
 						<th style="text-align: center">과목설명</th>
 						<th style="text-align: center">학점</th>
+						<th style="text-align: center">수정</th>
+						<th style="text-align: center">삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,6 +48,21 @@
 			               <td style="vertical-align: middle; text-align: center;">${vo.subjName}</td>
 			               <td style="vertical-align: middle; text-align: center;">${vo.explanation}</td>
 			               <td style="vertical-align: middle; text-align: center;">${vo.credit}</td>
+			               <td style="vertical-align: middle; text-align: center;">
+								<a href="<c:url value='/admin/lecture/subjectEdit?subjCode=${vo.subjCode }'/>">
+									<button class="btn btn-primary btn-sm">
+										수정
+									</button>
+								</a>
+							</td>
+							<td style="vertical-align: middle; text-align: center;">
+								<a href="<c:url value='/admin/lecture/subjectDelete?subjCode=${vo.subjCode }'/>" 
+									class="btnDel">
+									<button class="btn btn-danger btn-sm" >
+										삭제
+									</button>
+								</a>
+							</td>
 			            </tr> 
 			         	</c:forEach>
 					</c:if>

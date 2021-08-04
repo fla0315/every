@@ -32,13 +32,13 @@
 						<th style="text-align: center">권한</th>
 						<th style="text-align: center">입사년도</th>
 						<th style="text-align: center">수정</th>
-						<th style="text-align: center">삭제</th>
+						<!-- <th style="text-align: center">삭제</th> -->
 					</tr>
 				</thead>
 				<tbody>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="8" style="text-align: center">등록된 직원정보가 없습니다.</td>
+							<td colspan="7" style="text-align: center">등록된 직원정보가 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list}">
@@ -60,14 +60,14 @@
 									</button>
 								</a>
 							</td>
-							<td style="vertical-align: middle; text-align: center;">
+							<%-- <td style="vertical-align: middle; text-align: center;">
 								<a href="<c:url value='/admin/employee/employeeDelete?empNo=${vo.empNo }'/>" 
 									class="btnDel">
 									<button class="btn btn-danger btn-sm" >
 										삭제
 									</button>
 								</a>
-							</td>
+							</td> --%>
 			            </tr> 
 			         	</c:forEach>
 					</c:if>

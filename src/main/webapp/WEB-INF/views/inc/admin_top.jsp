@@ -86,11 +86,39 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseStudent" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
+                                	<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link" href="<c:url value='/admin/student/studentList'/>">학생정보관리</a>
-                                    <a class="nav-link" href="#">휴학/복학</a>
-                                    <a class="nav-link" href="#">등록금</a>
-                                    <a class="nav-link" href="#">장학금</a>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLeaveReturn" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        휴학/복학관리
+                                    	<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="collapseLeaveReturn" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="<c:url value='/admin/student/leaveManage'/>">휴학신청관리</a>
+                                            <a class="nav-link" href="<c:url value='/admin/student/returnManage'/>">복학신청관리</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTuition" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        등록금관리
+                                    	<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="collapseTuition" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="<c:url value='/admin/student/tuitionManage'/>">등록금 납부조회</a>
+                                            <a class="nav-link" href="<c:url value='/admin/student/tuitionStatistic'/>">등록금 통계</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseScholarship" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                       	 장학금관리
+                                       	 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                   	 </a>
+                                    <div class="collapse" id="collapseScholarship" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="<c:url value='/admin/student/scholarshipApproved'/>">장학금 대상조회</a>
+                                            <a class="nav-link" href="<c:url value='/admin/student/scholarshipApplyList'/>">장학금 신청조회</a>
+                                            <a class="nav-link" href="<c:url value='/admin/student/scholarshipStatistic'/>">장학금 통계</a>
+                                        </nav>
+                                    </div>
                                 </nav>
                             </div>
                              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProf" aria-expanded="false" aria-controls="collapseLayouts">

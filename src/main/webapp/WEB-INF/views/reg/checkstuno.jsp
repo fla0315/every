@@ -50,7 +50,7 @@ $(function(){
 				alert('회원유형을 선택해 주세요');
 				event.preventDefault();
 		}else if($('#chkstu').val()!='Y'){
-				alert('잡상인은 나가라고.');
+				alert('회원번호를 다시 확인해주세요.');
 				$('#chkstu').focus();
 				event.preventDefault();	
 		}
@@ -59,7 +59,7 @@ $(function(){
 		//유형 선택 여부
 		$('#stuno').click(function(){
 			if($('input:radio[name=chk_info]').is(':checked')==false){
-					alert('유형을 선택해주세요.');
+					alert('회원 유형을 선택해주세요.');
 					event.preventDefault();	
 			}}); 
 	
@@ -83,7 +83,7 @@ $('#stuno').keyup(function(){
 					$('#checkstuno').html("회원 확인이 되셨습니다.").css("color", "blue");
 					$('#chkstu').val('Y').css("color","red");
 				}else{
-					$('#checkstuno').html("잡상인은 나가세요.").css("color", "red");
+					$('#checkstuno').html("회원번호를 다시 입력해 주세요").css("color", "red");
 					$('#chkstu').val('N');
 				}
 			},
@@ -92,7 +92,7 @@ $('#stuno').keyup(function(){
 			}
 		});				
 	}else{
-		$('#checkstuno').text('제대로 써라?').css("color", "brown");
+		$('#checkstuno').text('입력이 짧거나 쓸 수 없는 문자가 있습니다.').css("color", "brown");
 		
 	}
 });

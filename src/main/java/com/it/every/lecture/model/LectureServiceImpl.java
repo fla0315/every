@@ -18,7 +18,6 @@ public class LectureServiceImpl implements LectureService {
 
 	private static final Logger logger = LoggerFactory.getLogger(LectureServiceImpl.class);
 	private final LectureDAO lectureDao;
-	private final ClassroomDAO classroomDao;
 	
 	@Override
 	public List<Map<String, Object>> selectLecture() {
@@ -37,14 +36,39 @@ public class LectureServiceImpl implements LectureService {
 		logger.info("강의개설 후 vo={}", vo);
 		cnt = lectureDao.registerSubjTime(vo);
 		
-		//강의실 사용가능여부 변경
-		String usable = "Y";
-		if(cnt > 0) {
-			usable = "N";
-		} 
-		cnt = classroomDao.changeUsable(vo.getClassroomCode(), usable);
+		return cnt;
+	}
+
+	@Override
+	@Transactional
+	public int editOpenSubj(LectureVO vo) {
+		
+		//개설교과과정 테이블 수정
+		int cnt = lectureDao.editOpenSubj(vo);
+		
+		//강의시간표 테이블 수정
+		cnt = lectureDao.editSubjTime(vo);
 		
 		return cnt;
 	}
+
+	@Override
+	@Transactional
+	public int deleteOpenSubj(String openSubCode) {
+		
+		//강의시간표 테이블에서 삭제
+		int cnt = lectureDao.deleteSubjTime(openSubCode);
+
+		//개설교과과목 테이블에서 삭제
+		cnt = lectureDao.deleteOpenSubj(openSubCode);
+		
+		return cnt;
+	}
+
+	@Override
+	public Map<String, String> selectByOsCode(String openSubCode) {
+		return lectureDao.selectByOsCode(openSubCode);
+	}
+
 
 }
