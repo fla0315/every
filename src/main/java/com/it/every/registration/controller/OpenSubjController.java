@@ -255,7 +255,7 @@ public class OpenSubjController {
 		//=====다운로드 맵
 		System.out.println(map);
 		
-		String uploadPath=fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG); //이거 실라버슨
+		String uploadPath=fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_SYLLABUS_FLAG); //이거 실라버슨
 		File file = new File(uploadPath, syllabusVo.getSyllabus()); //실라버스 파일 이름 가져오는거 
 		map.put("file", file);
 		//map.put("originalFileName", syllabusVo.getSyllabus());
