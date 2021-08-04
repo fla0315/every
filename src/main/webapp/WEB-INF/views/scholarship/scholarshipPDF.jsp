@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+    
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,16 +51,16 @@
         <table id="table1">
             <tr>
                 <td>소속</td>
-                <td>항공서비스대학</td>
+                <td>가천대학교</td>
                 <td>학번</td>
-                <td>201224026</td>
+                <td>****</td>
             </tr>
 
             <tr>
                 <td>성명</td>
                 <td>김영림</td>
                 <td>생년월일</td>
-                <td>1993년06월15일</td>
+                <td>****</td>
             </tr>
 
             <tr>    
@@ -112,17 +116,17 @@
                         <c:if test="${!empty list }">
                             <c:forEach var="map" items="${list }">
                                 <tr class="align_center">
-                                    <td>수혜학기</td>  <!-- 수혜학기  -->
-                                    <td>수혜년도</td>  <!-- 수혜년도  -->
-                                    <td>장학내용</td>  <!-- 장학내용  -->
-                                    <td>장학금 항목</td>  <!-- 장학금 항목  -->
+                                    <td>${map['SEMESTER']} 학기</td>  <!-- 수혜학기  -->
+                                    <td><fmt:formatDate value="${map['AWARDING_DATE']}" pattern="yyyy-MM-dd" /></td>  <!-- 수혜년도  -->
+                                    <td>${map['SCHOLARSHIP_TYPE']}</td>  <!-- 장학내용  -->
+                                   <td>${map['SCHOLARSHIP_TYPE']}</td> <!-- 장학금 항목  -->
+                                   <td>${map['SCHOLARSHIP']}</td> <!-- 장학금 항목  -->
                                     <td>비고</td>  <!-- 비고  -->
                                 </tr>
                             </c:forEach>
                         </c:if>
             </tbody>
         </table>
-
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <br>
         <br>

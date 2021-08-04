@@ -11,7 +11,7 @@
 		</sql>
 		 -->
 	<!-- 나의 수강신청 내역조회 -->
-		<select id="searchMyRegistarion" parameterType="searchVo" resultType="map">
+		<select id="searchMyRegistarion" parameterType="RegistrationSearchVO" resultType="map">
 				select * from 
 				subject st join subj_type sj
 				on st.type_code= sj.type_code
@@ -24,6 +24,8 @@
 				join student stu
 				on stu.stu_no = rs.stu_no
 				where stu.student_id=#{studentId}
+				<if test='subjYear!="0"'>and st.subj_year = #{subjYear} </if>
+		    	<if test='semester!="0"'>and st.semester = #{semester}</if>
 		</select>
 	
 	<!-- 수강신청  -->
@@ -51,7 +53,7 @@
 		on rs.open_sub_code = os.open_sub_code
 		join student stu
 		on stu.stu_no = rs.stu_no
-		where stu.student_id=#{studentId} and st.semester = '2학기' and st.subj_year = '2021'
+		where stu.student_id=#{studentId}
 	</select>
 		
 			
@@ -75,7 +77,7 @@
 		on rsc.open_sub_code = os.open_sub_code
 		join student stu
 		on stu.stu_no = rsc.stu_no
-		where stu.student_id=#{studentId} and st.semester = '2학기' and st.subj_year = '2021'
+		where stu.student_id=#{studentId}
 	</select>	
 		
 			
@@ -84,6 +86,61 @@
 		delete from registrationCart 
 		where stu_No= #{stuNo} and open_sub_code =#{openSubCode}
 	</delete>
+	
+	<!-- 개설교과목별 조회 -->
+	<select id="selectByOpenSubCode" parameterType="String" resultType="map">
+		select r.*, s.name from registration r join student s
+		on r.stu_no = s.stu_no
+		where open_sub_code = #{openSubCode}
+		order by name
+	</select>
+	
+	<select id="checkDuplicate" parameterType="RegistrationCartVO" resultType="int">
+		select count(*) from registration
+		where stu_no=#{stuNo} and open_sub_code=#{openSubCode}
+	</select>
+	
+	<select id="checkDuplicateCart" parameterType="RegistrationCartVO" resultType="int">
+		select count(*) from registrationcart
+		where stu_no=#{stuNo} and open_sub_code=#{openSubCode}
+	</select>
+	
+	<!-- 각 수강코드별 학생수 뽑아오는거 -->
+	<select id="countPersonnel" parameterType="registrationVo" resultType="int">
+		select st.personnel
+		from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join
+		(select open_sub_code, count(*) as count
+		from registration
+		group by open_sub_code) g
+		on os.open_sub_code=g.open_sub_code
+		where os.open_sub_code=#{openSubCode}
+	</select>
+	<!-- 각 수강코드별 학생 총 수  뽑아오는거 -->
+	<select id="countCount" parameterType="registrationVo" resultType="int">
+		select g.count
+		from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join
+		(select open_sub_code, count(*) as count
+		from registration
+		group by open_sub_code) g
+		on os.open_sub_code=g.open_sub_code
+		where os.open_sub_code=#{openSubCode}
+	</select>
+	
+	
 	
 	
 	

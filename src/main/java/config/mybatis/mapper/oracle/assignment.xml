@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.assignment.model.AssignmentDAO">
+	<!-- 과제번호 별 과제 보기 -->
+	<select id="showAssignment" parameterType="int" resultType="assignmentVo">
+		select * from assignment
+		where assign_no = #{assignNo}
+	</select>
+	
+	<!-- 학생/과제별 세부보기 -->
+	<select id="checkAssignByStuNo" parameterType="assignmentVo" resultType="map">
+		select a.*, (select name from student where stu_no=#{stuNo}) name, (select assign_name from distribute_assign where assign_no=#{assignNo}) assignName
+		from assignment a
+		where assign_no = #{assignNo} and stu_no = #{stuNo}
+	</select>
+	
+	<!-- 채점 -->
+	<update id="gradeForAssign" parameterType="assignmentVo">
+		update assignment
+		set assign_point = #{assignPoint}
+		where assign_no = #{assignNo} and stu_no = #{stuNo}
+	</update>
+</mapper>

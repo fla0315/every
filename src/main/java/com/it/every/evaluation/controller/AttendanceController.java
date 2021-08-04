@@ -57,17 +57,16 @@ public class AttendanceController {
 	}
 	
 	@RequestMapping("/attendanceEdit")
-	public String attendanceEdit(@ModelAttribute AttendanceVO vo, @RequestParam String open, Model model) {
-		logger.info("개인 출석 등록/수정 처리, 파라미터 vo={}, openSubCode={}", vo, open);
-		vo.setOpenSubCode(open);
+	public String attendanceEdit(@ModelAttribute AttendanceVO vo, Model model) {
+		logger.info("개인 출석 등록/수정 처리, 파라미터 vo={}, openSubCode={}", vo);
 		
 		int cnt = attendanceService.editBystuNo(vo);
 		logger.info("개인 출석 등록/수정 처리 결과, cnt={}", cnt);
 		
-		String msg="등록/수정 실패!", url="/professor/attendance?openSubCode="+open;
+		String msg="등록/수정 실패!", url="/professor/attendance?openSubCode="+vo.getOpenSubCode();
 		if(cnt>0) {
 			evaluationService.updateAttend(vo);
-			return "redirect:/professor/attendance?openSubCode="+open;
+			return "redirect:/professor/attendance?openSubCode="+vo.getOpenSubCode();
 		}
 		
 		model.addAttribute("msg", msg);
@@ -76,11 +75,45 @@ public class AttendanceController {
 		return "common/message";
 	}
 	
-	/*
-	@PostMapping("/attendanceAll")
-	public void attendanceAll(@RequestParam String openSubCode,@RequestParam String week, @RequestParam String attend) {
-		logger.info("출석 주차 전체 등록");
+	
+	@RequestMapping("/attendanceAll")
+	public String attendanceAll(@RequestParam String openSubCode, @RequestParam String week, Model model) {
+		logger.info("출석 주차 전체 등록, 파라미터 openSubCode={}, week={}", openSubCode, week);
 		AttendanceVO vo = new AttendanceVO();
+		vo.setOpenSubCode(openSubCode);
+		if(week.equals("first")) {//1
+			vo.setFirst("출석");
+		}else if(week.equals("second")) {//2
+			vo.setSecond("출석");
+		}else if(week.equals("third")) {//3
+			vo.setThird("출석");
+		}else if(week.equals("fourth")) {//4
+			vo.setFourth("출석");
+		}else if(week.equals("fifth")) {//5
+			vo.setFifth("출석");
+		}else if(week.equals("sixth")) {//6
+			vo.setSixth("출석");
+		}else if(week.equals("seventh")) {//7
+			vo.setSeventh("출석");
+		}else if(week.equals("eighth")) {//8
+			vo.setEighth("출석");
+		}else if(week.equals("ninth")) {//9
+			vo.setNinth("출석");
+		}else if(week.equals("tenth")) {//10
+			vo.setTenth("출석");
+		}
+		
+		logger.info("vo={}", vo);
+		int cnt = attendanceService.attendanceAll(vo);
+		String msg="전체 출석 등록 실패!", url="/professor/attendance?openSubCode="+openSubCode;
+		if(cnt>0) {
+			return "redirect:/professor/attendance?openSubCode="+openSubCode;
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
-	*/
+	
 }

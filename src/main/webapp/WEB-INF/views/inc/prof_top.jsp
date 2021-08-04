@@ -48,10 +48,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="<c:url value='/reg/logout'/>">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
@@ -86,9 +84,8 @@
                             </a>
                             <div class="collapse" id="collapseLecture" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                	<a class="nav-link" href="#">강의 개설 신청</a>
-                                    <a class="nav-link" href="#">강의 현황</a>
-                                    <a class="nav-link" href="#">학생 현황</a>
+                                	<a class="nav-link" href="<c:url value='/professor/lecture/openLectureCheck'/>">강의 개설 수락</a>
+                                    <a class="nav-link" href="<c:url value='/professor/lecture/openLectureList'/>">강의 현황</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -107,8 +104,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">과제 개설</a>
-                                            <a class="nav-link" href="#">과제 조회</a><!-- 평가 포함 -->
+                                            <a class="nav-link" href="<c:url value='/professor/assign/distributeAssignReg'/>">과제 개설</a>
+                                            <a class="nav-link" href="<c:url value='/professor/assign/assignmentCheck'/>">과제 조회</a><!-- 평가 포함 -->
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">

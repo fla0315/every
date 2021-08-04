@@ -19,5 +19,7 @@ public class SubjectVO {
 	private int credit;				/* 학점 */
 	private int personnel;			/* 인원수 */
 	private String type;			/* 교과구분 */
+	private String profName;		/* 교수명	 */
+	private String subjYear;		/* 개설년도	 */
 	
 }

@@ -7,6 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.it.every.assignment.model.AssignmentVO;
+import com.it.every.common.RegistrationSearchVO;
+import com.it.every.distributeAssign.model.DistributeAssignVo;
+import com.it.every.scholarship.model.ScholarshipVO;
+import com.it.every.tuition.model.TuitionVO;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -64,14 +70,11 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.selectByStuId(userid);
 	}
 
-	@Override
-	public Map<String, Object> selectByTuitionNo(String userid, int tuitionNo) {
-		return studentDao.selectByTuitionNo(userid, tuitionNo);
-	}
+	
 
 	@Override
-	public List<Map<String, Object>> selectByScholarship(String userid) {
-		return studentDao.selectByScholarship(userid);
+	public List<Map<String, Object>> selectByScholarship(RegistrationSearchVO regiSearchVo) {
+		return studentDao.selectByScholarship(regiSearchVo);
 	}
 
 
@@ -96,4 +99,47 @@ public class StudentServiceImpl implements StudentService{
 	public String nameByStuNo(String no) {
 		return studentDao.nameByStuNo(no);
 	}
+
+
+	@Override
+	public int insertAssignment(AssignmentVO assignmentVo) {
+		return studentDao.insertAssignment(assignmentVo);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectMyAssignmemt(DistributeAssignVo distributeAssignVo) {
+		return studentDao.selectMyAssignmemt(distributeAssignVo);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> myAssignmemtList(String stuNo) {
+		return studentDao.myAssignmemtList(stuNo);
+	}
+
+
+	@Override
+	public Map<String, Object> selectByTuitionNo(TuitionVO tuitionVo) {
+		return studentDao.selectByTuitionNo(tuitionVo);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectByScholashipNo(ScholarshipVO scholarshipVo) {
+		return studentDao.selectByScholashipNo(scholarshipVo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

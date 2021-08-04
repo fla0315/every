@@ -3,19 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<%@ include file="../inc/admin_top.jsp"%>
+<%@ include file="../inc/top.jsp"%>
 <script type="text/javascript"
 	src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
 	
 <style type ="text/css">
-	
 	.reg_box {
 		border: 1px solid #cce1e4;
-		margin: 100px auto; 
+		border-radius: 30px;
+		margin: 5% auto; 
 		padding: 30px; 
 		height: auto; 
 		width: 450px;
-		box-shadow: 0px 0px 14px 10px rgba(161,140,183,0.3);
+		background-color: rgba(255, 255, 255, 0.8);
 	}
 	.col-md-8 border{
 		margin:100px auto;
@@ -310,15 +310,15 @@ $('#email_check').keyup(function(){
 <div>
 	<article class="align_center">
 		<form name="register" method="post" action="<c:url value='/reg/write'/>" >
-			<div class="col-11 border" style="width:800">
 			<fieldset>
-			
-				<legend>회원 가입</legend>
+				<br>
+				<div class="text-center">
+					<h4>회원가입</h4>
+				</div>
 				<!-- 회원 번호에서 받아온 값(회원번호, 타입) -->
 					<input type="hidden" name="stuno" id="stuno" value="${param.stuno}">
 					<input type="hidden" name="chk_info" id="chk_info" value="${param.chk_info}">
 				<!-- 아이디 -->
-					<br>
 					<br>
 				<div class="id" style="width: 200px;">
 					<label for="user_id">아이디</label> <br> 
@@ -326,8 +326,6 @@ $('#email_check').keyup(function(){
 						style="ime-mode: inactive"> <br> 
 						<div class="check_id" id="check_id"></div>
 				</div>
-				<br>
-
 				<!-- 비밀번호 -->
 				<div class="pwd" style="width: 200px;">
 					<label for="pwd">비밀번호</label> 
@@ -369,14 +367,11 @@ $('#email_check').keyup(function(){
 				<br>
 					<span class="checkemail" id="checkemail"></span>
 				</div>
-				
-				
-				<br>
 				<!-- 휴대폰 -->
 				<div class="phone">
 					<label for="hp1">휴대폰</label> <br> 
-				<span> 
-					<select name="phone1" id="phone1" name="phone1" title="휴대폰 앞자리" style="width: 80px;">
+					<div class="row">
+					<select class="custom-select" id="phone1" name="phone1" title="휴대폰 앞자리" style="width: 80px;">
 							<option value="010">010</option>
 							<option value="011">011</option>
 							<option value="016">016</option>
@@ -384,11 +379,9 @@ $('#email_check').keyup(function(){
 							<option value="018">018</option>
 							<option value="019">019</option>
 					</select>
-					&nbsp;-
-					 <input type="text" class="phone2" id="phone2" name="phone2" style="width: 80px;">&nbsp;- 
-					 <input type="text"	class="phone3" id="phone3" name="phone3" style="width: 80px;">  	
-					</span>
-					<input type="button" value="인증번호 보내기" id="phoneconfirm"> 
+					&nbsp;-&nbsp;<input type="text" class="phone2 form-control" id="phone2" name="phone2" style="width: 80px;">&nbsp;-&nbsp;<input type="text" class="phone3 form-control" id="phone3" name="phone3" style="width: 80px;">	
+					&nbsp;&nbsp;<input type="button" class="btn btn-dark" value="인증번호" id="phoneconfirm" style="font-size:0.8em; width:100px">
+					</div>   
 					<div class="check_phone" id="check_phone"></div>
 					 <br>
 					
@@ -398,13 +391,10 @@ $('#email_check').keyup(function(){
 					<div class="checknum" id="checknum"></div>
 					
 				<br>
-
-				<div class="center"></div>
-			
-				
 			</fieldset>
+			<div class="text-center">
+				<input type="submit" class="registeration btn btn-dark" value="회원가입">
 			</div>
-	<input type="submit" class="registeration" value="회원가입"  style="width:80px;">
 		</form>
 			
 		<input type ="hidden" name="chkId" id="chkId"> 

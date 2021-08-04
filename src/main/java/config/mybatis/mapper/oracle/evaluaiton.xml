@@ -12,11 +12,16 @@
 		select * from evaluationView
 		where sub_code=#{openSubCode}
 	</select>
+	
+	<select id="selectBystuNo" parameterType="evaluationVo" resultType="map">
+		select * from evaluationView
+		where sub_code=#{subCode} and stu_no=#{stuNo}
+	</select>
 	<!-- insert는 evaluation에 그대로 sub_code, stu_no -->
 	
 	<update id="editBystuNo" parameterType="evaluationVo">
 		update evaluation
-		set midterm=#{midterm}, finals=#{finals}, assignment=#{assignment}, attendance=#{attendance}, total_grade=#{totalGrade}, edit_date=sysdate
+		set midterm=#{midterm}, finals=#{finals}, total_grade=#{totalGrade}, edit_date=sysdate
 		where sub_code=#{subCode} and stu_no=#{stuNo}
 	</update>
 	
@@ -24,5 +29,19 @@
 		update evaluation
 		set attendance=#{point}
 		where sub_code=#{openSubCode} and stu_no=#{stuNo}
+	</update>
+	
+<!-- 과제 점수가 여러개임 해결책 찾기 	
+	<update id="updateAssign" parameterType="assignmentVo">
+		update evaluation
+		set assignment = #{assignPoint}
+		where sub_code=#{openSubCode} and stu_no = #{stuNo}
+	</update> 
+-->
+	
+	<update id="totalGrade" parameterType="attendanceVo">
+		update evaluation
+		set total_grade=#{totalGrade}
+		where sub_code=#{subCode} and stu_no=#{stuNo}
 	</update>
 </mapper>

@@ -30,9 +30,10 @@ public class SearchVO {
     
 	//년도 이건 검색조건
 	private String searchYear = "";
+	private String Year = "";
+	
 	//학기 검색조건
 	private String searchSemester = "";
-
 	
 	
     /**블럭당 보여질 페이지 수,  페이지 사이즈 */

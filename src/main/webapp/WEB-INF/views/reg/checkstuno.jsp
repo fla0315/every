@@ -3,19 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<%@ include file="../inc/admin_top.jsp"%>
+<%@ include file="../inc/top.jsp"%>
 <script type="text/javascript"
 	src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
 	
 <style type ="text/css">
-	
 	.reg_box {
 		border: 1px solid #cce1e4;
-		margin: 100px auto; 
+		border-radius: 30px;
+		margin: 10% auto; 
 		padding: 30px; 
 		height: auto; 
 		width: 450px;
-		box-shadow: 0px 0px 14px 10px rgba(161,140,183,0.3);
+		background-color: rgba(255, 255, 255, 0.8);
 	}
 	.col-md-8 border{
 		margin:100px auto;
@@ -131,33 +131,27 @@ $("input:radio[name=chk_info]").change(function(){
 	<article class="align_center">
 		<form name="register" method="post" action="<c:url value='/reg/register'/>">
 			<fieldset>
-			<div class="col-11 border" style="width:800">
-				<legend>회원인증</legend>
 				<br>
+				<div class="text-center">
+					<h4>회원인증</h4>
 				<br>
-
-				<!-- 학번인증 -->
-				 <input type="text"	class="stuno" id="stuno" name="stuno" placeholder="회원번호를 입력하세요" required
-						style="ime-mode: inactive"> 
-						<div class="checkstuno" id="checkstuno"></div>
-					<br>
 				
 				<input type="radio" name="chk_info" value="student">학생
 				<input type="radio" name="chk_info" value="admin">관리자 
 				<input type="radio" name="chk_info" value="professor">교수
-				
-				<br>
-
+				<br><br>
+				<!-- 학번인증 -->
+				<input type="text"	class="stuno form-control" id="stuno" name="stuno" placeholder="회원번호를 입력하세요" required
+						style="ime-mode: inactive"> 
+						<div class="checkstuno" id="checkstuno"></div>
+					<br>
 				<div class="center"></div>
 				<br>
 				<span>
-				<input type="submit" id="register" class="btn btn-danger" value="회원가입"  style="width:80px;">
-					<input type="button" id="return" class="btn btn-danger" value="나가기"  style="width:80px;">
+					<input type="submit" id="register" class="btn btn-dark" value="회원가입" >
+					<input type="button" id="return" class="btn btn-dark" value="나가기">
 				</span>
-	
 				</div>
-			
-				
 			</fieldset>
 			
 			   <input type ="hidden" name="chkstu" id="chkstu">

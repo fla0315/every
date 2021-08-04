@@ -40,21 +40,46 @@
 		where student_id=#{studentId}
 	</select>
 	
+	<!-- 등록금상세조회 -->
+	<select id="selectByTuitionNo" parameterType="TuitionVO" resultType="map">
+		select * from tuitionView t join (select * from department d join student s
+		on s.dept_no = d.dept_no) q
+		on t.stu_no = q.stu_no
+		where t.stu_no=#{stuNo} and t.tuition_No=#{tuitionNo}
+	</select>
+	
 	
 	<!-- 장학금 조회 -->
-	<select id="selectByScholarship" parameterType="String" resultType="map">
-			<!-- select *
-			from scholarshipView a
-			join student s
-			on a.stu_no = s.stu_no
-			where s.student_id=#{studentId} -->
-			select sch.* , a.award_no, a.stu_no, a.awarding_date
+	<select id="selectByScholarship" parameterType="RegistrationSearchVO" resultType="map">
+			select *
 			from scholarship sch join award a
 			on sch.scholarship_no = a.scholarship_no
 			join student s
 			on a.stu_no = s.stu_no
 			where s.student_id=#{studentId}
+ 			<!-- <if test='subjYear!=0'>and subj_year=#{subjYear} </if> -->
+		    <if test='semester!=0'>and semester=#{semester}</if>
+		<!-- 	select sch.* , a.award_no, a.stu_no, a.awarding_date
+			from scholarship sch join award a
+			on sch.scholarship_no = a.scholarship_no
+			join student s
+			on a.stu_no = s.stu_no
+			where s.student_id=#{studentId} -->
 	</select>	
+	
+	<!-- 장학금 상세 조회 -->
+	<select id="selectByScholashipNo" parameterType="ScholarshipVO" resultType="map">
+		select *
+		from scholarship sch join award a
+		on sch.scholarship_no = a.scholarship_no
+		join student s
+		on a.stu_no = s.stu_no
+		where s.student_id=#{studentId} and sch.scholarship_no=#{scholarshipNo}
+	</select>
+	
+	
+	
+	
 	
 	<!-- 쪽지용 이름으로 검색 -->
 	<select id="searchForChat" parameterType="String" resultType="studentVo">
@@ -65,6 +90,46 @@
 	<!-- 번호로 이름 찾기 -->
 	<select id="nameByStuNo" parameterType="string" resultType="string">
 		select name from student where stu_no = #{no}
+	</select>
+	
+	
+	
+	<!-- 과제 등록 -->
+	<insert id="insertAssignment" parameterType="AssignmentVo">
+		insert into assignment(assign_no,open_sub_code, stu_no, file_name, file_size, original_file_name)
+		values(#{assignNo},#{openSubCode}, #{stuNo}, #{fileName}, #{fileSize}, #{originalFileName})
+	</insert>
+	
+	<!-- 과제에서 내 과목들만 조회하는 거 -->
+	<select id="selectMyAssignmemt" parameterType="distributeAssignVO" resultType="map">
+		select * from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join registration rs
+		on rs.open_sub_code = os.open_sub_code
+		join student stu
+		on stu.stu_no = rs.stu_no
+		join distribute_assign b
+		on b.open_sub_code = rs.open_sub_code
+		where stu.student_id=#{studentId} and b.open_sub_code =#{openSubCode}
+	</select>
+	
+	<!-- 내가 제출한 과제 목록들 보여주는 거 -->
+	<select id="myAssignmemtList" parameterType="String" resultType="map">
+		select * from 
+		assignment a join registration r
+		on a.open_sub_code = r.open_sub_code
+		join open_subj o
+		on o.open_sub_code = a.open_sub_code
+		join subject s
+		on s.subj_code =o.subj_code
+		join distribute_assign d
+		on d.assign_no = a.assign_no
+		where a.stu_no=#{stuNo}
 	</select>
 </mapper>
 

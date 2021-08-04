@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.it.every.common.RegistrationSearchVO;
 import com.it.every.registrationCart.model.RegistrationCartVO;
 
 import lombok.RequiredArgsConstructor;
@@ -16,8 +18,8 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	private final StudentRegistrationDAO studentRegistrationDao;
 
 	@Override
-	public List<Map<String, Object>> searchMyRegistarion(String userid) {
-		return studentRegistrationDao.searchMyRegistarion(userid);
+	public List<Map<String, Object>> searchMyRegistarion(RegistrationSearchVO registrationSearchVo) {
+		return studentRegistrationDao.searchMyRegistarion(registrationSearchVo);
 	}
 
 	
@@ -54,6 +56,40 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	@Override
 	public int deleteCart(RegistrationCartVO registrationCartVo) {
 		return studentRegistrationDao.deleteCart(registrationCartVo);
+	}
+
+
+	@Override
+	public int checkDuplicate(RegistrationVO registrationVo) {
+
+			int count = studentRegistrationDao.checkDuplicate(registrationVo);
+			
+			return count;
+		
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectByOpenSubCode(String openSubCode) {
+		return studentRegistrationDao.selectByOpenSubCode(openSubCode);
+
+	@Override
+	public int checkDuplicateCart(RegistrationCartVO registrationCartVo) {
+		
+		int count = studentRegistrationDao.checkDuplicateCart(registrationCartVo);
+		
+		return count;
+	}
+
+
+	@Override
+	public int countPersonnel(RegistrationVO registrationVo) {
+		return studentRegistrationDao.countPersonnel(registrationVo);
+	}
+
+
+	@Override
+	public int countCount(RegistrationVO registrationVo) {
+		return studentRegistrationDao.countCount(registrationVo);
 	}
 	
 	

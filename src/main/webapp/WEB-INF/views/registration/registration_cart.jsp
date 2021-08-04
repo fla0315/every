@@ -54,8 +54,7 @@
 												</form>
 											</td>
 												<!-- 년도 -->
-												<td><fmt:formatDate value="${CMap['OPEN_DATE']}"
-														pattern="yyyy" /></td>
+												<td>${CMap['SUBJ_YEAR']}</td>
 												<!-- 학기 -->
 												<td>${CMap['SEMESTER'] }</td>
 												<!-- 과목명 -->

@@ -20,7 +20,6 @@
 		$('input[name=chkAll]').change(function(){
 			$('.card-body table tbody input[type=checkbox]').prop('checked', this.checked);
 		});
-		
 	});
 </script>
 
@@ -58,7 +57,6 @@ body {
                        성적 입력 테이블
                    </div>
                    <div class="card-body">
-                   <form name="form" id="form" role="form" method="post">
                        <table id="datatablesSimple">
                            <thead>
                                <tr>
@@ -80,7 +78,7 @@ body {
                            <tbody>
                                <c:if test="${empty evList }">
                                	<tr>
-                               		<td colspan="12" class="text-center">등록된 학생이 없습니다.</td>
+                               		<td colspan="13" class="text-center">등록된 학생이 없습니다.</td>
                                	</tr>
                                </c:if>
                                <c:if test="${!empty evList }">
@@ -93,23 +91,35 @@ body {
                                			<td>${map['YEAR'] }</td>
                                			<td>${map['STU_NO'] }</td>
                                			<td>${map['MAJOR'] }</td>
-                               			<td><input type="text" name="attendance" value="${map['ATTENDANCE'] }" size="5" readonly></td> <!-- 점수 계산 예정 -->
-                               			<td><input type="text" name="assignment" value="${map['ASSIGNMENT'] }" size="5" readonly></td> <!-- 과제 계산 예정 -->
-                               			<td><input type="text" name="midterm" value="${map['MIDTERM'] }" size="5"></td>
-                               			<td><input type="text" name="finals" value="${map['FINALS'] }" size="5"></td>
-                               			<td><input type="text" name="totalGrade" value="${map['TOTAL_GRADE'] }" size="5"></td>
+                               			<td>${map['ATTENDANCE'] }</td>
+                               			<td>${map['ASSIGNMENT'] }</td> <!-- 과제 계산 예정 -->
+                               			<td><input type="text" name="midterm" value="${map['MIDTERM'] }" size="5" readonly></td>
+                               			<td><input type="text" name="finals" value="${map['FINALS'] }" size="5" readonly></td>
+                               			<td><input type="text" name="totalGrade" value="${map['TOTAL_GRADE'] }" size="5" readonly></td>
                                			<td>
                                				<c:if test="${!empty map['TOTAL_GRADE']}">
                                					<fmt:parseNumber var="grade" type="number" value="${map['TOTAL_GRADE'] }" integerOnly="true"/>
                                					<c:choose>
+                               						<c:when test="${grade>=95 }">
+                               							A+
+                               						</c:when>
                                						<c:when test="${grade>=90 }">
                                							A
+                               						</c:when>
+                               						<c:when test="${grade>=85 }">
+                               							B+
                                						</c:when>
                                						<c:when test="${grade>=80 }">
                                							B
                                						</c:when>
+                               						<c:when test="${grade>=75 }">
+                               							C+
+                               						</c:when>
                                						<c:when test="${grade>=70 }">
                                							C
+                               						</c:when>
+                               						<c:when test="${grade>=65 }">
+                               							D+
                                						</c:when>
                                						<c:when test="${grade>=60 }">
                                							D
@@ -121,9 +131,9 @@ body {
                                				</c:if>
                                			</td>
                                			<td style="width:5%" class="text-center">
-                               				<input type="submit" class="btn btn-sm btn-secondary" id="btnEdit" value="수정" formaction="<c:url value='/professor/evaluation/evaluationEdit?stuNo=${map["STU_NO"] }&open=${open}'/>">
+                               				<input type="button" class="btn btn-sm btn-secondary" value="수정" onclick="window.open('${pageContext.request.contextPath }/professor/evaluation/evaluationEdit?stuNo=${map['STU_NO'] }&openSubCode=${open }', 'detail', 'top=100, left=600, width=480, height=400, location=yes, resizable=yes')"/>
                                			</td>
-                               		</tr>
+                               			</tr>
                                		<c:set var="noCheck" value="${noCheck+1 }" />
                                	</c:forEach>
                                </c:if>
@@ -131,15 +141,7 @@ body {
                        </table>
                    </div>
                </div>
-			<div >
-			</form>
-				<button type="button" class="btn btn-sm btn-primary" id="btnSave">제출</button>
-				<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
-			</div>
-
 		</div>
-
 	</article>
-
 
 <%@ include file="../../inc/bottom.jsp" %>

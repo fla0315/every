@@ -34,4 +34,14 @@ public class EvaluationServiceImpl implements EvaluationService {
 		return evaluationDao.updateAttend(vo);
 	}
 
+	@Override
+	public Map<String, Object> selectBystuNo(EvaluationVO vo) {
+		return evaluationDao.selectBystuNo(vo);
+	}
+
+	@Override
+	public int totalGrade(EvaluationVO vo) {
+		return evaluationDao.totalGrade(vo);
+	}
+
 }

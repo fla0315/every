@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 <script type="text/javascript">
-	/* $(function(){	//개설과목
+	$(function(){	//개설과목
 		$('#btnSave').click(function(){
 			if($('#openSub option:selected').val()!='선택하세요'){
 				var openSubCode = $('#openSub option:selected').val();
@@ -21,7 +21,7 @@
 				alert('개설교과목 번호를 선택하세요!');
 			}
 		});
-	}); */
+	});
 </script>
 
 <style type="text/css">
