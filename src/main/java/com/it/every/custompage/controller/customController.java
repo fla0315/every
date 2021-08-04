@@ -13,15 +13,20 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.every.category.model.categoryVO;
 
 
 import com.it.every.custompage.custommodel.customService;
+import com.it.every.custompage.custommodel.customVO;
 import com.it.every.department.model.DepartmentVO;
 import com.it.every.professor.model.ProfessorVO;
 import com.it.every.register.Controller.registerController;
 import com.it.every.register.model.registerVO;
+import com.it.every.subjType.model.SubjTypeVO;
+import com.it.every.subject.model.SubjectVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,10 +38,35 @@ public class customController {
 	private final customService service;
 
 	@RequestMapping("/custom")
-	public String custompage() {
-		logger.info("커스텀 페이지 출력");
+	public String custompage(HttpSession session, Model model, @ModelAttribute customVO vo) {
+		
+		logger.info("게시판 목록 출력");
+		
+		String usertype= (String)session.getAttribute("usertype");
+		String deptname= (String)session.getAttribute("name");
+		vo.setUsertype(usertype);
+		vo.setProfname(deptname);
+		
+		List<customVO> list = service.customlist(vo);
+		
+		model.addAttribute("list",list);
+		
 		return "admin/custompage/custom";
 
+	}
+	//상황에 따라서는 바로 ajax쓰자.
+	@RequestMapping("custompageDelete")
+	public String custompageDelete(@RequestParam("deletename") String name) {
+		logger.info("삭제 게시판 이름, name={}",name);
+		int result=service.deleteboard(name);
+		logger.info("결과, result={}",result);
+		return "redirect:/custompage/custom";
+	}
+	
+	@RequestMapping("/custompagechange")
+	public String custompagechage() {
+		logger.info("수정 페이지 출력");
+		return "admin/custompage/custompagechange";
 	}
 
 	@RequestMapping("/noticeboard")
@@ -44,6 +74,32 @@ public class customController {
 		logger.info("커스텀 보드 출력");
 		return "admin/custompage/noticeboard";
 
+	}
+	
+	@ResponseBody
+	@RequestMapping("/typecheck")
+	public List<customVO> subjname(@RequestParam("type") String type, @RequestParam("name") String name, HttpSession session, Model model){
+		
+		logger.info("ajax이용한 수업목록 출력확인, 파라미터 type={}",type);
+		customVO vo = new customVO();
+		
+		vo.setType(type);
+		vo.setDeptname(name);
+		List<customVO> subname= service.subjname(vo);
+		
+		String usertype= (String)session.getAttribute("usertype");
+		
+		logger.info("수업목록 확인, 파라미터 name={}",subname);
+		if (usertype.equals("professor")) {
+			model.addAttribute("subname", subname);
+		}else if (usertype.equals("admin")) {
+			
+		}
+		
+		
+		return subname;
+		
+		
 	}
 	
 
@@ -54,23 +110,33 @@ public class customController {
 		  String no = (String)session.getAttribute("no"); 
 		  String name= (String)session.getAttribute("name"); 
 		  logger.info("게시판 생성, 파라미터 (교수 또는 관리자) 번호={}, 이름={}",no,name);
-	  
+
+	   //너로 등록된 거 불러오고
 	  List<Map<String, Object>> prolist=service.proselectoption(no);
-	
-	  	
 	  String usertype= (String)session.getAttribute("usertype");
+	  
+	  
 	  registerVO regvo= new registerVO();
 	  regvo.setChk_info(usertype);
 	  
-	 List<String> category = service.selectcategory(regvo);
-	  
+	  List<categoryVO> category = service.selectcategory(regvo);
 	  List<DepartmentVO> deptname= service.professordeptname(name);
+	  List<DepartmentVO> adminname= service.adminsubjname();
+	  //별수 없이 넣는다 진짜  
+	  customVO cuvo= new customVO();
+	  cuvo.setUsertype(usertype);
+	  cuvo.setProfname(name);
+	  List<SubjTypeVO> type= service.subjtype(cuvo);
 	  
 	  model.addAttribute("prolist",prolist);
-	  
+	  model.addAttribute("type", type);
 	  model.addAttribute("category", category);
 	  
-	  model.addAttribute("deptname", deptname);
+	  if (usertype.equals("professor")) {
+		  model.addAttribute("deptname", deptname);
+	} else if(usertype.equals("admin")){
+		 model.addAttribute("deptname", adminname);
+	}
 	  
 	  
 	  logger.info("게시판 목록, 결과 category={}", category);
@@ -79,8 +145,62 @@ public class customController {
 		  logger.info("교수학과명, 결과 dept_name={}", deptname);
 	  }
 	  
+	  logger.info("유형불러오기, 결과 type={}",type);
+	  
 	
 	  return "admin/custompage/custompage2"; 
 	  }
+	  
+	  //게시판 등록
+
+	  @RequestMapping("/customwrite")
+	  public String boardRegister(@ModelAttribute customVO vo, 
+			  HttpSession session, Model model, 
+			  @RequestParam("bdname") String bdname,
+			  @RequestParam("b2") String subcode,
+			  @RequestParam("c") String category
+			) 
+	  {
+		  vo.setBdname(bdname);
+		  vo.setUsage('Y');
+		  vo.setOpensubcode(subcode);
+		  
+		  
+		  int categorycode=Integer.parseInt(service.categorycode(category));
+		  vo.setCategorycode(categorycode);
+		  boolean bool=true;
+		  
+		  
+		  String usertype= (String)session.getAttribute("usertype");
+		  if (usertype.equals("professor")) {
+			vo.setAuthcode(4);
+		}else if(usertype.equals("admin")) {
+			String code= (String)session.getAttribute("no");
+			String authcode= service.adminfound(code);
+			vo.setAuthcode(Integer.parseInt(authcode));
+		}
+		  
+		  int result=service.insertboard(vo);
+		  logger.info("처리중, vo={}, result={}",vo,result);
+		  	String msg="실패", url="admin/custompage/custompage2";
+		  if (result!=1) {
+			  bool=false;
+		}else {
+			msg="등록성공";
+			
+		}
+		
 	
+		  
+		  return url;
+		  
+	  }
+	  //게시판 교체
+	  @RequestMapping("/customchangeinput")
+	  public String changeboard(@ModelAttribute customVO vo) {
+		  int result=service.updateboard(vo);
+		  logger.info("결과 result={}",result);
+		  return "redirect:/custompage/custompagechange";
+		  
+	  }
 }

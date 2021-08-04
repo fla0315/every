@@ -73,6 +73,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 		return studentRegistrationDao.selectByOpenSubCode(openSubCode);
 	}
 
+	
 	@Override
 	public int checkDuplicateCart(RegistrationCartVO registrationCartVo) {
 		
