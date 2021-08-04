@@ -9,6 +9,8 @@ import com.it.every.category.model.categoryVO;
 import com.it.every.department.model.DepartmentVO;
 import com.it.every.professor.model.ProfessorVO;
 import com.it.every.register.model.registerVO;
+import com.it.every.subjType.model.SubjTypeVO;
+import com.it.every.subject.model.SubjectVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +21,7 @@ public class customServiceIMPl implements customService {
 	private final customDAO dao;
 
 	@Override
-	public List<String> selectcategory(registerVO vo){
+	public List<categoryVO> selectcategory(registerVO vo){
 		// TODO Auto-generated method stub
 		return dao.selectcategory(vo);
 	}
@@ -36,18 +38,65 @@ public class customServiceIMPl implements customService {
 		return dao.professordeptname(prof_name);
 	}
 
+
+
 	@Override
-	public List<DepartmentVO> admincustompage() {
+	public List<SubjTypeVO> subjtype(customVO vo) {
 		// TODO Auto-generated method stub
-		return dao.admincustompage();
+		return dao.subjtype(vo);
 	}
 
-	/*
-	 * @Override public List<Map<String, Object>> adminselectoption(String admin_no)
-	 * { // TODO Auto-generated method stub return dao.adminselectoption(admin_no);
-	 * }
-	 * 
-	 */
+	@Override
+	public List<customVO> subjname(customVO vo) {
+		// TODO Auto-generated method stub
+		return dao.subjname(vo);
+	}
+
+	@Override
+	public int insertboard(customVO vo) {
+		// TODO Auto-generated method stub
+		return dao.insertboard(vo);
+	}
+
+	@Override
+	public String adminfound(String emp_no) {
+		// TODO Auto-generated method stub
+		return dao.adminfound(emp_no);
+	}
+
+	@Override
+	public String categorycode(String category_code) {
+		// TODO Auto-generated method stub
+		return dao.categorycode(category_code);
+	}
+
+	@Override
+	public List<DepartmentVO> adminsubjname() {
+		// TODO Auto-generated method stub
+		return dao.adminsubjname();
+	}
+
+	@Override
+	public List<customVO> customlist(customVO vo) {
+		// TODO Auto-generated method stub
+		return dao.customlist(vo);
+	}
+
+	@Override
+	public int deleteboard(String bd_name) {
+		// TODO Auto-generated method stub
+		return dao.deleteboard(bd_name);
+	}
+
+	@Override
+	public int updateboard(customVO vo) {
+		// TODO Auto-generated method stub
+		return dao.updateboard(vo);
+	}
+
+	
+
+	
 	
 	
 }
