@@ -2,33 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.it.every.custom.model.customDAO">
+<mapper namespace="com.it.every.custompage.custommodel.customDAO">
 
 
 <!-- <select id="subj_type" resultType="subjtypeVO">
 	select * form subj_type
 </select> -->
 
-<!-- 넌 필수로 들어가 카테고리 명 불러오기-->
-<select id="selectcategory" parameterType="registerVO" resultType="String">
+	
+<!-- 넌 필수로 들어가 카테고리 명 불러오기(교수는 2개만, 관리자는 몽땅)-->
+<select id="selectcategory" parameterType="registerVO" resultType="categoryVO">
 		select category_name from Category	
 		<if test='chk_info=="professor"'>
 			where category_code=1 or category_code=4
 		</if>
-		
-		
+</select>
+	
+	<!--너도 필수 이걸로 교수에게 등록된 모든 수업 타입을 불러오자. -->
+	<select id="subjtype" parameterType="customVO" resultType="SubjTypeVO">
+		select distinct type from forboard 
+		<if test='usertype=="professor"'>
+			where prof_name=#{profname}
+		</if>
 	</select>
 	
-	
-	<select id = "deptname"  resultType="departmentVO">
-		select * from department
+	<!-- 이걸로 교수 및 해당하는 전체 수업들 출력 -->
+	<select id="subjname" parameterType="customVO" resultType="customVO">
+		select subj_name, open_sub_code from forboard
+		where type=#{type} and dept_name=#{deptname}
 	</select>
-	
-	<select id= "subjname" resultType="subjectVO">
-		select * from subject
-	</select>
-	
-	
 	
 	<!-- 너로 교수 학과명 출력 만들고 -->
 	<select id= "professordeptname" parameterType="String" resultType="DepartmentVO">
@@ -37,36 +39,61 @@
 				select dept_no from professor where prof_name=#{prof_name})
 	</select> 	
 	
-	<!-- 너로 관리자 출력 만든다. -->
-	<select id="admincustompage" resultType="DepartmentVO">
-		select dept_name from department
+	<!-- 관리자는 수업이 등록된 모든 학과를 볼 수 있어야 하니까 -->
+	<select id="adminsubjname" resultType="DepartmentVO">
+		select distinct dept_name from forboard
 	</select>
 	
-	<!--(교수) 게시판 생성 검색조건 -->
+	
+	<!--(교수) 게시판 생성 검색 수업조건 -->
 	<select id="proselectoption" parameterType="String" resultType="map">
 		select dept_name,type,subj_name,prof_name 
-			from customboardview where prof_no=#{prof_no}
+			from forboard where prof_no=#{prof_no}
 	</select>
 	
 	
-	<!-- 아무래도 이수구분 선택 후에는 강좌명 차이도 줘야겠지? 
-	<select id= "divideclass" parameterType="String" resultType="map">
-		select subj_name from customboardview
-			
-		 where 
-	</select> -->
+	<!-- 등록 sql -->
+	<insert id="insertboard" parameterType="customVO">
 	
-
+		<selectKey resultType="int" keyProperty="bdcode" order="BEFORE">
+			select seq_board.nextval from dual
+		</selectKey>
+		insert into board(bd_code,bd_name,auth_code,usage,is_reply,is_comment,category_code,is_private,is_upload,max_upfile,max_filesize,open_sub_code ) 
+			values (#{bdcode}, #{bdname}, #{authcode},#{usage}, #{isreply}, #{iscomment},#{categorycode},#{isprivate},#{isupload},#{maxupfile},#{maxfilesize},#{opensubcode})
 	
-	<!--(관리자) 게시판 생성 검색조건
-	<select id="adminselectoption" parameterType="String" resultType="map">
-		select *
-			from department da, professor pro, subj_type su, subject sub
-			where da.dept_no=pro.dept_no and pro.prof_no=sub.prof_no 
-					and sub.type_code=su.type_code and pro.prof_no=#{prof_no};
+	</insert>
+	
+	
+	<!-- 로그인이 관리자일때 권한입력 차이점 주기 -->
+	<select id="adminfound" parameterType="String" resultType="String">
+		select auth_code from employee where emp_no=#{emp_no}
 	</select>
-	 -->
 	
+	<!-- 별수 없이 카테고리 코드도 넣어줘야 겠네. -->
+	<select id="categorycode" parameterType="String" resultType="String">
+		select category_code from category where category_name=#{category_code}
+	</select>
+	
+	<!-- 게시판 불러오기 -->
+	<select id="customlist" parameterType="customVO" resultType="customVO">
+	select forbo.dept_name,boar.bd_name, forbo.type, forbo.subj_name, boar.is_private, boar.is_reply, boar.is_upload
+	from forboard forbo, board boar
+	where boar.open_sub_code=forbo.open_sub_code
+	<if test='usertype=="professor"'>
+	 and prof_name=#{profname}
+	</if>
+	</select>
+	
+	<delete id="deleteboard" parameterType="String">
+		delete from board where bd_name=#{bd_name}
+	</delete>
+	
+	<!-- 게시판 업데이트 -->
+	<update id="updateboard" parameterType="customVO">
+		update board 
+		set is_reply=#{isreply}, is_private=#{isprivate}, is_comment=#{iscomment}, is_upload=#{isupload}, bd_name=#{bdname}
+		where bd_name=#{forbdname}
+	</update>
 
 
 </mapper>

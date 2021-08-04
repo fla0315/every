@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/admin_top.jsp" %>
 
+
+
 	<div class="card mb-4" style="width: 90%; margin: 0 auto; margin-top: 50px">
 		<div class="card-header" style="font-size: 1.5em">
 			<i class="fas fa-clipboard-list"></i>&nbsp;신고글 관리
@@ -29,10 +31,10 @@
 				<tbody>
 					<tr>
 						<td style="vertical-align: middle; text-align: center;">1</td>
-						<td style="vertical-align: middle"><a href="#">광고성 게시글*광고성 게시글*광고성 게시글</a></td>
+						<td style="vertical-align: middle"><a href="#">454*광고성 게시글*광고성 게시글</a></td>
 						<td style="vertical-align: middle; text-align: center;">양길동</td>
-						<td style="vertical-align: middle; text-align: center;">2021/05/29</td>
-						<td style="vertical-align: middle; text-align: center;">홍길동</td>
+						<td style="vertical-align: middle; text-align: center;">2021/05/21</td>
+						<td style="vertical-align: middle; text-align: center;">나한길</td>
 						<td style="vertical-align: middle; text-align: center;"><input type="button" class="btn btn-danger btn-sm" value="삭제"></td>
 					</tr>
 					
