@@ -5,12 +5,15 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.it.every.common.RegistrationSearchVO;
 import com.it.every.registrationCart.model.RegistrationCartVO;
 
 @Mapper
 public interface StudentRegistrationDAO {
 	
-	List<Map<String ,Object>> searchMyRegistarion(String userid); //수강신청내역조회
+	List<Map<String ,Object>> searchMyRegistarion(RegistrationSearchVO registrationSearchVo); //나의수강신청내역조회
+	
+	
 	int insertMyRegistarion(RegistrationVO registrationVo); //수강신청하기
 	int deleteMyRegistarion(RegistrationVO registrationVo); //수강취소
 	List<Map<String ,Object>> selectMyRegistarion(String userid); //해당학기 수강신청 내역들만 조회
@@ -20,4 +23,15 @@ public interface StudentRegistrationDAO {
 	int deleteCart(RegistrationCartVO registrationCartVo); //장바구니 취소
 	
 	List<Map<String ,Object>> selectByOpenSubCode(String openSubCode); //개설교과목별 학생목록 불러오기
+	//수강이력조회
+	int checkDuplicate(RegistrationVO registrationVo);
+	int checkDuplicateCart(RegistrationCartVO registrationCartVo);
+	
+	//총원 카운트
+	int countPersonnel(RegistrationVO registrationVo);
+	int countCount(RegistrationVO registrationVo);
+	
+	
+	
+	
 }

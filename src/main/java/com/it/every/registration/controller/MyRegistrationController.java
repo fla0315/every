@@ -11,7 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.every.common.RegistrationSearchVO;
+import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.registration.model.RegistrationVO;
 import com.it.every.registration.model.StudentRegistrationService;
 import com.it.every.student.model.StudentService;
@@ -29,14 +32,48 @@ public class MyRegistrationController {
 	private final StudentRegistrationService studentRegistrationService;
 	private final StudentService studentService;
 	
+	
+	
+	
+	
+	@RequestMapping("/myregistration1")
+	@ResponseBody
+	public List<Map<String, Object>>  myregistration1(@ModelAttribute RegistrationSearchVO regiSearchVo, HttpSession session, Model model) {
+		logger.info("regiSearchVo={}",regiSearchVo);
+		
+		String userid = (String)session.getAttribute("user_id");
+		regiSearchVo.setStudentId(userid);
+		
+		logger.info("나의수상신청목록 페이지");
+		List<Map<String ,Object>> list = studentRegistrationService.searchMyRegistarion(regiSearchVo);
+		
+		logger.info("나의수상신청목록 , list.size()={}", list.size());
+		
+		model.addAttribute("list",list);
+		
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/myregistration")
-	public String myregistration(HttpSession session, Model model) {
+	public String myregistration(@ModelAttribute RegistrationSearchVO regiSearchVo, HttpSession session, Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		//String userid ="fla0315";
-		
+		regiSearchVo.setStudentId(userid);
+		regiSearchVo.setSubjYear("0");
+		regiSearchVo.setSemester("0");
 		logger.info("나의수상신청목록 페이지");
-		List<Map<String ,Object>> list = studentRegistrationService.searchMyRegistarion(userid);
+		
+		System.out.println(regiSearchVo);
+		
+		
+		List<Map<String ,Object>> list = studentRegistrationService.searchMyRegistarion(regiSearchVo);
 		Map<String, Object> map = studentService.selectStudentDeptView(userid);
 		
 		logger.info("나의수상신청목록 , list.size()={}", list.size());
@@ -50,11 +87,5 @@ public class MyRegistrationController {
 		return "registration/myregistration";
 	}
 	
-	
-	
-	@RequestMapping("/Test")
-	public void Test() {
-		
-	}
 	
 }

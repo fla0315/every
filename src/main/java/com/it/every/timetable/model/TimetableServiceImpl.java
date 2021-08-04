@@ -1,6 +1,7 @@
 package com.it.every.timetable.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,11 @@ public class TimetableServiceImpl implements TimetableService{
 	@Override
 	public List<TimetableVO> selectTimetable() {
 		return timetableDao.selectTimetable();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectTimetableByID(String userid) {
+		return timetableDao.selectTimetableByID(userid);
 	}
 	
 	

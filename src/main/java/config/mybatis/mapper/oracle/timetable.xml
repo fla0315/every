@@ -4,9 +4,33 @@
 
 <mapper namespace="com.it.every.timetable.model.TimetableDAO">
 
-	<select id="selectTimetable" resultType="timetableVO">
-		select * from timetable
-	</select>
+	
+	<!-- 시간표 수정해야함  -->
+  	<select id="selectTimetableByID" parameterType="string" resultType="map">
+		select * from 
+		subject st join subj_type sj
+		on st.type_code= sj.type_code
+		join professor prof
+		on prof.prof_no = st.prof_no
+		join open_subj os
+		on os.subj_code = st.subj_code
+		join registration rs
+		on rs.open_sub_code = os.open_sub_code
+		join student stu
+		on stu.stu_no = rs.stu_no
+		join subj_time s
+		on rs.open_sub_code = s.open_sub_code 
+		join timetable t 
+		on t.timetable_code = s.timetable_code
+		join classroom class 
+		on class.classroom_code = s.classroom_code
+		join building b 
+		on b.building_code = class.building_code
+		where stu.student_id=#{studentId}
+	</select> 
+	
+	
+	
 	
 </mapper>
 

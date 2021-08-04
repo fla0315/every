@@ -17,8 +17,62 @@
 		on rs.open_sub_code = os.open_sub_code
 		join student stu
 		on stu.stu_no = rs.stu_no
-		where stu.student_id=#{studentId} and st.semester = '2학기' and st.subj_year = '2021'
+		where stu.student_id=#{studentId}
 	</select>
+	
+	
+	
+	<insert id="insertSubjEvalStudent" parameterType="SubjEvalVO">
+		insert into subj_eval(open_sub_code,stu_no,classification,q1,q2,q3,q4,q5,content)
+		values(#{openSubCode}, #{stuNo}, #{classification}, #{q1}, #{q2}, #{q3}, #{q4}, #{q5}, #{content})
+	</insert>
+	
+	
+	<!-- 강의 평가 부분 -->
+	<select id="searchEvalFlag" parameterType="String" resultType="map">
+		select * from
+		evaluation eval left join registration regi
+		on eval.sub_code = regi.open_sub_code 
+		left join subj_eval subEval 
+		on subEval.open_sub_code = regi.open_sub_code
+		join open_subj opensub 
+		on opensub.open_sub_code = regi.open_sub_code
+		join subject subj 
+		on subj.subj_code = opensub.subj_code
+		join professor prof 
+		on prof.prof_no = subj.prof_no
+		join subj_type suvjt
+		on suvjt.type_code = subj.type_code
+		where regi.stu_no=#{stuNo}
+	</select>
+	
+	<!-- 성적조회부분 -->
+	<select id="searchMyGrade" parameterType="String" resultType="map">
+		select * from
+		evaluation eval left join registration regi
+		on eval.sub_code = regi.open_sub_code 
+		left join subj_eval subEval 
+		on subEval.open_sub_code = regi.open_sub_code
+		join open_subj opensub 
+		on opensub.open_sub_code = regi.open_sub_code
+		join subject subj 
+		on subj.subj_code = opensub.subj_code
+		join professor prof 
+		on prof.prof_no = subj.prof_no
+		join subj_type suvjt
+		on suvjt.type_code = subj.type_code
+		where regi.stu_no=#{stuNo}
+	</select>
+	
+	
+	<!-- 강의평가하면 강의평가 구분 변경 -->
+	<update id="updateEvalFlag" parameterType="SubjEvalVO">
+		update registration
+		set lecture_eval_flag ='Y'
+		where open_sub_code=#{openSubCode} and stu_no=#{stuNo}
+	
+	</update>
+	
 	
 	
 </mapper>
