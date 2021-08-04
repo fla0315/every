@@ -20,7 +20,7 @@ import com.it.every.assignment.model.AssignmentVO;
 import com.it.every.common.ConstUtil;
 import com.it.every.common.FileUploadUtil;
 import com.it.every.common.RegistrationSearchVO;
-import com.it.every.distributeAssign.model.DistributeAssignVo;
+import com.it.every.distributeAssign.model.DistributeAssignVO;
 import com.it.every.registration.model.StudentRegistrationService;
 import com.it.every.student.model.StudentService;
 
@@ -62,7 +62,7 @@ public class assignmentController {
 	
 	@RequestMapping("/assignment/selectMySubj")
 	@ResponseBody
-	public List<Map<String, Object>> assignmentName(@ModelAttribute DistributeAssignVo distributeAssignVo ,@RequestParam String openSubCode,HttpSession session, Model model) {
+	public List<Map<String, Object>> assignmentName(@ModelAttribute DistributeAssignVO distributeAssignVo ,@RequestParam String openSubCode,HttpSession session, Model model) {
 		logger.info("과목번호가 들어왔을 때 과제 목록 불러주는거 ");
 		//여기다가는 과목명과 과제제목을 학번에 맞는걸 뿌려줘야한다
 		String userid = (String)session.getAttribute("user_id");

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.it.every.assignment.model.AssignmentVO;
 import com.it.every.common.RegistrationSearchVO;
-import com.it.every.distributeAssign.model.DistributeAssignVo;
+import com.it.every.distributeAssign.model.DistributeAssignVO;
 import com.it.every.scholarship.model.ScholarshipVO;
 import com.it.every.tuition.model.TuitionVO;
 
@@ -108,7 +108,7 @@ public class StudentServiceImpl implements StudentService{
 
 
 	@Override
-	public List<Map<String, Object>> selectMyAssignmemt(DistributeAssignVo distributeAssignVo) {
+	public List<Map<String, Object>> selectMyAssignmemt(DistributeAssignVO distributeAssignVo) {
 		return studentDao.selectMyAssignmemt(distributeAssignVo);
 	}
 
