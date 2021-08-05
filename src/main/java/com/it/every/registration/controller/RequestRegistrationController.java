@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.every.attendance.model.AttendanceVO;
 import com.it.every.common.RegistrationSearchVO;
+import com.it.every.evaluation.model.EvaluationVO;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.registration.model.RegistrationVO;
@@ -92,12 +94,15 @@ public class RequestRegistrationController {
 	//장바구니에서 수강신청
 	@RequestMapping("/request_registrationCartInsert")
 	@ResponseBody
-	public String myregistrationCartInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo, @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode,Model model) {
+	public Map<String, String>  myregistrationCartInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo ,  @ModelAttribute RegistrationCartVO registrationCartVo ,@ModelAttribute AttendanceVO attendanceVo , @ModelAttribute EvaluationVO evaluationVo,@RequestParam String openSubCode,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		registrationVo.setStuNo(stuNo);
 		registrationCartVo.setStuNo(stuNo);
+		attendanceVo.setStuNo(stuNo);
+		evaluationVo.setStuNo(stuNo);
+		
 		
 		//String userid ="fla0315";
 		logger.info("장바구니에서 수강신청페이지 페이지 vo={} ",registrationVo);
@@ -109,11 +114,15 @@ public class RequestRegistrationController {
 		for (int i = 0; i < codeArr.length; i++) {
 			System.out.println(codeArr[i]);
 			registrationVo.setOpenSubCode(codeArr[i]);
+			attendanceVo.setOpenSubCode(codeArr[i]);
+			evaluationVo.setSubCode(codeArr[i]);
 			
 			int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
 			if(cnt>0) {
 				registrationCartVo.setOpenSubCode(codeArr[i]);
 				cnt = studentRegistrationService.deleteCart(registrationCartVo);
+				 cnt =  studentRegistrationService.insertAutoAttendance(attendanceVo);
+				  cnt =  studentRegistrationService.insertAutoEvaluation(evaluationVo);
 				  msg="수강신청완료!!!."; 
 				  url="/registration/request_registration"; 
 			  }else{
@@ -123,21 +132,26 @@ public class RequestRegistrationController {
 			model.addAttribute("msg", msg); 
 			model.addAttribute("url", url);
 		}
-		
-			return msg;
+		Map<String, String> list = new HashMap<String, String>();
+		list.put("msg", msg);
+		return list;
 	}
 	
 	
 	//개설과목에서 수강신청
 	@RequestMapping("/request_registrationInsert")
 	@ResponseBody
-	public Map<String, String> myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo ,@ModelAttribute RegistrationSearchVO regiSearchVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode ,Model model) {
+	public Map<String, String> myregistrationInsert(HttpSession session, @ModelAttribute RegistrationVO registrationVo ,@ModelAttribute AttendanceVO attendanceVo , @ModelAttribute EvaluationVO evaluationVo ,@ModelAttribute RegistrationSearchVO regiSearchVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode ,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		registrationVo.setStuNo(stuNo);
 		registrationCartVo.setStuNo(stuNo);
 		registrationVo.setOpenSubCode(openSubCode);
+		attendanceVo.setStuNo(stuNo);
+		evaluationVo.setStuNo(stuNo);
+		attendanceVo.setOpenSubCode(openSubCode);
+		evaluationVo.setSubCode(openSubCode);
 		
 		int personnel = studentRegistrationService.countPersonnel(registrationVo);
 		int countCount = studentRegistrationService.countCount(registrationVo);
@@ -167,6 +181,8 @@ public class RequestRegistrationController {
 				  
 				  if(cnt>0){ 
 					  cnt = studentRegistrationService.deleteCart(registrationCartVo);
+					  cnt =  studentRegistrationService.insertAutoAttendance(attendanceVo);
+					  cnt =  studentRegistrationService.insertAutoEvaluation(evaluationVo);
 					  msg="수강신청완료!."; 
 					  url="/registration/request_registration"; 
 					  
@@ -179,9 +195,6 @@ public class RequestRegistrationController {
 				
 			}
 		}
-		
-		
-		
 		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("msg", msg);
@@ -243,19 +256,25 @@ public class RequestRegistrationController {
 	*/
 	
 	
+	//수강취소
 	@RequestMapping("/request_registrationDelete")
-	public String myregistrationDelete(HttpSession session,@ModelAttribute RegistrationVO registrationVo  ,Model model) {
+	public String myregistrationDelete(HttpSession session,@ModelAttribute RegistrationVO registrationVo ,@RequestParam String openSubCode,@ModelAttribute AttendanceVO attendanceVo , @ModelAttribute EvaluationVO evaluationVo  ,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		registrationVo.setStuNo(stuNo);
-		//String userid ="fla0315";
-		logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
+		attendanceVo.setStuNo(stuNo);
+		evaluationVo.setStuNo(stuNo);
+		attendanceVo.setOpenSubCode(openSubCode);
+		evaluationVo.setSubCode(openSubCode);
 		
-			int cnt = studentRegistrationService.deleteMyRegistarion(registrationVo);
+		logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
+		int cnt =studentRegistrationService.deleteAutoAttendance(attendanceVo);
+			cnt = studentRegistrationService.deleteAutoEvaluation(evaluationVo);
 			
 			String msg ="수상취소 완료!" , url ="/registration/request_registration";
 			if(cnt>0) {
+				cnt = studentRegistrationService.deleteMyRegistarion(registrationVo);
 				msg="수강취소완료.";
 				url="/registration/request_registration";
 			}else {

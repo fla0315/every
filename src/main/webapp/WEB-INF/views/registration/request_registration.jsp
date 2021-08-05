@@ -113,12 +113,12 @@ $(function(){
 				dataType : "json",
 				data: "openSubCode="+openSubCode,
 				success : function(data){
-					alert('성공');
-					//location.reload();
+					alert(data.msg);
+					location.reload();
 				},
 				error : function(){
-					alert('수강신청 실패');
-					//location.reload();
+					alert(data.msg);
+					location.reload();
 				}
 			});
 		});

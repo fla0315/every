@@ -75,20 +75,17 @@ body {
 				alert('과목을 선택하세요!');
 				event.preventDefault();
 				return false;
-				
 			}else if($('#mySubj option:selected').val()=='선택하세요' && $('#mySubj option:selected').val().length<0){
 				alert("과제명을 선택하세요");
 				$('#mySubj').focus();
 				event.preventDefault();
 				return false;
-			}else if($('#assignName').val().length<1){
-				alert("과제명을 입력하세요");
-				$('#assignName').focus();
+			}else if (confirm($('#openSub option:selected').text()+" "+$('#mySubj option:selected').text()+" 제출하시겠습니까?") == true){ 
+			    document.form.submit();
+			}else{   // 추
 				event.preventDefault();
-				return false;
-			} 
-			
-			
+			    return;
+			}
 		});
 	});
 </script>
@@ -151,10 +148,10 @@ body {
 							</div> <br> -->
 							
 							
-							<label for="assignName">과제파일</label>
+							<label for="assignName">과제파일 <span style="color: red; font-size: 0.7em; font-weight: bold;">과제는 한번 밖에 제출 할 수 없습니다.</span> </label>
 							<div class="col-md-6">
 									<input class="form-control"  type="file" name="upfile" id="upfile"
-										value=""/>  <span>(최대 20M)</span>
+										value=""/>  <span>(최대 5M)</span>
 							</div>
 							<div class="mt-4 mb-0">
 								<div class="d-grid">
