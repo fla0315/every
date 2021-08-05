@@ -53,14 +53,12 @@ public class OpenSubjController {
 		List<OpenSubjVO> list = openSubjService.OpenRegistraionSearch(regiSearchVo);
 		System.out.println(list);
 		logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
-
 		model.addAttribute("list", list);
-		
-		
 		return list;
-
-	}
-
+	}//에이젝스
+	
+	
+	
 	
 	  @GetMapping("/open_registration") public String
 	  open_rregistration(@ModelAttribute OpenSubjVO openSubjVo , HttpSession
@@ -85,10 +83,10 @@ public class OpenSubjController {
 	  model.addAttribute("typeMap", typeMap);
 	  
 	  return "registration/open_registration";
-	  
 	  }
 	  
-
+	  
+	 //장바구니
 	@RequestMapping("/open_registrationCart")
 	public String insertCart(HttpSession session, @ModelAttribute RegistrationCartVO registrationCartVo, @RequestParam String openSubCode, Model model) {
 
@@ -134,6 +132,7 @@ public class OpenSubjController {
 		return "common/message";
 	}
 
+	//장바구니삭제
 	@RequestMapping("/open_registrationCartDelete")
 	public String myregistrationDelete(HttpSession session, @ModelAttribute RegistrationCartVO registrationCartVo,
 			Model model) {
@@ -161,7 +160,8 @@ public class OpenSubjController {
 		return "common/message";
 
 	}
-
+	
+	//장바구니 보여주기
 	@RequestMapping("/registration_cart")
 	public String cart(HttpSession session, @ModelAttribute RegistrationCartVO registrationCartVo, Model model) {
 
@@ -249,19 +249,14 @@ public class OpenSubjController {
 		//1
 		logger.info("다운로드 처리, 파라미터 syllabusVo={}", syllabusVo);
 		
-		syllabusVo.setOpenSubCode(openSubCode);
-		syllabusVo.setSyllabus(syllabus);
-		
 		Map<String, Object> map = new HashMap<>();
 		//=====다운로드 맵
-		System.out.println(map);
-		
 		String uploadPath=fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_SYLLABUS_FLAG); //이거 실라버스
 		File file = new File(uploadPath, syllabusVo.getSyllabus()); //실라버스 파일 이름 가져오는거 
 		map.put("file", file);
 		map.put("originalFileName", syllabusVo.getSyllabus());
 		
-		ModelAndView mav = new ModelAndView("downloadView", map);
+		ModelAndView mav = new ModelAndView("syllabusdownloadview", map);
 		return mav;
 	}
 	 

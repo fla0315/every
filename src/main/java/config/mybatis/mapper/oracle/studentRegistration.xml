@@ -31,7 +31,7 @@
 	<!-- 수강신청  -->
 	<insert id="insertMyRegistarion" parameterType="registrationVo">
 		insert into registration(open_sub_code,stu_no,classification)
-		values(#{openSubCode},#{stuNo},'y')
+		values(#{openSubCode},#{stuNo},'Y')
 	</insert>
 	
 	<!-- 수강신청 취소 -->

@@ -136,6 +136,7 @@ body {
 											<option> 선택하세요 </option>
 										</select>
 										<label for="openSub">과제명</label>
+										<div id="name"></div>
 									</div>
 								</div>
 								

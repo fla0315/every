@@ -7,7 +7,7 @@ $(function(){
 	var num = 0;
 	$('#btGrade').click(function(){
 		$(".evalFlag span").each(function(idx,item){
-			if($(this).text()=='N'){
+			if($(this).text()=='[강의평가 미완료]'){
 				num++
 			};
 		});

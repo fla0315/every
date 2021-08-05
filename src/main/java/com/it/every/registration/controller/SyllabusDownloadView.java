@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
-@Component("downloadView")
+@Component("syllabusdownloadview")
 public class SyllabusDownloadView extends AbstractView{
 	private static final Logger logger
 		=LoggerFactory.getLogger(SyllabusDownloadView.class);

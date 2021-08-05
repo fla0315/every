@@ -96,8 +96,8 @@
 	
 	<!-- 과제 등록 -->
 	<insert id="insertAssignment" parameterType="AssignmentVo">
-		insert into assignment(assign_no,open_sub_code, stu_no, file_name, file_size, original_file_name)
-		values(#{assignNo},#{openSubCode}, #{stuNo}, #{fileName}, #{fileSize}, #{originalFileName})
+		insert into assignment(assign_no,open_sub_code, stu_no, file_name, file_size, original_file_name,apply_date)
+		values(#{assignNo},#{openSubCode}, #{stuNo}, #{fileName}, #{fileSize}, #{originalFileName},sysdate)
 	</insert>
 	
 	<!-- 과제에서 내 과목들만 조회하는 거 -->
@@ -122,7 +122,7 @@
 	<select id="myAssignmemtList" parameterType="String" resultType="map">
 		select * from 
 		assignment a join registration r
-		on a.open_sub_code = r.open_sub_code
+		on a.open_sub_code = r.open_sub_code and a.stu_no=r.stu_no
 		join open_subj o
 		on o.open_sub_code = a.open_sub_code
 		join subject s

@@ -70,7 +70,6 @@
 		update registration
 		set lecture_eval_flag ='Y'
 		where open_sub_code=#{openSubCode} and stu_no=#{stuNo}
-	
 	</update>
 	
 	
