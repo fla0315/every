@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.it.every.board.model.BoardService;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
 
@@ -25,6 +26,7 @@ public class ProfessorNoticeController {
 	= LoggerFactory.getLogger(ProfessorNoticeController.class);
 	
 	private final OpenSubjService openSubjService;
+	private final BoardService boardService;
 	
 	@RequestMapping("/noticeWrite")
 	public String noticeWrite(@RequestParam (required=false) String openSubCode, Model model, HttpSession session) {
@@ -55,7 +57,7 @@ public class ProfessorNoticeController {
 		}
 		
 		if(openSubCode!=null && !openSubCode.isEmpty()) {
-			
+			int bdCode = boardService.checkBdCode(openSubCode);
 		}
 	}
 }

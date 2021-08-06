@@ -4,11 +4,9 @@
 
 <mapper namespace="com.it.every.post.model.PostDAO">
 	<!-- 개설교과목공지 글 읽어오기 -->
-	<select id="postByOpenSubCode" parameterType="String" resultType="map">
-	select * from post p
-	join board b
-	on p.bd_code = b.bd_code
-	where open_sub_code = #{openSubCode}
+	<select id="postByOpenSubCode" parameterType="int" resultType="postVo">
+		select * from post p
+		where bd_code = #{bdCode}
 	</select>
 </mapper>
 
