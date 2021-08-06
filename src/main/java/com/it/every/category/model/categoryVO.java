@@ -11,10 +11,10 @@ import lombok.ToString;
 @ToString
 public class categoryVO {
 
-	private int category_code;
-	private String category_name;
+	private int categorycode;
+	private String categoryname;
 	private char usage;
-	private Timestamp reg_date;
+	private Timestamp regdate;
 
 	
 }

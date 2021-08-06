@@ -75,6 +75,7 @@ $(function(){
 		  $.ajax({
 				url:"<c:url value='/custompage/typecheck'/>",
 				type:"post",
+				async: false,
 				data:{"type":type,"name":name},			
 				success:function(res){
 					for (var i = 0; i < res.length; i++) {
@@ -109,6 +110,7 @@ $(function(){
 	 //게시판 타입
 	  $('.category').change(function(){
 		  var type= $(".category:checked").val();
+		  var opensub=$(".b2").val();
 		  if (type!=null) {
 			  $("#all_option").css("visibility","visible");
 			  $(".type_check").html(type).css("color", "red");
@@ -117,6 +119,24 @@ $(function(){
 		}else
 			 $("#all_option").css("visibility","hidden");
 		 	
+		  //여기서 해당 개설교과코드의 과목이 이미 생성되었는지 확인한다. 
+		    $.ajax({
+				url:"<c:url value='/custompage/checkadmin'/>",
+				type:"post",
+				async: false,
+				data:{"type":type,"opensub":opensub},			
+				success:function(res){
+					if (res) {
+						$("#admincheck").val("Y");
+					}else {
+						$("#admincheck").val("N");
+					}	
+				},
+				error:function(xhr, status, error){
+					alert("error 발생!!" + error);
+				}
+			}
+		});
 		  
 		});
 	 //댓글사용 여부.d
@@ -151,23 +171,6 @@ $(function(){
 		  }
 	  });
 	
-	//업로드 옵션값 저장.h
-	  $('.maxup_file').change(function(){
-		  var type= $(this).val();
-		  if(type!=null){
-			  $(".maxupfile").val(type);
-		  }
-	  });
-	
-	//업로드 옵션값 저장.i
-	  $('.maxfile_size').change(function(){
-		  var type= $(this).val();
-		  if(type!=null){
-			  $(".maxfilesize").val(type);
-		  }
-	  });
-	
-	
 	 
 	 //옵션값 변경
 	  //업로드 여부가 Y여야 내용 보이도록
@@ -182,7 +185,21 @@ $(function(){
 
 	
 	   });
-	   
+	 //업로드 옵션값 저장.h
+		  $('.maxup_file').change(function(){
+			  var type= $(this).val();
+			  if(type!=null){
+				  $(".maxupfile").val(type);
+			  }
+		  });
+		
+		//업로드 옵션값 저장.i
+		  $('.maxfile_size').change(function(){
+			  var type= $(this).val();
+			  if(type!=null){
+				  $(".maxfilesize").val(type);
+			  }
+		  });
 
 $('.boardcancel').click(function(){
 	self.close();
@@ -191,14 +208,16 @@ $('.boardcancel').click(function(){
 });	 
 	
 	 
-$('.boardlist').submit(function(){	
-var comSubmit = new ComSubmit('registerboard').serialize();
-	   $.ajax({
-	          type: "POST",
+$('form[name=registerboard]').submit(function(){	
+	$.ajax({
+	          type: "post",
 	          url: '<c:url value='/custompage/customwrite'/>',
-	          data: comSubmit,      
-	          success: function(res){	
-	       		 self.close();
+	          data: $(this).serialize(),  
+	          async: false,
+	          success: function(){    	
+	        	  alert("등록성공");
+	        		  self.close();
+	        		  opener.parent.location.reload();
 	           }, error: function (xhr, status, error){
 					alert("error 발생!!" + error);
 				}
@@ -213,7 +232,7 @@ var comSubmit = new ComSubmit('registerboard').serialize();
 </head>
 <body>
 
-
+<form name="registerboard" class="registerboard" style="float:left" >
 <div class="accordion" id="accordionExample" style="float:left;">
 <div>
 <!--학과명 -->
@@ -292,7 +311,7 @@ var comSubmit = new ComSubmit('registerboard').serialize();
         </div>
         
         <!-- 설정 -->
-        <form name="registerboard" method="post" style="float:left" >
+      
         <div class="accordion-item" id="all_option" style="width: 500px;">
            <h2 class="accordion-header" id="headingFive">
            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
@@ -332,9 +351,9 @@ var comSubmit = new ComSubmit('registerboard').serialize();
             <div class="visible_use">비공개 여부</div>
         	<br>
        
-      		<input type="radio" class="private" name="private" value="Y"> >사용
+      		<input type="radio" class="private" name="private" value="Y"> >공개
       		<br>
-      		<input type="radio" class="private" name="private" value="N"> >미사용
+      		<input type="radio" class="private" name="private" value="N"> >미공개
        			
             </div>
             </div>
@@ -344,9 +363,9 @@ var comSubmit = new ComSubmit('registerboard').serialize();
             <div class="upload_use">업로드 여부</div>
         	<br>
        
-      		<input type="radio" class="upload" name="upload" value="Y"> >사용
+      		<input type="radio" class="upload" name="upload" value="Y"> 사용
       		<br>
-      		<input type="radio" class="upload" name="upload" value="N"> >미사용
+      		<input type="radio" class="upload" name="upload" value="N"> 미사용
        			
             </div>
             </div>
@@ -383,7 +402,7 @@ var comSubmit = new ComSubmit('registerboard').serialize();
           
         </div>
     </div>
-    </form>
+    
     
     </div>
     
@@ -393,7 +412,7 @@ var comSubmit = new ComSubmit('registerboard').serialize();
 
 <div class="reg_box" style="float:left">
 <div class="container">
-		<form name="registerboard" class="registerboard" method="post" action="<c:url value='/custompage/customwrite'/>" style="float:left" >
+		
 			<div class="col-11 border" style="width:1000;">
 			<fieldset>
 				<div>
@@ -424,7 +443,7 @@ var comSubmit = new ComSubmit('registerboard').serialize();
 				<!-- 게시판 유형 확인용 -->
 				<div class="type" style="width: 200px;">
 					<label for="typecheck">게시판 유형 : </label> 
-					<span class="type_check" id="type_check"></span>
+					<div class="type_check" id="type_check"></div>
 				</div>
 				<br>
 				
@@ -432,13 +451,11 @@ var comSubmit = new ComSubmit('registerboard').serialize();
 				<!-- 체크 값 가져오기 -->
 			
 				
-
-			</article>
-				
 			</div>
-		
-			<input type="submit" class="boardlist" name="boardlist" value="게시판 생성" style="float:center; color:blue" >
-			<input type="button" class="boardcancel" name="boardcancel" value="등록취소" style="float:center; color:blue" >
+			<span>
+			<input type="submit" class="boardlist" name="boardlist" value="생성" style="float:center; color:blue" >
+			<input type="button" class="boardcancel" name="boardcancel" value="취소" style="float:center; color:blue" >
+			</span>
 			</fieldset>
 			</div>
 			<!-- 업로드 옵션용 -->
@@ -453,22 +470,24 @@ var comSubmit = new ComSubmit('registerboard').serialize();
 			<input type="hidden" class="c" name="c">
 			<!-- 옵션 저장용 -->
 			<!-- 댓글 -->
-			<input type="hidden" class="isreply" name="isreply">
+			<input type="hidden" class="isreply" name="isreply" value="N">
 			<!-- 답글 -->
-			<input type="hidden" class="iscomment" name="iscomment">
+			<input type="hidden" class="iscomment" name="iscomment" value="N">
 			<!-- 비공개 -->
-			<input type="hidden" class="isprivate" name="isprivate">
+			<input type="hidden" class="isprivate" name="isprivate" value="N">
 			<!-- 업로드 -->
-			<input type="hidden" class="isupload" name="isupload">
+			<input type="hidden" class="isupload" name="isupload" value="N">
 			<!-- 업로드 개수 -->
-			<input type="hidden" class="maxupfile" name="maxupfile">
+			<input type="hidden" class="maxupfile" name="maxupfile" value="1">
 			<!-- 업로드 사이즈 -->
-			<input type="hidden" class="maxfilesize" name="maxfilesize">
-			</form>
+			<input type="hidden" class="maxfilesize" name="maxfilesize" value="100">
+		
 	
 			</div>
 		</div>
 			
+			</form>	
+			<input type="text" class="admincheck" name="admincheck">
 			
 
 </body>

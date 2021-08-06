@@ -1,11 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <%@ include file="../../inc/admin_top.jsp" %>
+
+
+<style>
+
+</style>
+
+<script type="text/javascript"
+	src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
+	
+<script type="text/javascript">
+$(function() {
+	
+	  
+	   if($('#confirm').val()==""){
+	      $('#writecalom').hide();
+	         
+	   }
+	   
+
+	
+$('#comment').keyup(function (e){
+    var content = $(this).val();       
+    if(content.length > 100) {
+    $(this).val($(this).val().substring(0, 100));
+    alert("입력은 100자까지만 가능합니다.");
+	event.preventDefault();
+    }
+    });
+    
+$('#showrite').click(function(){
+	$('#confirm').val("Y");
+	 $('#writecalom').show();
+	
+});    
+});
+
+</script>
+
 	<div class="card-header" style="font-size: 1.5em">
 		
 			<i class="fas fa-clipboard-list"></i>&nbsp;자유게시판
 		</div>
-	<div class="card mb-4" style="width: 90%; margin: 0 auto; margin-top: 50px">
+
 				
 				<table id="datatablesSimple">
 				<thead>
@@ -21,13 +62,24 @@
 				</thead>
 			
 			</table>
-				</div>
-	
+			
+		
 	
 		<div class="card mb-4" style="width: 90%; margin: 0 auto; margin-top: 50px">
+	
 		<div class="card-body">
-		<input type="button" class="btn btn-danger btn-sm" value="글 등록하기"></td>
-			
+		<input type="button" class="btn btn-danger btn-sm" id="showrite" value="글 등록하기">
+			<br>
+		<div class="writecalom" id="writecalom">
+			<form class="writecomment">
+			<pre>
+			<textarea rows="5" name="comment" id="comment" class="form-control"  autocomplete="off"
+			 wrap="hard" style="height:150px; width:400px;" 
+			 placeholder="내용을 입력하세요.&#13;&#10;입력하신 글은&#13;&#10;운영정책에 따라 삭제될 수도 있습니다."></textarea>
+			</pre>
+		</form>
+		</div>
+			<br>
 			
 			
 			<table id="datatablesSimple">
@@ -119,6 +171,7 @@
 					
 				</tbody>
 			</table>
+			<input type="hidden" id="confirm">
 		</div>
 	</div>
 

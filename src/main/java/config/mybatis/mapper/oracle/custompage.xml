@@ -14,7 +14,7 @@
 <select id="selectcategory" parameterType="registerVO" resultType="categoryVO">
 		select category_name from Category	
 		<if test='chk_info=="professor"'>
-			where category_code=1 or category_code=4
+			where category_code=4
 		</if>
 </select>
 	
@@ -68,6 +68,13 @@
 	<select id="adminfound" parameterType="String" resultType="String">
 		select auth_code from employee where emp_no=#{emp_no}
 	</select>
+	
+	<!-- 해당 강좌명의 이미 등록된 카테고리(게시판타입의) 정보가 있다면, alert으로 취소  -->
+	<select id="checkall" parameterType="customVO" resultType="int">
+		select count(*) from board 
+		where category_code=#{categorycode} and open_sub_code=#{opensubcode}
+	</select>
+	
 	
 	<!-- 별수 없이 카테고리 코드도 넣어줘야 겠네. -->
 	<select id="categorycode" parameterType="String" resultType="String">

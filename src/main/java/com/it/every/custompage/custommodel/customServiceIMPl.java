@@ -94,6 +94,12 @@ public class customServiceIMPl implements customService {
 		return dao.updateboard(vo);
 	}
 
+	@Override
+	public int checkall(customVO vo) {
+		// TODO Auto-generated method stub
+		return dao.checkall(vo);
+	}
+
 	
 
 	

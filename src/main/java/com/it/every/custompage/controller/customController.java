@@ -44,10 +44,15 @@ public class customController {
 		
 		String usertype= (String)session.getAttribute("usertype");
 		String deptname= (String)session.getAttribute("name");
+		
+		logger.info("섹션확인, type={}, name={}",usertype,deptname);
+		
 		vo.setUsertype(usertype);
 		vo.setProfname(deptname);
 		
 		List<customVO> list = service.customlist(vo);
+		
+		logger.info("정보전달, list={}",list);
 		
 		model.addAttribute("list",list);
 		
@@ -98,7 +103,15 @@ public class customController {
 		
 		
 		return subname;
+
+	}
+	
+	@ResponseBody
+	@RequestMapping("/checkadmin")
+	public boolean checkadmin(@RequestParam("type") String type, @RequestParam("opensub") String opensub) {
+		boolean result=true;
 		
+		return result;
 		
 	}
 	
@@ -138,7 +151,7 @@ public class customController {
 		 model.addAttribute("deptname", adminname);
 	}
 	  
-	  
+	
 	  logger.info("게시판 목록, 결과 category={}", category);
 	  logger.info("교수 선택 목록, 결과 prolist={}", prolist);
 	  if (deptname!=null) {
@@ -152,7 +165,6 @@ public class customController {
 	  }
 	  
 	  //게시판 등록
-
 	  @RequestMapping("/customwrite")
 	  public String boardRegister(@ModelAttribute customVO vo, 
 			  HttpSession session, Model model, 
@@ -161,9 +173,13 @@ public class customController {
 			  @RequestParam("c") String category
 			) 
 	  {
+		  logger.info("vo={}",vo);
 		  vo.setBdname(bdname);
 		  vo.setUsage('Y');
 		  vo.setOpensubcode(subcode);
+		  System.out.println(bdname);
+		  System.out.println(subcode);
+		  System.out.println(category);
 		  
 		  
 		  int categorycode=Integer.parseInt(service.categorycode(category));
@@ -182,25 +198,34 @@ public class customController {
 		  
 		  int result=service.insertboard(vo);
 		  logger.info("처리중, vo={}, result={}",vo,result);
-		  	String msg="실패", url="admin/custompage/custompage2";
+		  	String msg="실패", url="/custompage/custompage2";
 		  if (result!=1) {
 			  bool=false;
 		}else {
 			msg="등록성공";
-			
+			url ="/custompage/custompage2";
 		}
 		
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
 	
 		  
-		  return url;
+		  return "common/message";
 		  
 	  }
-	  //게시판 교체
+	  
+	  
+	  //게시판 정보 수정
+	  @ResponseBody
 	  @RequestMapping("/customchangeinput")
-	  public String changeboard(@ModelAttribute customVO vo) {
+	  public boolean changeboard(@ModelAttribute customVO vo) {
 		  int result=service.updateboard(vo);
 		  logger.info("결과 result={}",result);
-		  return "redirect:/custompage/custompagechange";
+		  Boolean bool= true;
+		  if (result!=1) {
+			bool=false;
+		}
+		  return bool;
 		  
 	  }
 }

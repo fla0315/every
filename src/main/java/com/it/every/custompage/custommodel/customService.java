@@ -27,6 +27,8 @@ public interface customService {
 	public List<DepartmentVO> adminsubjname();
 	public List<customVO> customlist(customVO vo);
 	public int deleteboard(String bd_name);
+	public int checkall(customVO vo);
+	
 	
 	public int updateboard(customVO vo);
 }

@@ -7,27 +7,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>강의평가</title>
+
 <script type="text/javascript"
    src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
 
 <script type="text/javascript">
    $(function() {
-      $('form[name=customchangeinput]').submit(function() {
-         event.preventDefault();
+      $('form[name=changeboard]').submit(function() {
          $.ajax({
-            type : "POST",
-            url : "<c:url value='/customchange/customchangeinput'/>",
+            type : "post",
+            url : '<c:url value='/custompage/customchangeinput'/>',
             data:$(this).serialize(),
-            success:function() {
-               self.close();
-               opener.parent.location.reload();
+            success:function(res) {
+            	if (res) {
+            		 alert("수정성공");
+                     self.close();
+                     opener.parent.location.reload();
+				}
+            		 
             },
-            error: function() {
-             
-               self.close();
-            }
-         })
+            error: function (xhr, status, error){
+				alert("error 발생!!" + error);
+			}
+         });
       });
    });
 </script>
@@ -36,8 +38,7 @@
 
 </head>
 <body>
-   <form name="changeboard" method="post"
-      action="<c:url value='/custompage/customchangeinput'/>">
+   <form name="changeboard" method="post">
 
       <table border="1"
          style="border-collapse: collapse; width: 80%; margin: 0 auto; text-align: center;">

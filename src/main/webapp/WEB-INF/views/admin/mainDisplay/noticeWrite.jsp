@@ -42,7 +42,7 @@ body {
 				<div class="mb-3">
 					<label for="content">내용</label>
 					<div id="summernote"></div>
-					<!-- <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea> -->
+					<!-- <textarea class="form-control" rows="5" name="content" id="content" placeholder=" 입력해 주세요" ></textarea> -->
 				</div>
 			</form>
 
