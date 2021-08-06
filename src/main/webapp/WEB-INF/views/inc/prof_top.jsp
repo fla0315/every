@@ -12,6 +12,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>EVERYHAKSA</title>
+        <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/images/graduation-hat.png">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
