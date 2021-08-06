@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import lombok.Getter;
 
 @Controller
-public class bootController {
-
+public class bootController { 
 	
 	@GetMapping("/inc/top")
 	public String student() {
