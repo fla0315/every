@@ -85,7 +85,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 		return count;
 	}
 
-
+/*
 	@Override
 	public int countPersonnel(RegistrationVO registrationVo) {
 		return studentRegistrationDao.countPersonnel(registrationVo);
@@ -96,7 +96,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	public int countCount(RegistrationVO registrationVo) {
 		return studentRegistrationDao.countCount(registrationVo);
 	}
-
+*/
 
 	@Override
 	public int insertAutoAttendance(AttendanceVO attendanceVo) {

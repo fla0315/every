@@ -60,7 +60,7 @@
 	
 	<!-- 개설교과과목 전체조회 + 검색 + 강의계획서 추가한 것 -->
 	<select id="OpenRegistraionSearch" resultType="map"  parameterType="RegistrationSearchVO">
-		select *
+		select opensub.*,sylla.*,subject.*, subjtype.*,prof.*,depart.*,subj_time.*,timetable.*,classroom.*,NVL(g.count,'0') as count
 		from open_subj opensub left join syllabus sylla 
 		on sylla.open_sub_code = opensub.open_sub_code
 		left join subject subject 
@@ -81,7 +81,7 @@
 		    (select open_sub_code, count(*) as count
 		    from registration
 		    group by open_sub_code) g
-on opensub.open_sub_code=g.open_sub_code
+		on opensub.open_sub_code=g.open_sub_code
 		where 1=1
 		    <if test='subjYear!=0'>and subj_year=#{subjYear} </if> 
 		    <if test='semester!=0'>and semester=#{semester}</if> 

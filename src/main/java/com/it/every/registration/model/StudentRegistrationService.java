@@ -31,8 +31,8 @@ public interface StudentRegistrationService {
 	int checkDuplicateCart(RegistrationCartVO registrationCartVo);
 
 	//총원 카운트
-	int countPersonnel(RegistrationVO registrationVo);
-	int countCount(RegistrationVO registrationVo);
+//	int countPersonnel(RegistrationVO registrationVo);
+	//int countCount(RegistrationVO registrationVo);
 	
 	int insertAutoAttendance (AttendanceVO attendanceVo); //수강신청하면 자동으로 출석부 등록
 	int insertAutoEvaluation (EvaluationVO evaluationVo); //수강신청하면 자동으로 강의 등록

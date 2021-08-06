@@ -153,19 +153,19 @@ public class RequestRegistrationController {
 		attendanceVo.setOpenSubCode(openSubCode);
 		evaluationVo.setSubCode(openSubCode);
 		
-		int personnel = studentRegistrationService.countPersonnel(registrationVo);
-		int countCount = studentRegistrationService.countCount(registrationVo);
-		System.out.println(personnel+"총원");
-		System.out.println(countCount+"현재 등록인원");
+		//int personnel = studentRegistrationService.countPersonnel(registrationVo);
+		//int countCount = studentRegistrationService.countCount(registrationVo);
+	//	System.out.println(personnel+"총원");
+		//System.out.println(countCount+"현재 등록인원");
 		
 		String msg =" " , url ="/registration/request_registration";
-	
+	/*
 		if(countCount>=personnel) {
 			  msg="정원초과하였습니다."; 
 			  url="/registration/request_registration"; 
 			  model.addAttribute("msg", msg); 
 			  model.addAttribute("url", url);
-		}else {
+		}else { */
 			int count = studentRegistrationService.checkDuplicate(registrationVo);
 			if(count > 0) {
 				//실패
@@ -194,7 +194,7 @@ public class RequestRegistrationController {
 				  model.addAttribute("url", url);
 				
 			}
-		}
+		//}
 		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("msg", msg);

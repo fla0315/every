@@ -78,7 +78,6 @@ $(function(){
 							success : function(data){
 								alert(data.msg);
 								
-								$('#MyregiInfo ').append();	
 								
 							},
 							error : function(e){
