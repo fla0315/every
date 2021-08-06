@@ -18,7 +18,7 @@
 			open('http://localhost:9091/every/tuition/tuitionPDF','chk',
 			 'width=1000,height=1000,left=0,top=0,location=yes,resizable=yes');	
 		});
-	}); */
+	}); */ 
 
 	$(function() {
 		
