@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.board.model.BoardDAO">
+	<!-- 개설교과목번호로 게시판코드 읽어오기 -->
+	<select id="checkBdCode" parameterType="String" resultType="int">
+		select bdCode from board
+		where open_sub_code = #{openSubCode}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

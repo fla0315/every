@@ -20,9 +20,9 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/professor/notice")
 @RequiredArgsConstructor
-public class NoticeController {
+public class ProfessorNoticeController {
 	private static final Logger logger
-	= LoggerFactory.getLogger(NoticeController.class);
+	= LoggerFactory.getLogger(ProfessorNoticeController.class);
 	
 	private final OpenSubjService openSubjService;
 	

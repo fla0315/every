@@ -7,6 +7,11 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
-	private final BoardDAO boardDAO;
+	private final BoardDAO boardDao;
+
+	@Override
+	public int checkBdCode(String openSubCode) {
+		return boardDao.checkBdCode(openSubCode);
+	}
 
 }
