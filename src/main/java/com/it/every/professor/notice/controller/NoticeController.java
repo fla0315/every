@@ -54,7 +54,9 @@ public class NoticeController {
 			model.addAttribute("osList", osList);
 		}
 		
-		
+		if(openSubCode!=null && !openSubCode.isEmpty()) {
+			
+		}
 	}
 }
 
