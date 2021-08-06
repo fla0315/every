@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String userid = (String) request.getSession().getAttribute("userid");
+		String userid = (String) request.getSession().getAttribute("user_id");
 		logger.info("preHandle 호출!, 세션 userid={}", userid);
 		
 		//컨트롤러 수행 이전에 먼저 수행되는 메서드
@@ -31,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			PrintWriter out = response.getWriter();
 			out.print("<script>alert('먼저 로그인하세요');");
 			out.print("location.href='" + request.getContextPath() 
-				+ "/reg/login';");
+				+ "/';");
 			out.print("</script>");
 			return false;	//컨트롤러를 수행하지 않음
 		}else {	//로그인 된 경우

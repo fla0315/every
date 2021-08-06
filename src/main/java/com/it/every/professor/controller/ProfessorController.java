@@ -44,7 +44,7 @@ public class ProfessorController {
 		String profNo = (String) session.getAttribute("no");
 		logger.info("교수님 메인 화면");
 		List<Map<String, Object>> oList = openSubjService.checkClassRoom(profNo);
-		logger.info("담당교과목 메인화면 리스트 oList={}", oList);
+		logger.info("담당교과목 메인화면 리스트 oList.size={}", oList.size());
 		model.addAttribute("oList", oList);
 	}
 	

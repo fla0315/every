@@ -26,6 +26,7 @@ import com.it.every.common.ConstUtil;
 import com.it.every.common.FileUploadUtil;
 import com.it.every.distributeAssign.model.DistributeAssignService;
 import com.it.every.distributeAssign.model.DistributeAssignVO;
+import com.it.every.evaluation.model.EvaluationService;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.registration.model.StudentRegistrationService;
@@ -44,6 +45,7 @@ public class DistributeAssignController {
 	private final AssignmentService assignmentService;
 	private final StudentRegistrationService studentRegistrationService;
 	private final FileUploadUtil fileUploadUtil;
+	private final EvaluationService evaluationService;
 	
 	@GetMapping("/distributeAssignReg")
 	public void distributeAssignReg(HttpSession session, Model model) {
@@ -129,9 +131,14 @@ public class DistributeAssignController {
 		int cnt = assignmentService.gradeForAssign(vo);
 		if(cnt>0) {
 			logger.info("점수 반영 성공");
+			assignmentService.applyAssignEvaluation(vo);
+			Map<String, Object> map = new HashMap<>();
+			map.put("STU_NO", vo.getStuNo());
+			map.put("SUB_CODE", vo.getOpenSubCode());
+			evaluationService.totalGrade(map);
 		}
 		
-		return "/professor/assign/assignmentCheck?openSubCode="+vo.getOpenSubCode()+"&assignNo="+vo.getAssignNo();
+		return "/professor/assign/assignmentCheck";
 	}
 	
 	@RequestMapping("/download")

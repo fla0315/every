@@ -24,7 +24,7 @@
 	
 	<insert id="insertSubjEvalStudent" parameterType="SubjEvalVO">
 		insert into subj_eval(open_sub_code,stu_no,classification,q1,q2,q3,q4,q5,content)
-		values(#{openSubCode}, #{stuNo}, #{classification}, #{q1}, #{q2}, #{q3}, #{q4}, #{q5}, #{content})
+		values(#{openSubCode}, #{stuNo}, '1', #{q1}, #{q2}, #{q3}, #{q4}, #{q5}, #{content})
 	</insert>
 	
 	
@@ -50,7 +50,7 @@
 	<select id="searchMyGrade" parameterType="String" resultType="map">
 		select * from
 		evaluation eval left join registration regi
-		on eval.sub_code = regi.open_sub_code 
+		on eval.sub_code = regi.open_sub_code and eval.stu_no = regi.stu_no
 		left join subj_eval subEval 
 		on subEval.open_sub_code = regi.open_sub_code
 		join open_subj opensub 

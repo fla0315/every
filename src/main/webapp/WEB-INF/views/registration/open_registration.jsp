@@ -180,7 +180,7 @@
 								class="ctl_select" tabindex="1" title="전공">
 									<option value="0">ALL</option>
 								<c:forEach var="fMap" items="${facultyMap}">
-									<option value="${fMap['FACULTY_NAME']}">${fMap['FACULTY_NAME']}</option>
+									<option value="${fMap['FACULTY_NO']}">${fMap['DEPT_NAME']}</option>
 								</c:forEach>
 							</select>
 						</td>

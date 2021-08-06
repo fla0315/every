@@ -22,6 +22,10 @@ body {
 				alert('개설교과목 번호를 선택하세요!');
 			}
 		});
+		
+		$('#btCreate').click(function(){
+			location.href="<c:url value='/custompage/custom'/>";
+		});
 	});
 </script>
 <article>
@@ -45,6 +49,7 @@ body {
 					</select>
 					<input type="button" id="btCheck" value="조회">
 			<div class="text-end">
+				<button type="button" class="btn btn-sm btn-primary" id="btCreate">개설</button>
 				<button type="button" class="btn btn-sm btn-primary" id="btWrite">등록</button>
 			</div>
 		</div>

@@ -26,4 +26,9 @@ public class AssignmentServiceImple implements AssignmentService {
 	public int gradeForAssign(AssignmentVO vo) {
 		return assignmentDao.gradeForAssign(vo);
 	}
+
+	@Override
+	public int applyAssignEvaluation(AssignmentVO vo) {
+		return assignmentDao.applyAssignEvaluation(vo);
+	}
 }

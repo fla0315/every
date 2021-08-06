@@ -31,17 +31,9 @@
 		where sub_code=#{openSubCode} and stu_no=#{stuNo}
 	</update>
 	
-<!-- 과제 점수가 여러개임 해결책 찾기 	
-	<update id="updateAssign" parameterType="assignmentVo">
+	<update id="totalGrade" parameterType="map">
 		update evaluation
-		set assignment = #{assignPoint}
-		where sub_code=#{openSubCode} and stu_no = #{stuNo}
-	</update> 
--->
-	
-	<update id="totalGrade" parameterType="attendanceVo">
-		update evaluation
-		set total_grade=#{totalGrade}
-		where sub_code=#{subCode} and stu_no=#{stuNo}
+		set total_grade = (select trunc(sum(nvl(midterm,0)+nvl(finals,0)+nvl(assignment,0)+nvl(attendance,0))/4) from evaluation where sub_code=#{SUB_CODE} and stu_no=#{STU_NO} group by stu_no, sub_code)
+		where sub_code=#{SUB_CODE} and stu_no=#{STU_NO}
 	</update>
 </mapper>

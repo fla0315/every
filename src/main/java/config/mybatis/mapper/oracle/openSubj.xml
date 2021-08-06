@@ -48,31 +48,40 @@
 	
 	
 	
-	<!-- 개설교과과목 전체조회 + 검색 + 강의계획서 추가한 것 -->
-	<select id="OpenRegistraionSearch" resultType="map"  parameterType="RegistrationSearchVO">
-		select sj.type, st.* ,prof.prof_name ,os.* ,g.* ,s.*
-		from 
-		subject st join subj_type sj
-		on st.type_code= sj.type_code
-		join professor prof
-		on prof.prof_no = st.prof_no
-		join open_subj os
-		on os.subj_code = st.subj_code
-		join
-		    (select open_sub_code, count(*) as count
-		    from registration
-		    group by open_sub_code) g
-		on os.open_sub_code=g.open_sub_code
-		join syllabus s
-		on s.open_sub_code=os.open_sub_code
-		where 1=1
-		    <if test='subjYear!=0'>and subj_year=#{subjYear} </if> 
-		    <if test='semester!=0'>and semester=#{semester}</if> 
-			<if test='subjName!="" and subjName!=null'>and subj_name like '%' || #{subjName} || '%'</if> 
-			<if test='grade!=0'>and grade like '%' || #{grade} || '%'</if> 
-			<if test='type!=0'>and st.type_code = #{type} </if>
-			<if test='facultyName!="0"'>and st.faculty_name like '%' || #{facultyName} || '%'</if> 
-	</select>
+   <!-- 개설교과과목 전체조회 + 검색 + 강의계획서 추가한 것 -->
+   <select id="OpenRegistraionSearch" resultType="map"  parameterType="RegistrationSearchVO">
+      select subject.* , subjtype.* , prof.prof_name ,sylla.*, classroom.*, g.*
+      from registration regi join open_subj opensub
+      on regi.open_sub_code = opensub.open_sub_code
+      join syllabus sylla 
+      on sylla.open_sub_code = opensub.open_sub_code
+      join subject subject 
+      on subject.subj_code = opensub.subj_code
+      join  subj_type subjtype 
+      on subjtype.type_code =subject.type_code
+      join professor prof 
+      on prof.prof_no = subject.prof_no
+      join department depart
+      on depart.dept_no = prof.dept_no
+      join subj_time subj_time
+      on subj_time.open_sub_code = opensub.open_sub_code
+      join timetable timetable
+      on timetable.timetable_code = subj_time.timetable_code
+      join classroom classroom
+      on classroom.classroom_code = subj_time.classroom_code
+      join
+          (select open_sub_code, count(*) as count
+          from registration
+          group by open_sub_code) g
+      on opensub.open_sub_code=g.open_sub_code
+      where 1=1
+          <if test='subjYear!=0'>and subj_year=#{subjYear} </if> 
+          <if test='semester!=0'>and semester=#{semester}</if> 
+         <if test='subjName!="" and subjName!=null'>and subj_name like '%' || #{subjName} || '%'</if> 
+         <if test='grade!=0'>and grade like '%' || #{grade} || '%'</if> 
+         <if test='type!=0'>and subject.type_code = #{type} </if>
+         <if test='facultyName!="0"'>and depart.DEPT_NAME like '%' || #{deptName} || '%'</if> 
+   </select>
 	
 	<!-- 개설교과과목 전체조회 + 검색 백업본 -->
 	<!-- <select id="OpenRegistraionSearch" resultType="map"  parameterType="RegistrationSearchVO">
@@ -104,10 +113,10 @@
 
 
 	<!-- 학과 찾는거 -->
-	<select id="selectFacultyS" resultType="map">
-		select distinct faculty_name from subject
-	</select>
-	
+   <select id="selectFacultyS" resultType="map">
+      select faculty_no, dept_name from department
+   </select>
+   
 	<!-- 이수구분 찾는거 -->
 	<select id="selectTypeS" resultType="map">
 		select * from subj_type

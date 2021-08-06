@@ -1,5 +1,6 @@
 package com.it.every.evaluation.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,10 @@ public class AttendanceController {
 		String msg="등록/수정 실패!", url="/professor/attendance?openSubCode="+vo.getOpenSubCode();
 		if(cnt>0) {
 			evaluationService.updateAttend(vo);
+			Map<String, Object> map = new HashMap<>();
+			map.put("STU_NO", vo.getStuNo());
+			map.put("SUB_CODE", vo.getOpenSubCode());
+			evaluationService.totalGrade(map);
 			return "redirect:/professor/attendance?openSubCode="+vo.getOpenSubCode();
 		}
 		
