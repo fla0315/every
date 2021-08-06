@@ -34,8 +34,7 @@ $('#comment').keyup(function (e){
     });
     
 $('#showrite').click(function(){
-	$('#confirm').val("Y");
-	 $('#writecalom').show();
+	
 	
 });    
 });
