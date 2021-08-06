@@ -10,7 +10,7 @@ import com.it.every.register.model.registerVO;
 import com.it.every.subjType.model.SubjTypeVO;
 import com.it.every.subject.model.SubjectVO;
 
-public interface boardService {
+public interface BoardService {
 
 
 	public List<categoryVO> selectcategory(registerVO vo);

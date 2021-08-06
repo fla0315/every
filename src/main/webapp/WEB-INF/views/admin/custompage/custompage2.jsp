@@ -45,6 +45,24 @@
 $(function(){
 	
 	//유효성검사
+	 $('.boardlist').click(function(){
+      
+       if($('.a').val()==""){
+            alert('이수구분을 선택해 주세요');
+            event.preventDefault();               
+      }else if ($('.b').val()=="") {
+         alert('강좌명을 선택해 주세요.')
+         event.preventDefault();   
+      }else if ($('.c').val()=="") {
+    	  alert('게시판 유형을 선택해 주세요.')
+    	  event.preventDefault();
+      }else if ($('.admincheck').val()=="Y") {
+    	  alert('해당 강좌에 선택하신 유형의 게시판이 개설되어 있습니다.' )
+    	  event.preventDefault();
+	}
+	 });
+	
+	
 	//선택할 때마다 하위 항목이 하나씩 하나씩 늘어나도록 설정(관리자와 차이를 두려면 어쩔 수가 없다.)
 	//학과선택	
 	$('.deptname').change(function(){
@@ -56,6 +74,7 @@ $(function(){
 		}
 		});
 	
+	
 	 //이수구분 선택 및 강좌명 선택
 	  $('.subj_type').change(function(){
 		  var type= $(".subj_type:checked").val();
@@ -64,9 +83,11 @@ $(function(){
 			  $("#subjname").css("visibility","visible");
 			  $(".subj_type_check").html(type).css("color", "red");
 			  $(".a").val(type);
+			  $(".checka").val(type);
 		}else{
 			$("#subjname").css("visibility","hidden");
 		}
+		  
 		  
 		  $.ajax({
 				url:"<c:url value='/custompage/typecheck'/>",
@@ -91,17 +112,41 @@ $(function(){
 							}else{
 								$("#boardtype").css("visibility","hidden");
 							}
+							  
+							  var type= $(".category:checked").val();
+							  var opensub=$(".b2").val();
+						   //여기서 해당 개설교과코드의 과목이 이미 생성되었는지 확인한다. 
+						    $.ajax({
+								url:"<c:url value='/custompage/checkadmin'/>",
+								type:"post",
+								async: false,
+								data:{"type":type,"opensub":opensub},			
+								success:function(res){
+									if (res) {
+										$(".admincheck").val("Y");
+									}else {
+										$(".admincheck").val("N");
+									}	
+								},
+								error:function(xhr, status, error){
+									
+								}
+						});
 							 
 							});
 					
 					}
 				},
 				error:function(xhr, status, error){
-					alert("error 발생!!" + error);
+					
 				}
 			});
+		  
+		  
 	
 		});
+	 
+	
 
 	 //게시판 타입
 	  $('.category').change(function(){
@@ -123,15 +168,14 @@ $(function(){
 				data:{"type":type,"opensub":opensub},			
 				success:function(res){
 					if (res) {
-						$("#admincheck").val("Y");
+						$(".admincheck").val("Y");
 					}else {
-						$("#admincheck").val("N");
+						$(".admincheck").val("N");
 					}	
 				},
 				error:function(xhr, status, error){
 					alert("error 발생!!" + error);
 				}
-			}
 		});
 		  
 		});
@@ -215,7 +259,7 @@ $('form[name=registerboard]').submit(function(){
 	        		  self.close();
 	        		  opener.parent.location.reload();
 	           }, error: function (xhr, status, error){
-					alert("error 발생!!!" + error);
+					alert("error 발생!!" + error);
 				}
 		   });
 
@@ -483,7 +527,7 @@ $('form[name=registerboard]').submit(function(){
 		</div>
 			
 			</form>	
-			<input type="text" class="admincheck" name="admincheck">
+			<input type="hidden" class="admincheck" name="admincheck">
 			
 
 </body>

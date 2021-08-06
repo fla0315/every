@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.it.every.board.model.boardService;
+import com.it.every.board.model.BoardService;
 import com.it.every.board.model.customVO;
 import com.it.every.category.model.categoryVO;
+
 import com.it.every.department.model.DepartmentVO;
 import com.it.every.professor.model.ProfessorVO;
 import com.it.every.register.Controller.registerController;
@@ -33,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class customController {
 	private static final Logger logger = LoggerFactory.getLogger(registerController.class);
-	private final boardService service;
+	private final BoardService service;
 
 	@RequestMapping("/custom")
 	public String custompage(HttpSession session, Model model, @ModelAttribute customVO vo) {

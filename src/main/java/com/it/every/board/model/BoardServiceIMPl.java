@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class boardServiceIMPl implements boardService {
+public class BoardServiceIMPl implements BoardService {
 
 	private final BoardDAO dao;
 
