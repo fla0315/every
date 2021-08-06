@@ -1,9 +1,8 @@
 package com.it.every.admin.student.model;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -47,6 +46,16 @@ public class StudentManageServiceImpl implements StudentManageService{
 	@Override
 	public List<StudentManageVO> selectBeingInSchool() {
 		return studentDao.selectBeingInSchool();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectGrade() {
+		return studentDao.selectGrade();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMajorGrade(String major) {
+		return studentDao.selectMajorGrade(major);
 	}
 	
 

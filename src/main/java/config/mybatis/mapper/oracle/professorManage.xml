@@ -8,9 +8,9 @@
 		<selectKey resultType="string" keyProperty="profNo" order="BEFORE">
 			select 'P' || to_char(professor_seq.nextval, 'FM00000') from dual
 		</selectKey>
-		insert into professor(prof_no, position_no, dept_no, prof_name, prof_id,
+		insert into professor(prof_no, position_no, dept_no, prof_name,
 			prof_pwd, prof_ph, prof_email, prof_start_date, prof_end_date)
-		values(#{profNo}, #{positionNo}, #{deptNo}, #{profName}, #{profNo}, 
+		values(#{profNo}, #{positionNo}, #{deptNo}, #{profName}, 
 			#{profPwd}, #{profPh}, #{profEmail}, #{profStartDate}, #{profEndDate})
 	</insert>
 
@@ -39,6 +39,26 @@
 	<delete id="deleteProfessor" parameterType="string">
 		delete from professor where prof_no=#{profNo}
 	</delete>
+	
+	<select id="selectPosition" resultType="HashMap">
+		select pp.position_name position, count(pp.position_name) count
+		from professor p join prof_position pp
+		on p.position_no = pp.position_no
+		join department d
+		on p.dept_no = d.dept_no
+		where d.dept_name='경영학과'
+		group by pp.position_name
+	</select>
+	
+	<select id="selectMajorPosition" parameterType="String" resultType="HashMap">
+		select pp.position_name position, count(pp.position_name) count
+		from professor p join prof_position pp
+		on p.position_no = pp.position_no
+		join department d
+		on p.dept_no = d.dept_no
+		where d.dept_name=#{deptName}
+		group by pp.position_name
+	</select>
 	
 	
 </mapper>

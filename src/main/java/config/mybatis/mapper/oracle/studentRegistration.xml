@@ -31,7 +31,7 @@
 	<!-- 수강신청  -->
 	<insert id="insertMyRegistarion" parameterType="registrationVo">
 		insert into registration(open_sub_code,stu_no,classification)
-		values(#{openSubCode},#{stuNo},'y')
+		values(#{openSubCode},#{stuNo},'Y')
 	</insert>
 	
 	<!-- 수강신청 취소 -->
@@ -140,8 +140,27 @@
 		where os.open_sub_code=#{openSubCode}
 	</select>
 	
+	<!--수강신청을 하면 자동으로 들어가는 출석부 -->
+	<insert id="insertAutoAttendance" parameterType="AttendanceVO">
+		insert into attendance (open_sub_code,stu_no,classification)
+		values(#{openSubCode},#{stuNo},'Y')
+	</insert>
+	<!--수강신청을 하면 자동으로 들어가는 성적 -->
+	<insert id="insertAutoEvaluation" parameterType="EvaluationVO">
+		insert into evaluation (sub_code,stu_no,classification)
+		values (#{subCode},#{stuNo},'Y')
+	</insert>
 	
+	<!-- 출석부 자동으로 삭제 -->
+	<delete id="deleteAutoAttendance" parameterType="AttendanceVO">
+		delete from attendance
+		where open_sub_code=#{openSubCode} and stu_no=#{stuNo}
+	</delete>
 	
-	
+	<!-- 강의 자동으로 삭제 -->
+	<delete id="deleteAutoEvaluation" parameterType="EvaluationVO">
+		delete from evaluation
+		where sub_code=#{subCode} and stu_no=#{stuNo}
+	</delete>
 	
 </mapper>

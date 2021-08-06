@@ -22,7 +22,7 @@
               subtitle: '(등록금 납부금액 상위 5개 학과)'
             },
             vAxis: {format: 'decimal'},
-            colors: ['#4BC0C0']
+            colors: ['#AAAAFF']
           };
 
     var chart1 = new google.charts.Bar(document.getElementById('columnchart_material'));
@@ -88,7 +88,7 @@
 		<div class="col-xl-6" style="width: 550px; float: left; margin-left: 20px">
 			<div class="card mb-4">
 				<div class="card-header">
-					<i class="fas fa-chart-bar me-1" style="font-size: 1.3em"></i> 전체 등록금 학부별 비중
+					<i class="fas fa-chart-bar me-1" style="font-size: 1.3em"></i> 납부 등록금 학부별 비중
 				</div>
 				<div id="donutchart"></div>
 			</div>

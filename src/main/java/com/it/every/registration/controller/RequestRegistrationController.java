@@ -12,12 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.every.attendance.model.AttendanceVO;
 import com.it.every.common.RegistrationSearchVO;
+import com.it.every.evaluation.model.EvaluationVO;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.registration.model.RegistrationVO;
@@ -39,7 +40,7 @@ public class RequestRegistrationController {
 	
 	@RequestMapping("/request_registration")
 	@ResponseBody
-	public List<OpenSubjVO> open_registration(@ModelAttribute RegistrationSearchVO regiSearchVo,
+	public List<OpenSubjVO> open_registration(@ModelAttribute RegistrationSearchVO regiSearchVo, @ModelAttribute RegistrationVO registrationVo,
 			HttpSession session, Model model) {
 
 		logger.info("개설교과과정페이지");
@@ -48,7 +49,6 @@ public class RequestRegistrationController {
 		List<OpenSubjVO> list = openSubjService.OpenRegistraionSearch(regiSearchVo);
 		System.out.println(list);
 		logger.info("개설교과과정페이지 전체 ,list.size()={}", list.size());
-
 		model.addAttribute("list", list);
 		
 		return list;
@@ -94,12 +94,15 @@ public class RequestRegistrationController {
 	//장바구니에서 수강신청
 	@RequestMapping("/request_registrationCartInsert")
 	@ResponseBody
-	public String myregistrationCartInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo, @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode,Model model) {
+	public Map<String, String>  myregistrationCartInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo ,  @ModelAttribute RegistrationCartVO registrationCartVo ,@ModelAttribute AttendanceVO attendanceVo , @ModelAttribute EvaluationVO evaluationVo,@RequestParam String openSubCode,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		registrationVo.setStuNo(stuNo);
 		registrationCartVo.setStuNo(stuNo);
+		attendanceVo.setStuNo(stuNo);
+		evaluationVo.setStuNo(stuNo);
+		
 		
 		//String userid ="fla0315";
 		logger.info("장바구니에서 수강신청페이지 페이지 vo={} ",registrationVo);
@@ -111,11 +114,15 @@ public class RequestRegistrationController {
 		for (int i = 0; i < codeArr.length; i++) {
 			System.out.println(codeArr[i]);
 			registrationVo.setOpenSubCode(codeArr[i]);
+			attendanceVo.setOpenSubCode(codeArr[i]);
+			evaluationVo.setSubCode(codeArr[i]);
 			
 			int cnt = studentRegistrationService.insertMyRegistarion(registrationVo);
 			if(cnt>0) {
 				registrationCartVo.setOpenSubCode(codeArr[i]);
 				cnt = studentRegistrationService.deleteCart(registrationCartVo);
+				 cnt =  studentRegistrationService.insertAutoAttendance(attendanceVo);
+				  cnt =  studentRegistrationService.insertAutoEvaluation(evaluationVo);
 				  msg="수강신청완료!!!."; 
 				  url="/registration/request_registration"; 
 			  }else{
@@ -125,35 +132,40 @@ public class RequestRegistrationController {
 			model.addAttribute("msg", msg); 
 			model.addAttribute("url", url);
 		}
-		
-			return msg;
+		Map<String, String> list = new HashMap<String, String>();
+		list.put("msg", msg);
+		return list;
 	}
 	
 	
 	//개설과목에서 수강신청
 	@RequestMapping("/request_registrationInsert")
 	@ResponseBody
-	public Map<String, String> myregistrationInsert(HttpSession session,@ModelAttribute RegistrationVO registrationVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode ,Model model) {
+	public Map<String, String> myregistrationInsert(HttpSession session, @ModelAttribute RegistrationVO registrationVo ,@ModelAttribute AttendanceVO attendanceVo , @ModelAttribute EvaluationVO evaluationVo ,@ModelAttribute RegistrationSearchVO regiSearchVo , @ModelAttribute RegistrationCartVO registrationCartVo ,@RequestParam String openSubCode ,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		registrationVo.setStuNo(stuNo);
 		registrationCartVo.setStuNo(stuNo);
 		registrationVo.setOpenSubCode(openSubCode);
+		attendanceVo.setStuNo(stuNo);
+		evaluationVo.setStuNo(stuNo);
+		attendanceVo.setOpenSubCode(openSubCode);
+		evaluationVo.setSubCode(openSubCode);
 		
-		int personnel = studentRegistrationService.countPersonnel(registrationVo);
-		int countCount = studentRegistrationService.countCount(registrationVo);
-		System.out.println(personnel+"총원");
-		System.out.println(countCount+"현재 등록인원");
+		//int personnel = studentRegistrationService.countPersonnel(registrationVo);
+		//int countCount = studentRegistrationService.countCount(registrationVo);
+	//	System.out.println(personnel+"총원");
+		//System.out.println(countCount+"현재 등록인원");
 		
 		String msg =" " , url ="/registration/request_registration";
-	
+	/*
 		if(countCount>=personnel) {
 			  msg="정원초과하였습니다."; 
 			  url="/registration/request_registration"; 
 			  model.addAttribute("msg", msg); 
 			  model.addAttribute("url", url);
-		}else {
+		}else { */
 			int count = studentRegistrationService.checkDuplicate(registrationVo);
 			if(count > 0) {
 				//실패
@@ -169,8 +181,11 @@ public class RequestRegistrationController {
 				  
 				  if(cnt>0){ 
 					  cnt = studentRegistrationService.deleteCart(registrationCartVo);
+					  cnt =  studentRegistrationService.insertAutoAttendance(attendanceVo);
+					  cnt =  studentRegistrationService.insertAutoEvaluation(evaluationVo);
 					  msg="수강신청완료!."; 
 					  url="/registration/request_registration"; 
+					  
 				  }else{
 					  msg="수강신청실패."; 
 					  url="/registration/request_registration"; 
@@ -179,7 +194,8 @@ public class RequestRegistrationController {
 				  model.addAttribute("url", url);
 				
 			}
-		}
+		//}
+		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("msg", msg);
 		return list;
@@ -240,19 +256,25 @@ public class RequestRegistrationController {
 	*/
 	
 	
+	//수강취소
 	@RequestMapping("/request_registrationDelete")
-	public String myregistrationDelete(HttpSession session,@ModelAttribute RegistrationVO registrationVo  ,Model model) {
+	public String myregistrationDelete(HttpSession session,@ModelAttribute RegistrationVO registrationVo ,@RequestParam String openSubCode,@ModelAttribute AttendanceVO attendanceVo , @ModelAttribute EvaluationVO evaluationVo  ,Model model) {
 		
 		String userid = (String)session.getAttribute("user_id");
 		String stuNo = (String)session.getAttribute("no");
 		registrationVo.setStuNo(stuNo);
-		//String userid ="fla0315";
-		logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
+		attendanceVo.setStuNo(stuNo);
+		evaluationVo.setStuNo(stuNo);
+		attendanceVo.setOpenSubCode(openSubCode);
+		evaluationVo.setSubCode(openSubCode);
 		
-			int cnt = studentRegistrationService.deleteMyRegistarion(registrationVo);
+		logger.info("수강신청페이지 페이지 vo={} ",registrationVo);
+		int cnt =studentRegistrationService.deleteAutoAttendance(attendanceVo);
+			cnt = studentRegistrationService.deleteAutoEvaluation(evaluationVo);
 			
 			String msg ="수상취소 완료!" , url ="/registration/request_registration";
 			if(cnt>0) {
+				cnt = studentRegistrationService.deleteMyRegistarion(registrationVo);
 				msg="수강취소완료.";
 				url="/registration/request_registration";
 			}else {

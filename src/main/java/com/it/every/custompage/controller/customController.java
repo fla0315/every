@@ -165,6 +165,8 @@ public class customController {
 	  }
 	  
 	  //게시판 등록
+	
+	  
 	  @RequestMapping("/customwrite")
 	  public String boardRegister(@ModelAttribute customVO vo, 
 			  HttpSession session, Model model, 

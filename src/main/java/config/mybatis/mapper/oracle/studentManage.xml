@@ -48,6 +48,38 @@
 		order by s.major, s.stu_no desc
 	</select>
 	
+	<select id="selectGrade" resultType="HashMap">
+		select g.grade grade, count(g.grade) count
+		from
+		(select stu_no, name,
+		    case when semester = '' or semester = '1' then '1학년'
+		         when semester = '2' or semester = '3' then '2학년'
+		         when semester = '4' or semester = '5' then '3학년'
+		         when semester = '6' or semester = '7' then '4학년'
+		         else '재학생아님'
+		    end as grade
+		from student
+		where major = '경영학과' and state = 1) g
+		group by g.grade
+		order by g.grade
+	</select>
+	
+	<select id="selectMajorGrade" parameterType="String" resultType="HashMap">
+		select g.grade grade, count(g.grade) count
+		from
+		(select stu_no, name,
+		    case when semester = '' or semester = '1' then '1학년'
+		         when semester = '2' or semester = '3' then '2학년'
+		         when semester = '4' or semester = '5' then '3학년'
+		         when semester = '6' or semester = '7' then '4학년'
+		         else '재학생아님'
+		    end as grade
+		from student
+		where major = #{major} and state = 1) g
+		group by g.grade
+		order by g.grade
+	</select>
+	
 </mapper>
 
 

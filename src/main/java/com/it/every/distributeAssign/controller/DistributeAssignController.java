@@ -1,9 +1,11 @@
 package com.it.every.distributeAssign.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,11 +18,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.it.every.assignment.model.AssignmentService;
 import com.it.every.assignment.model.AssignmentVO;
+import com.it.every.common.ConstUtil;
+import com.it.every.common.FileUploadUtil;
 import com.it.every.distributeAssign.model.DistributeAssignService;
 import com.it.every.distributeAssign.model.DistributeAssignVO;
+import com.it.every.evaluation.model.EvaluationService;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
 import com.it.every.registration.model.StudentRegistrationService;
@@ -33,10 +39,13 @@ import lombok.RequiredArgsConstructor;
 public class DistributeAssignController {
 	private static final Logger logger
 		= LoggerFactory.getLogger(DistributeAssignController.class);
+	
 	private final DistributeAssignService distributeAssignService;
 	private final OpenSubjService openSubjService;
 	private final AssignmentService assignmentService;
 	private final StudentRegistrationService studentRegistrationService;
+	private final FileUploadUtil fileUploadUtil;
+	private final EvaluationService evaluationService;
 	
 	@GetMapping("/distributeAssignReg")
 	public void distributeAssignReg(HttpSession session, Model model) {
@@ -122,8 +131,28 @@ public class DistributeAssignController {
 		int cnt = assignmentService.gradeForAssign(vo);
 		if(cnt>0) {
 			logger.info("점수 반영 성공");
+			assignmentService.applyAssignEvaluation(vo);
+			Map<String, Object> map = new HashMap<>();
+			map.put("STU_NO", vo.getStuNo());
+			map.put("SUB_CODE", vo.getOpenSubCode());
+			evaluationService.totalGrade(map);
 		}
 		
-		return "/professor/assign/assignmentCheck?openSubCode="+vo.getOpenSubCode()+"&assignNo="+vo.getAssignNo();
+		return "/professor/assign/assignmentCheck";
+	}
+	
+	@RequestMapping("/download")
+	public ModelAndView download(@ModelAttribute AssignmentVO vo, HttpServletRequest request) {
+		logger.info("과제 다운로드 처리, 파라미터 vo={}", vo);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		String uploadPath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_ASSIGNMENT_FLAG);
+		File file = new File(uploadPath, vo.getFileName());
+		map.put("file", file);
+		map.put("originalFileName", vo.getOriginalFileName());
+		
+		ModelAndView mav = new ModelAndView("AssigndownloadView", map);
+		return mav;
 	}
 }

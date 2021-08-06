@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.it.every.attendance.model.AttendanceVO;
 import com.it.every.common.RegistrationSearchVO;
+import com.it.every.evaluation.model.EvaluationVO;
 import com.it.every.registrationCart.model.RegistrationCartVO;
 
 @Mapper
@@ -28,9 +30,13 @@ public interface StudentRegistrationDAO {
 	int checkDuplicateCart(RegistrationCartVO registrationCartVo);
 	
 	//총원 카운트
-	int countPersonnel(RegistrationVO registrationVo);
-	int countCount(RegistrationVO registrationVo);
+	//int countPersonnel(RegistrationVO registrationVo);
+	//int countCount(RegistrationVO registrationVo);
 	
+	int insertAutoAttendance (AttendanceVO attendanceVo); //수강신청하면 자동으로 출석부 등록
+	int insertAutoEvaluation (EvaluationVO evaluationVo); //수강신청하면 자동으로 강의 등록
+	int deleteAutoAttendance (AttendanceVO attendanceVo); //출석부 자동 삭제
+	int deleteAutoEvaluation (EvaluationVO evaluationVo); //강의 자동삭제
 	
 	
 	

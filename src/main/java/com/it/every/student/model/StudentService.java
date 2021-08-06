@@ -6,7 +6,6 @@ import java.util.Map;
 import com.it.every.assignment.model.AssignmentVO;
 import com.it.every.common.RegistrationSearchVO;
 import com.it.every.distributeAssign.model.DistributeAssignVO;
-import com.it.every.professor.model.ProfessorVO;
 import com.it.every.scholarship.model.ScholarshipVO;
 import com.it.every.tuition.model.TuitionVO;
 

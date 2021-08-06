@@ -7,7 +7,7 @@ $(function(){
 	var num = 0;
 	$('#btGrade').click(function(){
 		$(".evalFlag span").each(function(idx,item){
-			if($(this).text()=='N'){
+			if($(this).text()=='[강의평가 미완료]'){
 				num++
 			};
 		});
@@ -24,7 +24,7 @@ $(function(){
 
 
 <div class="container-fluid px-4" style="background-color: white;">
-	<h4 class="mt-4" style="background-color: white;">성적조회</h4>
+	<h4 class="mt-4" style="background-color: white;">강의평가</h4>
 	<br>
 
 	<div class="card mb-4">

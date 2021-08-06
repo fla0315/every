@@ -20,20 +20,20 @@ $(function(){
 		var semester=$('#semester').val(); //학기
 		var grade=$('#grade').val(); //학년
 		var type=$('#type').val(); //이수구분
-		var facultyName=$('#facultyName').val(); //학과
+		var deptName=$('#deptName').val(); //학과
 		var subjName=$('#subjName').val(); //과목명
 		
 		console.log(subjYear);
 		console.log(semester);
 		console.log(grade);
 		console.log(type);
-		console.log(facultyName);
+		console.log(deptName);
 		console.log(subjName);
 		
 		$.ajax({
 			url:"<c:url value='/registration/open_registration'/>",
 			data:{
-				"facultyName":facultyName, //위에서 만들어준거
+				"deptName":deptName, //위에서 만들어준거
 				"subjName":subjName,
 				"type":type,
 				"grade":grade,
@@ -55,14 +55,13 @@ $(function(){
 					str+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmRegistration' method='post' action='<c:url value='/registration/request_registrationInsert'/>'><button type='button' name='openSubCode' class='buttons' value='"+item.OPEN_SUB_CODE+"'>수강신청</button></form> </td>"; //장바구니
 						str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.SEMESTER+"학기"+"</td>"; //학기
 						str+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SUBJ_NAME+"</td>"; //과목명
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.FACULTY_NAME+"</td>"; //학부(과)
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.DEPT_NAME+"</td>"; //학부(과)
 						str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.GRADE+"학년"+"</td>";  //학년
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>" +item.TYPE+"</td>"; //이수구분
 						str+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.CREDIT+"학점"+"</td>"; //학점
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.COUNT+"/"+item.PERSONNEL+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //담당교수
-						
 					str+="</tr>"; //테이블 닫는거
 				});
 					
@@ -79,6 +78,7 @@ $(function(){
 							success : function(data){
 								alert(data.msg);
 								
+								
 							},
 							error : function(e){
 								console.log(e);
@@ -93,44 +93,6 @@ $(function(){
 			}
 		});
 	}//subjList
-	
-	/* 
-	function Mylist(){
-		$.ajax({
-			url : "<c:url value='/registration/request_Myregistration'/>",
-			type : "post",
-		    dataType: "json",
-	        data    : "",
-	        async    : false,
-			success : function(data){
-				var mystr = "";
-				$.each(data, function(idx, item){
-					console.log(item)
-					mystr+="<tr class='' role='row' id=''>"; //테이블 여는거 
-					mystr+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmRegistration' method='post' action='<c:url value='/registration/request_registrationInsert'/>'><button type='button' name='openSubCode' class='buttons' value='"+item.OPEN_SUB_CODE+"'>수강신청</button></form> </td>"; //삭제
-					mystr+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.OPEN_DATE+"학기"+"</td>"; //년도
-					mystr+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SEMESTER+"</td>"; //학기
-					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.SUBJ_NAME+"</td>"; //과목명
-					mystr+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.FACULTY_NAME+"학년"+"</td>";  //학부
-					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>" +item.GRADE+"</td>"; //학년
-					mystr+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.TYPE+"학점"+"</td>"; //이수구분
-					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.CREDIT+"</td>"; //학점
-					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
-					mystr+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //강의실 시ㄴ
-					str+="</tr>"; //테이블 닫는거
-				});
-				$('#MyregiInfo ').append(mystr); //조회누르면 뿌려주는 바디부분
-			}); 
-			error : function(e){
-				alert("망함");
-			}
-		}); 
-	}//Mylist */
-
-	
-	
-	
-	
 	
 	
 	/* 장바구니에서 수강신청 */
@@ -150,19 +112,17 @@ $(function(){
 				dataType : "json",
 				data: "openSubCode="+openSubCode,
 				success : function(data){
-					alert('성공');
-					//location.reload();
+					alert(data.msg);
+					location.reload();
 				},
 				error : function(){
-					alert('수강신청 실패');
-					//location.reload();
+					alert(data.msg);
+					location.reload();
 				}
 			});
 		});
 	});  
 	
-
-
 	
 </script>
 <!-- 수강신청코드  -->
@@ -252,11 +212,11 @@ $(function(){
 						<td style="padding-left: 10px"><span class=""><label
 								for="학부">학과/학부</label></span></td>
 						<td id="major_1">
-							<select id="facultyName" name="facultyName"
+							<select id="deptName" name="deptName"
 								class="ctl_select" tabindex="1" title="전공">
 									<option value="0">All</option>
 								<c:forEach var="fMap" items="${facultyMap}">
-									<option value="${fMap['FACULTY_NAME']}">${fMap['FACULTY_NAME']}</option>
+									<option value="${fMap['FACULTY_NO']}">${fMap['DEPT_NAME']}</option>
 								</c:forEach>
 							</select>
 						</td>

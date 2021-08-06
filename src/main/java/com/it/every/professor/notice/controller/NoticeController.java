@@ -53,6 +53,8 @@ public class NoticeController {
 			logger.info("교수님 개설강좌 목록 osList.size={}", osList.size());
 			model.addAttribute("osList", osList);
 		}
+		
+		
 	}
 }
 

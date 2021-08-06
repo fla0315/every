@@ -1,11 +1,13 @@
 package com.it.every.admin.professor.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ import com.it.every.department.model.DepartmentVO;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/admin/professor")
+@RequestMapping("/admin")
 @RequiredArgsConstructor
 public class ProfessorManageController {
 
@@ -30,7 +32,7 @@ public class ProfessorManageController {
 	private final ProfessorPositionService professorPositionService;
 	private final DepartmentService departmentService;
 	
-	@RequestMapping("/professorList")
+	@RequestMapping("/professor/professorList")
 	public String professorList(Model model) {
 		logger.info("교수목록 조회 화면");
 		
@@ -43,7 +45,7 @@ public class ProfessorManageController {
 	}
 	
 	
-	@RequestMapping("/professorRegister")
+	@RequestMapping("/professor/professorRegister")
 	public String professorRegister(Model model) {
 		logger.info("교수등록 화면");
 		
@@ -59,7 +61,7 @@ public class ProfessorManageController {
 		return "admin/professor/professorRegister";
 	}
 	
-	@PostMapping("/register_post")
+	@PostMapping("/professor/register_post")
 	public String register_post(@ModelAttribute ProfessorManageVO vo, Model model) {
 		
 		logger.info("교수등록 처리, 파라미터 vo={}", vo);
@@ -80,7 +82,7 @@ public class ProfessorManageController {
 	}
 	
 	
-	@RequestMapping("/professorEdit")
+	@RequestMapping("/professor/professorEdit")
 	public String professorEdit(@RequestParam(defaultValue = "0") String profNo, Model model) {
 		logger.info("교수정보 수정 화면");
 		
@@ -100,7 +102,7 @@ public class ProfessorManageController {
 	}
 	
 	
-	@PostMapping("/professorEdit")
+	@PostMapping("/professor/professorEdit")
 	public String professorEdit_post(@ModelAttribute ProfessorManageVO vo, Model model) {
 		
 		logger.info("교수정보수정 처리, 파라미터 vo={}", vo);
@@ -144,5 +146,75 @@ public class ProfessorManageController {
 		logger.info("교수강의통계 화면");
 		
 		return "admin/chart/professorChart";
+	}
+	
+	@GetMapping("/chart/majorProfChart")
+	public String majorStuChart(Model model) {
+		logger.info("학과별 교수통계 초기화면");
+		
+		List<DepartmentVO> deptList = departmentService.selectDepartment();
+		List<Map<String, Object>> positionList = professorManageService.selectPosition();
+		logger.info("gradeList.size={}", positionList.size());
+		
+		String str ="[";
+		str +="['직책' , '교수 수'] ,";
+		int num1 =0;
+		for (Map<String, Object> map1 : positionList) {
+			
+			str +="['";
+			str += map1.get("POSITION");
+			str +="' , ";
+			str += map1.get("COUNT");
+			str +=" ]";
+			
+			num1 ++;
+			if(num1<positionList.size()){
+				str +=",";
+			}		
+		}
+		str += "]";
+		
+		logger.info("str1 = {}", str);
+		
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("str1", str);
+		
+		return "admin/chart/majorProfChart";
+	}
+	
+	@RequestMapping("/chart/selectProfMajor")
+	public String selectMajorGrade(@RequestParam String major, Model model) {
+		
+		logger.info("학과별 교수통계 학과조회 화면, parmeter major={}", major);
+		
+		List<DepartmentVO> deptList = departmentService.selectDepartment();
+		List<Map<String, Object>> majorPositionList = professorManageService.selectMajorPosition(major);
+		logger.info("majorPositionList.size={}", majorPositionList.size());
+		
+		String str ="[";
+		str +="['직책' , '교수 수'] ,";
+		int num1 =0;
+		for (Map<String, Object> map1 : majorPositionList) {
+			
+			str +="['";
+			str += map1.get("POSITION");
+			str +="' , ";
+			str += map1.get("COUNT");
+			str +=" ]";
+			
+			num1 ++;
+			if(num1<majorPositionList.size()){
+				str +=",";
+			}		
+		}
+		str += "]";
+		
+		logger.info("str1 = {}", str);
+		
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("str1", str);
+		model.addAttribute("major", major);
+		
+		return "admin/chart/majorProfChart";
 	}
 }

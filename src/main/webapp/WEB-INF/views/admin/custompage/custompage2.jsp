@@ -45,9 +45,6 @@
 $(function(){
 	
 	//유효성검사
-	
-	
-	
 	//선택할 때마다 하위 항목이 하나씩 하나씩 늘어나도록 설정(관리자와 차이를 두려면 어쩔 수가 없다.)
 	//학과선택	
 	$('.deptname').change(function(){
@@ -58,7 +55,6 @@ $(function(){
 			$("#subjtype").css("visibility","hidden");
 		}
 		});
-	
 	
 	 //이수구분 선택 및 강좌명 선택
 	  $('.subj_type').change(function(){
@@ -219,7 +215,7 @@ $('form[name=registerboard]').submit(function(){
 	        		  self.close();
 	        		  opener.parent.location.reload();
 	           }, error: function (xhr, status, error){
-					alert("error 발생!!" + error);
+					alert("error 발생!!!" + error);
 				}
 		   });
 

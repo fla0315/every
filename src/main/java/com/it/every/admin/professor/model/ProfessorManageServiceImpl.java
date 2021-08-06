@@ -1,6 +1,7 @@
 package com.it.every.admin.professor.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -10,32 +11,44 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProfessorManageServiceImpl implements ProfessorManageService{
 	
-	private final ProfessorManageDAO studentDao;
+	private final ProfessorManageDAO professorDao;
 
 	@Override
 	public int professorRegister(ProfessorManageVO vo) {
-		return studentDao.professorRegister(vo);
+		return professorDao.professorRegister(vo);
 	}
 
 	@Override
 	public List<ProfessorManageVO> selectAll() {
-		return studentDao.selectAll();
+		return professorDao.selectAll();
 	}
 
 	@Override
 	public ProfessorManageVO selectByProfNo(String profNo) {
-		return studentDao.selectByProfNo(profNo);
+		return professorDao.selectByProfNo(profNo);
 	}
 
 	@Override
 	public int updateProfessor(ProfessorManageVO vo) {
-		return studentDao.updateProfessor(vo);
+		return professorDao.updateProfessor(vo);
 	}
 
 	@Override
 	public int deleteProfessor(String profNo) {
-		return studentDao.deleteProfessor(profNo);
+		return professorDao.deleteProfessor(profNo);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectPosition() {
+		return professorDao.selectPosition();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMajorPosition(String deptName) {
+		return professorDao.selectMajorPosition(deptName);
+	}
+
+	
 	
 	
 	

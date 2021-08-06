@@ -1,4 +1,4 @@
-package com.it.every.registration.controller;
+package com.it.every.distributeAssign.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,43 +15,41 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
-@Component("syllabusdownloadview")
-public class SyllabusDownloadView extends AbstractView{
+@Component("AssigndownloadView")
+public class AssignDownloadView extends AbstractView{
 	private static final Logger logger
-		=LoggerFactory.getLogger(SyllabusDownloadView.class);
+	=LoggerFactory.getLogger(AssignDownloadView.class);
 	
 	@Override
-	protected void renderMergedOutputModel(Map<String, Object> model, 
-			HttpServletRequest request,	HttpServletResponse response) throws Exception {
-		File file=(File) model.get("file");
+	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		File file = (File) model.get("file");
 		String originalFileName = (String) model.get("originalFileName");
-		String fileName=file.getName();
+		String fileName = file.getName();
 		
 		logger.info("파일명:{}, 변경전 파일명:{}", fileName, originalFileName);
 		
 		if(file==null || !file.exists() || !file.canRead()) {
 			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out=response.getWriter();
+			PrintWriter out = response.getWriter();
 			out.print("<script>alert('파일이 존재하지 않거나 손상되었습니다.');");
 			out.print("history.back();");
 			out.print("</script>");
+			
 			return;
 		}
 		
 		response.setContentType("application/octet-stream");
-		originalFileName 
-			= new String(originalFileName.getBytes("euc-kr"),"8859_1");
-		response.setHeader("Content-disposition", "attachment;filename=" 
+		originalFileName = new String(originalFileName.getBytes("euc-kr"), "8859_1");
+		response.setHeader("Content-disposition", "attachment;filename="
 				+ originalFileName);
-		OutputStream os=response.getOutputStream();
+		OutputStream os = response.getOutputStream();
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(file);
 			FileCopyUtils.copy(fis, os);
-		}finally {
+		} finally {
 			if(fis!=null) fis.close();
 		}
-		
 	}
-
 }
