@@ -132,7 +132,7 @@ P.HStyle5, LI.HStyle5, DIV.HStyle5
 	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>대학(원)</SPAN></P>
 	</TD>
 	<TD colspan="3" width="189" height="21" valign="middle" style='border-left:solid #000000 0.4pt;border-right:solid #000000 0.4pt;border-top:solid #000000 0.4pt;border-bottom:solid #000000 0.4pt;padding:1.4pt 5.1pt 1.4pt 5.1pt'>
-	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>가천대학교</SPAN></P>
+	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>에브리대학교</SPAN></P>
 	</TD>
 	<TD width="77" height="21" valign="middle" bgcolor="#ccffcc" style='border-left:solid #000000 0.4pt;border-right:solid #000000 0.4pt;border-top:solid #000000 0.4pt;border-bottom:solid #000000 0.4pt;padding:1.4pt 5.1pt 1.4pt 5.1pt'>
 	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>입 학 금</SPAN></P>
@@ -198,7 +198,7 @@ P.HStyle5, LI.HStyle5, DIV.HStyle5
 	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>성&nbsp;&nbsp;&nbsp;&nbsp; 명</SPAN></P>
 	</TD>
 	<TD colspan="3" width="189" height="21" valign="middle" style='border-left:solid #000000 0.4pt;border-right:solid #000000 0.4pt;border-top:solid #000000 0.4pt;border-bottom:solid #000000 0.4pt;padding:1.4pt 5.1pt 1.4pt 5.1pt'>
-	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>${map['NAME'] } 이름&nbsp;</SPAN></P>
+	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>${map['NAME'] }&nbsp;</SPAN></P>
 	</TD>
 	<TD width="77" height="21" valign="middle" bgcolor="#ccffcc" style='border-left:solid #000000 0.4pt;border-right:solid #000000 0.4pt;border-top:solid #000000 0.4pt;border-bottom:solid #000000 0.4pt;padding:1.4pt 5.1pt 1.4pt 5.1pt'>
 	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>계</SPAN></P>
@@ -225,7 +225,7 @@ P.HStyle5, LI.HStyle5, DIV.HStyle5
 	<P CLASS=HStyle5 STYLE='margin-left:25.0pt;margin-right:25.0pt;line-height:150%;'><SPAN STYLE='font-size:9.0pt;line-height:150%;'>&nbsp;</SPAN></P>
 	<P CLASS=HStyle5 STYLE='margin-left:40.0pt;margin-right:25.0pt;text-align:left;text-indent:-15.0pt;line-height:150%;'><SPAN STYLE='font-size:9.0pt;line-height:150%;'><SPAN style='HWP-TAB:1;'>&nbsp;&nbsp;&nbsp;</SPAN>위 금액을 소정기일 내에 국민 은행 전국 각 지점에 납부하시기 바랍니다.</SPAN></P>
 	<P CLASS=HStyle5 STYLE='margin-left:41.9pt;margin-right:25.0pt;text-align:left;text-indent:-16.9pt;line-height:150%;'><SPAN STYLE='font-size:9.0pt;line-height:150%;'>&nbsp;</SPAN></P>
-	<P CLASS=HStyle5 STYLE='margin-left:25.0pt;margin-right:25.0pt;line-height:150%;'><SPAN STYLE='font-size:14.0pt;font-weight:"bold";line-height:150%;'>가천 대학교 총장</SPAN></P>
+	<P CLASS=HStyle5 STYLE='margin-left:25.0pt;margin-right:25.0pt;line-height:150%;'><SPAN STYLE='font-size:14.0pt;font-weight:"bold";line-height:150%;'>에브리 대학교 총장</SPAN></P>
 	</TD>
 </TR>
 </TABLE></P>
@@ -269,7 +269,7 @@ P.HStyle5, LI.HStyle5, DIV.HStyle5
 	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>대학(원)</SPAN></P>
 	</TD>
 	<TD colspan="3" width="189" height="21" valign="middle" style='border-left:solid #000000 0.4pt;border-right:solid #000000 0.4pt;border-top:solid #000000 0.4pt;border-bottom:solid #000000 0.4pt;padding:1.4pt 5.1pt 1.4pt 5.1pt'>
-	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>가천대학</SPAN></P>
+	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>에브리대학</SPAN></P>
 	</TD>
 	<TD width="77" height="21" valign="middle" bgcolor="#ccffcc" style='border-left:solid #000000 0.4pt;border-right:solid #000000 0.4pt;border-top:solid #000000 0.4pt;border-bottom:solid #000000 0.4pt;padding:1.4pt 5.1pt 1.4pt 5.1pt'>
 	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>입학금</SPAN></P>
@@ -365,7 +365,7 @@ P.HStyle5, LI.HStyle5, DIV.HStyle5
 </TR>
 <TR>
 	<TD colspan="8" width="676" height="41" valign="middle" style='border-left:solid #000000 0.4pt;border-right:solid #000000 0.4pt;border-top:none;border-bottom:solid #000000 0.4pt;padding:1.4pt 5.1pt 1.4pt 5.1pt'>
-	<P CLASS=HStyle5 STYLE='margin-left:25.0pt;margin-right:25.0pt;line-height:160%;'><SPAN STYLE='font-size:14.0pt;font-weight:"bold";line-height:160%;'>가천 대학교 총장</SPAN></P>
+	<P CLASS=HStyle5 STYLE='margin-left:25.0pt;margin-right:25.0pt;line-height:160%;'><SPAN STYLE='font-size:14.0pt;font-weight:"bold";line-height:160%;'>에브리 대학교 총장</SPAN></P>
 	</TD>
 </TR>
 </TABLE></P>
@@ -409,7 +409,7 @@ P.HStyle5, LI.HStyle5, DIV.HStyle5
 	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>대학(원)</SPAN></P>
 	</TD>
 	<TD colspan="3" width="189" height="21" valign="middle" style='border-left:solid #000000 0.4pt;border-right:solid #000000 0.4pt;border-top:solid #000000 0.4pt;border-bottom:solid #000000 0.4pt;padding:1.4pt 5.1pt 1.4pt 5.1pt'>
-	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>가천대학</SPAN></P>
+	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>에브리대학</SPAN></P>
 	</TD>
 	<TD width="77" height="21" valign="middle" bgcolor="#ccffcc" style='border-left:solid #000000 0.4pt;border-right:solid #000000 0.4pt;border-top:solid #000000 0.4pt;border-bottom:solid #000000 0.4pt;padding:1.4pt 5.1pt 1.4pt 5.1pt'>
 	<P CLASS=HStyle5><SPAN STYLE='font-size:9.0pt;font-weight:"bold";line-height:120%;'>입학금</SPAN></P>
@@ -508,7 +508,7 @@ P.HStyle5, LI.HStyle5, DIV.HStyle5
 </TR>
 <TR>
 	<TD colspan="8" width="676" height="41" valign="middle" style='border-left:solid #000000 0.4pt;border-right:solid #000000 0.4pt;border-top:none;border-bottom:solid #000000 0.4pt;padding:1.4pt 5.1pt 1.4pt 5.1pt'>
-	<P CLASS=HStyle5 STYLE='margin-left:25.0pt;margin-right:25.0pt;line-height:160%;'><SPAN STYLE='font-size:14.0pt;font-weight:"bold";line-height:160%;'>가천 대학교 총장</SPAN></P>
+	<P CLASS=HStyle5 STYLE='margin-left:25.0pt;margin-right:25.0pt;line-height:160%;'><SPAN STYLE='font-size:14.0pt;font-weight:"bold";line-height:160%;'>에브리 대학교 총장</SPAN></P>
 	</TD>
 </TR>
 

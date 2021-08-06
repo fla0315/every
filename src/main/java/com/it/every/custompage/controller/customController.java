@@ -44,10 +44,15 @@ public class customController {
 		
 		String usertype= (String)session.getAttribute("usertype");
 		String deptname= (String)session.getAttribute("name");
+		
+		logger.info("섹션확인, type={}, name={}",usertype,deptname);
+		
 		vo.setUsertype(usertype);
 		vo.setProfname(deptname);
 		
 		List<customVO> list = service.customlist(vo);
+		
+		logger.info("정보전달, list={}",list);
 		
 		model.addAttribute("list",list);
 		
@@ -152,7 +157,8 @@ public class customController {
 	  }
 	  
 	  //게시판 등록
-
+	
+	  
 	  @RequestMapping("/customwrite")
 	  public String boardRegister(@ModelAttribute customVO vo, 
 			  HttpSession session, Model model, 
@@ -161,9 +167,13 @@ public class customController {
 			  @RequestParam("c") String category
 			) 
 	  {
+		  logger.info("vo={}",vo);
 		  vo.setBdname(bdname);
 		  vo.setUsage('Y');
 		  vo.setOpensubcode(subcode);
+		  System.out.println(bdname);
+		  System.out.println(subcode);
+		  System.out.println(category);
 		  
 		  
 		  int categorycode=Integer.parseInt(service.categorycode(category));
@@ -182,25 +192,29 @@ public class customController {
 		  
 		  int result=service.insertboard(vo);
 		  logger.info("처리중, vo={}, result={}",vo,result);
-		  	String msg="실패", url="admin/custompage/custompage2";
+		  	String msg="실패", url="/custompage/custompage2";
 		  if (result!=1) {
 			  bool=false;
 		}else {
 			msg="등록성공";
-			
+			url ="/custompage/custompage2";
 		}
 		
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
 	
 		  
-		  return url;
+		  return "common/message";
 		  
 	  }
+	  
+	  
 	  //게시판 교체
 	  @RequestMapping("/customchangeinput")
 	  public String changeboard(@ModelAttribute customVO vo) {
 		  int result=service.updateboard(vo);
 		  logger.info("결과 result={}",result);
-		  return "redirect:/custompage/custompagechange";
+		  return "/custompage/custompagechange";
 		  
 	  }
 }

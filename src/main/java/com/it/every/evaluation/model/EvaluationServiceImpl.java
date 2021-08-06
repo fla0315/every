@@ -40,8 +40,8 @@ public class EvaluationServiceImpl implements EvaluationService {
 	}
 
 	@Override
-	public int totalGrade(EvaluationVO vo) {
-		return evaluationDao.totalGrade(vo);
+	public int totalGrade(Map<String, Object> map) {
+		return evaluationDao.totalGrade(map);
 	}
 
 }

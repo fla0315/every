@@ -10,4 +10,5 @@ public interface AssignmentDAO {
 	List<AssignmentVO> showAssignment(int assignNo);
 	Map<String, Object> checkAssignByStuNo(AssignmentVO vo);
 	int gradeForAssign(AssignmentVO vo);
+	int applyAssignEvaluation(AssignmentVO vo);
 }

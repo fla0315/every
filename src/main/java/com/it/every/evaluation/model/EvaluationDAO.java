@@ -13,7 +13,7 @@ public interface EvaluationDAO {
 	List<Map<String, Object>> selectEvaluationView(String openSubCode);
 	Map<String, Object> selectBystuNo(EvaluationVO vo);
 	int editBystuNo(EvaluationVO vo);
-	int totalGrade(EvaluationVO vo);
+	int totalGrade(Map<String, Object> map);
 	
 	/*출석부 점수 반영*/
 	int updateAttend(AttendanceVO vo);

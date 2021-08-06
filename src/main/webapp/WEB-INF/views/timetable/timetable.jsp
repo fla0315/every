@@ -123,7 +123,7 @@
         <div id="timeTableDiv">
                 <div style="margin: 30px; font-size: 25px;">
                     <div style="text-align: center; margin: 0 auto;">
-                        <img src="<c:url value='/resources/images/timetableIcon.png'/>" id="tticon"><span id="userName"> ${principal.name }</span>님의 강의시간표
+                         <div>${sessionScope.name }님의 강의시간표.</div>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -209,7 +209,7 @@
         
 
     </div>
-    
+    </div> 
     
     <%@ include file="../inc/bottom.jsp" %>        
     

@@ -188,45 +188,45 @@ $('#pwd').keyup(function(){
 
 <div class="reg_box">
 <div>
-   <article class="align_center">
-      <form name="register" method="post" action="<c:url value='/reg/checklogin'/>">
-         <fieldset>
-            <br>
-            <div class="text-center">
-               <h4>로그인</h4>
-            <br><br>
-               <input type="radio" name="chk_info" id="chk_info" value="student">학생
-               <input type="radio" name="chk_info" id="chk_info" value="professor">교수
-               <input type="radio" name="chk_info" id="chk_info" value="admin">관리자 
-            </div>
-            <br>
-         <div class="log">
-            <!-- 아이디 -->
-            <div class="id" style="width: 200px;">
-               <label for="userid">아이디</label> <br> <input type="text"
-                  class="user_id form-control" id="user_id" name="user_id" placeholder="ID" required
-                  style="ime-mode: inactive"> <br> 
-            </div>
-            <!-- 비밀번호 -->
-            <div class="password" style="width: 200px;">
-               <label for="pass">비밀번호</label> 
-                  <br> 
-                  <input type="password" class="form form-control" id="pwd" name="pwd" placeholder="Password" required
-                  style="ime-mode: inactive"> 
-                  <span class="check_id" id="check_id" style=""></span>
-            </div>
-         </div>
-            <br><br>
-            <div class="text-center">
-            <input type="submit" id="submit" class="btn btn-dark" value="로그인"  style="width:80px;">
-            </div>
-         </fieldset>
-            <br>
-          <input type ="hidden" name="chkId" id="chkId"> 
-           <input type ="hidden" name="chkpwd" id="chkpwd">
-           <!-- radio바꿨을때 초기화용 -->
-            <input type ="hidden" name="changeradio" id="changeradio">
-      </form>
-   </article>
-   </div>
+	<article class="align_center">
+		<form name="register" method="post" action="<c:url value='/reg/checklogin'/>">
+			<fieldset>
+				<br>
+				<div class="text-center">
+					<h4>로그인</h4>
+				<br><br>
+					<input type="radio" name="chk_info" id="chk_info" value="student">학생
+					<input type="radio" name="chk_info" id="chk_info" value="professor">교수
+					<input type="radio" name="chk_info" id="chk_info" value="admin">관리자 
+				</div>
+				<br>
+			<div class="log">
+				<!-- 아이디 -->
+				<div class="id" style="width: 200px;">
+					<label for="userid">아이디</label> <br> <input type="text"
+						class="user_id form-control" id="user_id" name="user_id" placeholder="ID" required
+						style="ime-mode: inactive"> <br> 
+				</div>
+				<!-- 비밀번호 -->
+				<div class="password" style="width: 200px;">
+					<label for="pass">비밀번호</label> 
+						<br> 
+						<input type="password" class="form form-control" id="pwd" name="pwd" placeholder="Password" required
+						style="ime-mode: inactive"> 
+						<span class="check_id" id="check_id" style=""></span>
+				</div>
+			</div>
+				<br><br>
+				<div class="text-center">
+				<input type="submit" id="submit" class="btn btn-dark" value="로그인"  style="width:80px;">
+				</div>
+			</fieldset>
+				<br>
+			 <input type ="hidden" name="chkId" id="chkId"> 
+			  <input type ="hidden" name="chkpwd" id="chkpwd">
+			  <!-- radio바꿨을때 초기화용 -->
+			   <input type ="hidden" name="changeradio" id="changeradio">
+		</form>
+	</article>
+	</div>
 </div>

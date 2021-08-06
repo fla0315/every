@@ -29,7 +29,7 @@ public class customVO {
 	private char isupload; //업로드가능여부
 	private int maxupfile;//최대 업로드 가능 숫자
 	private int maxfilesize;//최대 업로드 가능 용량
-
+	
 	
 	//따로 사용용도
 	private String deptname;

@@ -22,4 +22,14 @@
 		set assign_point = #{assignPoint}
 		where assign_no = #{assignNo} and stu_no = #{stuNo}
 	</update>
+	
+	<!-- 과제 점수 성적 반영 -->
+	<update id="applyAssignEvaluation" parameterType="assignmentVo">
+		update evaluation
+		set assignment = (select avg(assign_point)
+		from assignment
+		where open_sub_code=#{openSubCode} and stu_no=#{stuNo}
+		group by stu_no, open_sub_code)
+		where sub_code=#{openSubCode} and stu_no=#{stuNo}
+	</update>
 </mapper>

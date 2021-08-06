@@ -89,30 +89,23 @@ public class EvaluationController {
 	}
 	
 	@PostMapping("/evaluationEdit")
-	public String evaluationEdit_post(@ModelAttribute EvaluationVO vo, Model model) {
+	public String evaluationEdit_post(@ModelAttribute EvaluationVO vo) {
 		logger.info("성적 등록/수정 처리, 파라미터 vo={}", vo);
 
 		int cnt = evaluationService.editBystuNo(vo);
 		logger.info("성적 등록/수정 처리 결과, cnt={}", cnt);
 		
-		
 		if(cnt>0) {
 			Map<String, Object> map = evaluationService.selectBystuNo(vo);
-			int mid = Integer.parseInt(String.valueOf(map.get("MIDTERM")));
-			int fin = Integer.parseInt(String.valueOf(map.get("FINALS")));
-			int assign = Integer.parseInt(String.valueOf(map.get("ASSIGNMENT")));
-			int attend = Integer.parseInt(String.valueOf(map.get("ATTENDANCE")));
-			
-			int avg = (mid+fin+assign+attend)/4;
-			logger.info("avg={}", avg);
-			vo.setTotalGrade(avg);
-			int cnt2 = evaluationService.totalGrade(vo);
+
+			logger.info("map={}", map);
+			int cnt2 = evaluationService.totalGrade(map);
 			if(cnt2>0) {
 				logger.info("총점 저장 성공");
 			}
 		}
 		
-		return "/professor/evaluation/evaluationRecord?openSubCode="+vo.getSubCode();
+		return "/professor/evaluation/evaluationRecord";
 	}
 	
 	@GetMapping("/evaluationCheck")
