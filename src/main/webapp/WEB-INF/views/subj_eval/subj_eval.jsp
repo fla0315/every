@@ -93,7 +93,7 @@ $(function(){
 											<span>[강의평가 완료]</span>						
 										</c:if>		
 										<c:if test="${myMap['LECTURE_EVAL_FLAG']=='N'}">
-											<span>[강의평가 미완료]</span>						
+											<span style="color: red; font-style: bold;">[강의평가 미완료]</span>						
 										</c:if>		
 									</td>
 									
