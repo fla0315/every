@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.it.every.board.model.BoardService;
 import com.it.every.openSubj.model.OpenSubjService;
 import com.it.every.openSubj.model.OpenSubjVO;
+import com.it.every.post.model.PostService;
+import com.it.every.post.model.PostVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +29,7 @@ public class ProfessorNoticeController {
 	
 	private final OpenSubjService openSubjService;
 	private final BoardService boardService;
+	private final PostService postService;
 	
 	@RequestMapping("/noticeWrite")
 	public String noticeWrite(@RequestParam (required=false) String openSubCode, Model model, HttpSession session) {
@@ -58,6 +61,8 @@ public class ProfessorNoticeController {
 		
 		if(openSubCode!=null && !openSubCode.isEmpty()) {
 			int bdCode = boardService.checkBdCode(openSubCode);
+			List<PostVO> pList = postService.postByOpenSubCode(bdCode);
+			model.addAttribute("pList", pList);
 		}
 	}
 }

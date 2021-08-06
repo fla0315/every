@@ -1,5 +1,7 @@
 package com.it.every.post.model;
 
-public interface PostService {
+import java.util.List;
 
+public interface PostService {
+	List<PostVO> postByOpenSubCode(int bdCode);
 }
