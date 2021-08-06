@@ -66,19 +66,15 @@ $('#showrite').click(function(){
 		
 	
 		<div class="card mb-4" style="width: 90%; margin: 0 auto; margin-top: 50px">
-	
 		<div class="card-body">
-		<input type="button" class="btn btn-danger btn-sm" id="showrite" value="글 등록하기">
-			<br>
-		<div class="writecalom" id="writecalom">
-			<form class="writecomment">
-			<pre>
-			<textarea rows="5" name="comment" id="comment" class="form-control"  autocomplete="off"
-			 wrap="hard" style="height:150px; width:400px;" 
-			 placeholder="내용을 입력하세요.&#13;&#10;입력하신 글은&#13;&#10;운영정책에 따라 삭제될 수도 있습니다."></textarea>
-			</pre>
-		</form>
+		<a href="<c:url value='/board/write'/>">
+				<button class="btn btn-primary btn-sm">
+				글 등록
+				</button>
+				</a>
 		</div>
+			<br>
+
 			<br>
 			
 			
@@ -173,6 +169,6 @@ $('#showrite').click(function(){
 			</table>
 			<input type="hidden" id="confirm">
 		</div>
-	</div>
+
 
 <%@ include file="../../inc/bottom.jsp" %>

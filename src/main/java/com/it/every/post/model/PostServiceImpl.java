@@ -1,4 +1,4 @@
-package com.it.every.freepage.model;
+package com.it.every.post.model;
 
 import org.springframework.stereotype.Service;
 
@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class postServiceImpl implements postService {
-	private final postDao dao;
+public class PostServiceImpl implements PostService {
+	private final PostDAO dao;
 	
 	@Override
 	public int freewrite(String contents) {

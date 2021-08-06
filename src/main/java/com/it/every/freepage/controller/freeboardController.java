@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.every.evaluation.controller.AttendanceController;
-import com.it.every.freepage.model.postService;
-import com.it.every.freepage.model.postVO;
+import com.it.every.post.model.PostService;
+import com.it.every.post.model.PostVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class freeboardController {
 	private static final Logger logger
 	= LoggerFactory.getLogger(AttendanceController.class);
-	public static postService service; 
+	public static PostService service; 
 	
 	
 	@GetMapping("/write")
@@ -29,7 +29,7 @@ public class freeboardController {
 	
 	@RequestMapping("/insert")
 	public String insert(@RequestParam("content") String content) {
-		postVO vo = new postVO();
+		PostVO vo = new PostVO();
 		vo.setContents(content);
 		int a = service.freewrite(content);
 		logger.info("결과 result={}",a);

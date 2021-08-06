@@ -1,4 +1,4 @@
-package com.it.every.freepage.model;
+package com.it.every.post.model;
 
 import java.sql.Timestamp;
 
@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class postVO {
+public class PostVO {
  
 		public int postNo; //게시글번호
 		public int bdCode; //게시판코드
