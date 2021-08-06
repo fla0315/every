@@ -9,6 +9,9 @@
 	select * form subj_type
 </select> -->
 
+
+
+
 	
 <!-- 넌 필수로 들어가 카테고리 명 불러오기(교수는 2개만, 관리자는 몽땅)-->
 <select id="selectcategory" parameterType="registerVO" resultType="categoryVO">
