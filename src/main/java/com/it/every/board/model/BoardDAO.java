@@ -1,4 +1,4 @@
-package com.it.every.custompage.custommodel;
+package com.it.every.board.model;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,7 @@ import com.it.every.subjType.model.SubjTypeVO;
 import com.it.every.subject.model.SubjectVO;
 
 @Mapper
-public interface customDAO {
+public interface BoardDAO {
 
 	public List<categoryVO> selectcategory(registerVO vo);
 	public List<Map<String, Object>> proselectoption(String prof_no);

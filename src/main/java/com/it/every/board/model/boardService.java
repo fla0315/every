@@ -1,4 +1,4 @@
-package com.it.every.custompage.custommodel;
+package com.it.every.board.model;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,7 @@ import com.it.every.register.model.registerVO;
 import com.it.every.subjType.model.SubjTypeVO;
 import com.it.every.subject.model.SubjectVO;
 
-public interface customService {
+public interface boardService {
 
 
 	public List<categoryVO> selectcategory(registerVO vo);

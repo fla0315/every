@@ -1,4 +1,4 @@
-package com.it.every.custompage.custommodel;
+package com.it.every.board.model;
 
 import java.util.List;
 import java.util.Map;
@@ -16,9 +16,9 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class customServiceIMPl implements customService {
+public class boardServiceIMPl implements boardService {
 
-	private final customDAO dao;
+	private final BoardDAO dao;
 
 	@Override
 	public List<categoryVO> selectcategory(registerVO vo){

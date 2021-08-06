@@ -1,4 +1,4 @@
-package com.it.every.custompage.custommodel;
+package com.it.every.board.model;
 
 
 import lombok.Setter;
