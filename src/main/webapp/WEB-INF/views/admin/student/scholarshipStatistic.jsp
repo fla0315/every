@@ -22,7 +22,7 @@
               subtitle: '(장학금 수여금액 상위 5개 학과)'
             },
             vAxis: {format: 'decimal'},
-            colors: ['#36A2EB']
+            colors: ['#AAAAFF']
           };
 
     var chart1 = new google.charts.Bar(document.getElementById('columnchart_material'));

@@ -22,7 +22,7 @@
               subtitle: '(등록금 납부금액 상위 5개 학과)'
             },
             vAxis: {format: 'decimal'},
-            colors: ['#4BC0C0']
+            colors: ['#AAAAFF']
           };
 
     var chart1 = new google.charts.Bar(document.getElementById('columnchart_material'));

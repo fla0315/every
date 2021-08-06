@@ -20,7 +20,7 @@
               subtitle: '(학년별 재학생 수)'
             },
             vAxis: {format: 'decimal'},
-            colors: ['#36A2EB']
+            colors: ['#AAAAFF']
           };
 
     var chart1 = new google.charts.Bar(document.getElementById('columnchart_material'));
