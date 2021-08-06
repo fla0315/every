@@ -110,6 +110,20 @@ public class customController {
 	@RequestMapping("/checkadmin")
 	public boolean checkadmin(@RequestParam("type") String type, @RequestParam("opensub") String opensub) {
 		boolean result=true;
+		logger.info("type, type={}",type);
+		customVO vo = new customVO();
+		
+		int typenum= service.category(type); 
+		vo.setCategorycode(typenum);
+		vo.setOpensubcode(opensub);
+		
+		int a = service.checkall(vo);
+		
+		if (a==1) {
+			result=true;
+		}else {
+			result=false;
+		}
 		
 		return result;
 		
@@ -165,8 +179,6 @@ public class customController {
 	  }
 	  
 	  //게시판 등록
-	
-	  
 	  @RequestMapping("/customwrite")
 	  public String boardRegister(@ModelAttribute customVO vo, 
 			  HttpSession session, Model model, 
