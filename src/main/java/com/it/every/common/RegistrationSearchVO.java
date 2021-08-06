@@ -14,7 +14,7 @@ public class RegistrationSearchVO extends SearchVO{
 	private int  grade; //학년
 	private String type; //이수구분
 	private String facultyName; //학과 
-	private String deptName; //학과 
+	private String deptName; //department에서 학과
 	private String subjName;//과목명
 	
 	private String studentId;//학생 아이디

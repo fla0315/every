@@ -6,7 +6,9 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.it.every.attendance.model.AttendanceVO;
 import com.it.every.common.RegistrationSearchVO;
+import com.it.every.evaluation.model.EvaluationVO;
 import com.it.every.registrationCart.model.RegistrationCartVO;
 
 import lombok.RequiredArgsConstructor;
@@ -74,6 +76,8 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	}
 
 	
+	
+	
 	@Override
 	public int checkDuplicateCart(RegistrationCartVO registrationCartVo) {
 		
@@ -82,7 +86,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 		return count;
 	}
 
-
+/*
 	@Override
 	public int countPersonnel(RegistrationVO registrationVo) {
 		return studentRegistrationDao.countPersonnel(registrationVo);
@@ -92,6 +96,30 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	@Override
 	public int countCount(RegistrationVO registrationVo) {
 		return studentRegistrationDao.countCount(registrationVo);
+	}
+*/
+
+	@Override
+	public int insertAutoAttendance(AttendanceVO attendanceVo) {
+		return studentRegistrationDao.insertAutoAttendance(attendanceVo);
+	}
+
+
+	@Override
+	public int insertAutoEvaluation(EvaluationVO evaluationVo) {
+		return studentRegistrationDao.insertAutoEvaluation(evaluationVo);
+	}
+
+
+	@Override
+	public int deleteAutoAttendance(AttendanceVO attendanceVo) {
+		return studentRegistrationDao.deleteAutoAttendance(attendanceVo);
+	}
+
+
+	@Override
+	public int deleteAutoEvaluation(EvaluationVO evaluationVo) {
+		return studentRegistrationDao.deleteAutoEvaluation(evaluationVo);
 	}
 	
 	
