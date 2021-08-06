@@ -77,8 +77,6 @@ $(function(){
 							data: "openSubCode="+$(this).val(),
 							success : function(data){
 								alert(data.msg);
-								
-								
 							},
 							error : function(e){
 								console.log(e);

@@ -153,6 +153,10 @@ public class RequestRegistrationController {
 		attendanceVo.setOpenSubCode(openSubCode);
 		evaluationVo.setSubCode(openSubCode);
 		
+		
+		
+		
+		
 		//int personnel = studentRegistrationService.countPersonnel(registrationVo);
 		//int countCount = studentRegistrationService.countCount(registrationVo);
 	//	System.out.println(personnel+"총원");
