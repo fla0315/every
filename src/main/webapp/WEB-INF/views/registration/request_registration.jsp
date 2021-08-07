@@ -311,7 +311,7 @@ $(function(){
 												<!-- 과목명 -->
 												<td>${myMap['SUBJ_NAME'] }</td>
 												<!-- 학부(과)  -->
-												<td>${myMap['FACULTY_NAME'] }</td>
+												<td>${myMap['DEPT_NAME'] }</td>
 												<!-- 학년 -->
 												<!-- 이수구분 -->
 												<td>${myMap['GRADE'] }</td>

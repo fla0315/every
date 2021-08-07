@@ -41,7 +41,7 @@ body {
 					var openSubCode= "";
 					$("#mySubj").empty();
 					
-					str+="<option>선택하세요.</option>"; //테이블 여는거 
+					str+="<option>선택하세요</option>"; //테이블 여는거 
 					if(res.length > 0){
 						openSubCode+="<input type='hidden' value='"+res[0].OPEN_SUB_CODE+"' name='openSubCode' id='hiddenSub'>";
 					}
@@ -75,7 +75,7 @@ body {
 				alert('과목을 선택하세요!');
 				event.preventDefault();
 				return false;
-			}else if($('#mySubj option:selected').val()=='선택하세요' && $('#mySubj option:selected').val().length<0){
+			}else if($('#mySubj option:selected').val()=='선택하세요'){
 				alert("과제명을 선택하세요");
 				$('#mySubj').focus();
 				event.preventDefault();

@@ -20,11 +20,11 @@
 				url : "<c:url value='/subj_eval/insertSurvey'/>",
 				data : $(this).serialize(),
 				success : function() {
-					alert('강의등록 성공');
+					alert('강의평가 등록');
 					self.close();
 				},
 				error :  function() {
-					alert('강의등록실패');
+					alert('강의평가 등록실패');
 					self.close();
 				}
 			})

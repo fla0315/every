@@ -4,10 +4,7 @@
 <div class="container-fluid px-4">
 	<br>
 	<div class="row">
-	
-	
-	
-		<div class="col-xl-6" style="width: 650px;">
+		<div class="col-xl-6" >
 			<div class="card mb-4">
 				<div class="card-header">
 					<i class="fas fa-table me-1" style="font-size: 1.3em"></i> 시간표
@@ -23,7 +20,7 @@
 		
 		
 		
-		<div class="col-xl-6" style="width: 650px;">
+		<div class="col-xl-6">
 			<div class="card mb-4">
 				<div class="card-header">
 					<i class="fas fa-table me-1" style="font-size: 1.3em"></i> 공지사항
@@ -39,7 +36,7 @@
 		
 		
 		
-		<div class="col-xl-6" style="width: 650px;">
+		<div class="col-xl-6" >
 			<div class="card mb-4">
 				<div class="card-header">
 					<i class="fas fa-table me-1" style="font-size: 1.3em"></i> 학사일정
@@ -52,7 +49,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-6" style="width:  650px;">
+		<div class="col-xl-6" >
 			<div class="card mb-4">
 				<div class="card-header">
 					<i class="fas fa-table me-1" style="font-size: 1.3em"></i> 수강내역
