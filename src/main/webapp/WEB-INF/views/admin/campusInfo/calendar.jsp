@@ -7,7 +7,7 @@
 	<div class="col-xl-6" style="float: left; width: 450px; margin: 20px">
 		<div class="card mb-4">
 			<div class="card-header">
-				<i class="fas fa-chart-area me-1"></i> 학사일정
+				<i class="far fa-calendar-alt me-1"></i> 학사일정
 			</div>
 			<script type="text/javascript"
 				src="<c:url value='/resources/js/calendar.js'/>"></script>
@@ -78,6 +78,13 @@
 					</tr>
 				</tbody>
 			</table>
+			<div style="text-align: right; margin-right: 30px">
+				<a href="<c:url value='/admin/student/studentRegister'/>">
+				<button class="btn btn-primary btn-sm">
+					학사일정등록
+				</button>
+				</a>
+		</div>
 		</div>
 
 

@@ -167,11 +167,9 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                             </a>
                             <div class="collapse" id="collapseMain" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/notice'/>">공지사항</a>
-                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/lunchMenu'/>">식단표</a>
-                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/campusMap'/>">캠퍼스맵</a>
-                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/calendar'/>">학사일정</a>
-                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/question'/>">Q&amp;A</a>
+                                    <a class="nav-link" href="<c:url value='/admin/campusInfo/notice'/>">공지사항</a>
+                                    <a class="nav-link" href="<c:url value='/admin/campusInfo/campusMap'/>">캠퍼스맵</a>
+                                    <a class="nav-link" href="<c:url value='/admin/campusInfo/calendar'/>">학사일정</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBoard" aria-expanded="false" aria-controls="collapseLayouts">

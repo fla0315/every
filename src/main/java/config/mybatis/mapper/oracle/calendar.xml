@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.calendar.model.CalendarDAO">
+
+	<select id="selectCalendar" resultType="classroomVO">
+		select * 
+		from calendar
+	</select>
+	
+	<update id="changeCalendar" parameterType="String">
+		update classroom
+		set usable=#{usable}
+		where classroom_code=#{classroomCode}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
