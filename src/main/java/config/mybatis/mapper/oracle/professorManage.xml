@@ -27,6 +27,10 @@
 		select * from professor where prof_no=#{profNo}
 	</select>
 	
+	<select id="selectByDeptNo" parameterType="String" resultType="professorManageVo">
+		select * from professor where dept_no=#{deptNo}
+	</select>
+	
 	<update id="updateProfessor" parameterType="professorManageVo">
 		update professor
 		set position_no=#{positionNo}, dept_no=#{deptNo}, prof_name=#{profName}, 
@@ -48,6 +52,7 @@
 		on p.dept_no = d.dept_no
 		where d.dept_name='경영학과'
 		group by pp.position_name
+		order by count desc
 	</select>
 	
 	<select id="selectMajorPosition" parameterType="String" resultType="HashMap">
@@ -58,7 +63,9 @@
 		on p.dept_no = d.dept_no
 		where d.dept_name=#{deptName}
 		group by pp.position_name
+		order by count desc
 	</select>
+	
 	
 	
 </mapper>

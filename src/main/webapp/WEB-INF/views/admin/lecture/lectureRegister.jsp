@@ -46,19 +46,6 @@
 			}
 		});
 		
-		/* $('#subject').change(function() {
-			var str = $("#subject option:selected").val();
-			var strArr = str.split('.');
-			var idx = $("#subject option").index( $("#subject option:selected") );
-			if(idx != 0) {
-				$('#subjCode').attr("value", strArr[0]);
-				$('#profNo').attr("value", strArr[1]);
-			} else {
-				$('#subjCode').attr("value", '');
-				$('#profNo').attr("value", '');
-			}
-		}); */
-		
 		$('#subject').change(function() {
 			var idx = $("#subject option").index( $("#subject option:selected") );
 			if(idx != 0) {
