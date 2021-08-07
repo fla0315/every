@@ -19,7 +19,7 @@ public class JunggoController {
 	private static final Logger logger = LoggerFactory.getLogger(JunggoController.class);
 	private final PostService postService;
 	
-	@RequestMapping("/main")
+	@RequestMapping("/junggoMain")
 	public void main(HttpSession session, Model model) {
 		String no = (String) session.getAttribute("no");
 		char firstNo = no.charAt(0);
