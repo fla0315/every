@@ -100,6 +100,12 @@ public class customServiceIMPl implements customService {
 		return dao.checkall(vo);
 	}
 
+	@Override
+	public int category(String name) {
+		// TODO Auto-generated method stub
+		return dao.category(name);
+	}
+
 	
 
 	

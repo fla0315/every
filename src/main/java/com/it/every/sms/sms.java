@@ -47,7 +47,7 @@ public String smsNaver(String phone){
    bodyJson.put("countryCode","82");
    bodyJson.put("from","01045792823");
    bodyJson.put("subject","인증");
-   bodyJson.put("content","받고보자");
+   bodyJson.put("content","받고보자"); 
    bodyJson.put("messages",toArr);
    
    String body = bodyJson.toJSONString();

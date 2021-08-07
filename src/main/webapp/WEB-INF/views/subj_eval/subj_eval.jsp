@@ -73,7 +73,7 @@ $(function(){
 									<!-- 과목명 -->
 									<td>${myMap['SUBJ_NAME'] }</td>
 									<!-- 학부(과)  -->
-									<td>${myMap['FACULTY_NAME'] }</td>
+									<td>${myMap['DEPT_NAME'] }</td>
 									<!-- 학년 -->
 									<!-- 이수구분 -->
 									<td>${myMap['GRADE'] }</td>
@@ -93,7 +93,7 @@ $(function(){
 											<span>[강의평가 완료]</span>						
 										</c:if>		
 										<c:if test="${myMap['LECTURE_EVAL_FLAG']=='N'}">
-											<span>[강의평가 미완료]</span>						
+											<span style="color: red; font-style: bold;">[강의평가 미완료]</span>						
 										</c:if>		
 									</td>
 									
