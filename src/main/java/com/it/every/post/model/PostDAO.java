@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PostDAO {
 	//개설교과목공지 불러오기
 	List<PostVO> postByOpenSubCode(int bdCode);
+	//개설교과목공지 등록
+	int insertNoitce(PostVO vo);
 }

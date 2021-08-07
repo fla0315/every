@@ -16,4 +16,9 @@ public class PostServiceImpl implements PostService {
 		return postDao.postByOpenSubCode(bdCode);
 	}
 
+	@Override
+	public int insertNoitce(PostVO vo) {
+		return postDao.insertNoitce(vo);
+	}
+
 }

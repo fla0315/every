@@ -8,6 +8,11 @@
 		select * from post p
 		where bd_code = #{bdCode}
 	</select>
+	<!-- 개설교과목공지 글 등록 -->
+	<insert id="insertNoitce" parameterType="postVo">
+		insert into post(post_no, bd_code, writer_code, title, contents, reg_date)
+		values(POST_SEQ.nextval, #{bdCode}, #{writerCode}, #{title}, #{contents}, sysdate)
+	</insert>
 </mapper>
 
 

@@ -5,7 +5,7 @@
 <mapper namespace="com.it.every.board.model.BoardDAO">
 	<!-- 개설교과목번호로 게시판코드 읽어오기 -->
 	<select id="checkBdCode" parameterType="String" resultType="int">
-		select bdCode from board
+		select bd_code from board
 		where open_sub_code = #{openSubCode}
 	</select>
 </mapper>

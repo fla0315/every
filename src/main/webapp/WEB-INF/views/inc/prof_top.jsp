@@ -126,7 +126,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 자유게시판
                             </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="<c:url value='/junggo/main'/>">
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 거래게시판
                             </a>

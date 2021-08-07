@@ -23,4 +23,5 @@ public class PostVO {
 	private int step;				//차수
 	private Timestamp editDate;		//수정일
 	private char isPrivate;			//비밀글여부
+	private int price;				//가격
 }
