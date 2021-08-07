@@ -20,7 +20,7 @@ public class JunggoController {
 	private final PostService postService;
 	
 	@RequestMapping("/junggoMain")
-	public void main(HttpSession session, Model model) {
+	public void junggoMain(HttpSession session, Model model) {
 		String no = (String) session.getAttribute("no");
 		char firstNo = no.charAt(0);
 		logger.info("거래게시판");

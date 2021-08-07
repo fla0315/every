@@ -122,11 +122,11 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">커뮤니티</div>
-                            <a class="nav-link" href="#l">
+                            <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 자유게시판
                             </a>
-                            <a class="nav-link" href="<c:url value='/junggo/main'/>">
+                            <a class="nav-link" href="<c:url value='/junggo/junggoMain'/>">
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 거래게시판
                             </a>
