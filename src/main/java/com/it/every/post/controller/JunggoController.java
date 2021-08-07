@@ -27,4 +27,19 @@ public class JunggoController {
 		
 		model.addAttribute("firstNo", firstNo);
 	}
+	
+	@RequestMapping("/junggoDetail")
+	public void junggoDetail(HttpSession session, Model model) {
+		String no = (String) session.getAttribute("no");
+		char firstNo = no.charAt(0);
+		logger.info("거래게시판");
+		
+		model.addAttribute("firstNo", firstNo);
+		
+	}
+	
+	
+	
+	
+	
 }

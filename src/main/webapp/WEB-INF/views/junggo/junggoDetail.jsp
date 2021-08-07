@@ -24,50 +24,57 @@ body {
 <body>
 	<article>
 	<div class="container col-lg-10" role="main">
-		<h2>거래 게시판</h2>
+		<h2>거래 상세 게시판</h2>
 		<br>
 		<div class="card mb-3">
 			<div class="card-header">
-				<i class="fas fa-table me-1"></i> 거래 등록
+				<i class="fas fa-table me-1"></i> 상세
 			</div>
 			<div class="card-body">
+				<div id="info">
+	<div id="viewImg">
+		<!-- 상품 이미지 -->
+		<p class="center">
+		<a class="link">
+			<img src="<c:url value='/pd_images/${vo.imageUrl}'/>"
+		 		border="0" width="150">
+		</a>	
+		</p>
+		<p class="center">
+		<a class="link">
+		 	큰이미지 보기</a></p>
+	</div> 
+	<!-- 상품이름  -->
+	<!-- 상품가격  -->
+	<!-- 판매자이름 -->
+	<!-- 등록일  -->
+	<!-- 만약 판매가 되었을경우 판매상품 취소줄 및 색변경 + 구매버튼 안보이기 -->
+	<div id="viewPd">
+		<form name="frmPd" method="post" >			
+			<!-- 상품명 -->
+			<p class="line2">
+				<span class="boldF">
 				
-			</div>
-		</div>
-		<div class="card mb-5">
-			<div class="card-header">
-				<i class="fas fa-table me-1"></i> 거래 목록
-			</div>
-			<div class="card-body">
-				<table id="datatablesSimple">
-					<colgroup>
-						<col style="width:20%;" />
-						<col style="width:20%;" />
-						<col style="width:20%;" />
-						<col style="width:20%;" />		
-						<col style="width:20%;" />		
-					</colgroup>
-					<thead>
-						<tr>
-							<th>제목</th>
-							<th>판매물품</th>
-							<th>가격</th>
-							<th>작성자</th>
-							<th>등록일</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Tiger Nixon</td>
-							<td>System Architect</td>
-							<td>Edinburgh</td>
-							<td>Edinburgh</td>
-						</tr>
-					</tbody>
-				</table>
+				</span>
+			</p>
+			<p class="line"><span class="sp1">
+			</p>
+			<p class="line"><span class="sp1"> 적립금</span>
+			</p>
+			<p class="line"><span class="sp1"> 제조사</span>
+			</p>
+		
+			<p class="line">
+				<input type="button" value="구매" class="buttons" id="btOrder">
+				<input type="button" value="목록" class="buttons" id="btOrder">
+			</p>
+		</form>
+	</div>
 			</div>
 		</div>
 	</div>
+	
+	
 </article>
 <%@ include file="../inc/bottom.jsp"%>
 </body>
