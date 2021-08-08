@@ -9,5 +9,9 @@ import lombok.ToString;
 @ToString
 public class CalendarVO {
 
+	private int calNo;
+	private String contents;
+	private String sDate;
+	private String eDate;
 	
 }

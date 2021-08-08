@@ -3,7 +3,7 @@
 <%@ include file="../../inc/admin_top.jsp" %>
 
 <script type="text/javascript">
-	$(function(){
+	/* $(function(){
 		$('.btnDel').each(function(index, item) {
 			$(item).click(function(){
 				var result = confirm('삭제하시겠습니까?');
@@ -14,7 +14,7 @@
 				
 			});
 		});
-	}); 
+	});  */
 </script>
 
 	<div class="card mb-4" style="width: 90%; margin: 0 auto; margin-top: 50px">
@@ -32,7 +32,6 @@
 						<th style="text-align: center">부임년도</th>
 						<th style="text-align: center">퇴임년도</th>
 						<th style="text-align: center">수정</th>
-						<!-- <th style="text-align: center">삭제</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -70,14 +69,6 @@
 									</button>
 								</a>
 							</td>
-							<%-- <td style="vertical-align: middle; text-align: center;">
-								<a href="<c:url value='/admin/professor/professorDelete?profNo=${vo.profNo }'/>" 
-									class="btnDel">
-									<button class="btn btn-danger btn-sm" >
-										삭제
-									</button>
-								</a>
-							</td> --%>
 			            </tr> 
 			         	</c:forEach>
 					</c:if>

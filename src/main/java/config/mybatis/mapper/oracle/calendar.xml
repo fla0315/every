@@ -4,17 +4,35 @@
 
 <mapper namespace="com.it.every.calendar.model.CalendarDAO">
 
-	<select id="selectCalendar" resultType="classroomVO">
-		select * 
-		from calendar
+	<select id="selectCalendar" resultType="calendarVo">
+		select * from calendar
 	</select>
 	
-	<update id="changeCalendar" parameterType="String">
-		update classroom
-		set usable=#{usable}
-		where classroom_code=#{classroomCode}
+	<select id="selectAll" resultType="hashMap">
+		select cal_no calNo, contents, s_date sDate, e_date eDate from calendar
+	</select>
+	
+	<insert id="registerCalendar" parameterType="calendarVo">
+		insert into calendar
+		values(calendar_seq.nextval, #{contents}, #{sDate}, #{eDate})
+	</insert>
+	
+	<select id="selectByCalNo" parameterType="int" resultType="hashMap">
+		select cal_no calNo, contents, s_date sDate, e_date eDate 
+		from calendar
+		where cal_no = #{calNo}
+	</select>
+	
+	<update id="editCalendar" parameterType="calendarVo">
+		update calendar
+		set contents=#{contents}, s_date=#{sDate}, e_date=#{eDate}
+		where cal_no=#{calNo}
 	</update>
 	
+	<delete id="deleteCalendar" parameterType="int">
+		delete from calendar
+		where cal_no=#{calNo}	
+	</delete>
 </mapper>
 
 
