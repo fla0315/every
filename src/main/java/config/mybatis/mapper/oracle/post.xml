@@ -32,6 +32,7 @@
 	<resultMap type="string" id="CONTENTS_CLOB">
 		<result property="contents" column="contents" jdbcType="CLOB" javaType="java.lang.String"/>
 	</resultMap>
+	
 	<select id="contentsByPostNo" parameterType="int" resultMap="CONTENTS_CLOB">
 		select contents from post
 		where post_no = #{postNo}

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.every.common.FileUploadUtil;
 import com.it.every.post.model.PostService;
-import com.it.every.post.model.PostVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,7 +38,7 @@ public class JunggoController {
 	}
 	
 	@RequestMapping("/junggoDetail")
-	public String junggoDetail(HttpSession session,@RequestParam(defaultValue = "0") int postNo ,HttpServletRequest request,Model model) {
+	public String junggoDetail(HttpSession session,@RequestParam(defaultValue = "0") int postNo, HttpServletRequest request,Model model) {
 		String no = (String) session.getAttribute("no");
 		char firstNo = no.charAt(0);
 		
@@ -55,7 +54,9 @@ public class JunggoController {
 		
 		
 		Map<String,  Object> map =postService.selectByJunggoPostNo(postNo);
-		logger.info("상세보기 결과, vo={}", map);
+		String contents =postService.contentsByPostNo(postNo);
+		logger.info("상세보기 결과, map={}", map);
+		logger.info("본문, contents={}", contents);
 		
 		/*
 		String fileInfo
@@ -64,6 +65,7 @@ public class JunggoController {
 		*/
 		model.addAttribute("firstNo", firstNo);
 		model.addAttribute("map", map);
+		model.addAttribute("contents", contents);
 		
 		return "junggo/junggoDetail";
 	}

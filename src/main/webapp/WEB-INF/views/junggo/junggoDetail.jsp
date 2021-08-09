@@ -166,7 +166,7 @@ body {
 		<!-- 상품 이미지 -->
 		<p class="center">
 			<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-					<img style="width: 100%;" src="${map['FILE_NAME']}" >
+					<img style="width: 100%;" src="<c:url value="/resources/images/${map['FILE_NAME']}"/>" >
 			</a>
 		</p>
 	</div>
@@ -182,7 +182,7 @@ body {
 				      
 				      <!-- 이미지 넣는 부분 -->
 				      <div class="modal-body"  style="width: 100%">
-				       	<img   style="width: 100%" src="<c:url value='/resources/images/campusmap.png'/>" border="0" width="150">
+				       	<img style="width: 100%;" src="<c:url value="/resources/images/${map['FILE_NAME']}"/>" >
 				      </div>
 				      
 				      <div class="modal-footer">
@@ -198,7 +198,7 @@ body {
 	
 	<div id="viewPd">
 		<form name="frmPd" method="post" action="" >			
-				<input id="postNo" type="text" value="${map['POST_NO']}">
+				<input id="postNo" type="hidden" value="${map['POST_NO']}">
 			<br>
 			<!-- 상품명 -->
 			<p class="line">
@@ -213,7 +213,7 @@ body {
 			<!-- 판매상태 -->	
 			<!-- 상품이름 -->	
 				<c:if test="${map['DEL_FLAG']=='S'}">
-						<input type="text" id ="title" value="${map['TITLE']}">
+						<input type="hidden" id ="title" value="${map['TITLE']}">
 						<span style="font-size: 1.2em;" >${map['TITLE']}</span> <!-- 상품이름 -->
 				</c:if>	
 				
@@ -238,7 +238,7 @@ body {
 
 		
 			<p>
-				<span>*판매자</span><span>* ${map['WRITER_CODE']}</span>
+				<span>*판매자</span> <span> ${map['WRITER_CODE']}</span>
 			</p>
 		
 			<p>
@@ -285,7 +285,7 @@ body {
  <hr>
 		<!-- 여기 써머노트에서 디비 받아오는 부분 -->
 	<div id="divContents" style="margin-left: 30%;">
-		<p>${map['CONTENTS']}</p>
+		<p>${contents}</p>
 	</div>
 </div>
 </div>
