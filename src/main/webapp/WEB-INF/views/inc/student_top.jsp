@@ -171,7 +171,7 @@
                                     </a>
                                     <div class="collapse" id="collapseNotice" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">공지사항조회</a>
+                                            <a class="nav-link" href="<c:url value='/student/studentNotice/studentNotice'/>">공지사항조회</a>
                                         </nav>
                                     </div>
                                 </nav>

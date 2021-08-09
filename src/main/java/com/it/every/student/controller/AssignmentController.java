@@ -29,10 +29,10 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/student")
 @RequiredArgsConstructor
-public class assignmentController {
+public class AssignmentController {
 	
 	private static final Logger logger 
-		=LoggerFactory.getLogger(assignmentController.class);
+		=LoggerFactory.getLogger(AssignmentController.class);
 
 	
 	private final FileUploadUtil fileUploadUtil;
