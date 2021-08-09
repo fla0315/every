@@ -13,6 +13,17 @@
 		insert into post(post_no, bd_code, writer_code, title, contents, reg_date)
 		values(POST_SEQ.nextval, #{bdCode}, #{writerCode}, #{title}, #{contents}, sysdate)
 	</insert>
+	
+	
+	<!-- 중고게시판 상품 디테일-->
+	<select id="selectByJunggoPostNo" parameterType="int" resultType="PostVo">
+		select * from post post left join board_file bf 
+		on post.post_no = bf.post_no
+		where post.post_no=#{postNo}
+	</select>
+	
+	
+	
 </mapper>
 
 

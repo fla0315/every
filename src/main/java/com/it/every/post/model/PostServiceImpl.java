@@ -21,4 +21,9 @@ public class PostServiceImpl implements PostService {
 		return postDao.insertNoitce(vo);
 	}
 
+	@Override
+	public PostVO selectByJunggoPostNo(int postNo) {
+		return postDao.selectByJunggoPostNo(postNo);
+	}
+
 }

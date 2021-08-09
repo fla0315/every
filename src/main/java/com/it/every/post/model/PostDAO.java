@@ -10,4 +10,9 @@ public interface PostDAO {
 	List<PostVO> postByOpenSubCode(int bdCode);
 	//개설교과목공지 등록
 	int insertNoitce(PostVO vo);
+	
+	//거래게시판에서 상품 설명 불러오는거
+	PostVO selectByJunggoPostNo(int postNo);
+	
+	
 }
