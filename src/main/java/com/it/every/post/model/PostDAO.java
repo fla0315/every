@@ -24,6 +24,6 @@ public interface PostDAO {
 	int updateByJunggoPostNo(int postNo);//거래완료되면 업데이트
 	
 	List<Map<String, Object>> selectByNoticeStudent(String stuNo); //학생 공지사항 조회하는거
-	//Map<String, Object> selectByNoticeStudentMap(int postNo); //학생 공지사항 조회하는거
+	Map<String, Object> selectByNoticeStudentMap(int postNo); //학생 공지사항 조회하는거
 	
 }
