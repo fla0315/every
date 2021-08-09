@@ -92,7 +92,7 @@
 	
 	
 	
-	<select id="selectByNoticeStudent" parameterType="String" resultType="map">
+	<select id="selectByNoticeStudent" parameterType="RegistrationSearchVO" resultType="map">
 		select post.post_no, subj.*, to_char(post.reg_date, 'YYYY-MM-DD') as reg_date ,regi.*,board.*,post.title,post.writer_code,post.read_count from registration regi join board board
 		on regi.open_sub_code = board.open_sub_code
 		join post post
@@ -102,10 +102,10 @@
 		join subject subj
 		on subj.subj_code = os.subj_code
 		where stu_no=#{stuNo}
-		<!-- <if test='opensubcode!=0'>and subj_year=#{subjYear} </if>  -->
+		<if test='openSubCode!="0"'>and regi.open_sub_code=#{openSubCode} </if>
 	</select>
 	
-	<select id="selectByNoticeStudentMap" parameterType="int" resultType="map">
+	<select id="selectByNoticeStudentMap" parameterType="String" resultType="map">
 		select post.post_no, subj.*, to_char(post.reg_date, 'YYYY-MM-DD') as reg_date ,regi.*,board.*,post.title,post.writer_code,post.read_count from registration regi join board board
 		on regi.open_sub_code = board.open_sub_code
 		join post post
@@ -115,7 +115,6 @@
 		join subject subj
 		on subj.subj_code = os.subj_code
 		where stu_no=#{stuNo}
-		<!-- <if test='opensubcode!=0'>and subj_year=#{subjYear} </if>  -->
 	</select>
 	
 	

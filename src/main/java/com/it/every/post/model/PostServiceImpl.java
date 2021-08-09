@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.it.every.board.model.BoardVO;
 import com.it.every.boardFile.model.BoardFileVO;
+import com.it.every.common.RegistrationSearchVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -80,8 +82,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 
-	public List<Map<String, Object>> selectByNoticeStudent(String stuNo) {
-		return postDao.selectByNoticeStudent(stuNo);
+	public List<Map<String, Object>> selectByNoticeStudent(RegistrationSearchVO regiVo) {
+		return postDao.selectByNoticeStudent(regiVo);
 	}
 
 }

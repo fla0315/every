@@ -3,7 +3,9 @@ package com.it.every.post.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.every.board.model.BoardVO;
 import com.it.every.boardFile.model.BoardFileVO;
+import com.it.every.common.RegistrationSearchVO;
 
 public interface PostService {
 	List<PostVO> postByOpenSubCode(int bdCode);
@@ -23,5 +25,5 @@ public interface PostService {
 	//거래게시판에서 상품 설명 불러오는거
 	Map<String,  Object> selectByJunggoPostNo(int postNo);
 	int updateByJunggoPostNo(int postNo);//거래완료되면 업데이트
-	List<Map<String, Object>> selectByNoticeStudent(String stuNo); //학생 공지사항 조회하는거
+	List<Map<String, Object>> selectByNoticeStudent(RegistrationSearchVO regiVo); //학생 공지사항 조회하는거
 }
