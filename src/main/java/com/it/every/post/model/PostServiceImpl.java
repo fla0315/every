@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.it.every.boardFile.model.BoardFileVO;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -45,6 +47,8 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public int editNotice(PostVO vo) {
 		return postDao.editNotice(vo);
+	}
+	
 	public Map<String,  Object> selectByJunggoPostNo(int postNo) {
 		return postDao.selectByJunggoPostNo(postNo);
 	}
@@ -53,5 +57,26 @@ public class PostServiceImpl implements PostService {
 	public int updateByJunggoPostNo(int postNo) {
 		return postDao.updateByJunggoPostNo(postNo);
 	}
+
+	@Override
+	public int insertJunggo(PostVO vo) {
+		return postDao.insertJunggo(vo);
+	}
+
+	@Override
+	public int insertJunggoFile(BoardFileVO vo) {
+		return postDao.insertJunggoFile(vo);
+	}
+
+	@Override
+	public int junggoBdCode() {
+		return postDao.junggoBdCode();
+	}
+
+	@Override
+	public List<Map<String, Object>> postBybdCode(int bdCode) {
+		return postDao.postBybdCode(bdCode);
+	}
+
 
 }

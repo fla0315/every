@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.it.every.boardFile.model.BoardFileVO;
+
 @Mapper
 public interface PostDAO {
 	//개설교과목공지 불러오기
@@ -19,6 +21,13 @@ public interface PostDAO {
 	int noticeReadCount(int postNo);
 	int deletePostByPostNo(int postNo);
 	
+	//거래게시판 bdCode
+	int junggoBdCode();
+	//거래게시판 리스트
+	List<Map<String, Object>> postBybdCode(int bdCode);
+	//거래게시판 상품 등록
+	int insertJunggo(PostVO vo);
+	int insertJunggoFile(BoardFileVO vo);
 	//거래게시판에서 상품 설명 불러오는거
 	Map<String,  Object> selectByJunggoPostNo(int postNo);
 	int updateByJunggoPostNo(int postNo);//거래완료되면 업데이트

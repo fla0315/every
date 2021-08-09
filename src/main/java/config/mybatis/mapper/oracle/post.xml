@@ -50,7 +50,32 @@
 		where post_no = #{postNo}
 	</delete>
 	
-	
+	<!-- 중고게시판 bdCode 받아오기 -->
+	<select id="junggoBdCode" resultType="int">
+		select bd_code from board b
+		join category c
+		on b.category_code = c.category_code
+		where c.category_name = '거래게시판'
+	</select>
+	<!-- 중고게시판 전체 리스트 -->
+	<select id="postBybdCode" parameterType="int" resultType="map">
+		select * from post p
+		where bd_code = #{bdCode}
+		order by post_no desc
+	</select>
+	<!-- 중고게시판 상품 등록하기 -->
+	<insert id="insertJunggo" parameterType="postVo">
+		<selectKey resultType="int" keyProperty="postNo" order="BEFORE">
+			select post_seq.nextval from dual
+		</selectKey>
+		insert into post(post_no, bd_code, writer_code, title, contents, reg_date, del_flag, price)
+		values(#{postNo}, #{bdCode}, #{writerCode}, #{title}, #{contents}, sysdate, 'S', #{price})
+	</insert>
+	<!-- 상품 이미지 등록 -->
+	<insert id="insertJunggoFile" parameterType="boardFileVo">
+		insert into board_file(no, post_no, file_name, file_size, original_file_name, down_count, upfile_date)
+		values(BOARD_FILE_SEQ.nextval, #{postNo}, #{fileName}, #{fileSize}, #{originalFileName}, 0, sysdate)
+	</insert>
 	<!-- 중고게시판 상품 디테일-->
 	<select id="selectByJunggoPostNo" parameterType="int" resultType="map">
 		select * from post post left join board_file bf 
