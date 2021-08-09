@@ -25,6 +25,10 @@
 		select * from subject where subj_code = #{subjCode}
 	</select>
 	
+	<select id="selectBySubjName" parameterType="String" resultType="String">
+		select subj_code from subject where subj_name = #{subjName}
+	</select>
+	
 	<update id="editSubject" parameterType="subjectVo">
 		update subject
 		set subj_name=#{subjName}, type_code=#{typeCode},

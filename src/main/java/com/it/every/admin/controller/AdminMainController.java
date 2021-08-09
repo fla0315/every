@@ -201,4 +201,11 @@ public class AdminMainController {
 		
 		return "admin/board/marketBoardReport";
 	}
+	
+	@RequestMapping("/chart/classChart")
+	public String classChart() {
+		logger.info("강의별 학생통계 화면");
+		
+		return "admin/chart/classChart";
+	}
 }

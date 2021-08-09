@@ -49,9 +49,14 @@ public class ProfessorManageServiceImpl implements ProfessorManageService{
 	}
 
 	@Override
-	public ProfessorManageVO selectByDeptNo(String deptNo) {
+	public List<ProfessorManageVO> selectByDeptNo(String deptNo) {
 		return professorDao.selectByDeptNo(deptNo);
 	}
+
+//	@Override
+//	public ProfessorManageVO selectByDeptNo(String deptNo) {
+//		return professorDao.selectByDeptNo(deptNo);
+//	}
 
 	
 	

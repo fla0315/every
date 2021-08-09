@@ -37,6 +37,11 @@ public class SubjectServiceImpl implements SubjectService{
 		return subjectDao.deleteSubject(subjCode);
 	}
 
+	@Override
+	public String selectBySubjName(String subjName) {
+		return subjectDao.selectBySubjName(subjName);
+	}
+
 	
 	
 	
