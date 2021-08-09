@@ -7,12 +7,48 @@
 	<select id="postByOpenSubCode" parameterType="int" resultType="postVo">
 		select * from post p
 		where bd_code = #{bdCode}
+		order by post_no desc
 	</select>
 	<!-- 개설교과목공지 글 등록 -->
 	<insert id="insertNoitce" parameterType="postVo">
-		insert into post(post_no, bd_code, writer_code, title, contents, reg_date)
-		values(POST_SEQ.nextval, #{bdCode}, #{writerCode}, #{title}, #{contents}, sysdate)
+		insert into post(post_no, bd_code, writer_code, title, contents, reg_date, read_count)
+		values(POST_SEQ.nextval, #{bdCode}, #{writerCode}, #{title}, #{contents}, sysdate, 0)
 	</insert>
+	<!-- 개설교과목공지 글 수정 -->
+	<update id="editNotice" parameterType="postVo">
+		update post
+		set title=#{title}, contents=#{contents}, edit_date=sysdate
+		where post_no = #{postNo}
+	</update>
+	<!-- post_no로 게시글 불러오기 -->
+	<select id="postByPostNo" parameterType="int" resultType="map">
+		select p.*, b.* from post p
+		join board b
+		on p.bd_code = b.bd_code
+		where post_no = #{postNo}
+	</select>
+	
+	<!-- post_no로 contents내용 부르기 -->
+	<resultMap type="string" id="CONTENTS_CLOB">
+		<result property="contents" column="contents" jdbcType="CLOB" javaType="java.lang.String"/>
+	</resultMap>
+	<select id="contentsByPostNo" parameterType="int" resultMap="CONTENTS_CLOB">
+		select contents from post
+		where post_no = #{postNo}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="noticeReadCount" parameterType="int">
+		update post
+		set read_count = read_count+1
+		where post_no = #{postNo}
+	</update>
+	
+	<!-- post 삭제 -->
+	<delete id="deletePostByPostNo">
+		delete from post
+		where post_no = #{postNo}
+	</delete>
 </mapper>
 
 

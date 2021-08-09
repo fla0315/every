@@ -5,14 +5,12 @@
 
 <c:choose>
 	<c:when test="${fn:contains(firstNo, 'P')}">
-		교수
 		<jsp:include page="../inc/prof_top.jsp"></jsp:include>
 	</c:when>
 	<c:when test="${fn:contains(firstNo, 'E')}">
 		<jsp:include page="../inc/admin_top.jsp"></jsp:include>
 	</c:when>
 	<c:otherwise>
-		${firstNo }
 		<jsp:include page="../inc/student_top.jsp"></jsp:include>
 	</c:otherwise>
 </c:choose>
@@ -41,11 +39,13 @@ body {
 				<i class="fas fa-table me-1"></i> 거래 등록
 			</div>
 			<div class="card-body">
+				<form name="frmWrite" method="post" enctype="multipart/form-data" action="<c:url value='/junggo/junggoMain'/>">
 				<div class="mb-3">
-					<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
+					<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요"><br>
 					<input type="text" class="form-control" name="price" id="price" placeholder="가격">
 				</div>
 				<textarea class="form-control" rows="5" name="contents" id="summernote" placeholder="내용을 입력해 주세요" ></textarea>
+				</form>
 			</div>
 		</div>
 		<div class="card mb-5">
