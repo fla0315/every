@@ -52,14 +52,15 @@
 		<div class="col-xl-6" >
 			<div class="card mb-4">
 				<div class="card-header">
-					<i class="fas fa-table me-1" style="font-size: 1.3em"></i> 수강내역
+					<i class="fas fa-table me-1" style="font-size: 1.3em"></i> 캠퍼스맵
 					<div style="float: right; font-size: 0.8em">
-						<a href="<c:url value='#'/>">+ 더보기</a>
+						<a href="<c:url value='#'/>"></a>
 					</div>
 				</div>
 				<div>
 					<div style="width: 100%; height: 400px;">
-				<iframe src="/every/registration/myregistration" width="100%" height="100%"></iframe>
+					<img style="width: 100%;" src="<c:url value="/resources/images/campusmap.png"/>" >
+				<!-- <iframe src="/every/registration/myregistration" width="100%" height="100%"></iframe> -->
 				</div>
 				</div>
 			</div>

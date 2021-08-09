@@ -49,6 +49,7 @@ public class PostServiceImpl implements PostService {
 		return postDao.editNotice(vo);
 	}
 	
+		
 	public Map<String,  Object> selectByJunggoPostNo(int postNo) {
 		return postDao.selectByJunggoPostNo(postNo);
 	}
@@ -78,5 +79,9 @@ public class PostServiceImpl implements PostService {
 		return postDao.postBybdCode(bdCode);
 	}
 
+
+	public List<Map<String, Object>> selectByNoticeStudent(String stuNo) {
+		return postDao.selectByNoticeStudent(stuNo);
+	}
 
 }
