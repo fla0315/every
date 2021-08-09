@@ -45,6 +45,13 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public int editNotice(PostVO vo) {
 		return postDao.editNotice(vo);
+	public Map<String,  Object> selectByJunggoPostNo(int postNo) {
+		return postDao.selectByJunggoPostNo(postNo);
+	}
+
+	@Override
+	public int updateByJunggoPostNo(int postNo) {
+		return postDao.updateByJunggoPostNo(postNo);
 	}
 
 }
