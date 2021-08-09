@@ -1,6 +1,7 @@
 package com.it.every.post.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,7 +13,7 @@ public interface PostDAO {
 	int insertNoitce(PostVO vo);
 	
 	//거래게시판에서 상품 설명 불러오는거
-	PostVO selectByJunggoPostNo(int postNo);
-	
+	Map<String,  Object> selectByJunggoPostNo(int postNo);
+	int updateByJunggoPostNo(int postNo);//거래완료되면 업데이트
 	
 }

@@ -1,6 +1,7 @@
 package com.it.every.post.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,13 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public PostVO selectByJunggoPostNo(int postNo) {
+	public Map<String,  Object> selectByJunggoPostNo(int postNo) {
 		return postDao.selectByJunggoPostNo(postNo);
+	}
+
+	@Override
+	public int updateByJunggoPostNo(int postNo) {
+		return postDao.updateByJunggoPostNo(postNo);
 	}
 
 }

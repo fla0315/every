@@ -12,32 +12,48 @@
 		        // getter
 		        var IMP = window.IMP;
 		        IMP.init('imp31034269');
+		        
+		        var title = $('#title').val();
+		        
 		        IMP.request_pay({
 		            pg: 'kakao',
 		            merchant_uid: 'merchant_' + new Date().getTime(),
 
-		            name: '${postVo.title}',
-		            amount:${postVo.price},
+		            name: 'title',
+		            amount:1,
 		            buyer_email: 'iamport@siot.do',
 		            buyer_name:'${postVo.writerCode}',
 		            buyer_tel: '010-1234-5678',
 		            buyer_addr: '인천광역시 부평구',
 		            buyer_postcode: '123-456'
 		        }, function (rsp) {
+		        
+		            
 		            console.log(rsp);
 		            if (rsp.success) {
+		            	var postNo = $('#postNo').val();
+		            	console.log(postNo);	
+			            $.ajax({
+		                    type: "POST", 
+		                    url:  "<c:url value='/junggo/junggoupdate'/>", //충전 금액값을 보낼 url 설정
+		                    data: "postNo="+postNo,
+		                    success : function(){
+		                    	console.log(postNo);
+		                    	location.reload();
+							},
+							error : function(){
+								console.log(postNo);
+							}
+		                });
+			            
+			            
+			            
 		                var msg = '결제가 완료되었습니다.';
 		                msg += '고유ID : ' + rsp.imp_uid;
 		                msg += '상점 거래ID : ' + rsp.merchant_uid;
 		                msg += '결제 금액 : ' + rsp.paid_amount;
 		                msg += '카드 승인번호 : ' + rsp.apply_num;
-		                $.ajax({
-		                    type: "GET", 
-		                    url: "/user/mypage/charge/point", //충전 금액값을 보낼 url 설정
-		                    data: {
-		                        "amount" : money
-		                    },
-		                });
+		           
 		            } else {
 		                var msg = '결제에 실패하였습니다.';
 		                msg += '에러내용 : ' + rsp.error_msg;
@@ -47,19 +63,11 @@
 		    });
 		 
 		 
-		 
 		 $('button[name=chitchat]').click(function () {
 				
 			    window.open('http://localhost:9091/every/chitchat/chitchatMain', 'detail', 'width=900, height=500, location=yes, resizable=yes');
 			    
 		  });
-			
-			
-			
-		 
-		 
-		 
-		 
 		 
 	});
 	
@@ -158,7 +166,7 @@ body {
 		<!-- 상품 이미지 -->
 		<p class="center">
 			<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-					<img style="width: 100%;" src="<c:url value='/resources/images/campusmap.png'/>" >
+					<img style="width: 100%;" src="${map['FILE_NAME']}" >
 			</a>
 		</p>
 	</div>
@@ -190,25 +198,27 @@ body {
 	
 	<div id="viewPd">
 		<form name="frmPd" method="post" action="" >			
+				<input id="postNo" type="text" value="${map['POST_NO']}">
 			<br>
 			<!-- 상품명 -->
 			<p class="line">
 			<!-- 판매상태 -->
-				<c:if test="${postVo.delFlag=='S'}">
+				<c:if test="${map['DEL_FLAG']=='S'}">
 						<span style="font-weight: bold; color: orange; font-size: 1.6em;">판매중&nbsp;</span>
 				</c:if>	
-						
-				<c:if test="${postVo.delFlag=='C'}">
+					
+				<c:if test="${map['DEL_FLAG']=='C'}">
 						<span style="font-weight: bold; color: red; font-size: 1.6em;">판매완료&nbsp;</span>
 				</c:if>	
 			<!-- 판매상태 -->	
 			<!-- 상품이름 -->	
-				<c:if test="${postVo.delFlag=='S'}">
-						<span style="font-size: 1.2em;" >${postVo.title}</span> <!-- 상품이름 -->
+				<c:if test="${map['DEL_FLAG']=='S'}">
+						<input type="text" id ="title" value="${map['TITLE']}">
+						<span style="font-size: 1.2em;" >${map['TITLE']}</span> <!-- 상품이름 -->
 				</c:if>	
 				
-				<c:if test="${postVo.delFlag=='C'}">
-						<span style="text-decoration: line-through;">${postVo.title}</span> <!-- 상품이름 -->
+				<c:if test="${map['DEL_FLAG']=='C'}">
+						<span style="text-decoration: line-through;">${map['TITLE']}</span> <!-- 상품이름 -->
 				</c:if>	
 			<!-- 상품이름 -->	
 			</p>
@@ -217,28 +227,28 @@ body {
 			
 			
 			<span class=""> * 판매가격</span>				
-				<c:if test="${postVo.delFlag=='S'}">
-						<span id="getPrice"><fmt:formatNumber value="${postVo.price}" pattern="#,###"/></span> <!-- 상품이름 -->
+				<c:if test="${map['DEL_FLAG']=='S'}">
+						<span id="getPrice"><fmt:formatNumber value="${map['PRICE']}" pattern="#,###"/></span> <!-- 상품이름 -->
 				</c:if>	
 				
-				<c:if test="${postVo.delFlag=='C'}">
-						<span style="text-decoration: line-through;"><fmt:formatNumber value="${postVo.price}" pattern="#,###"/>  </span>
+				<c:if test="${map['DEL_FLAG']=='C'}">
+						<span style="text-decoration: line-through;"><fmt:formatNumber value="${map['PRICE']}" pattern="#,###"/>  </span>
 				</c:if>	
 			</p>
 
 		
 			<p>
-				<span>*판매자</span><span>* ${postVo.writerCode}</span>
+				<span>*판매자</span><span>* ${map['WRITER_CODE']}</span>
 			</p>
 		
 			<p>
 				<span>*등록일</span>
-				<span><fmt:formatDate value="${postVo.regDate}" pattern="yyyy-MM-dd"/>  </span>
+				<span><fmt:formatDate value="${map['REG_DATE']}" pattern="yyyy-MM-dd"/>  </span>
 			</p>
 		
 			<p>
 				<span>*조회수</span>
-				<span>${postVo.readCount}</span>
+				<span>${map['READ_COUNT']}</span>
 			</p>
 
 		
@@ -259,11 +269,11 @@ body {
 			
 			
 			<p>
-				<c:if test="${postVo.delFlag=='S'}">
+				<c:if test="${map['DEL_FLAG']=='S'}">
 					<button id="check_module" type="button">상품구매</button>
 				</c:if>	
 				
-				<c:if test="${postVo.delFlag=='C'}">
+				<c:if test="${map['DEL_FLAG']=='C'}">
 				</c:if>	
 				
 				<button ><a style="text-decoration: none; color: black;" href="<c:url value='/junggo/junggoMain'/>">목록</a></button>
@@ -275,7 +285,7 @@ body {
  <hr>
 		<!-- 여기 써머노트에서 디비 받아오는 부분 -->
 	<div id="divContents" style="margin-left: 30%;">
-		<p>${postVo.contents}</p>
+		<p>${map['CONTENTS']}</p>
 	</div>
 </div>
 </div>

@@ -1,5 +1,7 @@
 package com.it.every.post.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.every.common.FileUploadUtil;
 import com.it.every.post.model.PostService;
@@ -51,21 +54,33 @@ public class JunggoController {
 		}
 		
 		
-		PostVO postVo =postService.selectByJunggoPostNo(postNo);
-		logger.info("상세보기 결과, vo={}", postVo);
+		Map<String,  Object> map =postService.selectByJunggoPostNo(postNo);
+		logger.info("상세보기 결과, vo={}", map);
 		
 		/*
 		String fileInfo
 		=Utility.getFileInfo(postVo.getOriginalFileName(), postVo.getFileSize(), 
 			request);
 		*/
-		
 		model.addAttribute("firstNo", firstNo);
-		model.addAttribute("postVo", postVo);
+		model.addAttribute("map", map);
 		
 		return "junggo/junggoDetail";
 	}
 	
+	
+	
+	@RequestMapping("/junggoupdate")
+	@ResponseBody
+	public String callmebayby(HttpSession session,@RequestParam(defaultValue = "0") int postNo ,HttpServletRequest request,Model model) {
+		
+		logger.info("업데이트 postNo={}",postNo);
+		int update = postService.updateByJunggoPostNo(postNo);
+		logger.info("업데이트 update={}",update);
+		
+		return "junggo/junggoDetail";
+		
+	}
 	
 	
 	

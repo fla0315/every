@@ -16,13 +16,17 @@
 	
 	
 	<!-- 중고게시판 상품 디테일-->
-	<select id="selectByJunggoPostNo" parameterType="int" resultType="PostVo">
+	<select id="selectByJunggoPostNo" parameterType="int" resultType="map">
 		select * from post post left join board_file bf 
 		on post.post_no = bf.post_no
 		where post.post_no=#{postNo}
 	</select>
 	
-	
+	<update id="updateByJunggoPostNo" parameterType="int">
+		update post 
+		set del_flag='C'
+		where post_no=#{postNo}
+	</update>
 	
 </mapper>
 
