@@ -1,8 +1,11 @@
 package com.it.every.classroom.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
+
+import com.it.every.lecture.model.LectureVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +29,14 @@ public class ClassroomServiceImpl implements ClassroomService {
 	public int changeUsable(String classroomCode, String usable) {
 		return classroomDao.changeUsable(classroomCode, usable);
 	}
+
+	@Override
+	public List<ClassroomVO> usableClassroom(LectureVO vo) {
+		return classroomDao.usableClassroom(vo);
+	}
+
+	
+
 
 
 	

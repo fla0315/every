@@ -2,8 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/admin_top.jsp" %>
 
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
 	$(function(){
+		
+		$("#subject").autocomplete({  //오토 컴플릿트 시작
+			source: List,	// source는 List 배열
+			focus : function(event, ui) { // 방향키로 자동완성단어 선택 가능하게 만들어줌	
+				return false;
+			},
+			minLength: 1,// 최소 글자수
+			delay: 100,	//autocomplete 딜레이 시간(ms)
+			//disabled: true, //자동완성 기능 끄기
+		});
+		
 		$('#wr_submit').click(function(){
 			if($('#subject').val().length<1){
 				alert('과목명을 입력하세요');
@@ -46,19 +62,10 @@
 			}
 		});
 		
-		$('#subject').change(function() {
-			var idx = $("#subject option").index( $("#subject option:selected") );
-			if(idx != 0) {
-				$('#subjCode').attr("value", $("#subject option:selected").val());	
-			} else {
-				$('#subjCode').attr("value", '');
-			}
-		});
-		
 		$('#professor').change(function() {
 			var idx = $("#professor option").index( $("#professor option:selected") );
 			if(idx != 0) {
-				$('#profNo').attr("value", $("#professor option:selected").val());	
+				$('#profNo').attr("value", $("#professor option:selected").val());
 			} else {
 				$('#profNo').attr("value", '');
 			}
@@ -84,7 +91,7 @@
 		
 		var date = new Date();
 		var selYear = date.getFullYear();
-		var selMonth = date.getMonth();
+		var selMonth = date.getMonth()+1;
 		console.log(selMonth);
 		
 		//현재년도를 기준으로 호출
@@ -99,6 +106,108 @@
 			getYears(chgYear);
 			$('#openYear').val(chgYear);
 		});
+		
+		//선택한 과목 번호 불러오기
+		$('#subject').change(function() {
+			var subjName = $(this).val();
+			
+			$.ajax({
+				url:"<c:url value='/admin/lecture/subjCode?subjName=" + subjName + "'/>",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					
+					if(res == null) {
+						alert('해당 과목에 대한 정보가 없습니다.');
+						$("#subject").empty();
+	
+					} else if(res != null) {
+						$('#subjCode').val(res);
+					}
+				},
+				error:function(xhr, status, error){
+					alert('해당 과목을 찾을 수 없습니다.');
+					$('#subject').focus();
+					event.preventDefault();
+				}
+			});
+		});
+		
+		// 학과별 교수목록 불러오기
+		$('#deptNo').change(function() {
+			
+			var deptNo = $(this).val();
+			
+			$.ajax({
+				url:"<c:url value='/admin/lecture/profList?deptNo=" + deptNo + "'/>",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					
+					$('#timetableCode').val("").prop("selected", true);
+					$("#classroomCode").empty();
+					$("#classroomCode").append("<option value='0'>---선택하세요---</option>");
+					
+					if(res.length == 0) {
+						alert('해당 학과에 등록된 교수가 없습니다.');
+						$("#professor").empty();
+						$("#professor").append("<option value='0'>---선택하세요---</option>");
+						
+						
+					} else if(res.length > 0) {
+						$("#professor").empty();
+						var result = "";
+						$.each(res, function(idx, item){
+							result += "<option value='" + item.profNo + "'>" + item.profName + "</option>";
+						});
+						
+						$("#professor").append("<option value='0'>---선택하세요---</option>");
+						$("#professor").append(result);
+					}
+				},
+				error:function(xhr, status, error){
+					alert("error 발생!" + error);
+				}
+			});
+		});
+		
+		// 학과별 강의실 목록 불러오기
+		$('#timetableCode').change(function() {
+			
+			var deptNo = $('#deptNo').val();
+			var timetableCode = $(this).val();
+			
+			$.ajax({
+				url:"<c:url value='/admin/lecture/usableClassroom?deptNo=" + deptNo 
+						+ "&timetableCode=" + timetableCode + "'/>",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					
+					if(res.length == 0) {
+						alert('해당 시간에 사용 가능한 강의실이 없습니다.');
+						$("#classroomCode").empty();
+						$("#classroomCode").append("<option value='0'>---선택하세요---</option>");
+	
+					} else if(res.length > 0) {
+						$("#classroomCode").empty();
+						
+						var result = "";
+						$.each(res, function(idx, item){
+							result += "<option value='" + item.classroomCode + "'>" 
+								+ item.buildingName + " " + item.classroomName + "</option>";
+						});
+						
+						$("#classroomCode").append("<option value='0'>---선택하세요---</option>");
+						$("#classroomCode").append(result);
+					}
+				},
+				error:function(xhr, status, error){
+					alert("error 발생!" + error);
+				}
+			});
+		});
+		
 	});	
 	
 	function getYears(getY) {
@@ -113,6 +222,9 @@
 			$('#openYear').append("<option value='" + y + "'>" + y + "년" + "</option>");
 		}
 	}
+	
+	List = ${str}
+	
 </script>
 
 <div id="layoutAuthentication">
@@ -125,20 +237,10 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">개설강의 수정</h3></div>
                                     <div class="card-body">
                                          <form name="registerfrm" method="post" action="<c:url value='/admin/lecture/lectureEdit'/>">
-                                         	<input name="openSubCode" id="openSubCode" type="hidden" value="${map['OPENSUBCODE']}" />
+                                         	<input name="openSubCode" id="openSubCode" type="text" value="${map['OPENSUBCODE']}" />
                                          	<div class="form-floating mb-3">
-                                                <select class="form-control" name="subjCode" id="subjCode" >
-													<option value="">---선택하세요---</option>
-													    <!-- 반복문 시작 -->	
-											        <c:forEach var="subjVo" items="${subjectList }" varStatus="status">
-														<option value="${subjVo.subjCode }" 
-															<c:if test="${map['SUBJCODE'] == subjVo.subjCode }">
-																selected="selected"
-															</c:if>
-														>${subjVo.subjName }</option>
-											        </c:forEach>
-												</select>
-												<!-- <input type="hidden" name="subjCode" id="subjCode"/> --> 
+												<input class="form-control" name="subject" id="subject" value="${map['SUBJNAME']}" placeholder="Enter your first name" />
+												<input type="text" name="subjCode" id="subjCode" value="${map['OPENSUBCODE']}"/>
                                                 <label for="inputFirstName">과목명</label>
                                             </div>
                                             <div class="row mb-3">
@@ -160,18 +262,11 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                    	<select class="form-control" name="profNo" id="profNo" >
+                                                    	<select class="form-control" name="professor" id="professor" >
 														    <option value="">---선택하세요---</option>
-														    <!-- 반복문 시작 -->	
-											            	<c:forEach var="profVo" items="${profList }" varStatus="status">
-																<option value="${profVo.profNo }" 
-																	<c:if test="${map['PROFNO'] == profVo.profNo }">
-																		selected="selected"
-																	</c:if>
-																>${profVo.profName }</option>
-											            	</c:forEach>
+														    <option value="${map['PROFNO'] }" selected="selected">${map['PROFNAME'] }</option>
 														</select>
-                                                        <!-- <input type="hidden" name="profNo" id="profNo"/> --> 
+                                                        <input type="text" name="profNo" id="profNo" value="${map['PROFNO'] }"/> 
                                                         <label for="inputFirstName">담당교수</label>
                                                     </div>
                                                 </div>
