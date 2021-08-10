@@ -171,7 +171,7 @@ body {
 							<i class="far fa-file-alt"></i> 전체보기
 						</div>
 						<div class="card-body" style="height:450px">
-							<table class="table-bordered text-center" style="width: 100%">
+							<table class="table table-bordered table-striped mb-0" id="showTable">
 								<colgroup>
 									<col style="width: 20%" />
 									<col style="width: 20%" />
@@ -206,6 +206,8 @@ body {
 							</table>
 						</div>
 					</div>
+					
+					
 					</div>
 				</div>
 			</div>

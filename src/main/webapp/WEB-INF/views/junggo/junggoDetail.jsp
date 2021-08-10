@@ -5,6 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
+
 <script>
 	$(function(){
 		
@@ -226,7 +229,7 @@ body {
 			<p class="line">
 			
 			
-			<span class=""> * 판매가격</span>				
+			<span class=""> <i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;판매가격</span>				
 				<c:if test="${map['DEL_FLAG']=='S'}">
 						<span id="getPrice"><fmt:formatNumber value="${map['PRICE']}" pattern="#,###"/></span> <!-- 상품이름 -->
 				</c:if>	
@@ -238,16 +241,16 @@ body {
 
 		
 			<p>
-				<span>*판매자</span> <span> ${map['WRITER_CODE']}</span>
+				<span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;판매자</span> <span>${map['WRITER']}</span>
 			</p>
 		
 			<p>
-				<span>*등록일</span>
+				<span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;등록일</span>
 				<span><fmt:formatDate value="${map['REG_DATE']}" pattern="yyyy-MM-dd"/>  </span>
 			</p>
 		
 			<p>
-				<span>*조회수</span>
+				<span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;조회수</span>
 				<span>${map['READ_COUNT']}</span>
 			</p>
 

@@ -42,7 +42,7 @@
 					console.log(item)
 					str+="<tr class='' role='row' id=''>"; //테이블 여는거 
 					str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.SUBJ_NAME+"</td>"; //제목
-					str+="<td role='gridcell' style='height: 0px; width: 5%; '><a style='text-decoration:none; color=black;' href='<c:url value='/student/studentNotice/studentNoticeDetail?postNo="+item.POST_NO+"'/>' onclick='window.open(this.href,'_blank','width=800, height=600')'>"+item.TITLE+"</a></td>"; //제목
+					str+="<td role='gridcell' style='height: 0px; width: 5%; '><a style='text-decoration:none; color=black;' href='<c:url value='/student/studentNotice/readCount?postNo="+item.POST_NO+"'/>'>"+item.TITLE+"</a></td>"; //제목
 					str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.REG_DATE+"</td>"; //날짜
 					str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.READ_COUNT+"</td>"; //조회수
 					str+="</tr>"; //테이블 닫는거
