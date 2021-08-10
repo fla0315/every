@@ -42,10 +42,5 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 	<div class="col-xl-6" style="float: left; width: 600px; margin: 20px">
-		<div class="card mb-4">
-			<div class="card-header">
-				<i class="far fa-calendar-alt me-1"></i> 학사일정
-			</div>
-			<div id="calendar" style="float: left; width: 100%"></div>
-		</div>
+		<div id="calendar" style="float: left; width: 100%"></div>
 	</div>
