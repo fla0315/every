@@ -9,6 +9,13 @@
 		where bd_code = #{bdCode}
 		order by post_no desc
 	</select>
+	<!-- 개설교과목공지 전체 -->
+	<select id="noticeByProfNo" parameterType="String" resultType="map">
+		select p.*, b.open_sub_code from post p join board b
+		on p.bd_code = b.bd_code
+		where p.bd_code in (select bd_code from board
+		where open_sub_code in (select open_sub_code from open_subj where prof_no=#{profNo}))
+	</select>
 	<!-- 개설교과목공지 글 등록 -->
 	<insert id="insertNoitce" parameterType="postVo">
 		insert into post(post_no, bd_code, writer_code, title, contents, reg_date, read_count)

@@ -13,7 +13,6 @@
 
 <script type="text/javascript">
 	$(function(){	//개설과목
-			
 		$('#openSub').change(function(){
 			var openSubCode = $('#openSub option:selected').val();
 			$('#openSubCode').val(openSubCode);
@@ -44,6 +43,10 @@
 		         }) 
 			}
 	      });
+		
+		$('#btnList').click(function(){
+			location.href="<c:url value='/professor/notice/noticeList?openSubCode='/>";
+		});
 	});
 </script>
 

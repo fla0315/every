@@ -11,6 +11,8 @@ import com.it.every.boardFile.model.BoardFileVO;
 public interface PostDAO {
 	//개설교과목공지 불러오기
 	List<PostVO> postByOpenSubCode(int bdCode);
+	//개설교과목 교수님별 전체 불러오기
+	List<Map<String, Object>> noticeByProfNo(String profNo);
 	//개설교과목공지 등록
 	int insertNoitce(PostVO vo);
 	//개설교과목공지 수정

@@ -7,6 +7,7 @@ import com.it.every.boardFile.model.BoardFileVO;
 
 public interface PostService {
 	List<PostVO> postByOpenSubCode(int bdCode);
+	List<Map<String, Object>> noticeByProfNo(String profNo);
 	int insertNoitce(PostVO vo);
 	int editNotice(PostVO vo);
 	Map<String, Object> postByPostNo(int postNo);

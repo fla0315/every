@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.it.every.common.ConstUtil;
 import com.it.every.common.FileUploadUtil;
 import com.it.every.openSubj.model.OpenSubjService;
+import com.it.every.post.model.PostService;
+import com.it.every.post.model.PostVO;
 import com.it.every.professor.model.ProfessorService;
 import com.it.every.professor.model.ProfessorVO;
 import com.it.every.syllabus.model.SyllabusService;
@@ -38,14 +40,17 @@ public class ProfessorController {
 	private final OpenSubjService openSubjService;
 	private final SyllabusService syllabusService;
 	private final FileUploadUtil fileUploadUtil;
+	private final PostService postService;
 	
 	@RequestMapping("/profMain")
 	public void profMain(HttpSession session, Model model) {
 		String profNo = (String) session.getAttribute("no");
 		logger.info("교수님 메인 화면");
 		List<Map<String, Object>> oList = openSubjService.checkClassRoom(profNo);
-		logger.info("담당교과목 메인화면 리스트 oList.size={}", oList.size());
+		List<Map<String, Object>> nList = postService.noticeByProfNo(profNo);
+		logger.info("담당교과목 메인화면 리스트 oList.size={}, nList.size={}", oList.size(), nList.size());
 		model.addAttribute("oList", oList);
+		model.addAttribute("nList", nList);
 	}
 	
 	@GetMapping("/editProf")

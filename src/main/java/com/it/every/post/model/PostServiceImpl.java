@@ -84,4 +84,9 @@ public class PostServiceImpl implements PostService {
 		return postDao.selectByNoticeStudent(stuNo);
 	}
 
+	@Override
+	public List<Map<String, Object>> noticeByProfNo(String profNo) {
+		return postDao.noticeByProfNo(profNo);
+	}
+
 }
