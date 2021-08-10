@@ -190,7 +190,7 @@
                                  	  <a class="nav-link" href="#">자유게시판</a>
 	                               </nav>
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="<c:url value='/timetable/timetable'/>"">시간표조회</a>
+                                 	  <a class="nav-link" href="<c:url value='/timetable/timetable'/>">시간표조회</a>
 	                               </nav>
                             </div>
                           <!-- 나의 강좌 끝 -->

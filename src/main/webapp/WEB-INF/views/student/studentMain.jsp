@@ -40,12 +40,9 @@
 			<div class="card mb-4">
 				<div class="card-header">
 					<i class="fas fa-table me-1" style="font-size: 1.3em"></i> 학사일정
-					<div style="float: right; font-size: 0.8em">
-						<a href="<c:url value='#'/>">+ 더보기</a>
-					</div>
 				</div>
-				<div>
-					
+				<div style="width: 100%; height: 400px;">
+				<iframe src="/every/timetable/calendarMain" width="100%" height="100%"></iframe>
 				</div>
 			</div>
 		</div>
