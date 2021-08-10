@@ -12,13 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.it.every.admin.professor.model.ProfessorManageVO;
-import com.it.every.admin.professor.position.model.ProfessorPositionVO;
 import com.it.every.calendar.model.CalendarService;
 import com.it.every.calendar.model.CalendarVO;
 import com.it.every.campus.model.CampusService;
 import com.it.every.campus.model.CampusVO;
-import com.it.every.department.model.DepartmentVO;
 
 import lombok.RequiredArgsConstructor;
 

@@ -126,7 +126,9 @@
 					}
 				},
 				error:function(xhr, status, error){
-					alert("error 발생!" + error);
+					alert('해당 과목을 찾을 수 없습니다.');
+					$('#subject').focus();
+					event.preventDefault();
 				}
 			});
 		});
@@ -142,14 +144,18 @@
 				dataType:"json",
 				success:function(res){
 					
+					$('#timetableCode').val("").prop("selected", true);
+					$("#classroomCode").empty();
+					$("#classroomCode").append("<option value='0'>---선택하세요---</option>");
+					
 					if(res.length == 0) {
 						alert('해당 학과에 등록된 교수가 없습니다.');
 						$("#professor").empty();
 						$("#professor").append("<option value='0'>---선택하세요---</option>");
-
+						
+						
 					} else if(res.length > 0) {
 						$("#professor").empty();
-						
 						var result = "";
 						$.each(res, function(idx, item){
 							result += "<option value='" + item.profNo + "'>" + item.profName + "</option>";
@@ -157,6 +163,43 @@
 						
 						$("#professor").append("<option value='0'>---선택하세요---</option>");
 						$("#professor").append(result);
+					}
+				},
+				error:function(xhr, status, error){
+					alert("error 발생!" + error);
+				}
+			});
+		});
+		
+		// 학과별 강의실 목록 불러오기
+		$('#timetableCode').change(function() {
+			
+			var deptNo = $('#deptNo').val();
+			var timetableCode = $(this).val();
+			
+			$.ajax({
+				url:"<c:url value='/admin/lecture/usableClassroom?deptNo=" + deptNo 
+						+ "&timetableCode=" + timetableCode + "'/>",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					
+					if(res.length == 0) {
+						alert('해당 시간에 사용 가능한 강의실이 없습니다.');
+						$("#classroomCode").empty();
+						$("#classroomCode").append("<option value='0'>---선택하세요---</option>");
+
+					} else if(res.length > 0) {
+						$("#classroomCode").empty();
+						
+						var result = "";
+						$.each(res, function(idx, item){
+							result += "<option value='" + item.classroomCode + "'>" 
+								+ item.buildingName + " " + item.classroomName + "</option>";
+						});
+						
+						$("#classroomCode").append("<option value='0'>---선택하세요---</option>");
+						$("#classroomCode").append(result);
 					}
 				},
 				error:function(xhr, status, error){
@@ -195,13 +238,6 @@
                                     <div class="card-body">
                                          <form name="registerfrm" method="post" action="<c:url value='/admin/lecture/lectureReg_post'/>">
                                          	<div class="form-floating mb-3">
-                                                <%-- <select class="form-control" name="subject" id="subject" >
-													<option value="">---선택하세요---</option>
-													    <!-- 반복문 시작 -->	
-											        <c:forEach var="subjVo" items="${subjectList }" varStatus="status">
-														<option value="${subjVo.subjCode }" >${subjVo.subjName }</option>
-											        </c:forEach>
-												</select> --%>
 												<input class="form-control" name="subject" id="subject" placeholder="Enter your first name" />
 												<input type="hidden" name="subjCode" id="subjCode"/>
                                                 <label for="inputFirstName">과목명</label>
@@ -267,9 +303,9 @@
                                                         <select class="form-control" name="classroomCode" id="classroomCode">
 														    <option value="">---선택하세요---</option>
 														    <!-- 반복문 시작 -->	
-											            	<c:forEach var="classroomVo" items="${classroomList }" varStatus="status">
+											            	<%-- <c:forEach var="classroomVo" items="${classroomList }" varStatus="status">
 																<option value="${classroomVo.classroomCode }">${classroomVo.buildingName } ${classroomVo.classroomName }</option>
-											            	</c:forEach>
+											            	</c:forEach> --%>
 														</select>
                                                         <label for="inputFirstName">강의실</label>
                                                     </div>
