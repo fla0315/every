@@ -17,7 +17,7 @@ public class PostVO {
 	private String contents;		//내용
 	private Timestamp regDate;		//등록일
 	private int readCount;			//조회수
-	private String delFlag;			//삭제여부
+	private char delFlag;			//삭제여부
 	private int groupNo;			//원본글번호
 	private int sortNo;				//정렬번호
 	private int step;				//차수

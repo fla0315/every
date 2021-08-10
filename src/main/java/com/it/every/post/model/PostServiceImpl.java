@@ -115,6 +115,21 @@ public class PostServiceImpl implements PostService {
 
 	}
 
+	@Override
+	public int updatecount(int no) {
+		return postDao.updatecount(no);
+	}
+
+	@Override
+	public List<PostVO> mylist(String no) {
+		return postDao.mylist(no);
+	}
+
+	@Override
+	public int updatepost(PostVO vo) {
+		return postDao.updatepost(vo);
+	}
+
 
 
 }

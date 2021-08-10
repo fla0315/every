@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.it.every.calendar.model.CalendarService;
+import com.it.every.calendar.model.CalendarVO;
+import com.it.every.campus.model.CampusService;
 import com.it.every.timetable.model.TimetableService;
 import com.it.every.timetable.model.TimetableVO;
 
@@ -26,7 +29,10 @@ public class TimetableController {
 	private static final Logger logger = LoggerFactory.getLogger(TimetableController.class);
 
 	private final TimetableService timetableService;
-
+	private final CampusService campusService;
+	private final CalendarService calendarService;
+	
+	
 	@GetMapping("/timetable")
 	public void open_rregistration(@ModelAttribute TimetableVO timetableVo, HttpSession session, Model model) {
 
@@ -119,5 +125,43 @@ public class TimetableController {
 		logger.info("시간표 화면 보여주기");
 		model.addAttribute("Timelist", arr);
 	}
+	
+	
+	@RequestMapping("/calendarMain")
+	public String calendar(Model model) {
+		logger.info("학사일정 화면");
+		
+		List<CalendarVO> calendarList = calendarService.selectCalendar();
+		List<Map<String, Object>> allList = calendarService.selectAll();
+		logger.info("학사일정 조회 결과, calendarList.size={}", calendarList.size());
+		logger.info("학사일정 조회 결과, allList.size={}", allList.size());
+		
+		String str ="";
+		int num =0;
+		for (CalendarVO vo : calendarList) {
+			
+			str +="{";
+			str += "title: '" + vo.getContents() + "', ";
+			str += "start: '" + vo.getSDate().substring(0, 10) + "', ";
+			str += "end: '" + vo.getEDate().substring(0, 10) + "'";
+			str +="}";
+			
+			num ++;
+			if(num<calendarList.size()){
+				str +=", ";
+			}		
+		}
+		
+		logger.info("str = {}", str);
+		
+		model.addAttribute("calendarList", calendarList);
+		model.addAttribute("allList", allList);
+		model.addAttribute("str", str);
+		
+		return "timetable/calendarMain";
+	}
+	
+	
+	
 
 }
