@@ -23,6 +23,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>EVERYHAKSA</title>
+        <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/images/graduation-hat.png">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/styles.css'/>"/>
         <link href="<c:url value='/resources/calendar/core/main.css'/>" rel="stylesheet" />
@@ -37,7 +38,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
 		<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=46a41c1e7c20d77119a3710f087caae5&libraries=services"></script> -->
 		
 <style type="text/css">
-	a {
+	table a {
 		 text-decoration:none; 
 		 color: black;
 	}
@@ -48,7 +49,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="<c:url value='/'/>">Every Haksa</a>
+            <a class="navbar-brand ps-3" href="<c:url value='/admin/mainDisplay/notice'/>"><i class="fas fa-user-graduate"></i>&nbsp;에브리학사</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -58,9 +59,10 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div>
             </form>
+            <div style="color: white"><%=name %>님 환영합니다.</div>&nbsp;
+            
             <a id="chitchat" href="<c:url value='/chitchat/chitchatMain'/>"><i class="fas fa-envelope"></i></a>
-            <div style="color: white"><%=name %>, 환영합니다.</div>
-            <!-- Navbar-->
+            <!-- Navbar--> 
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
@@ -167,11 +169,9 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                             </a>
                             <div class="collapse" id="collapseMain" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/notice'/>">공지사항</a>
-                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/lunchMenu'/>">식단표</a>
-                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/campusMap'/>">캠퍼스맵</a>
-                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/calendar'/>">학사일정</a>
-                                    <a class="nav-link" href="<c:url value='/admin/mainDisplay/question'/>">Q&amp;A</a>
+                                    <a class="nav-link" href="<c:url value='/admin/campusInfo/notice'/>">공지사항</a>
+                                    <a class="nav-link" href="<c:url value='/admin/campusInfo/campusMap'/>">캠퍼스맵</a>
+                                    <a class="nav-link" href="<c:url value='/admin/campusInfo/calendar'/>">학사일정</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBoard" aria-expanded="false" aria-controls="collapseLayouts">

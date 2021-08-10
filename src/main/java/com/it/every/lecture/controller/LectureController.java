@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.every.admin.professor.model.ProfessorManageService;
 import com.it.every.admin.professor.model.ProfessorManageVO;
-import com.it.every.admin.student.model.StudentManageVO;
-import com.it.every.admin.student.state.model.StudentStateVO;
 import com.it.every.classroom.model.ClassroomService;
 import com.it.every.classroom.model.ClassroomVO;
 import com.it.every.department.model.DepartmentService;
@@ -65,29 +63,90 @@ public class LectureController {
 		logger.info("강의등록 화면");
 		
 		List<DepartmentVO> deptList = departmentService.selectDepartment();
-		List<SubjTypeVO> typeList = subjTypeService.selectSubjType();
 		List<ProfessorManageVO> profList = profManageService.selectAll();
 		List<TimetableVO> timetableList = timetableService.selectTimetable();
 		List<ClassroomVO> classroomList = classroomService.selectClassroom();
 		List<SubjectVO> subjectList = subjectService.selectSubject();
 		
 		logger.info("학과 조회 결과, deptList.size={}", deptList.size());
-		logger.info("교과구분 조회 결과, typeList.size={}", typeList.size());
 		logger.info("교수 조회 결과, profList.size={}", profList.size());
 		logger.info("시간표 조회 결과, timetableList.size={}", timetableList.size());
 		logger.info("강의실 조회 결과, classroomList.size={}", classroomList.size());
 		logger.info("과목 조회 결과, subjectList.size={}", subjectList.size());
 		
+		String str ="[";
+		int num =0;
+		for (SubjectVO vo : subjectList) {
+			
+			str += "'" + vo.getSubjName() + "'";
+			
+			num ++;
+			if(num<subjectList.size()){
+				str +=", ";
+			}		
+		}
+		str += "]";
+		
+		logger.info("str = {}", str);
+		
 		model.addAttribute("deptList", deptList);
-		model.addAttribute("typeList", typeList);
 		model.addAttribute("profList", profList);
 		model.addAttribute("timetableList", timetableList);
 		model.addAttribute("classroomList", classroomList);
 		model.addAttribute("subjectList", subjectList);
+		model.addAttribute("str", str);
 		
 		return "admin/lecture/lectureRegister";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping("/subjCode")
+	public String searchSubjCode(@RequestParam String subjName) {
+		
+		logger.info("파라미터 subjName={}", subjName);
+		
+		String result = subjectService.selectBySubjName(subjName);
+		logger.info("과목번호 조회 결과, result={}", result);
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/profList")
+	public List<ProfessorManageVO> deptProfList(@RequestParam String deptNo) {
+		logger.info("학과별 교수리스트 - list");
+		
+		List<ProfessorManageVO> list = profManageService.selectByDeptNo(deptNo);
+		
+		logger.info("학과별 교수 조회 결과, list.size={}", list.size());
+		//logger.info("교수이름 조회 결과: {}", list.get(0).getProfName());
+		
+		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/usableClassroom")
+	public List<ClassroomVO> usableClassroom(
+			@RequestParam String deptNo, 
+			@RequestParam String timetableCode) {
+		logger.info("학과별 강의실리스트 - list");
+		logger.info("파라미터 조회 - deptNo={}, timetableCode={}", deptNo, timetableCode);
+		
+		LectureVO vo = new LectureVO();
+		
+		vo.setDeptNo(deptNo);
+		vo.setTimetableCode(timetableCode);
+		logger.info("vo={}", vo);
+		
+		List<ClassroomVO> list 
+			= classroomService.usableClassroom(vo);
+		
+		logger.info("학과별 강의실리스트 조회 결과, list.size={}", list.size());
+		
+		return list;
+	}
+	
+	
 	
 	@PostMapping("/lectureReg_post")
 	public String lectureReg_post(@RequestParam Map<String, String> map, 
@@ -144,11 +203,28 @@ public class LectureController {
 		List<ClassroomVO> classroomList = classroomService.selectClassroom();
 		List<SubjectVO> subjectList = subjectService.selectSubject();
 		
+		logger.info("학과 조회 결과, map={}", map);
 		logger.info("학과 조회 결과, deptList.size={}", deptList.size());
 		logger.info("교수 조회 결과, profList.size={}", profList.size());
 		logger.info("시간표 조회 결과, timetableList.size={}", timetableList.size());
 		logger.info("강의실 조회 결과, classroomList.size={}", classroomList.size());
 		logger.info("과목 조회 결과, subjectList.size={}", subjectList.size());
+		
+		String str ="[";
+		int num =0;
+		for (SubjectVO vo : subjectList) {
+			
+			str += "'" + vo.getSubjName() + "'";
+			
+			num ++;
+			if(num<subjectList.size()){
+				str +=", ";
+			}		
+		}
+		str += "]";
+		
+		logger.info("str = {}", str);
+		
 		
 		model.addAttribute("map", map);
 		model.addAttribute("deptList", deptList);
@@ -156,6 +232,7 @@ public class LectureController {
 		model.addAttribute("timetableList", timetableList);
 		model.addAttribute("classroomList", classroomList);
 		model.addAttribute("subjectList", subjectList);
+		model.addAttribute("str", str);
 		
 		return "admin/lecture/lectureEdit";
 	}
@@ -197,4 +274,6 @@ public class LectureController {
 		
 		return "common/message";
 	}
+	
+	
 }

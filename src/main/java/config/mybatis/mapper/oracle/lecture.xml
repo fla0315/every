@@ -44,8 +44,9 @@
 	</insert>
 	
 	<select id="selectByOsCode" parameterType="String" resultType="HashMap">
-		select o.open_sub_code openSubCode, sj.subj_code subjCode, d.dept_no deptNo, 
-		p.prof_no profNo, o.open_year openYear, o.semester semester, 
+		select o.open_sub_code openSubCode, sj.subj_code subjCode, 
+		sj.subj_name subjName, d.dept_no deptNo, p.prof_no profNo, 
+		p.prof_name profName, o.open_year openYear, o.semester semester, 
 		t.timetable_code timetableCode, c.classroom_code classroomCode
 		from subj_time s 
 		join open_subj o

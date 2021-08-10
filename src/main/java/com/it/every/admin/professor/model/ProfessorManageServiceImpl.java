@@ -48,6 +48,16 @@ public class ProfessorManageServiceImpl implements ProfessorManageService{
 		return professorDao.selectMajorPosition(deptName);
 	}
 
+	@Override
+	public List<ProfessorManageVO> selectByDeptNo(String deptNo) {
+		return professorDao.selectByDeptNo(deptNo);
+	}
+
+//	@Override
+//	public ProfessorManageVO selectByDeptNo(String deptNo) {
+//		return professorDao.selectByDeptNo(deptNo);
+//	}
+
 	
 	
 	

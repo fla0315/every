@@ -21,10 +21,10 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/student")
 @RequiredArgsConstructor
-public class studentController {
+public class StudentController {
 
 	private static final Logger logger 
-		=LoggerFactory.getLogger(studentController.class);
+		=LoggerFactory.getLogger(StudentController.class);
 	
 	private final StudentService studentService;
 

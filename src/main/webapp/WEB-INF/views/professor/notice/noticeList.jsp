@@ -7,6 +7,14 @@ body {
 	padding-top: 70px;
 	padding-bottom: 30px;
 }
+
+table a {
+	color:black;
+}
+
+table a:hover{
+	color:gray;
+}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -49,7 +57,7 @@ body {
 					</select>
 					<input type="button" id="btCheck" value="조회">
 			<div class="text-end">
-				<button type="button" class="btn btn-sm btn-primary" id="btCreate">개설</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btCreate">개설교과목 공지 개설</button>
 				<button type="button" class="btn btn-sm btn-primary" id="btWrite">등록</button>
 			</div>
 		</div>
@@ -60,58 +68,32 @@ body {
 			<div class="card-body">
 				<table id="datatablesSimple">
 					<colgroup>
+						<col style="width:50%;" />
+						<col style="width:30%;" />
 						<col style="width:20%;" />
-						<col style="width:20%;" />
-						<col style="width:40%;" />
-						<col style="width:20%;" />		
 					</colgroup>
 					<thead>
 						<tr>
-							<th>번호</th>
-							<th>과목명</th>
 							<th>제목</th>
 							<th>날짜</th>
+							<th>조회수</th>
 						</tr>
 					</thead>
-					<tfoot>
-						<tr>
-							<th>Name</th>
-							<th>Position</th>
-							<th>Office</th>
-							<th>Age</th>
-						</tr>
-					</tfoot>
 					<tbody>
-						<tr>
-							<td>Tiger Nixon</td>
-							<td>System Architect</td>
-							<td>Edinburgh</td>
-							<td>Edinburgh</td>
-						</tr>
-						<tr>
-							<td>Garrett Winters</td>
-							<td>Accountant</td>
-							<td>Tokyo</td>
-							<td>Tokyo</td>
-						</tr>
-						<tr>
-							<td>Ashton Cox</td>
-							<td>Junior Technical Author</td>
-							<td>San Francisco</td>
-							<td>San Francisco</td>
-						</tr>
-						<tr>
-							<td>Cedric Kelly</td>
-							<td>Senior Javascript Developer</td>
-							<td>Edinburgh</td>
-							<td>Edinburgh</td>
-						</tr>
-						<tr>
-							<td>Airi Satou</td>
-							<td>Accountant</td>
-							<td>Tokyo</td>
-							<td>Tokyo</td>
-						</tr>
+						<c:if test="${empty pList }">
+							<tr>
+								<td colspan="4">데이터가 없습니다</td>
+							</tr>
+						</c:if>
+						<c:if test="${!empty pList }">
+							<c:forEach var="vo" items="${pList }">
+								<tr>
+									<td><a href="<c:url value='/professor/notice/readCount?postNo=${vo.postNo }&openSubCode=${open}'/>">${vo.title }</a></td>
+									<td><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd"/></td>
+									<td>${vo.readCount }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
 			</div>

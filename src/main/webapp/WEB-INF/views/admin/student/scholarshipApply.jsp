@@ -4,61 +4,6 @@
 
 <script type="text/javascript">
 	$(function(){
-		$('#wr_submit').click(function(){
-			if($('#major').val().length<1){
-				alert('학과를 선택하세요');
-				$('#major').focus();
-				event.preventDefault();
-			} else if($('#name').val().length<1){
-				alert('이름를 입력하세요');
-				$('#name').focus();
-				event.preventDefault();
-			} else if($('#pwd').val().length<1){
-				alert('비밀번호를 입력하세요');
-				$('#pwd').focus();
-				event.preventDefault();
-			} else if($('#pwd').val()!=$('#pwdChk').val()){
-				alert('비밀번호가 일치하지 않습니다.');
-				$('#pwdChk').focus();
-				event.preventDefault();				
-			} else if($('#phoneNum').val().length<1){
-				alert('전화번호를 입력하세요');
-				$('#phoneNum').focus();
-				event.preventDefault();
-			} else if($('#state').val().length<1){
-				alert('학적상태를 선택하세요');
-				$('#state').focus();
-				event.preventDefault();
-			} else if($('#admissionDate').val().length<1){
-				alert('입학일자를 입력하세요');
-				$('#admissionDate').focus();
-				event.preventDefault();
-			}
-			
-		});
-		
-		/* $('#major').change(function() {
-			var idx = $("#major option").index( $("#major option:selected") );
-			if(idx != 0) {
-				if(idx<10) {
-					idx = "0" + idx;
-				}
-				$('#deptNo').attr("value", idx);	
-			} else {
-				$('#deptNo').attr("value", '');
-			}
-		});
-			
-		$('#admissionDate').change(function() {
-			var year = $('#admissionDate').val().substring(0,4);
-			$('#admissionYear').attr("value", year);	
-		});
-
-		$('#studentName').change(function() {
-			var year = $('#studentName').val();
-			$('#stuNo').attr("value", year);	
-		}); */
-		
 		
 		var date = new Date();
 		var selYear = date.getFullYear();
@@ -96,7 +41,6 @@
 																<option value="${studentVo.stuNo }">${studentVo.major }_${studentVo.stuNo }_${studentVo.name }</option>
 											            	</c:forEach>
 														</select>
-														<!-- <input type="text" name="stuNo" id="stuNo">	    -->         
                                                         <label for="inputFirstName">학생명</label>
                                                     </div>
                                                 </div>
@@ -116,22 +60,14 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <!-- <select class="form-control" name="openYear" id="openYear"  disabled="disabled"></select> -->
                                                         <input class="form-control" name="year" id="year" type="text" placeholder="연도" disabled="disabled"/>
                                                         <label for="inputFirstName">연도</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <!-- <select class="form-control" name="semesterType" id="semesterType"> -->
-                                                        <!-- <select class="form-control" name="semester" id="semester">
-														    <option value="">---선택하세요---</option>
-														    <option value="1학기">1학기</option>
-														    <option value="2학기">2학기</option>
-														</select> -->
 														<input class="form-control" name="semester" id="semester" type="text" 
 															placeholder="학기" disabled="disabled"/>
-														<!-- <input type="text" name="semester" id="semester"/> -->
                                                         <label for="inputFirstName">학기</label>
                                                     </div>
                                                 </div>

@@ -33,4 +33,6 @@ public interface BoardService {
 	
 	public int updateboard(customVO vo);
 	public String professorcalom(String no);
+	int checkBdCode(String openSubCode);
+	
 }

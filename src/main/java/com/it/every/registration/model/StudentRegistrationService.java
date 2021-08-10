@@ -39,4 +39,7 @@ public interface StudentRegistrationService {
 	int deleteAutoAttendance (AttendanceVO attendanceVo); //출석부 자동 삭제
 	int deleteAutoEvaluation (EvaluationVO evaluationVo); //강의 자동삭제
 		
+	
+	
+	
 }

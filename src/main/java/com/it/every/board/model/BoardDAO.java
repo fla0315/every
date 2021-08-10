@@ -36,5 +36,8 @@ public interface BoardDAO {
 	public int updateboard(customVO vo); //게시판 옵션 수정용
 	public String professorcalom(String no); //게시판 생성 시 교수는 학과 선택 x
 	
-	
+	int checkBdCode(String openSubCode);
+
+
+
 }

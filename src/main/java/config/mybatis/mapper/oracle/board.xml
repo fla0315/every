@@ -116,7 +116,10 @@
 	
 	</select> 
 	
-
+	<select id="checkBdCode" parameterType="String" resultType="int">
+		select bd_code from board
+		where open_sub_code = #{openSubCode}
+	</select>
 
 	
 </mapper>

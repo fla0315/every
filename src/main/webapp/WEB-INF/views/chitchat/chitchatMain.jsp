@@ -4,14 +4,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:choose>
 	<c:when test="${fn:contains(firstNo, 'P')}">
-		교수
 		<jsp:include page="../inc/prof_top.jsp"></jsp:include>
 	</c:when>
 	<c:when test="${fn:contains(firstNo, 'E')}">
 		<jsp:include page="../inc/admin_top.jsp"></jsp:include>
 	</c:when>
 	<c:otherwise>
-		${firstNo }
 		<jsp:include page="../inc/student_top.jsp"></jsp:include>
 	</c:otherwise>
 </c:choose>

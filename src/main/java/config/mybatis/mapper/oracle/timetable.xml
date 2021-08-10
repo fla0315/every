@@ -29,7 +29,9 @@
 		where stu.student_id=#{studentId}
 	</select> 
 	
-	
+	<select id="selectTimetable" resultType="timetableVO">
+		select * from timetable
+	</select>
 	
 	
 </mapper>

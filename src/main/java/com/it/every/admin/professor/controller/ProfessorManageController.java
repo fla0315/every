@@ -123,7 +123,7 @@ public class ProfessorManageController {
 		return "common/message";
 	}
 	
-	
+	/*
 	@RequestMapping("/professor/professorDelete")
 	public String professorDelete(@RequestParam String profNo, Model model) {
 		logger.info("교수정보 삭제");
@@ -139,7 +139,7 @@ public class ProfessorManageController {
 		
 		return "common/message";
 	}
-	
+	*/
 	
 	@RequestMapping("/chart/professorChart")
 	public String professorChart() {

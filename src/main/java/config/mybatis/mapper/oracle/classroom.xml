@@ -39,6 +39,23 @@
 		where classroom_code=#{classroomCode}
 	</update>
 	
+	<select id="usableClassroom" parameterType="lectureVo" resultType="classroomVo">
+		select c.classroom_code classroomCode, c.classroom_name classroomName, 
+		d.dept_name deptName, b.building_name buildingName
+		from classroom c join department d
+		on c.building_code = d.building_code
+		join building b
+		on d.building_code = b.building_code
+		where d.dept_no = #{deptNo}
+		and
+		classroom_code not in (select s.classroom_code
+		from subj_time s join timetable t
+		on s.timetable_code = t.timetable_code
+		where t.timetable_code = #{timetableCode})
+		order by c.classroom_code
+	</select>
+	
+	
 </mapper>
 
 

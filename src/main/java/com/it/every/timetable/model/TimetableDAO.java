@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface TimetableDAO {
 
 	public List<TimetableVO> selectTimetable();
-	
 	List<Map<String, Object>> selectTimetableByID(String userid); //학생별 개인 시간표조회
 	
 }

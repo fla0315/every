@@ -12,6 +12,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>EVERYHAKSA</title>
+        <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/images/graduation-hat.png">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -22,13 +23,13 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="<c:url value='/student/studentMain'/>">학사관리시스템</a>
+            <a class="navbar-brand ps-3" href="<c:url value='/student/studentMain'/>"><i class="fas fa-user-graduate"></i>&nbsp;에브리학사</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                <div style="color: white">${sessionScope.name } 환영합니다.</div>
+                <div style="color: white">${sessionScope.name }님 환영합니다.</div>
                     <!-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button> -->
                 </div>
@@ -170,7 +171,7 @@
                                     </a>
                                     <div class="collapse" id="collapseNotice" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">공지사항조회</a>
+                                            <a class="nav-link" href="<c:url value='/student/studentNotice/studentNotice'/>">공지사항조회</a>
                                         </nav>
                                     </div>
                                 </nav>

@@ -8,7 +8,7 @@
 		select *
 		from subject sj join subj_type st
 		on sj.type_code = st.type_code
-		order by sj.subj_code desc
+		order by to_number(sj.subj_code) desc
 	</select>
 	
 	<insert id="registerSubject" parameterType="subjectVo">
@@ -23,6 +23,10 @@
 	
 	<select id="selectBySubjCode" parameterType="String" resultType="subjectVo">
 		select * from subject where subj_code = #{subjCode}
+	</select>
+	
+	<select id="selectBySubjName" parameterType="String" resultType="String">
+		select subj_code from subject where subj_name = #{subjName}
 	</select>
 	
 	<update id="editSubject" parameterType="subjectVo">
