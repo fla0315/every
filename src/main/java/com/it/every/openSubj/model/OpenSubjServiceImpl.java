@@ -49,6 +49,11 @@ public class OpenSubjServiceImpl implements OpenSubjService {
 	public List<OpenSubjVO>  OpenRegistraionSearch(RegistrationSearchVO regiSearchVo) {
 		return openSubjDao.OpenRegistraionSearch(regiSearchVo);
 	}
+
+	@Override
+	public List<OpenSubjVO> boardOpenSubCode(String profNo) {
+		return openSubjDao.boardOpenSubCode(profNo);
+	}
 	
 	
 	

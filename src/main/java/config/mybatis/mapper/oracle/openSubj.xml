@@ -9,6 +9,13 @@
 		where prof_no=#{prof_no}
 	</select>
 	
+	<select id="boardOpenSubCode" parameterType="String" resultType="openSubjVo">
+		select * from open_subj o
+		join board b
+		on o.open_sub_code = b.open_sub_code
+		where prof_no = #{profNo}
+	</select>
+	
 	<select id="listByProfNo" parameterType="String" resultType="map">
 		select o.*, s.subj_name, s.personnel ,t.type ,(select count(*) from registration r where o.open_sub_code = r.open_sub_code) student
 		from open_subj o join subject s

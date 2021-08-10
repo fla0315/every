@@ -23,6 +23,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>EVERYHAKSA</title>
+        <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/images/graduation-hat.png">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/styles.css'/>"/>
         <link href="<c:url value='/resources/calendar/core/main.css'/>" rel="stylesheet" />

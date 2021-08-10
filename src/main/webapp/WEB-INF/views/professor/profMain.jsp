@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../inc/prof_top.jsp" %>
+
+<style type="text/css">
+	.notice{
+		color:black;
+	}
+	
+	.notice:hover{
+		color:gray;
+	}
+</style>
    <div class="container-fluid px-4">
        <h1 class="mt-4"></h1>
        <ol class="breadcrumb mb-4">
@@ -157,11 +167,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>21270001</td>
-									<td style="padding-left:2%" class="text-left">공지사항1</td>
-									<td>2021.08.03</td>
-								</tr>
+								<c:if test="${empty nList }">
+									<tr>
+										<td colspan="3">데이터가 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:if test="${!empty nList }">
+									<c:forEach var="map" items="${nList }">
+										<tr>
+											<td>${map['OPEN_SUB_CODE'] }</td>
+											<td><a class="notice" href="<c:url value='/professor/notice/noticeDetail?postNo=${map["POST_NO"] }&openSubCode=${map["OPEN_SUB_CODE"] }'/>">${map['TITLE'] }</a></td>
+											<td><fmt:formatDate value="${map['REG_DATE'] }" pattern="yyyy-MM-dd"/></td>
+										</tr>
+									</c:forEach>
+								</c:if>
 							</tbody>
 					</table>
 	                   </div>

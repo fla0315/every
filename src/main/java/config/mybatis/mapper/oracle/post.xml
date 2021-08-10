@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.post.model.PostDAO">
+	<!-- 개설교과목공지 글 읽어오기 -->
+	<select id="postByOpenSubCode" parameterType="int" resultType="postVo">
+		select * from post p
+		where bd_code = #{bdCode}
+		order by post_no desc
+	</select>
+	<!-- 개설교과목공지 전체 -->
+	<select id="noticeByProfNo" parameterType="String" resultType="map">
+		select p.*, b.open_sub_code from post p join board b
+		on p.bd_code = b.bd_code
+		where p.bd_code in (select bd_code from board
+		where open_sub_code in (select open_sub_code from open_subj where prof_no=#{profNo}))
+	</select>
+	<!-- 개설교과목공지 글 등록 -->
+	<insert id="insertNoitce" parameterType="postVo">
+		insert into post(post_no, bd_code, writer_code, title, contents, reg_date, read_count)
+		values(POST_SEQ.nextval, #{bdCode}, #{writerCode}, #{title}, #{contents}, sysdate, 0)
+	</insert>
+	<!-- 개설교과목공지 글 수정 -->
+	<update id="editNotice" parameterType="postVo">
+		update post
+		set title=#{title}, contents=#{contents}, edit_date=sysdate
+		where post_no = #{postNo}
+	</update>
+	<!-- post_no로 게시글 불러오기 -->
+	<select id="postByPostNo" parameterType="int" resultType="map">
+		select p.*, b.* from post p
+		join board b
+		on p.bd_code = b.bd_code
+		where post_no = #{postNo}
+	</select>
+	
+	<!-- post_no로 contents내용 부르기 -->
+	<resultMap type="string" id="CONTENTS_CLOB">
+		<result property="contents" column="contents" jdbcType="CLOB" javaType="java.lang.String"/>
+	</resultMap>
+	
+	<select id="contentsByPostNo" parameterType="int" resultMap="CONTENTS_CLOB">
+		select contents from post
+		where post_no = #{postNo}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="noticeReadCount" parameterType="int">
+		update post
+		set read_count = read_count+1
+		where post_no = #{postNo}
+	</update>
+	
+	<!-- post 삭제 -->
+	<delete id="deletePostByPostNo">
+		delete from post
+		where post_no = #{postNo}
+	</delete>
+	
+	<!-- 중고게시판 bdCode 받아오기 -->
+	<select id="junggoBdCode" resultType="int">
+		select bd_code from board b
+		join category c
+		on b.category_code = c.category_code
+		where c.category_name = '거래게시판'
+	</select>
+	<!-- 중고게시판 전체 리스트 -->
+	<select id="postBybdCode" parameterType="int" resultType="map">
+		select * from post p
+		where bd_code = #{bdCode}
+		order by post_no desc
+	</select>
+	<!-- 중고게시판 상품 등록하기 -->
+	<insert id="insertJunggo" parameterType="postVo">
+		<selectKey resultType="int" keyProperty="postNo" order="BEFORE">
+			select post_seq.nextval from dual
+		</selectKey>
+		insert into post(post_no, bd_code, writer_code, title, contents, reg_date, del_flag, price)
+		values(#{postNo}, #{bdCode}, #{writerCode}, #{title}, #{contents}, sysdate, 'S', #{price})
+	</insert>
+	<!-- 상품 이미지 등록 -->
+	<insert id="insertJunggoFile" parameterType="boardFileVo">
+		insert into board_file(no, post_no, file_name, file_size, original_file_name, down_count, upfile_date)
+		values(BOARD_FILE_SEQ.nextval, #{postNo}, #{fileName}, #{fileSize}, #{originalFileName}, 0, sysdate)
+	</insert>
+	<!-- 중고게시판 상품 디테일-->
+	<select id="selectByJunggoPostNo" parameterType="int" resultType="map">
+		select * from post post left join board_file bf 
+		on post.post_no = bf.post_no
+		where post.post_no=#{postNo}
+	</select>
+	
+	<update id="updateByJunggoPostNo" parameterType="int">
+		update post 
+		set del_flag='C'
+		where post_no=#{postNo}
+	</update>
+	
+	
+	
+	<select id="selectByNoticeStudent" parameterType="RegistrationSearchVO" resultType="map">
+		select post.post_no, subj.*, to_char(post.reg_date, 'YYYY-MM-DD') as reg_date ,regi.*,board.*,post.title,post.writer_code,post.read_count from registration regi join board board
+		on regi.open_sub_code = board.open_sub_code
+		join post post
+		on post.bd_code = board.bd_code
+		join open_subj os
+		on os.open_sub_code = regi.open_sub_code
+		join subject subj
+		on subj.subj_code = os.subj_code
+		where stu_no=#{stuNo}
+		<if test='openSubCode!="0"'>and regi.open_sub_code=#{openSubCode} </if>
+	</select>
+	
+	<select id="selectByNoticeStudentMap" parameterType="String" resultType="map">
+		select post.post_no, subj.*, to_char(post.reg_date, 'YYYY-MM-DD') as reg_date ,regi.*,board.*,post.title,post.writer_code,post.read_count from registration regi join board board
+		on regi.open_sub_code = board.open_sub_code
+		join post post
+		on post.bd_code = board.bd_code
+		join open_subj os
+		on os.open_sub_code = regi.open_sub_code
+		join subject subj
+		on subj.subj_code = os.subj_code
+		where stu_no=#{stuNo}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+

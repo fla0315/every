@@ -12,6 +12,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>EVERYHAKSA</title>
+        <link rel="shortcut icon" type="image⁄x-icon" href="${pageContext.request.contextPath}/resources/images/graduation-hat.png">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -121,11 +122,11 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">커뮤니티</div>
-                            <a class="nav-link" href="#l">
+                            <a class="nav-link" href="/every/post/freeboard">
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 자유게시판
                             </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="<c:url value='/junggo/junggoMain'/>">
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 거래게시판
                             </a>

@@ -29,6 +29,7 @@ public interface customDAO {
 	public List<customVO> customlist(customVO vo);
 	public int deleteboard(String bd_name);
 	public int checkall(customVO vo);
+	public int category(String name);
 	
 	
 	public int updateboard(customVO vo);

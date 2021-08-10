@@ -60,8 +60,8 @@ public class OpenSubjController {
 	
 	
 	
-	  @GetMapping("/open_registration") public String
-	  open_rregistration(@ModelAttribute OpenSubjVO openSubjVo , HttpSession
+	  @GetMapping("/open_registration") 
+	  public String  open_rregistration(@ModelAttribute OpenSubjVO openSubjVo , HttpSession
 	  session, Model model) {
 	  
 	  logger.info("개설교과과정페이지");

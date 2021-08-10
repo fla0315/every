@@ -13,13 +13,39 @@
 
 <script type="text/javascript">
 	$(function(){	//개설과목
-		$('#btnSave').click(function(){
-			if($('#openSub option:selected').val()!='선택하세요'){
-				var openSubCode = $('#openSub option:selected').val();
-				location.href="<c:url value='/professor/notice/noticeWrite?openSubCode="+openSubCode+"'/>";
-			} else{
+		$('#openSub').change(function(){
+			var openSubCode = $('#openSub option:selected').val();
+			$('#openSubCode').val(openSubCode);
+			console.log(openSubCode);
+		});
+		
+		$('form[name=noticeFrm]').submit(function() {
+			if($('#openSubCode').val()=='' || $('#openSubCode').val()=='선택하세요'){
 				alert('개설교과목 번호를 선택하세요!');
+				event.preventDefault();
+			}else{
+				 console.log(openSubCode);
+		         $.ajax({
+		            type : "POST",
+		            url : "<c:url value='/professor/notice/noticeWrite'/>",
+		            data : {
+		            	"openSubCode":openSubCode,
+		            	"title":title,
+		            	"contents":contents,
+		            	"writeCode":writerCode
+		            },
+		            success : function() {
+		               alert('공지사항 등록 성공');
+		            },
+		            error :  function() {
+		               alert('공지사항 등록 실패');
+		            }
+		         }) 
 			}
+	      });
+		
+		$('#btnList').click(function(){
+			location.href="<c:url value='/professor/notice/noticeList?openSubCode='/>";
 		});
 	});
 </script>
@@ -33,7 +59,7 @@ body {
 	<article>
 		<div class="container col-lg-10" role="main">
 			<h2>공지사항 등록</h2>
-			<form name="form" id="form" role="form" method="post" action="">
+			<form name="noticeFrm" id="form" role="form" method="post" action="<c:url value='/professor/notice/noticeWrite'/>">
 				<br>
 				<div class="mb-3">
 					<label for="title">개설교과목</label>
@@ -41,12 +67,7 @@ body {
 						<option>선택하세요</option>
 						<c:if test="${!empty osList }">
 							<c:forEach var="vo" items="${osList}">
-								<c:if test="${open == vo.openSubCode }">
-									<option selected>${vo.openSubCode }</option>
-								</c:if>
-								<c:if test="${open != vo.openSubCode }">
-									<option>${vo.openSubCode }</option>
-								</c:if>
+								<option value="${vo.openSubCode }">${vo.openSubCode }</option>
 							</c:forEach>
 						</c:if>
 					</select>
@@ -58,22 +79,24 @@ body {
 				
 				<div class="mb-3">
 					<label for="content">내용</label>
-					<div id="summernote"></div>
-					<!-- <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea> -->
+					<!-- <div id="summernote"></div> -->
+					<textarea class="form-control" rows="5" name="contents" id="summernote" placeholder="내용을 입력해 주세요" ></textarea>
+					<input type="hidden" name="writerCode" value="${sessionScope.no }">
+					<input type="hidden" id="openSubCode" name="openSubCode" value="">
 				</div>
-			</form>
 
 			<div >
-				<button type="button" class="btn btn-sm btn-primary" id="btnSave">제출</button>
+				<button type="submit" class="btn btn-sm btn-primary" id="btnSave">등록</button>
 				<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
 			</div>
+			</form>
 		</div>
 	</article>
 <script>
       $('#summernote').summernote({
         placeholder: '내용을 입력해주세요',
         tabsize: 2,
-        height: 100
+        height: 350
       });
     </script>
     

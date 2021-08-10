@@ -29,10 +29,10 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/student")
 @RequiredArgsConstructor
-public class assignmentController {
+public class AssignmentController {
 	
 	private static final Logger logger 
-		=LoggerFactory.getLogger(assignmentController.class);
+		=LoggerFactory.getLogger(AssignmentController.class);
 
 	
 	private final FileUploadUtil fileUploadUtil;
@@ -59,6 +59,30 @@ public class assignmentController {
 		return "student/assignment/StudentAssignment";
 		
 	}
+	@RequestMapping("/assignment/StudentAssignmentMain")
+	public String assignmentMain(@ModelAttribute RegistrationSearchVO regiVo,@ModelAttribute AssignmentVO  assignmentVo,HttpSession session, Model model) {
+		logger.info("과제 등록 페이지");
+		//여기다가는 과목명과 과제제목을 학번에 맞는걸 뿌려줘야한다
+		String userid = (String)session.getAttribute("user_id");
+		String stuNo = (String) session.getAttribute("no");
+		regiVo.setStudentId(userid);
+		assignmentVo.setStuNo(stuNo);
+		
+		List<Map<String, Object>> Mylist =regiService.selectMyRegistarion(userid);
+		model.addAttribute("Mylist",Mylist);
+		logger.info("과목명 , Mylist.size()={}",Mylist.size());
+		List<Map<String, Object>> AssignList =studentService.myAssignmemtList(stuNo);
+		model.addAttribute("AssignList",AssignList);
+		logger.info("과목명 , AssignList.size()={}",AssignList.size());
+		
+		return "student/assignment/StudentAssignmentMain";
+		
+	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/assignment/selectMySubj")
 	@ResponseBody

@@ -12,7 +12,7 @@ public interface OpenSubjDAO {
 	List<OpenSubjVO> selectByProfNo(String profNo); //교수가 담당하고 있는 개설과목찾기
 	List<Map<String, Object>> listByProfNo(String profNo); //교수 담당 세부
 	List<Map<String, Object>> checkClassRoom(String profNo); //교수별 개설교과목 강의실
-
+	List<OpenSubjVO> boardOpenSubCode(String profNo); //board 리스트 가져오기
 	
 	//개설교과과정전체조회 + 검색 추가하는중
 	List<OpenSubjVO> OpenRegistraionALL( ); //얘는 그냥 전체 조회
