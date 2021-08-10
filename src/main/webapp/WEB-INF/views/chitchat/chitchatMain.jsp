@@ -66,6 +66,8 @@ body {
 					data-bs-toggle="pill" data-bs-target="#inbox" type="button"
 					role="tab" aria-controls="inbox" aria-selected="false">수신함</button>
 			</li>
+			
+			
 			<li class="nav-item" role="presentation">
 				<button class="nav-link" id="outbox-tab"
 					data-bs-toggle="pill" data-bs-target="#outbox" type="button"
@@ -102,7 +104,7 @@ body {
 								<div class="col-md-5">
 									<div class="form-floating mb-3 mb-md-0">
 										<input class="form-control" name="receiver" type="text" id="receiver"
-											value=""/ readonly> <label for="receiver">받는 사람</label>
+											value=""readonly> <label for="receiver">받는 사람</label>
 											<input type="hidden" value="" id="code" name="code">
 									</div>
 								</div>

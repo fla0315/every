@@ -67,12 +67,12 @@ public class AdminMainController {
 		return "admin/chart/classChart";
 	}
 	
-	@RequestMapping("/board/freeBoard")
-	public String freeBoard() {
-		logger.info("자유게시판 화면");
-		
-		return "admin/board/freeBoard";
-	}
+	/*
+	 * @RequestMapping("/board/freeBoard") public String freeBoard() {
+	 * logger.info("자유게시판 화면");
+	 * 
+	 * return "admin/board/freeBoard"; }
+	 */
 	
 	@RequestMapping("/board/freeBoardReport")
 	public String freeBoardReport() {

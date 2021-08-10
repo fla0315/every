@@ -90,15 +90,18 @@
 	<select id="customlist" parameterType="customVO" resultType="customVO">
 	select forbo.dept_name,boar.bd_name, forbo.type, forbo.subj_name, boar.is_private, boar.is_reply, boar.is_upload
 	from forboard forbo, board boar
-	where boar.open_sub_code=forbo.open_sub_code
+	where boar.open_sub_code=forbo.open_sub_code and usage='Y'
 	<if test='usertype=="professor"'>
 	 and prof_name=#{profname}
 	</if>
 	</select>
 	
-	<delete id="deleteboard" parameterType="String">
-		delete from board where bd_name=#{bd_name}
-	</delete>
+	<!-- 미사용(삭제)-->
+	<update id="deleteboard" parameterType="String">
+		update board
+		set usage='N'
+		bd_name=#{bd_name}
+	</update>
 	
 	<!-- 게시판 업데이트 -->
 	<update id="updateboard" parameterType="customVO">
@@ -106,6 +109,14 @@
 		set is_reply=#{isreply}, is_private=#{isprivate}, is_comment=#{iscomment}, is_upload=#{isupload}, bd_name=#{bdname}
 		where bd_name=#{forbdname}
 	</update>
+	
+	<!-- 교수일 때 수업 불러오기용(학과 선택용) -->
+	<select id="professorcalom" parameterType="String" resultType="String" >
+		select distinct DEPT_NAME from forboard where prof_no=#{prof_no}
+	
+	</select> 
+	
 
 
+	
 </mapper>

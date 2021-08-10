@@ -43,6 +43,11 @@ public class customController {
 		
 		String usertype= (String)session.getAttribute("usertype");
 		String deptname= (String)session.getAttribute("name");
+		 String no = (String)session.getAttribute("no"); 
+		 
+		 
+		
+		  
 		
 		logger.info("섹션확인, type={}, name={}",usertype,deptname);
 		
@@ -140,7 +145,9 @@ public class customController {
 	   //너로 등록된 거 불러오고
 	  List<Map<String, Object>> prolist=service.proselectoption(no);
 	  String usertype= (String)session.getAttribute("usertype");
-	  
+	  String professorwhere = service.professorcalom(no);
+	  logger.info("pro={}",professorwhere);
+	
 	  
 	  registerVO regvo= new registerVO();
 	  regvo.setChk_info(usertype);
@@ -157,6 +164,8 @@ public class customController {
 	  model.addAttribute("prolist",prolist);
 	  model.addAttribute("type", type);
 	  model.addAttribute("category", category);
+	  model.addAttribute("professor",professorwhere);
+
 	  
 	  if (usertype.equals("professor")) {
 		  model.addAttribute("deptname", deptname);

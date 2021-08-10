@@ -13,7 +13,31 @@
 
 <script type="text/javascript">
    $(function() {
+	   
+	   $('#boardInsert').click(function() {
+		   
+		   
+		   if ($(':radio[name=isreply]:checked').length<1) {
+	   			alert("모든 선택지를 체크해 주세요.");
+	   			event.preventDefault();
+	   		}else if ($(':radio[name=isupload]:checked').length<1) {
+   			alert("모든 선택지를 체크해 주세요.");
+   			event.preventDefault();
+   		}else if ($(':radio[name=iscomment]:checked').length<1) {
+   			alert("모든 선택지를 체크해 주세요.");
+   			event.preventDefault();
+   		}else if ($(':radio[name=isprivate]:checked').length<1) {
+   			alert("모든 선택지를 체크해 주세요.");
+   			event.preventDefault();
+   		}
+   	  
+	   
+	      });
+	   
       $('form[name=changeboard]').submit(function() {
+    	 
+    	
+    	  
          $.ajax({
             type : "post",
             url : '<c:url value='/custompage/customchangeinput'/>',

@@ -3,7 +3,19 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<%@ include file="../../inc/admin_top.jsp" %>
+<%
+	String no = (String)session.getAttribute("no");
+	String usertype = (String)session.getAttribute("usertype");
+	%>
+	
+	<%if(usertype.equals("professor")){ %>
+	<jsp:include page="../../inc/prof_top.jsp"></jsp:include>
+	<%}else if(usertype.equals("admin")){ %>
+		<jsp:include page="../../inc/admin_top.jsp"></jsp:include>
+		<%}else if(usertype.equals("student")){ %>
+		<jsp:include page="../../inc/student_top.jsp"></jsp:include>
+		<%} %>
+
 
 
 
@@ -103,9 +115,7 @@ $(function() {
 					수정
 				</button>
 				
-				<button class="btn btn-primary btn-sm" id="deleteboard" class="deleteboard">
-					삭제
-				</button>
+				
 				<input type="hidden" id="confirm" class="confirm">
 			</div>
 		</div>

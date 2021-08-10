@@ -353,6 +353,7 @@ public class registerController {
 					,result,pvo.getProfNo(),pvo.getProfName(),id);
 			url= "redirect:/professor/profMain";		
 		}
+		
 		return url;
 	}
 	
@@ -363,6 +364,7 @@ public class registerController {
 		session.removeAttribute("no");
 		session.removeAttribute("name");
 		session.removeAttribute("user_id");
+		session.removeAttribute("usertype");
 		
 		return "redirect:/";
 	}

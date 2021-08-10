@@ -121,7 +121,7 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">커뮤니티</div>
-                            <a class="nav-link" href="#l">
+                            <a class="nav-link" href="/every/post/freeboard">
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 자유게시판
                             </a>

@@ -72,7 +72,7 @@ $(function(){
 $('#stuno').keyup(function(){
 	var data=$(this).val();
 	var data2=$('#changeradio').val(); 
-	if(validate_check(data) && data.length>=2){
+	if(data.length>=2){
 		$.ajax({
 			url:"<c:url value='/reg/stunocheck'/>",
 			type:"post",

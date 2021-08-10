@@ -106,6 +106,12 @@ public class BoardServiceIMPl implements BoardService {
 		return dao.category(name);
 	}
 
+	@Override
+	public String professorcalom(String no) {
+		// TODO Auto-generated method stub
+		return dao.professorcalom(no);
+	}
+
 	
 
 	

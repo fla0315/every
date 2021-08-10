@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.it.every.reply.model.ReplyDAO">
+	<insert id="replycomment" parameterType="ReplyVO">
+		<selectKey resultType="int" keyProperty="replyNo"
+			order="BEFORE">
+			select reply_seq.nextval from dual
+		</selectKey>
+		insert into
+		reply(reply_no,writer_code,contents,post_no,reg_date,del_flag)
+		values(#{replyNo},#{writerCode},#{contents},#{postNo},sysdate,#{delFlag})
+	</insert>
+
+
+<resultMap id="clobchange" type="map"  >
+ 	 <result property="REPLY_NO" column="REPLY_NO" />
+      <result property="CONTENTS" column="CONTENTS" jdbcType="CLOB" javaType="java.lang.String"/>
+      <result property="WRITER_CODE" column="WRITER_CODE" />
+      <result property="REG_DATE" column="REG_DATE" />
+      <result property="POST_NO" column="POST_NO" />
+   </resultMap>
+	<select id="selectreply" parameterType="int" resultMap="clobchange">
+	
+	<![CDATA[
+		SELECT reply_no,writer_code,contents,reg_date,post_no
+		from(
+			select *
+			from reply
+			where del_flag='N' and post_no=#{post_no}
+			order by reg_date desc)
+			where rownum<=3 
+  						]]>
+	</select>
+	
+ 
+   
+   
+	<update id="inputdelflag" parameterType="ReplyVO">
+		update reply
+		set del_flag=#{delFlag}
+		where reply_no=#{replyNo} 
+	
+	</update>
+	
+	<update id="goodinput" parameterType="PostVO">
+		update post
+		set good=#{good},good_people=#{goodPeople}
+		where post_no=#{postNo}
+	</update>
+
+	<select id="selectmyreply" parameterType="String" resultType="ReplyVO">
+		select reply_no,writer_code,contents,reg_date,post_no from reply
+		where del_flag='N'  and writer_code=#{writer_code}
+	
+	</select>
+
+</mapper>

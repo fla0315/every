@@ -3,16 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%
-String Id = (String)session.getAttribute("user_id");
-String no = (String)session.getAttribute("no");
-String name = (String)session.getAttribute("name");
-boolean t_login = false;
 
-if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
-	t_login=true; //로그인이 된 경우
-}
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +39,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="<c:url value='/'/>">Every Haksa</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+           
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
@@ -57,7 +47,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div>
             </form>
-            <div style="color: white"><%=no %>, 환영합니다.</div>
+            <div style="color: white">${sessionScope.name }, 환영합니다.</div>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
