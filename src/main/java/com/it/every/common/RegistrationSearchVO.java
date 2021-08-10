@@ -16,6 +16,8 @@ public class RegistrationSearchVO extends SearchVO{
 	private String facultyName; //학과 
 	private String deptName; //department에서 학과
 	private String subjName;//과목명
-	
+	private String openSubCode;//과목명
+	private String stuNo;//학생번호
 	private String studentId;//학생 아이디
+	
 }

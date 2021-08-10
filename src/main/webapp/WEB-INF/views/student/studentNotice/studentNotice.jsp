@@ -22,12 +22,13 @@
 	
 	function noticeList(){
 		
-		var opensubcode=$('#opensubcode').val(); //학과
+		var openSubCode=$('#openSubCode').val(); //학과
+		console.log(openSubCode);
 		
 		$.ajax({
 			url:"<c:url value='/student/studentNotice/studentNoticeAjax'/>",
 			data:{
-				"opensubcode":opensubcode,
+				"openSubCode":openSubCode,
 			},
 			dataType:"json",
 			type:"post",
@@ -41,7 +42,7 @@
 					console.log(item)
 					str+="<tr class='' role='row' id=''>"; //테이블 여는거 
 					str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.SUBJ_NAME+"</td>"; //제목
-					str+="<td role='gridcell' style='height: 0px; width: 5%; '><a href='<c:url value='/student/studentNotice/studentNoticeDetail?postNo="+item.POST_NO+"'/>'>"+item.TITLE+"</a></td>"; //제목
+					str+="<td role='gridcell' style='height: 0px; width: 5%; '><a style='text-decoration:none; color=black;' href='<c:url value='/student/studentNotice/readCount?postNo="+item.POST_NO+"'/>'>"+item.TITLE+"</a></td>"; //제목
 					str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.REG_DATE+"</td>"; //날짜
 					str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.READ_COUNT+"</td>"; //조회수
 					str+="</tr>"; //테이블 닫는거
@@ -69,9 +70,10 @@
 	<br><h2>공지사항</h2>
 		<br>
 		<!-- 공지사항에서 과목 고르기 -->
-		<div class="mb-3">
+		
+		<div class="mb-4">
 			<label for="title">과목</label>
-					<select id="opensubcode" name="opensubcode" class="dataTable-selector">
+					<select id="openSubCode" name="openSubCode" class="dataTable-selector">
 						<!-- 과목명 뿌려주는 곳 -->
 						<c:if test="${!empty Mylist }">
 								<option value="0">선택하세요</option>

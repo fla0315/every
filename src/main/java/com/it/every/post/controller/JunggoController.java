@@ -140,11 +140,24 @@ public class JunggoController {
 		logger.info("상세보기 결과, map={}", map);
 		logger.info("본문, contents={}", contents);
 		
-		/*
-		String fileInfo
-		=Utility.getFileInfo(postVo.getOriginalFileName(), postVo.getFileSize(), 
-			request);
-		*/
+		
+
+		//작성자
+		String writerCode = String.valueOf(map.get("WRITER_CODE"));
+		System.out.println(writerCode);
+        char startNo = writerCode.charAt(0);
+        String writer="";
+        if(startNo=='P'){ //교수일 경우
+           writer = professorService.nameByProfNo(writerCode);
+        } else if(startNo=='E'){ //임직원의 경우
+           writer = employeeService.nameByEmpNo(writerCode);
+        } else{   //학생의 경우
+           writer = studentService.nameByStuNo(writerCode);
+        }
+        
+        logger.info("작성자 이름={}", writer);
+        map.put("WRITER", writer);
+        
 		model.addAttribute("firstNo", firstNo);
 		model.addAttribute("map", map);
 		model.addAttribute("contents", contents);
