@@ -92,17 +92,21 @@ public class FileUploadUtil {
             path=ConstUtil.SYLLABUS_FILE_UPLOAD_PATH_TEST; //강의계획서
          }else if(pathFlag==ConstUtil.UPLOAD_ASSIGNMENT_FLAG) { //학생이 과제 제출하는거 
             path=ConstUtil.ASSIGNMENT_FILE_UPLOAD_PATH_TEST; //학생이 과제 제출했을때 다운로드 폴더 경로
-         }
+         }else if(pathFlag==ConstUtil.UPLOAD_JUNGGO_FLAG) { //중고거래
+             path=ConstUtil.JUNGGO_FILE_UPLOAD_PATH_TEST; //중고거래 다운
+          }
          
       }else { //deploy
          if(pathFlag==ConstUtil.UPLOAD_SYLLABUS_FLAG) {
             path=ConstUtil.SYLLABUS_FILE_UPLOAD_PATH_TEST; //psd_syllabus
          }else if(pathFlag==ConstUtil.UPLOAD_ASSIGNMENT_FLAG) {
             path=ConstUtil.ASSIGNMENT_FILE_UPLOAD_PATH_TEST; //pds_assignment
-         }
+         }else if(pathFlag==ConstUtil.UPLOAD_ASSIGNMENT_FLAG) {
+             path=ConstUtil.JUNGGO_FILE_UPLOAD_PATH_TEST; //pds_junggo
+          }
          //실제 물리적인 경로 구하기
          path = request.getSession().getServletContext().getRealPath(path);
-      }
+      } 
       
       logger.info("업로드 경로 : {}" , path);
       
