@@ -15,6 +15,32 @@
 				select * from 
 				subject st join subj_type sj
 				on st.type_code= sj.type_code
+				left join professor prof
+				on prof.prof_no = st.prof_no
+				left join open_subj os
+				on os.subj_code = st.subj_code
+				left join registration rs
+				on rs.open_sub_code = os.open_sub_code
+				left join student stu
+				on stu.stu_no = rs.stu_no
+				left join department depart
+				on depart.dept_no =prof.dept_no
+				left join subj_time subj_time
+				on subj_time.open_sub_code = os.open_sub_code
+				left join timetable timetable
+				on timetable.timetable_code = subj_time.timetable_code
+				left join classroom classroom
+				on classroom.classroom_code = subj_time.classroom_code
+				left join building bul
+				on bul.building_code = classroom.building_code
+				where stu.student_id=#{studentId}
+				<if test='openYear!="0"'>and st.open_year = #{openYear} </if>
+		    	<if test='semester!="0"'>and st.semester = #{semester}</if>
+		</select>
+	<!-- 	<select id="searchMyRegistarion" parameterType="RegistrationSearchVO" resultType="map">
+				select * from 
+				subject st join subj_type sj
+				on st.type_code= sj.type_code
 				join professor prof
 				on prof.prof_no = st.prof_no
 				join open_subj os
@@ -26,7 +52,7 @@
 				where stu.student_id=#{studentId}
 				<if test='subjYear!="0"'>and st.subj_year = #{subjYear} </if>
 		    	<if test='semester!="0"'>and st.semester = #{semester}</if>
-		</select>
+		</select> -->
 	
 	<!-- 수강신청  -->
 	<insert id="insertMyRegistarion" parameterType="registrationVo">
@@ -42,7 +68,7 @@
 	
 	<!-- 수강신청화면에서 보여지는 수강신청 내역들 -->
 	<select id="selectMyRegistarion" parameterType="String" resultType="map">
-		select * from 
+			select * from 
 			subject st join subj_type sj
 			on st.type_code= sj.type_code
 			left join professor prof
@@ -61,6 +87,8 @@
 			on timetable.timetable_code = subj_time.timetable_code
 			left join classroom classroom
 			on classroom.classroom_code = subj_time.classroom_code
+			left join building bul
+			on bul.building_code = classroom.building_code
 			where stu.student_id=#{studentId}
 	</select>
 		
@@ -77,14 +105,24 @@
 		select * from 
 		subject st join subj_type sj
 		on st.type_code= sj.type_code
-		join professor prof
+		left join professor prof
 		on prof.prof_no = st.prof_no
-		join open_subj os
+		left join open_subj os
 		on os.subj_code = st.subj_code
-		join registrationCart rsc
+		left join registrationCart rsc
 		on rsc.open_sub_code = os.open_sub_code
-		join student stu
+		left join student stu
 		on stu.stu_no = rsc.stu_no
+		left join department depart
+		on depart.dept_no = prof.dept_no
+        left join subj_time subj_time
+        on subj_time.open_sub_code = os.open_sub_code
+        left join timetable timetable
+        on timetable.timetable_code = subj_time.timetable_code
+        left join classroom classroom
+        on classroom.classroom_code = subj_time.classroom_code
+        left join building bul
+        on bul.building_code = classroom.building_code
 		where stu.student_id=#{studentId}
 	</select>	
 		

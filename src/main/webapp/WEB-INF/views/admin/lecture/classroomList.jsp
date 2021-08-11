@@ -27,8 +27,6 @@
 						<th style="text-align: center">건물명</th>
 						<th style="text-align: center">강의실번호</th>
 						<th style="text-align: center">강의실</th>
-						<!-- <th style="text-align: center">사용중인강의</th>
-						<th style="text-align: center">사용시간</th> -->
 						<th style="text-align: center">사용가능여부</th>
 						<th style="text-align: center">사용상태변경</th>
 					</tr>
@@ -36,37 +34,15 @@
 				<tbody>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="4" style="text-align: center">강의실 정보가 없습니다.</td>
+							<td colspan="5" style="text-align: center">강의실 정보가 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list}">
 					<c:forEach var="vo" items="${list }">
-					<c:set var="subjName" value="${vo.subjName}"/>         
-					<c:set var="timetable" value="${vo.timetableName}"/>         
 			            <tr>
 			               <td style="vertical-align: middle; text-align: center;">${vo.buildingName }</td>
 			               <td style="vertical-align: middle; text-align: center;">${vo.classroomCode }</td>
 			               <td style="vertical-align: middle; text-align: center;">${vo.classroomName }</td>
-			               <%-- <c:if test="${subjName == null }">
-			               		<td style="vertical-align: middle; text-align: center;">
-					               	-
-					            </td>
-			               </c:if>
-			               <c:if test="${subjName != null }">
-			               		<td style="vertical-align: middle; text-align: center;">
-					               	${subjName }
-					            </td>
-			               </c:if>
-			               <c:if test="${timetable == null }">
-			               		<td style="vertical-align: middle; text-align: center;">
-					               	-
-					            </td>
-			               </c:if>
-			               <c:if test="${timetable != null }">
-			               		<td style="vertical-align: middle; text-align: center;">
-					               	${timetable }
-					            </td>
-			               </c:if> --%>
 			               <td style="vertical-align: middle; text-align: center;">${vo.usable }</td>
 			               <td style="vertical-align: middle; text-align: center;">
 								<a href="<c:url value='/admin/lecture/changeUsable?classroomCode=${vo.classroomCode }&usable=${vo.usable}'/>"

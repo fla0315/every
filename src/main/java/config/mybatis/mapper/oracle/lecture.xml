@@ -84,6 +84,65 @@
 	<delete id="deleteSubjTime" parameterType="String">
 		delete from subj_time where open_sub_code=#{openSubCode}
 	</delete>
+	
+	<select id="selectScoreAvg" resultType="HashMap">
+		select s.subj_name subject, avg(e.total_grade) avgScore
+		from evaluation e join open_subj o
+		on e.sub_code = o.open_sub_code
+		join subject s
+		on o.subj_code = s.subj_code
+		where s.subj_name='데이터베이스'
+		group by s.subj_name
+	</select>
+	
+	<select id="selectMajorCount" resultType="HashMap">
+		select d.dept_name deptName, count(*) count
+		from evaluation e join open_subj o
+		on e.sub_code = o.open_sub_code
+		join subject s
+		on o.subj_code = s.subj_code
+		join student st
+		on e.stu_no = st.stu_no
+		join department d
+		on st.dept_no = d.dept_no
+		where s.subj_name='데이터베이스'
+		group by d.dept_name
+	</select>
+
+	<select id="selectGradeCount" resultType="HashMap">
+		select s.grade grade, count(*) count
+		from
+		(select s.subj_name subject, e.total_grade score,
+		 <![CDATA[
+		case when e.total_grade >= 95 then 'A+'
+		     when e.total_grade >= 90 then 'A'
+		     when e.total_grade >= 85 then 'B+'
+		     when e.total_grade >= 80 then 'B'
+		     when e.total_grade >= 75 then 'C+'
+		     when e.total_grade >= 70 then 'C'
+		     when e.total_grade >= 65 then 'D+'
+		     when e.total_grade >= 60 then 'D'
+		     when e.total_grade < 60 then 'F'
+		     else '재학생아님'
+		end as grade
+		]]>
+		from evaluation e join open_subj o
+		on e.sub_code = o.open_sub_code
+		join subject s
+		on o.subj_code = s.subj_code
+		where s.subj_name='데이터베이스') S
+		group by S.grade
+	</select>
+	
+	<select id="selectByProfNo" parameterType="String" resultType="HashMap">
+		select o.open_sub_code openSubCode, s.subj_name subject
+		from open_subj o join subject s
+		on o.subj_code = s.subj_code
+		join professor p
+		on o.prof_no = p.prof_no
+		where p.prof_no = #{profNo}
+	</select>
+	
 </mapper>
 
 

@@ -60,7 +60,7 @@
 									<!-- 과목명 -->
 									<td>${myMap['SUBJ_NAME'] }</td>
 									<!-- 학부(과)  -->
-									<td>${myMap['FACULTY_NAME'] }</td>
+									<td>${myMap['DEPT_NAME'] }</td>
 									<!-- 학년 -->
 									<!-- 이수구분 -->
 									<td>${myMap['GRADE'] }</td>
@@ -71,7 +71,7 @@
 									<!-- 담당교수 -->
 									<td>${myMap['PROF_NAME'] }</td>
 									<!-- 강의실/시간 -->
-									<td>${myMap['TIMETABLE'] }</td>
+									<td>${myMap['BUILDING_NAME']}-${myMap['CLASSROOM_NAME']}/&nbsp;${myMap['TIMETABLE_NAME']}</td>
 								</tr>
 							</c:forEach>
 						</c:if>

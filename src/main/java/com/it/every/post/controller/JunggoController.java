@@ -60,9 +60,7 @@ public class JunggoController {
 				writer = employeeService.nameByEmpNo(writerCode);
 			} else{	//학생의 경우
 				writer = studentService.nameByStuNo(writerCode);
-			}
-			
-			logger.info("작성자 이름={}", writer);
+			}			
 			map.put("WRITER", writer);
 		}
 		

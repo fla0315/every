@@ -37,7 +37,7 @@
 									type="text" value="${map['RECEIVERNAME'] }" readonly size="10">
 			</div>
 		<div class="form-floating mb-3">
-			<textarea class="col-md-12" rows="10" cols="20" wrap="hard" name="contents">${map['CONTENTS'] }</textarea>
+			<textarea class="col-md-12" rows="10" cols="20" wrap="hard" name="contents" readonly>${map['CONTENTS'] }</textarea>
 		</div>
 		<div class="mt-4 mb-0">
 			<div class="d-grid text-center">

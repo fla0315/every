@@ -102,7 +102,7 @@
 					<div class="card-header">
 						<i class="fas fa-map-marked-alt" style="font-size: 1.3em"></i> 캠퍼스맵
 						<div style="float: right; font-size: 0.8em">
-							<a href="<c:url value='/admin/mainDisplay/campusMap'/>">+ 더보기</a>
+							<a href="<c:url value='/admin/campusInfo/campusMap'/>">+ 더보기</a>
 						</div>
 					</div>
 					<div style="height: 320px" class="text-center">
@@ -122,27 +122,7 @@
                        학사일정
                    </div>
                    <div class="card-body">
-                   		<!-- Calendar -->
-						<link href="<c:url value='/resources/calendar/core/main.css'/>" rel="stylesheet" />
-						<script src="<c:url value='/resources/calendar/core/main.js'/>"></script>
-				  		<script src="<c:url value='/resources/calendar/interaction/main.js'/>"></script>
-						<link href="<c:url value='/resources/calendar/daygrid/main.css'/>" rel="stylesheet" />
-				   		<script src="<c:url value='/resources/calendar/daygrid/main.js'/>"></script>
-				        <script type="text/javascript" src="<c:url value='/resources/js/calendar.js'/>" ></script>
-				        <div id="calendar" style="float: left; width: 60%; margin: 10px;"></div>
-						<div id="schedule" style="float: right; width: 35%; margin-top: 20px">
-							<i class="fas fa-table me-1"></i>
-							<span style="font-weight: bold;">07.05 ~ 07.07</span><br>
-							<span>&nbsp;학사일정1</span>
-							<br><br>
-							<i class="fas fa-table me-1"></i>
-							<span style="font-weight: bold;">07.14 ~ 07.19</span><br>
-							<span>&nbsp;학사일정2</span>
-							<br><br>
-							<i class="fas fa-table me-1"></i>
-							<span style="font-weight: bold;">07.27 ~ 07.30</span><br>
-							<span>&nbsp;학사일정3</span>
-						</div>
+                   		<iframe src="/every/timetable/calendarMain" width="100%" height="100%"></iframe>
 					</div>                   
                    </div>
                </div>

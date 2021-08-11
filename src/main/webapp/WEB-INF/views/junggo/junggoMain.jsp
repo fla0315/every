@@ -42,6 +42,45 @@ body {
 	color:red;
 }
 </style>
+<script type="text/javascript">
+	$(function(){
+		$('#btnSave').click(function(){
+			if($('#title').val().length<1){
+				alert("제목을 입력하세요");
+				$('#title').focus();
+				event.preventDefault();
+				return false;
+			} else if($('#price').val().length<1){
+				alert("가격을 입력하세요");
+				$('#price').focus();
+				event.preventDefault();
+				return false;
+			} else if($('#summernote').val().length<1){
+				alert("내용을 입력하세요");
+				$('#summernote').focus();
+				event.preventDefault();
+				return false;
+			} else if($('#upfile').val().length<1){
+				alert("이미지를 업로드 하세요");
+				$('#upfile').focus();
+				event.preventDefault();
+				return false;
+			}
+			
+			if(!validate_price($('#price').val())){
+	            alert('가격은 숫자만 입력이 가능합니다.');
+	            $('#price').focus();
+	            event.preventDefault();
+	            return false;
+	        }
+		});
+	});
+	
+	function validate_price(price){
+	    var pattern = new RegExp(/^[0-9]*$/g);
+	    return pattern.test(price);
+	}
+</script>
 <body>
 	<article>
 	<div class="container col-lg-10" role="main">

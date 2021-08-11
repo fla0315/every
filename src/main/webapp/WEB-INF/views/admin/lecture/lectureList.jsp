@@ -38,7 +38,7 @@
 				<tbody>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="6" style="text-align: center">개설된 강의 정보가 없습니다.</td>
+							<td colspan="8" style="text-align: center">개설된 강의 정보가 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list}">

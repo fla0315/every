@@ -116,5 +116,4 @@
 	</div>
 </main>
 
-<script src="<c:url value='/resources/js/chart-pie-demo.js'/>"></script>
 <%@ include file="../../inc/bottom.jsp" %>

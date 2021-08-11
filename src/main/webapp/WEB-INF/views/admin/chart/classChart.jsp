@@ -2,133 +2,151 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/admin_top.jsp" %>
 
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	
-	$(function () {	//화면 로딩후 시작
-		$("#searchInput").autocomplete({  //오토 컴플릿트 시작
-			source: List,	// source는 data.js파일 내부의 List 배열
-			focus : function(event, ui) { // 방향키로 자동완성단어 선택 가능하게 만들어줌	
-				return false;
-			},
-			minLength: 1,// 최소 글자수
-			delay: 100,	//autocomplete 딜레이 시간(ms)
-			//disabled: true, //자동완성 기능 끄기
-		});
-	});
-	
-	List = [
-	    "종로2가사거리",
-	    "창경궁.서울대학교병원",
-	    "명륜3가.성대입구",
-	    "종로2가.삼일교",
-	    "혜화동로터리.여운형활동터",
-	    "서대문역사거리",
-	    "서울역사박물관.경희궁앞",
-	    "서울역사박물관.경희궁앞",
-	    "광화문",
-	    "광화문",
-	    "종로1가",
-	    "종로1가",
-	    "종로2가",
-	    "종로2가",
-	    "종로3가.탑골공원",
-	    "종로3가.탑골공원",
-	    "종로4가.종묘",
-	    "종로4가.종묘",
-	    "종로5가.광장시장",
-	    "종로5가.광장시장",
-	    "종로6가.동대문종합시장",
-	    "종로6가.동대문종합시장",
-	    "동대문역.흥인지문",
-	    "동대문(흥인지문)",
-	    "동묘앞",
-	    "동묘앞",
-	    "경기상고",
-	    "신교동",
-	    "경기상고",
-	    "경복고교",
-	    "청운중학교",
-	    "자하문고개.윤동주문학관",
-	    "자하문고개.윤동주문학관",
-	    "청운중학교",
-	    "경복고교",
-	    "통인시장종로구보건소",
-	    "통인시장종로구보건소",
-	    "효자동",
-	    "사직단.어린이도서관",
-	    "사직동주민센터",
-	    "경복궁역",
-	    "경복궁역",
-	    "경복궁",
-	    "KT광화문지사",
-	    "광화문",
-	    "서울역사박물관.경교장.강북삼성병원",
-	    "광화문.금호아시아나본관앞",
-	    "광화문",
-	    "세종문화회관",
-	    "서울지방경찰청.경복궁역",
-	    "사직단",
-	    "광화문광화문빌딩",
-	    "덕성여중고",
-	    "안국역.종로경찰서.인사동",
-	    "국민은행세검정지점",
-	    "세검정초등학교",
-	    "세검정.상명대",
-	    "상명대입구.석파랑",
-	    "하림각",
-	    "자하문터널입구.석파정",
-	    "부암동주민센터.무계원",
-	    "부암동주민센터.무계원",
-	    "자하문터널입구.석파정",
-	    "하림각",
-	    "상명대입구.세검정교회",
-	    "세검정.상명대",
-	    "세검정초등학교",
-	    "국민은행세검정지점",
-	    "승가사입구",
-	    "구기동현대빌라",
-	    "구기터널.삼성출판박물관",
-	    "구기터널.삼성출판박물관",
-	    "구기동",
-	    "구기동",
-	    "승가사입구",
-	    "갑을씨티텔앞",
-	    "평창파출소",
-	    "평창동주민센터",
-	    "일성아파트",
-	    "롯데아파트",
-	    "롯데아파트",
-	    "벽산평창힐스아파트",
-	    "예능교회",
-	    "서울예술고등학교.평창동주민센터",
-	    "화정박물관",
-	    "강북삼성병원",
-	    "독립문역.서대문형무소역사관",
-	    "서대문.서울시교육청",
-	    "서대문역사거리.적십자병원",
-	    "독립문",
-	    "창덕궁.서울돈화문국악당",
-	    "무교동",
-	    "청계1가.광교",
-	    "청계2가.수표교",
-	    "청계4가.세운교",
-	    "청계5가.광장시장",
-	    "원남동",
-	    "창덕궁.우리소리박물관",
-	    "안국역.종로경찰서.인사동",
-	    "조계사",
-	    // ... 10891개 데이터 생략
-	]
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['bar']});
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart1);
+  google.charts.setOnLoadCallback(drawChart2);
+
+  function drawChart1() {
+    var data1 = google.visualization.arrayToDataTable(
+		    ${str1}
+    );
+
+    var options1 = {
+            chart: {
+              subtitle: '(평균)'
+            },
+            vAxis: {format: 'decimal'},
+            colors: ['#AAAAFF', '#FF6384', '#FF9F40'],
+            bar: {groupWidth: "90%"}
+          };
+
+    var chart1 = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+    chart1.draw(data1, google.charts.Bar.convertOptions(options1));
+  }
+  
+  function drawChart2() {
+	    var data = google.visualization.arrayToDataTable(
+			    ${str2}
+	    );
+
+	    var options = {
+	              title: '성적별 비중',
+	              pieHole: 0.55,
+	              colors: ['#FF6384', '#FF9F40', '#FFCD56', '#4BC0C0'],
+	              width: 340,
+	              height: 280,
+	              chartArea:{left:50,top:75, width:'100%',height:'100%'}
+	          };
+
+	    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+
+	    chart.draw(data, options);
+	  }
+  
+  
+  $(function(){
+	  
+		var date = new Date();
+		var selYear = date.getFullYear();
+		var selMonth = date.getMonth()+1;
+		console.log(selMonth);
+		var semester = '';
+		
+		if(selMonth == 7 || selMonth == 8) {
+			semester = '2학기';
+		} else if(selMonth == 1 || selMonth == 2) {
+			semester = '1학기';
+		}
+		
+		
+		$('#semester').append("<span>(" + selYear + "년 " + semester + " 기준)</span>");
+		
+		$("#major").val((("${major}" == '') ? "" : "${major}")).prop("selected", true);              //select문
+		
+	});  
+
 </script>
 
-
-<div>
-	검색어<input id="searchInput" style="margin-left: 20px; width: 400px;">
-</div>
-
+<main>
+	<div class="container-fluid px-4">
+		<h1 class="mt-4">
+		강의별 학생통계 &nbsp;
+		<span id="semester"></span>
+		</h1>
+		<br>
+		<br>
+		<div style="height: 60px">
+		<%-- <form name="searchfrm" method="get" action="<c:url value='/admin/chart/selectMajor'/>">
+			<div style="width: 200px; float: left; margin-right: 10px">
+				<select class="form-control" name="major" id="major">
+					<option value="">--학과를 선택하세요--</option>
+					<!-- 반복문 시작 -->
+					<c:forEach var="deptVo" items="${deptList }" varStatus="status">
+						<option value="${deptVo.deptName }">${deptVo.deptName }</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div style="float: left;">
+				<input type="submit" id="wr_submit" class="btn btn-primary btn-block" value="조회">
+			</div>
+		</form> --%>
+		</div>
+		<div style="clear: both">
+			<div class="col-xl-6" style="width: 650px; float: left">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-bar me-1" style="font-size: 1.3em"></i> 평균 점수
+					</div>
+					<div id="columnchart_material" style="width: 600px; height: 450px; margin: 20px 0px 10px 20px;"></div>
+				</div>
+			</div>
+			<div class="col-xl-6" style="width: 550px; float: left; margin-left: 20px">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-bar me-1" style="font-size: 1.3em"></i> 전공별 학생 수
+					</div>
+					<div class="card-body">
+						<table id="datatablesSimple">
+							<thead>
+								<tr>
+									<th style="text-align: center">전공</th>
+									<th style="text-align: center">학생 수</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:if test="${empty majorList}">
+									<tr>
+										<td colspan="2" style="text-align: center">학생 정보가 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:if test="${!empty majorList}">
+								<c:forEach var="map" items="${majorList }">
+						            <tr>
+						               <td style="vertical-align: middle; text-align: center;">${map['DEPTNAME'] }</td>
+						               <td style="vertical-align: middle; text-align: center;">${map['COUNT'] }</td>
+						            </tr> 
+						         	</c:forEach>
+								</c:if>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6" style="width: 550px; float: left; margin-left: 20px">
+				<div class="card mb-4">
+					<div class="card-header">
+						<i class="fas fa-chart-bar me-1" style="font-size: 1.3em"></i> 성적 비중
+					</div>
+					<div id="donutchart" style="margin-left: 100px"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
 
 <%@ include file="../../inc/bottom.jsp" %>

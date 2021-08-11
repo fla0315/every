@@ -23,7 +23,6 @@ import com.it.every.department.model.DepartmentVO;
 import com.it.every.lecture.model.LectureService;
 import com.it.every.lecture.model.LectureVO;
 import com.it.every.subjType.model.SubjTypeService;
-import com.it.every.subjType.model.SubjTypeVO;
 import com.it.every.subject.model.SubjectService;
 import com.it.every.subject.model.SubjectVO;
 import com.it.every.timetable.model.TimetableService;

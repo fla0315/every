@@ -422,7 +422,7 @@ public class registerController {
 			session.setAttribute("user_id", id);
 			logger.info("처리 결과(값을 잘 받아왔는지 확인함) result={} 회원번호={} 회원이름={} 회원아이디={}"  
 					,result,evo.getEmpNo(),evo.getEmpName(),id);
-			url= "redirect:/admin/campusInfo/notice";
+			url= "redirect:/admin/campusInfo/calendar";
 			
 		}else if (chk_info.equals("professor")) {
 			result = service.logincheck3(id,pwd);

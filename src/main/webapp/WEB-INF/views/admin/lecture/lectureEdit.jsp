@@ -237,10 +237,10 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">개설강의 수정</h3></div>
                                     <div class="card-body">
                                          <form name="registerfrm" method="post" action="<c:url value='/admin/lecture/lectureEdit'/>">
-                                         	<input name="openSubCode" id="openSubCode" type="text" value="${map['OPENSUBCODE']}" />
+                                         	<input name="openSubCode" id="openSubCode" type="hidden" value="${map['OPENSUBCODE']}" />
                                          	<div class="form-floating mb-3">
 												<input class="form-control" name="subject" id="subject" value="${map['SUBJNAME']}" placeholder="Enter your first name" />
-												<input type="text" name="subjCode" id="subjCode" value="${map['OPENSUBCODE']}"/>
+												<input type="hidden" name="subjCode" id="subjCode" value="${map['OPENSUBCODE']}"/>
                                                 <label for="inputFirstName">과목명</label>
                                             </div>
                                             <div class="row mb-3">
@@ -266,7 +266,7 @@
 														    <option value="">---선택하세요---</option>
 														    <option value="${map['PROFNO'] }" selected="selected">${map['PROFNAME'] }</option>
 														</select>
-                                                        <input type="text" name="profNo" id="profNo" value="${map['PROFNO'] }"/> 
+                                                        <input type="hidden" name="profNo" id="profNo" value="${map['PROFNO'] }"/> 
                                                         <label for="inputFirstName">담당교수</label>
                                                     </div>
                                                 </div>
