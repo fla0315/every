@@ -28,6 +28,7 @@ public interface registerDAO {
 		
 		//회원가입 확인용
 		public int checkalready(registerVO vo);
+
 		
 		int checkalready1(registerVO vo);
 		int checkalready2(registerVO vo);

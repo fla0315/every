@@ -287,21 +287,42 @@ $('#emailconfirm').click(function(){
 	var email2 = $('#email2').val();
 	
 	var emailaddress= email1+"@"+email2
-
-		$.ajax({
-			url:"<c:url value='/reg/emailcheck'/>",
-			type:"GET",
-			data:"emailaddress="+JSON.stringify(emailaddress),
-			contentType: "application/json; charset=utf-8;",
-            dataType: "json",
-			success:function(res){
-				//alert(res);
-				$('#chkmail').val(res).css("color","red"); 
-			},
-			error:function(xhr, status, error){
-				alert("error 발생!!" + error);
+	
+	$.ajax({
+		url:"<c:url value='/reg/registeremailcheck'/>",
+		type:"post",
+		data:{"email1":email1,"email2":email2},
+		success:function(res){
+		
+			if(res){
+				$('#checkemail').html("이미 사용중인 이메일입니다.").css("color", "blue");
+				$('#regemail').val('Y').css("color","red"); 
+				event.preventDefault();	
+				
+			}else{
+				$.ajax({
+					url:"<c:url value='/reg/emailcheck'/>",
+					type:"GET",
+					data:"emailaddress="+JSON.stringify(emailaddress),
+					contentType: "application/json; charset=utf-8;",
+		            dataType: "json",
+					success:function(res){
+						//alert(res);
+						$('#chkmail').val(res).css("color","red"); 
+					},
+					error:function(xhr, status, error){
+						alert("error 발생!!" + error);
+					}
+				});				
+				
 			}
-		});				
+		},
+		error:function(xhr, status, error){
+			alert("error 발생!!" + error);
+		}
+	});				
+
+
 	}); 
 	
 //이메일 인증번호 체크하기	
@@ -430,6 +451,8 @@ $('#email_check').keyup(function(){
 			  <input type ="hidden" name="chkpwd" id="chkpwd">
 			   <input type ="hidden" name="chkphone" id="chkphone">
 			   <input type= "hidden" name ="chkmail" id="chkmail">
+			   		   <input type= "hidden" name ="regemail" id="regemail">
+
 			   
 	</article>
 

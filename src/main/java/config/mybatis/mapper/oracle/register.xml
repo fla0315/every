@@ -52,13 +52,13 @@
 		</if>
 	</select>
 	
-	<!-- 이메일 체크 -->
+	<!-- 이메일 중복 체크 -->
 	<select id="professorchkemail" parameterType="registerVo" resultType="int">
 	select count(*) from
 		(select * from student stu full outer join 
 		professor pr on stu.stu_no=pr.prof_no
  		full outer join employee em on stu.stu_no=em.emp_no)
- 		where prof_email=#{Email};
+ 		where prof_email=#{Email}
 	</select>
 	
 	
@@ -104,6 +104,8 @@
 	</if>
 	
 	 </update>
+	 
+	
 	 
 <!-- 로그인 시 아이디 체크 -->
 <select resultType="String" parameterType="String" id="selectPwd1"> 

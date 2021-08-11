@@ -29,6 +29,7 @@ public interface registerService {
 	public EmployeeVO selectByuserid3(String id); 
 	
 	public int checkalready(registerVO vo);
+	
 	int checkalready1(registerVO vo);
 	int checkalready2(registerVO vo);
 	int checkalready3(registerVO vo);

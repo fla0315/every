@@ -234,6 +234,31 @@ public class registerController {
 		return bool;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping("/registeremailcheck")
+	public boolean registeremailcheck(@RequestParam("email1") String email1, @RequestParam String email2 ) {
+		
+		registerVO vo = new registerVO();
+		
+		String email= email1+"@"+email2;
+		
+		vo.setEmail(email);
+		logger.info("여기까지는 갔나? email={}",email);
+		int a = service.professorchkemail(vo);
+		
+		boolean result=true;
+		
+		if (a<1) {
+			result=false;
+			
+		}
+	
+		
+		return result;
+		
+	}
+	
 	@ResponseBody
 	@RequestMapping("/registercheck")
 	public boolean checkregister(@RequestParam("stu_no") String num1, @RequestParam("chk_info") String num2) {
