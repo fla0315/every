@@ -73,13 +73,13 @@
 				</tbody>
 			</table>
 		</div>
-		<div style="text-align: right; margin-right: 30px">
+		<%-- <div style="text-align: right; margin-right: 30px">
 				<a href="<c:url value='/admin/student/scholarshipApply'/>">
 				<button class="btn btn-primary btn-sm">
 					장학금 신청
 				</button>
 				</a>
-		</div>
+		</div> --%>
 	</div>
 
 

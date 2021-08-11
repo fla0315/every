@@ -14,8 +14,6 @@
 						<th style="text-align: center">학번</th>
 						<th style="text-align: center">이름</th>
 						<th style="text-align: center">학기</th>
-						<th style="text-align: center">등록금</th>
-						<th style="text-align: center">장학금</th>
 						<th style="text-align: center">납부금액</th>
 						<th style="text-align: center">납부상태</th>
 					</tr>
@@ -23,7 +21,7 @@
 				<tbody>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="8" style="text-align: center">조회된 등록금 정보가 없습니다.</td>
+							<td colspan="6" style="text-align: center">조회된 등록금 정보가 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list}">
@@ -34,22 +32,6 @@
 			               <td style="vertical-align: middle; text-align: center;">${vo.name }</td>
 			               <td style="vertical-align: middle; text-align: center;">${vo.semester }</td>
 			               <td style="vertical-align: middle; text-align: center;">${vo.tuition }</td>
-			               <c:if test="${vo.approved == null || vo.approved == 'N'}">
-			               		<td style="vertical-align: middle; text-align: center;">
-					               	-
-					            </td>
-					            <td style="vertical-align: middle; text-align: center;">
-					            	${vo.tuition}
-					            </td>
-			               </c:if>
-			               <c:if test="${vo.approved == 'Y'}">
-			               		<td style="vertical-align: middle; text-align: center;">
-					               	${vo.scholarship }
-					            </td>
-					            <td style="vertical-align: middle; text-align: center;">
-					            	${vo.tuition - vo.scholarship}
-					            </td>
-			               </c:if>
 			               <td style="vertical-align: middle; text-align: center;">${vo.depositState }</td>
 			            </tr> 
 			         	</c:forEach>

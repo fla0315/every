@@ -104,6 +104,7 @@
 	<!-- 학과 찾는거 -->
 	<select id="selectFacultyS" resultType="map">
 		select faculty_no, dept_name from department
+		order by dept_name
 	</select>
 	
 	<!-- 이수구분 찾는거 -->

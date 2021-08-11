@@ -62,7 +62,7 @@
 			<br>
 			<div style="text-align: right; margin-right: 30px">
 				<a href="<c:url value='/admin/professor/professorRegister'/>">
-				<button class="btn btn-primary btn-sm">
+				<button class="btn btn-success btn-sm">
 					교수등록
 				</button>
 				</a>
