@@ -53,13 +53,30 @@ public class ProfessorManageServiceImpl implements ProfessorManageService{
 		return professorDao.selectByDeptNo(deptNo);
 	}
 
-//	@Override
-//	public ProfessorManageVO selectByDeptNo(String deptNo) {
-//		return professorDao.selectByDeptNo(deptNo);
-//	}
+	@Override
+	public Map<String, Object> selectProfLecRate() {
+		return professorDao.selectProfLecRate();
+	}
 
-	
-	
-	
+	@Override
+	public Map<String, Object> selectDeptLecRate() {
+		return professorDao.selectDeptLecRate();
+	}
+
+	@Override
+	public Map<String, Object> selectAllLecRate() {
+		return professorDao.selectAllLecRate();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectLecComment() {
+		return professorDao.selectLecComment();
+	}
+
+	@Override
+	public Map<String, Object> searchByProfName(String deptName, String profName, String subjName) {
+		return professorDao.searchByProfName(deptName, profName, subjName);
+	}
+
 	
 }

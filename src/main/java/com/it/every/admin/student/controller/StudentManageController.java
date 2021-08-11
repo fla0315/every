@@ -164,20 +164,6 @@ public class StudentManageController {
 		return "common/message";
 	}
 	
-	@GetMapping("/student/leaveManage")
-	public String leaveManage() {
-		logger.info("휴학관리 화면");
-		
-		return "admin/student/leaveManage";
-	}
-	
-	@GetMapping("/student/returnManage")
-	public String returnManage() {
-		logger.info("복학관리 화면");
-		
-		return "admin/student/returnManage";
-	}
-	
 	@GetMapping("/student/tuitionManage")
 	public String tuitionManage(Model model) {
 		logger.info("등록금관리 조회 화면");
@@ -251,8 +237,30 @@ public class StudentManageController {
 	
 	
 	@GetMapping("/chart/studentChart")
-	public String studentChart() {
+	public String studentChart(Model model) {
 		logger.info("학생성적통계 화면");
+		
+		List<Map<String, Object>> scoreList = studentManageService.selectSubjectScore();
+		Map<String, Object> scoreAvgMap = studentManageService.selectSubjectAvg();
+		Map<String, Object> deptAvgMap = studentManageService.selectDeptAvg();
+		Map<String, Object> allAvgMap = studentManageService.selectTotalAvg();
+		
+		logger.info("조회 결과, scoreList={}", scoreList);
+		logger.info("조회 결과, scoreAvgMap={}", scoreAvgMap);
+		logger.info("조회 결과, deptAvgMap={}", deptAvgMap);
+		logger.info("조회 결과, allAvgMap={}", allAvgMap);
+		
+		String str ="[";
+		str +="['항목별 비교', '학생 평균', '학과 평균', '전체 평균'] ,";
+		str +="['평균 점수', '" + scoreAvgMap.get("AVGSCORE") + "', '";
+		str += deptAvgMap.get("AVGSCORE") + "', '";
+		str += allAvgMap.get("TOTALAVG") + "']";
+		str += "]";
+		
+		logger.info("str={}", str);
+		
+		model.addAttribute("scoreList", scoreList);
+		model.addAttribute("str1", str);
 		
 		return "admin/chart/studentChart";
 	}

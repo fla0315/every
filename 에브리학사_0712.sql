@@ -1,24 +1,24 @@
-/* 학부생 */
+/* ?���??�� */
 DROP TABLE student 
 	CASCADE CONSTRAINTS;
 
-/* 장학금 수여 */
+/* ?��?���? ?��?�� */
 DROP TABLE award 
 	CASCADE CONSTRAINTS;
 
-/* 장학금 */
+/* ?��?���? */
 DROP TABLE scholarship 
 	CASCADE CONSTRAINTS;
 
-/* 학적상태 */
+/* ?��?��?��?�� */
 DROP TABLE student_state 
 	CASCADE CONSTRAINTS;
 
-/* 증명서발급 */
+/* 증명?��발급 */
 DROP TABLE certification 
 	CASCADE CONSTRAINTS;
 
-/* 등록금 */
+/* ?��록금 */
 DROP TABLE tuition 
 	CASCADE CONSTRAINTS;
 
@@ -26,11 +26,11 @@ DROP TABLE tuition
 DROP TABLE assignment 
 	CASCADE CONSTRAINTS;
 
-/* 학과 */
+/* ?���? */
 DROP TABLE department 
 	CASCADE CONSTRAINTS;
 
-/* 학부 */
+/* ?���? */
 DROP TABLE faculty 
 	CASCADE CONSTRAINTS;
 
@@ -39,15 +39,15 @@ DROP TABLE professor
 	CASCADE CONSTRAINTS;
 
 
-/* 강의평가 */
+/* 강의?���? */
 DROP TABLE subj_eval 
 	CASCADE CONSTRAINTS;
 
-/* 수강신청 */
+/* ?��강신�? */
 DROP TABLE registration 
 	CASCADE CONSTRAINTS;
 
-/* 성적 */
+/* ?��?�� */
 DROP TABLE evaluation 
 	CASCADE CONSTRAINTS;
 
@@ -55,7 +55,7 @@ DROP TABLE evaluation
 DROP TABLE open_subj 
 	CASCADE CONSTRAINTS;
 
-/* 과제등록 */
+/* 과제?���? */
 DROP TABLE distribute_assign 
 	CASCADE CONSTRAINTS;
 
@@ -63,7 +63,7 @@ DROP TABLE distribute_assign
 DROP TABLE syllabus 
 	CASCADE CONSTRAINTS;
 
-/* 요약시간표 */
+/* ?��?��?��간표 */
 DROP TABLE regi_timetable 
 	CASCADE CONSTRAINTS;
 
@@ -79,39 +79,39 @@ DROP TABLE building
 DROP TABLE subject 
 	CASCADE CONSTRAINTS;
 
-/* 이수구분 */
+/* ?��?��구분 */
 DROP TABLE subj_type 
 	CASCADE CONSTRAINTS;
 
-/* 하단정보 */
+/* ?��?��?���? */
 DROP TABLE footer 
 	CASCADE CONSTRAINTS;
 
-/* 은행 */
+/* ???�� */
 DROP TABLE bank 
 	CASCADE CONSTRAINTS;
 
-/* 계좌정보 */
+/* 계좌?���? */
 DROP TABLE account_info 
 	CASCADE CONSTRAINTS;
 
-/* 관계자 상세정보 */
+/* �?계자 ?��?��?���? */
 DROP TABLE official_info 
 	CASCADE CONSTRAINTS;
 
-/* 쪽지 발신함 */
+/* 쪽�? 발신?�� */
 DROP TABLE outbox 
 	CASCADE CONSTRAINTS;
 
-/* 쪽지 수신함 */
+/* 쪽�? ?��?��?�� */
 DROP TABLE inbox 
 	CASCADE CONSTRAINTS;
 
-/* 강의실 */
+/* 강의?�� */
 DROP TABLE classroom 
 	CASCADE CONSTRAINTS;
 
-/* 강의시간표 */
+/* 강의?��간표 */
 DROP TABLE subj_time 
 	CASCADE CONSTRAINTS;
 
@@ -119,11 +119,11 @@ DROP TABLE subj_time
 DROP TABLE bookmark 
 	CASCADE CONSTRAINTS;
 
-/* 기본시간표 */
+/* 기본?��간표 */
 DROP TABLE timetable 
 	CASCADE CONSTRAINTS;
 
-/* 게시판 */
+/* 게시?�� */
 DROP TABLE board 
 	CASCADE CONSTRAINTS;
 
@@ -135,61 +135,61 @@ DROP TABLE category
 DROP TABLE authority 
 	CASCADE CONSTRAINTS;
 
-/* 임직원 */
+/* ?��직원 */
 DROP TABLE employee 
 	CASCADE CONSTRAINTS;
 
-/* 부서 */
+/* �??�� */
 DROP TABLE emp_depart 
 	CASCADE CONSTRAINTS;
 
-/* 임직원 직책 */
+/* ?��직원 직책 */
 DROP TABLE emp_position 
 	CASCADE CONSTRAINTS;
 
-/* 게시글 */
+/* 게시�? */
 DROP TABLE post 
 	CASCADE CONSTRAINTS;
 
-/* 댓글 */
+/* ?���? */
 DROP TABLE reply 
 	CASCADE CONSTRAINTS;
 
-/* 대댓글 */
+/* ???���? */
 DROP TABLE rereply 
 	CASCADE CONSTRAINTS;
 
-/* 파일 */
+/* ?��?�� */
 DROP TABLE board_file 
 	CASCADE CONSTRAINTS;
 
-/* 증명서 종류 */
+/* 증명?�� 종류 */
 DROP TABLE certification_type 
 	CASCADE CONSTRAINTS;
 
-/* 출석부 */
+/* 출석�? */
 DROP TABLE attendance
 	CASCADE CONSTRAINTS;
 
 
-/* 학부생 */
+/* ?���??�� */
 CREATE TABLE student (
-	stu_no VARCHAR2(500) NOT NULL, /* 학번 */
-	student_id VARCHAR2(500), /* 아이디 */
-	pwd VARCHAR2(500), /* 비밀번호 */
-	name VARCHAR2(500), /* 성명 */
-	semester VARCHAR2(500), /* 학기 */
-	major VARCHAR2(500), /* 전공 */
-	minor VARCHAR2(500), /* 부전공 */
-	admission_date DATE, /* 입학일 */
-	graduation_date DATE, /* 졸업일 */
-	credits NUMBER, /* 이수학점 */
-	indentity_state CHAR(1), /* 본인인증상태 */
-	indentity_code VARCHAR2(200), /* 본인인증코드 */
-	change_date DATE, /* 비밀번호 변경일 */
-	state VARCHAR2(500), /* 학적상태번호 */
-	dept_no NUMBER, /* 학과번호 */
-    phonenum VARCHAR2(15) /*휴대전화*/
+	stu_no VARCHAR2(500) NOT NULL, /* ?���? */
+	student_id VARCHAR2(500), /* ?��?��?�� */
+	pwd VARCHAR2(500), /* 비�?번호 */
+	name VARCHAR2(500), /* ?���? */
+	semester VARCHAR2(500), /* ?���? */
+	major VARCHAR2(500), /* ?���? */
+	minor VARCHAR2(500), /* �??���? */
+	admission_date DATE, /* ?��?��?�� */
+	graduation_date DATE, /* 졸업?�� */
+	credits NUMBER, /* ?��?��?��?�� */
+	indentity_state CHAR(1), /* 본인?��증상?�� */
+	indentity_code VARCHAR2(200), /* 본인?��증코?�� */
+	change_date DATE, /* 비�?번호 �?경일 */
+	state VARCHAR2(500), /* ?��?��?��?��번호 */
+	dept_no NUMBER, /* ?��과번?�� */
+    phonenum VARCHAR2(15) /*?��???��?��*/
 );
 
 CREATE UNIQUE INDEX PK_student
@@ -204,12 +204,12 @@ ALTER TABLE student
 			stu_no
 		);
 
-/* 장학금 수여 */
+/* ?��?���? ?��?�� */
 CREATE TABLE award (
-	award_no NUMBER NOT NULL, /* 장학금수여번호 */
-	stu_no VARCHAR2(500), /* 학번 */
-	scholarship_no NUMBER, /* 장학금번호 */
-	awarding_date DATE /* 수여일 */
+	award_no NUMBER NOT NULL, /* ?��?��금수?��번호 */
+	stu_no VARCHAR2(500), /* ?���? */
+	scholarship_no NUMBER, /* ?��?��금번?�� */
+	awarding_date DATE /* ?��?��?�� */
 );
 
 CREATE UNIQUE INDEX PK_award
@@ -224,11 +224,11 @@ ALTER TABLE award
 			award_no
 		);
 
-/* 장학금 */
+/* ?��?���? */
 CREATE TABLE scholarship (
-	scholarship_no NUMBER NOT NULL, /* 장학금번호 */
-	scholarship_type VARCHAR2(500), /* 장학금종류 */
-	scholarship NUMBER /* 장학금 금액 */
+	scholarship_no NUMBER NOT NULL, /* ?��?��금번?�� */
+	scholarship_type VARCHAR2(500), /* ?��?��금종�? */
+	scholarship NUMBER /* ?��?���? 금액 */
 );
 
 CREATE UNIQUE INDEX PK_scholarship
@@ -243,10 +243,10 @@ ALTER TABLE scholarship
 			scholarship_no
 		);
 
-/* 학적상태 */
+/* ?��?��?��?�� */
 CREATE TABLE student_state (
-	state VARCHAR2(500) NOT NULL, /* 학적상태번호 */
-	state_name VARCHAR2(500) /* 학적상태이름 */
+	state VARCHAR2(500) NOT NULL, /* ?��?��?��?��번호 */
+	state_name VARCHAR2(500) /* ?��?��?��?��?���? */
 );
 
 CREATE UNIQUE INDEX PK_student_state
@@ -261,14 +261,14 @@ ALTER TABLE student_state
 			state
 		);
 
-/* 증명서발급 */
+/* 증명?��발급 */
 CREATE TABLE certification (
 	no NUMBER NOT NULL, /* 발급번호 */
-	certification_code NUMBER, /* 증명서코드 */
-	stu_no VARCHAR2(500), /* 학번 */
-	qty NUMBER, /* 수량 */
-	reg_date DATE, /* 발급일 */
-	is_print CHAR(1) /* 출력여부 */
+	certification_code NUMBER, /* 증명?��코드 */
+	stu_no VARCHAR2(500), /* ?���? */
+	qty NUMBER, /* ?��?�� */
+	reg_date DATE, /* 발급?�� */
+	is_print CHAR(1) /* 출력?���? */
 );
 
 CREATE UNIQUE INDEX PK_certification
@@ -283,14 +283,14 @@ ALTER TABLE certification
 			no
 		);
 
-/* 등록금 */
+/* ?��록금 */
 CREATE TABLE tuition (
-	tuition_no NUMBER NOT NULL, /* 등록금번호 */
-	stu_no VARCHAR2(500), /* 학번 */
-	semester VARCHAR2(500), /* 학기 */
+	tuition_no NUMBER NOT NULL, /* ?��록금번호 */
+	stu_no VARCHAR2(500), /* ?���? */
+	semester VARCHAR2(500), /* ?���? */
 	tuition NUMBER, /* 금액 */
-	deposit_state CHAR(1), /* 납부여부 */
-	deposit_date DATE /* 납부일 */
+	deposit_state CHAR(1), /* ?���??���? */
+	deposit_date DATE /* ?���??�� */
 );
 
 CREATE UNIQUE INDEX PK_tuition
@@ -309,11 +309,11 @@ ALTER TABLE tuition
 CREATE TABLE assignment (
 	assign_no NUMBER NOT NULL, /* 과제번호 */
 	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	stu_no VARCHAR2(500), /* 학번 */
-	file_name VARCHAR2(500), /* 파일이름 */
-	file_size NUMBER, /* 파일사이즈 */
-	original_file_name VARCHAR2(500), /* 원본파일이름 */
-	apply_date DATE /* 제출일 */
+	stu_no VARCHAR2(500), /* ?���? */
+	file_name VARCHAR2(500), /* ?��?��?���? */
+	file_size NUMBER, /* ?��?��?��?���? */
+	original_file_name VARCHAR2(500), /* ?��본파?��?���? */
+	apply_date DATE /* ?��출일 */
 );
 
 CREATE UNIQUE INDEX PK_assignment
@@ -330,14 +330,14 @@ ALTER TABLE assignment
 			open_sub_code
 		);
 
-/* 학과 */
+/* ?���? */
 CREATE TABLE department (
-	dept_no NUMBER NOT NULL, /* 학과번호 */
-	faculty_no NUMBER, /* 학부번호 */
-	dept_name VARCHAR2(500) NOT NULL, /* 학과명 */
-	tel VARCHAR2(500), /* 사무실전화번호 */
+	dept_no NUMBER NOT NULL, /* ?��과번?�� */
+	faculty_no NUMBER, /* ?���?번호 */
+	dept_name VARCHAR2(500) NOT NULL, /* ?��과명 */
+	tel VARCHAR2(500), /* ?��무실?��?��번호 */
 	building_code VARCHAR2(500), /* 건물코드 */
-	total_credit NUMBER /* 졸업이수학점 */
+	total_credit NUMBER /* 졸업?��?��?��?�� */
 );
 
 CREATE UNIQUE INDEX PK_department
@@ -352,10 +352,10 @@ ALTER TABLE department
 			dept_no
 		);
 
-/* 학부 */
+/* ?���? */
 CREATE TABLE faculty (
-	faculty_no NUMBER NOT NULL, /* 학부번호 */
-	faculty_name VARCHAR2(500) NOT NULL /* 학부이름 */
+	faculty_no NUMBER NOT NULL, /* ?���?번호 */
+	faculty_name VARCHAR2(500) NOT NULL /* ?���??���? */
 );
 
 CREATE UNIQUE INDEX PK_faculty
@@ -374,17 +374,17 @@ ALTER TABLE faculty
 CREATE TABLE professor (
 	prof_no VARCHAR2(500) NOT NULL, /* 교수번호 */
 	position_no NUMBER, /* 직책번호 */
-	dept_no NUMBER, /* 학과번호 */
-	prof_name VARCHAR2(500), /* 교수명 */
-	prof_id VARCHAR2(500), /* 아이디 */
-	prof_pwd VARCHAR2(500), /* 비밀번호 */
-    prof_ph VARCHAR2(500), /* 전화번호 */
-	prof_email VARCHAR2(500), /* 이메일 */
-	prof_start_date DATE, /* 임용일 */
-	prof_end_date DATE, /* 퇴직일 */
-	identity_state CHAR(1), /* 본인인증상태 */
-	identity_code VARCHAR2(500), /* 본인인증코드 */
-	change_date DATE /* 비밀번호 변경일 */
+	dept_no NUMBER, /* ?��과번?�� */
+	prof_name VARCHAR2(500), /* 교수�? */
+	prof_id VARCHAR2(500), /* ?��?��?�� */
+	prof_pwd VARCHAR2(500), /* 비�?번호 */
+    prof_ph VARCHAR2(500), /* ?��?��번호 */
+	prof_email VARCHAR2(500), /* ?��메일 */
+	prof_start_date DATE, /* ?��?��?�� */
+	prof_end_date DATE, /* ?��직일 */
+	identity_state CHAR(1), /* 본인?��증상?�� */
+	identity_code VARCHAR2(500), /* 본인?��증코?�� */
+	change_date DATE /* 비�?번호 �?경일 */
 );
 
 CREATE UNIQUE INDEX PK_professor
@@ -401,17 +401,17 @@ ALTER TABLE professor
 
 
 
-/* 강의평가 */
+/* 강의?���? */
 CREATE TABLE subj_eval (
 	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	stu_no VARCHAR2(500) NOT NULL, /* 학번 */
-	classification VARCHAR2(500) NOT NULL, /* 수강구분 */
+	stu_no VARCHAR2(500) NOT NULL, /* ?���? */
+	classification VARCHAR2(500) NOT NULL, /* ?��강구�? */
 	q1 NUMBER, /* 문항1 */
 	q2 NUMBER, /* 문항2 */
 	q3 NUMBER, /* 문항3 */
 	q4 NUMBER, /* 문항4 */
 	q5 NUMBER, /* 문항5 */
-	content CLOB /* 평가내용 */
+	content CLOB /* ?���??��?�� */
 );
 
 CREATE UNIQUE INDEX PK_subj_eval
@@ -430,14 +430,14 @@ ALTER TABLE subj_eval
 			classification
 		);
 
-/* 수강신청 */
+/* ?��강신�? */
 CREATE TABLE registration (
 	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	stu_no VARCHAR2(500) NOT NULL, /* 학번 */
-	classification VARCHAR2(500) NOT NULL, /* 수강구분 */
-	reg_date DATE, /* 수강일자 */
-	score NUMBER, /* 성적 */
-	lecture_eval_flag CHAR(1) /* 강의평가완료여부 */
+	stu_no VARCHAR2(500) NOT NULL, /* ?���? */
+	classification VARCHAR2(500) NOT NULL, /* ?��강구�? */
+	reg_date DATE, /* ?��강일?�� */
+	score NUMBER, /* ?��?�� */
+	lecture_eval_flag CHAR(1) /* 강의?���??��료여�? */
 );
 
 CREATE UNIQUE INDEX PK_registration
@@ -456,19 +456,19 @@ ALTER TABLE registration
 			classification
 		);
 
-/* 성적 */
+/* ?��?�� */
 CREATE TABLE evaluation (
 	sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	stu_no VARCHAR2(500) NOT NULL, /* 학번 */
-	classification VARCHAR2(500) NOT NULL, /* 수강구분 */
+	stu_no VARCHAR2(500) NOT NULL, /* ?���? */
+	classification VARCHAR2(500) NOT NULL, /* ?��강구�? */
 	midterm NUMBER, /* 중간고사 */
 	finals NUMBER, /* 기말고사 */
 	assignment NUMBER, /* 과제 */
 	attendance NUMBER, /* 출석 */
-	etc NUMBER, /* 기타 */
+	etc NUMBER, /* 기�? */
 	total_grade NUMBER, /* 총점 */
-	reg_date DATE, /* 입력날짜 */
-	edit_date DATE /* 수정날짜 */
+	reg_date DATE, /* ?��?��?���? */
+	edit_date DATE /* ?��?��?���? */
 );
 
 CREATE UNIQUE INDEX PK_evaluation
@@ -492,8 +492,8 @@ CREATE TABLE open_subj (
 	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
 	subj_code VARCHAR2(500), /* 과목코드 */
 	prof_no VARCHAR2(500), /* 교수번호 */
-	open_date DATE, /* 개설일자 */
-	close_date DATE /* 폐지일자 */
+	open_date DATE, /* 개설?��?�� */
+	close_date DATE /* ?���??��?�� */
 );
 
 CREATE UNIQUE INDEX PK_open_subj
@@ -508,12 +508,12 @@ ALTER TABLE open_subj
 			open_sub_code
 		);
 
-/* 과제등록 */
+/* 과제?���? */
 CREATE TABLE distribute_assign (
 	assign_no NUMBER NOT NULL, /* 과제번호 */
 	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	assign_name VARCHAR2(500), /* 과제명 */
-	reg_date DATE /* 등록일 */
+	assign_name VARCHAR2(500), /* 과제�? */
+	reg_date DATE /* ?��록일 */
 );
 
 CREATE UNIQUE INDEX PK_distribute_assign
@@ -533,9 +533,9 @@ ALTER TABLE distribute_assign
 /* 강의계획 */
 CREATE TABLE syllabus (
 	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	syllabus VARCHAR2(500), /* 강의계획서 */
-	theory_time NUMBER, /* 이론시간 */
-	training_time NUMBER /* 실습시간 */
+	syllabus VARCHAR2(500), /* 강의계획?�� */
+	theory_time NUMBER, /* ?��론시�? */
+	training_time NUMBER /* ?��?��?���? */
 );
 
 CREATE UNIQUE INDEX PK_syllabus
@@ -550,10 +550,10 @@ ALTER TABLE syllabus
 			open_sub_code
 		);
 
-/* 요약시간표 */
+/* ?��?��?��간표 */
 CREATE TABLE regi_timetable (
 	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	short_name VARCHAR2(500) /* 요약명 */
+	short_name VARCHAR2(500) /* ?��?���? */
 );
 
 CREATE UNIQUE INDEX PK_regi_timetable
@@ -571,7 +571,7 @@ ALTER TABLE regi_timetable
 /* 교수직책 */
 CREATE TABLE prof_position (
 	position_no NUMBER NOT NULL, /* 직책번호 */
-	position_name VARCHAR2(500) /* 직책명 */
+	position_name VARCHAR2(500) /* 직책�? */
 );
 
 CREATE UNIQUE INDEX PK_prof_position
@@ -589,8 +589,8 @@ ALTER TABLE prof_position
 /* 건물 */
 CREATE TABLE building (
 	building_code VARCHAR2(500) NOT NULL, /* 건물코드 */
-	building_name VARCHAR2(500), /* 건물명 */
-	detail VARCHAR2(500) /* 상세위치 */
+	building_name VARCHAR2(500), /* 건물�? */
+	detail VARCHAR2(500) /* ?��?��?���? */
 );
 
 CREATE UNIQUE INDEX PK_building
@@ -608,12 +608,11 @@ ALTER TABLE building
 /* 과목 */
 CREATE TABLE subject (
 	subj_code VARCHAR2(500) NOT NULL, /* 과목코드 */
-	prof_no VARCHAR2(500), /* 교수번호 */
 	type_code VARCHAR2(500), /* 구분코드 */
-	subj_name VARCHAR2(500), /* 과목명 */
-	explanation CLOB, /* 과목설명 */
-	credit NUMBER, /* 이수학점 */
-	personnel NUMBER /* 인원 */
+	subj_name VARCHAR2(500), /* 과목�? */
+	explanation varchar2(4000), /* 과목?���? */
+	credit NUMBER, /* ?��?��?��?�� */
+	personnel NUMBER /* ?��?�� */
 );
 
 CREATE UNIQUE INDEX PK_subject
@@ -628,10 +627,10 @@ ALTER TABLE subject
 			subj_code
 		);
 
-/* 이수구분 */
+/* ?��?��구분 */
 CREATE TABLE subj_type (
 	type_code VARCHAR2(500) NOT NULL, /* 구분코드 */
-	type VARCHAR2(500) /* 이수구분 */
+	type VARCHAR2(500) /* ?��?��구분 */
 );
 
 CREATE UNIQUE INDEX PK_subj_type
@@ -646,21 +645,21 @@ ALTER TABLE subj_type
 			type_code
 		);
 
-/* 하단정보 */
+/* ?��?��?���? */
 CREATE TABLE footer (
-	company_name VARCHAR2(200), /* 회사명 */
-	tel VARCHAR2(200), /* 전화번호 */
-	zipcode VARCHAR2(200), /* 우편번호 */
+	company_name VARCHAR2(200), /* ?��?���? */
+	tel VARCHAR2(200), /* ?��?��번호 */
+	zipcode VARCHAR2(200), /* ?��?��번호 */
 	address1 VARCHAR2(200), /* 주소1 */
 	address2 VARCHAR2(200), /* 주소2 */
-	policy CLOB, /* 개인정보처리방침 */
-	start_year VARCHAR2(200) /* 설립연도 */
+	policy CLOB, /* 개인?��보처리방�? */
+	start_year VARCHAR2(200) /* ?��립연?�� */
 );
 
-/* 은행 */
+/* ???�� */
 CREATE TABLE bank (
-	bank_code VARCHAR2(500) NOT NULL, /* 은행코드 */
-	bank_name VARCHAR2(500) /* 은행명 */
+	bank_code VARCHAR2(500) NOT NULL, /* ???��코드 */
+	bank_name VARCHAR2(500) /* ???���? */
 );
 
 CREATE UNIQUE INDEX PK_bank
@@ -675,12 +674,12 @@ ALTER TABLE bank
 			bank_code
 		);
 
-/* 계좌정보 */
+/* 계좌?���? */
 CREATE TABLE account_info (
-	bank_code VARCHAR2(500) NOT NULL, /* 은행코드 */
-	official_no VARCHAR2(500), /* 관계자번호 */
+	bank_code VARCHAR2(500) NOT NULL, /* ???��코드 */
+	official_no VARCHAR2(500), /* �?계자번호 */
 	account_no VARCHAR2(500), /* 계좌번호 */
-	account_name VARCHAR2(500) /* 예금주명 */
+	account_name VARCHAR2(500) /* ?��금주�? */
 );
 
 CREATE UNIQUE INDEX PK_account_info
@@ -695,19 +694,19 @@ ALTER TABLE account_info
 			bank_code
 		);
 
-/* 관계자 상세정보 */
+/* �?계자 ?��?��?���? */
 CREATE TABLE official_info (
-	official_no NUMBER NOT NULL, /* 관계자번호 */
-	hp1 VARCHAR2(200), /* 핸드폰1 */
-	hp2 VARCHAR2(200), /* 핸드폰2 */
-	email1 VARCHAR2(200), /* 이메일1 */
-	email2 VARCHAR2(200), /* 이메일2 */
-	zipcode VARCHAR2(200), /* 우편번호 */
+	official_no NUMBER NOT NULL, /* �?계자번호 */
+	hp1 VARCHAR2(200), /* ?��?��?��1 */
+	hp2 VARCHAR2(200), /* ?��?��?��2 */
+	email1 VARCHAR2(200), /* ?��메일1 */
+	email2 VARCHAR2(200), /* ?��메일2 */
+	zipcode VARCHAR2(200), /* ?��?��번호 */
 	address VARCHAR2(200), /* 주소 */
-	addr_detail VARCHAR2(200), /* 주소상세 */
-	jumin VARCHAR2(200), /* 주민번호 */
-	gender VARCHAR2(200), /* 성별 */
-	image_url VARCHAR2(200) /* 사진 */
+	addr_detail VARCHAR2(200), /* 주소?��?�� */
+	jumin VARCHAR2(200), /* 주�?�번?�� */
+	gender VARCHAR2(200), /* ?���? */
+	image_url VARCHAR2(200) /* ?���? */
 );
 
 CREATE UNIQUE INDEX PK_official_info
@@ -722,14 +721,14 @@ ALTER TABLE official_info
 			official_no
 		);
 
-/* 쪽지 발신함 */
+/* 쪽�? 발신?�� */
 CREATE TABLE outbox (
-	msg_no NUMBER NOT NULL, /* 쪽지번호 */
-	official_no VARCHAR2(500), /* 발신인 번호 */
-	contents CLOB, /* 내용 */
-	send_date DATE, /* 발송일 */
-	official_name VARCHAR2(500), /* 발신인명 */
-	del_flag CHAR(1) /* 삭제여부 */
+	msg_no NUMBER NOT NULL, /* 쪽�?번호 */
+	official_no VARCHAR2(500), /* 발신?�� 번호 */
+	contents CLOB, /* ?��?�� */
+	send_date DATE, /* 발송?�� */
+	official_name VARCHAR2(500), /* 발신?���? */
+	del_flag CHAR(1) /* ?��?��?���? */
 );
 
 CREATE UNIQUE INDEX PK_outbox
@@ -744,13 +743,13 @@ ALTER TABLE outbox
 			msg_no
 		);
 
-/* 쪽지 수신함 */
+/* 쪽�? ?��?��?�� */
 CREATE TABLE inbox (
 	no NUMBER NOT NULL, /* 번호 */
-	msg_no NUMBER, /* 쪽지번호 */
-	official_no VARCHAR2(500), /* 수신인번호 */
-	read_date DATE, /* 읽은 날짜 */
-	keep_flag CHAR(1) /* 보관여부 */
+	msg_no NUMBER, /* 쪽�?번호 */
+	official_no VARCHAR2(500), /* ?��?��?��번호 */
+	read_date DATE, /* ?��?? ?���? */
+	keep_flag CHAR(1) /* 보�??���? */
 );
 
 CREATE UNIQUE INDEX PK_inbox
@@ -765,10 +764,10 @@ ALTER TABLE inbox
 			no
 		);
 
-/* 강의실 */
+/* 강의?�� */
 CREATE TABLE classroom (
-	classroom_code VARCHAR2(500) NOT NULL, /* 강의실코드 */
-	classroom_name VARCHAR2(500), /* 강의실명 */
+	classroom_code VARCHAR2(500) NOT NULL, /* 강의?��코드 */
+	classroom_name VARCHAR2(500), /* 강의?���? */
 	building_code VARCHAR2(500) /* 건물코드 */
 );
 
@@ -784,12 +783,12 @@ ALTER TABLE classroom
 			classroom_code
 		);
 
-/* 강의시간표 */
+/* 강의?��간표 */
 CREATE TABLE subj_time (
-	lecture_time_no NUMBER NOT NULL, /* 강의시간표코드 */
+	lecture_time_no NUMBER NOT NULL, /* 강의?��간표코드 */
 	open_sub_code VARCHAR2(500), /* 개설교과과목코드 */
-	classroom_code VARCHAR2(500), /* 강의실코드 */
-	timetable_code VARCHAR2(500) /* 시간기준코드 */
+	classroom_code VARCHAR2(500), /* 강의?��코드 */
+	timetable_code VARCHAR2(500) /* ?��간기�?코드 */
 );
 
 CREATE UNIQUE INDEX PK_subj_time
@@ -807,9 +806,9 @@ ALTER TABLE subj_time
 /* 즐겨찾기 */
 CREATE TABLE bookmark (
 	no NUMBER NOT NULL, /* 번호 */
-	official_no VARCHAR2(200), /* 관계자번호 */
-	name VARCHAR2(200), /* 북마크명 */
-	url VARCHAR2(200) /* 북마크주소 */
+	official_no VARCHAR2(200), /* �?계자번호 */
+	name VARCHAR2(200), /* 북마?���? */
+	url VARCHAR2(200) /* 북마?��주소 */
 );
 
 CREATE UNIQUE INDEX PK_bookmark
@@ -824,13 +823,13 @@ ALTER TABLE bookmark
 			no
 		);
 
-/* 기본시간표 */
+/* 기본?��간표 */
 CREATE TABLE timetable (
-	timetable_code VARCHAR2(500) NOT NULL, /* 시간기준코드 */
-	timetable_name VARCHAR2(500), /* 표시교시명 */
-	day VARCHAR2(500), /* 요일 */
+	timetable_code VARCHAR2(500) NOT NULL, /* ?��간기�?코드 */
+	timetable_name VARCHAR2(500), /* ?��?��교시�? */
+	day VARCHAR2(500), /* ?��?�� */
 	period NUMBER, /* 교시 */
-	short_name VARCHAR2(500) /* 요약교시명 */
+	short_name VARCHAR2(500) /* ?��?��교시�? */
 );
 
 CREATE UNIQUE INDEX PK_timetable
@@ -845,22 +844,22 @@ ALTER TABLE timetable
 			timetable_code
 		);
 
-/* 게시판 */
+/* 게시?�� */
 CREATE TABLE board (
-	bd_code NUMBER NOT NULL, /* 게시판코드 */
+	bd_code NUMBER NOT NULL, /* 게시?��코드 */
 	auth_code NUMBER, /* 권한코드 */
 	category_code NUMBER, /* 카테고리 코드 */
-	bd_name VARCHAR2(500), /* 게시판 이름 */
-	reg_date DATE, /* 게시판 등록일 */
-	edit_date DATE, /* 게시판 수정일 */
-	bd_order NUMBER, /* 게시판 순서 */
-	usage CHAR(1), /* 사용여부 */
-	is_reply CHAR(1), /* 댓글여부 */
-	is_comment CHAR(1), /* 답글여부 */
-	is_private CHAR(1), /* 비공개여부 */
-	is_upload CHAR(1), /* 업로드 가능 여부 */
-	max_upfile NUMBER, /* 업로드 가능 개수 */
-	max_filesize NUMBER /* 업로드 가능 파일 사이즈 */
+	bd_name VARCHAR2(500), /* 게시?�� ?���? */
+	reg_date DATE, /* 게시?�� ?��록일 */
+	edit_date DATE, /* 게시?�� ?��?��?�� */
+	bd_order NUMBER, /* 게시?�� ?��?�� */
+	usage CHAR(1), /* ?��?��?���? */
+	is_reply CHAR(1), /* ?���??���? */
+	is_comment CHAR(1), /* ?���??���? */
+	is_private CHAR(1), /* 비공개여�? */
+	is_upload CHAR(1), /* ?��로드 �??�� ?���? */
+	max_upfile NUMBER, /* ?��로드 �??�� 개수 */
+	max_filesize NUMBER /* ?��로드 �??�� ?��?�� ?��?���? */
 );
 
 CREATE UNIQUE INDEX PK_board
@@ -878,9 +877,9 @@ ALTER TABLE board
 /* 카테고리 */
 CREATE TABLE category (
 	category_code NUMBER NOT NULL, /* 카테고리 코드 */
-	category_name VARCHAR2(500), /* 카테고리 명 */
-	usage CHAR(1), /* 사용여부 */
-	reg_date DATE /* 등록일 */
+	category_name VARCHAR2(500), /* 카테고리 �? */
+	usage CHAR(1), /* ?��?��?���? */
+	reg_date DATE /* ?��록일 */
 );
 
 CREATE UNIQUE INDEX PK_category
@@ -898,9 +897,9 @@ ALTER TABLE category
 /* 권한 */
 CREATE TABLE authority (
 	auth_code NUMBER NOT NULL, /* 권한코드 */
-	auth_name VARCHAR2(500), /* 권한명 */
-	auth_desc VARCHAR2(500), /* 설명 */
-	reg_date DATE /* 등록일 */
+	auth_name VARCHAR2(500), /* 권한�? */
+	auth_desc VARCHAR2(500), /* ?���? */
+	reg_date DATE /* ?��록일 */
 );
 
 CREATE UNIQUE INDEX PK_authority
@@ -915,16 +914,16 @@ ALTER TABLE authority
 			auth_code
 		);
 
-/* 임직원 */
+/* ?��직원 */
 CREATE TABLE employee (
-	emp_no VARCHAR2(500) NOT NULL, /* 임직원번호 */
-	emp_id VARCHAR2(500), /* 임직원아이디 */
-	emp_name VARCHAR2(500), /* 임직원명 */
-	pwd VARCHAR2(500), /* 비밀번호 */
-	start_date DATE, /* 입사일 */
-	resignation_date DATE, /* 퇴사일 */
-	identity_state CHAR(1), /* 본인인증상태 */
-	dep_code NUMBER, /* 부서코드 */
+	emp_no VARCHAR2(500) NOT NULL, /* ?��직원번호 */
+	emp_id VARCHAR2(500), /* ?��직원?��?��?�� */
+	emp_name VARCHAR2(500), /* ?��직원�? */
+	pwd VARCHAR2(500), /* 비�?번호 */
+	start_date DATE, /* ?��?��?�� */
+	resignation_date DATE, /* ?��?��?�� */
+	identity_state CHAR(1), /* 본인?��증상?�� */
+	dep_code NUMBER, /* �??��코드 */
 	position_code NUMBER, /* 직책코드 */
 	auth_code NUMBER /* 권한코드 */
 );
@@ -941,10 +940,10 @@ ALTER TABLE employee
 			emp_no
 		);
 
-/* 부서 */
+/* �??�� */
 CREATE TABLE emp_depart (
-	dep_code NUMBER NOT NULL, /* 부서코드 */
-	dep_name VARCHAR2(500) /* 부서명 */
+	dep_code NUMBER NOT NULL, /* �??��코드 */
+	dep_name VARCHAR2(500) /* �??���? */
 );
 
 CREATE UNIQUE INDEX PK_emp_depart
@@ -959,10 +958,10 @@ ALTER TABLE emp_depart
 			dep_code
 		);
 
-/* 임직원 직책 */
+/* ?��직원 직책 */
 CREATE TABLE emp_position (
 	position_code NUMBER NOT NULL, /* 직책코드 */
-	position_name VARCHAR2(500) /* 직책명 */
+	position_name VARCHAR2(500) /* 직책�? */
 );
 
 CREATE UNIQUE INDEX PK_emp_position
@@ -977,21 +976,21 @@ ALTER TABLE emp_position
 			position_code
 		);
 
-/* 게시글 */
+/* 게시�? */
 CREATE TABLE post (
-	post_no NUMBER NOT NULL, /* 게시글번호 */
-	bd_code NUMBER, /* 게시판코드 */
-	writer_code NUMBER, /* 작성자코드 */
-	title VARCHAR2(500), /* 제목 */
-	contents CLOB, /* 내용 */
-	reg_date DATE, /* 등록일 */
-	read_count NUMBER, /* 조회수 */
-	del_flag CHAR(1), /* 삭제여부 */
-	group_no NUMBER, /* 원본글번호 */
-	sort_no NUMBER, /* 정렬번호 */
+	post_no NUMBER NOT NULL, /* 게시�?번호 */
+	bd_code NUMBER, /* 게시?��코드 */
+	writer_code NUMBER, /* ?��?��?��코드 */
+	title VARCHAR2(500), /* ?���? */
+	contents CLOB, /* ?��?�� */
+	reg_date DATE, /* ?��록일 */
+	read_count NUMBER, /* 조회?�� */
+	del_flag CHAR(1), /* ?��?��?���? */
+	group_no NUMBER, /* ?��본�?번호 */
+	sort_no NUMBER, /* ?��?��번호 */
 	step NUMBER, /* 차수 */
-	edit_date DATE, /* 수정일 */
-	is_private CHAR(1) /* 비밀글여부 */
+	edit_date DATE, /* ?��?��?�� */
+	is_private CHAR(1) /* 비�?�??���? */
 );
 
 CREATE UNIQUE INDEX PK_post
@@ -1006,16 +1005,16 @@ ALTER TABLE post
 			post_no
 		);
 
-/* 댓글 */
+/* ?���? */
 CREATE TABLE reply (
-	reply_no NUMBER NOT NULL, /* 댓글번호 */
-	writer_code NUMBER, /* 댓글작성자 */
-	post_no NUMBER, /* 게시글번호 */
-	contents CLOB, /* 내용 */
-	reg_date DATE, /* 등록일 */
-	del_flag CHAR(1), /* 삭제여부 */
-	step NUMBER, /* 글의 단계 */
-	sort_no NUMBER, /* 글의 정렬순서 */
+	reply_no NUMBER NOT NULL, /* ?���?번호 */
+	writer_code NUMBER, /* ?���??��?��?�� */
+	post_no NUMBER, /* 게시�?번호 */
+	contents CLOB, /* ?��?�� */
+	reg_date DATE, /* ?��록일 */
+	del_flag CHAR(1), /* ?��?��?���? */
+	step NUMBER, /* �??�� ?���? */
+	sort_no NUMBER, /* �??�� ?��?��?��?�� */
 	group_no NUMBER /* 그룹번호 */
 );
 
@@ -1031,14 +1030,14 @@ ALTER TABLE reply
 			reply_no
 		);
 
-/* 대댓글 */
+/* ???���? */
 CREATE TABLE rereply (
-	rereply_no NUMBER NOT NULL, /* 대댓글번호 */
-	writer_code NUMBER, /* 대댓글작성자 */
-	reply_no NUMBER, /* 댓글번호 */
-	reg_date DATE, /* 등록일 */
-	contents CLOB, /* 내용 */
-	del_flag CHAR(1) /* 삭제여부 */
+	rereply_no NUMBER NOT NULL, /* ???���?번호 */
+	writer_code NUMBER, /* ???���??��?��?�� */
+	reply_no NUMBER, /* ?���?번호 */
+	reg_date DATE, /* ?��록일 */
+	contents CLOB, /* ?��?�� */
+	del_flag CHAR(1) /* ?��?��?���? */
 );
 
 CREATE UNIQUE INDEX PK_rereply
@@ -1053,15 +1052,15 @@ ALTER TABLE rereply
 			rereply_no
 		);
 
-/* 파일 */
+/* ?��?�� */
 CREATE TABLE board_file (
 	no NUMBER NOT NULL, /* 고유번호 */
-	post_no NUMBER, /* 게시글번호 */
-	file_name VARCHAR2(500), /* 파일명 */
-	file_size NUMBER, /* 파일크기 */
-	original_file_name VARCHAR2(500), /* 원본파일명 */
-	down_count NUMBER, /* 다운로드수 */
-	upfile_date DATE /* 업로드 날짜 */
+	post_no NUMBER, /* 게시�?번호 */
+	file_name VARCHAR2(500), /* ?��?���? */
+	file_size NUMBER, /* ?��?��?���? */
+	original_file_name VARCHAR2(500), /* ?��본파?���? */
+	down_count NUMBER, /* ?��?��로드?�� */
+	upfile_date DATE /* ?��로드 ?���? */
 );
 
 CREATE UNIQUE INDEX PK_board_file
@@ -1076,10 +1075,10 @@ ALTER TABLE board_file
 			no
 		);
 
-/* 증명서 종류 */
+/* 증명?�� 종류 */
 CREATE TABLE certification_type (
-	certification_code NUMBER NOT NULL, /* 증명서코드 */
-	certification_name VARCHAR2(500) /* 증명서이름 */
+	certification_code NUMBER NOT NULL, /* 증명?��코드 */
+	certification_name VARCHAR2(500) /* 증명?��?���? */
 );
 
 CREATE UNIQUE INDEX PK_certification_type
@@ -1094,11 +1093,11 @@ ALTER TABLE certification_type
 			certification_code
 		);
 
-/* 출석부 */
+/* 출석�? */
 CREATE TABLE attendance (
 	open_sub_code VARCHAR2(500) NOT NULL, /* 개설교과과목코드 */
-	stu_no VARCHAR2(500) NOT NULL, /* 학번 */
-	classification VARCHAR2(500) NOT NULL, /* 수강구분 */
+	stu_no VARCHAR2(500) NOT NULL, /* ?���? */
+	classification VARCHAR2(500) NOT NULL, /* ?��강구�? */
 	first VARCHAR2(30), /* 1주차 */
 	second VARCHAR2(30), /* 2주차 */
 	third VARCHAR2(30), /* 3주차 */
@@ -1109,7 +1108,7 @@ CREATE TABLE attendance (
 	eighth VARCHAR2(30), /* 8주차 */
 	ninth VARCHAR2(30), /* 9주차 */
 	tenth VARCHAR2(30), /* 10주차 */
-	point NUMBER /* 출석점수 */
+	point NUMBER /* 출석?��?�� */
 );
 
 CREATE UNIQUE INDEX PK_attendance

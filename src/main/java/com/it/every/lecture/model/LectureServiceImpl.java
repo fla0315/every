@@ -70,5 +70,25 @@ public class LectureServiceImpl implements LectureService {
 		return lectureDao.selectByOsCode(openSubCode);
 	}
 
+	@Override
+	public Map<String, Object> selectScoreAvg() {
+		return lectureDao.selectScoreAvg();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMajorCount() {
+		return lectureDao.selectMajorCount();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectGradeCount() {
+		return lectureDao.selectGradeCount();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectByProfNo(String profNo) {
+		return lectureDao.selectByProfNo(profNo);
+	}
+
 
 }

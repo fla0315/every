@@ -49,7 +49,7 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="<c:url value='/admin/mainDisplay/notice'/>"><i class="fas fa-user-graduate"></i>&nbsp;에브리학사</a>
+            <a class="navbar-brand ps-3" href="<c:url value='/admin/campusInfo/calendar'/>"><i class="fas fa-user-graduate"></i>&nbsp;에브리학사</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -90,16 +90,6 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                             <div class="collapse" id="collapseStudent" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 	<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link" href="<c:url value='/admin/student/studentList'/>">학생정보관리</a>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLeaveReturn" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        휴학/복학관리
-                                    	<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="collapseLeaveReturn" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="<c:url value='/admin/student/leaveManage'/>">휴학신청관리</a>
-                                            <a class="nav-link" href="<c:url value='/admin/student/returnManage'/>">복학신청관리</a>
-                                        </nav>
-                                    </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTuition" aria-expanded="false" aria-controls="pagesCollapseError">
                                         등록금관리
                                     	<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -159,44 +149,6 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                                 </nav>
                             </div>
                             
-                            
-                            <!-- 게시판 관리 -->
-                            <div class="sb-sidenav-menu-heading">게시판</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMain" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tv"></i></div>
-                                메인화면
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseMain" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<c:url value='/admin/campusInfo/notice'/>">공지사항</a>
-                                    <a class="nav-link" href="<c:url value='/admin/campusInfo/campusMap'/>">캠퍼스맵</a>
-                                    <a class="nav-link" href="<c:url value='/admin/campusInfo/calendar'/>">학사일정</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBoard" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
-                                자유게시판
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseBoard" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<c:url value='/admin/board/freeBoard'/>">게시글 관리</a>
-                                    <a class="nav-link" href="<c:url value='/admin/board/freeBoardReport'/>">게시글 신고현황</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSell" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
-                                거래게시판
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseSell" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<c:url value='/admin/board/marketBoard'/>">거래글 관리</a>
-                                    <a class="nav-link" href="<c:url value='/admin/board/marketBoardReport'/>">거래글 신고현황</a>
-                                </nav>
-                            </div>
-                            
                             <!-- 시스템통계 -->
                             <div class="sb-sidenav-menu-heading">통계</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMember" aria-expanded="false" aria-controls="collapsePages">
@@ -231,6 +183,11 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                                     <a class="nav-link" href="<c:url value='/admin/chart/classChart'/>">강의별 학생 통계</a>
                                 </nav>
                             </div>
+                            
+                            <!-- 게시판 관리 -->
+                            <div class="sb-sidenav-menu-heading">기타</div>
+                            <a class="nav-link" href="<c:url value='/admin/campusInfo/campusMap'/>">캠퍼스맵</a>
+                            <a class="nav-link" href="<c:url value='/admin/campusInfo/calendar'/>">학사일정</a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

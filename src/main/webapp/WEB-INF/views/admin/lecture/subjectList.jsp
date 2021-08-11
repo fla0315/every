@@ -30,6 +30,7 @@
 						<th style="text-align: center">과목명</th>
 						<th style="text-align: center">과목설명</th>
 						<th style="text-align: center">학점</th>
+						<th style="text-align: center">수강인원</th>
 						<th style="text-align: center">수정</th>
 						<th style="text-align: center">삭제</th>
 					</tr>
@@ -37,7 +38,7 @@
 				<tbody>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="5" style="text-align: center">조회된 과목 정보가 없습니다.</td>
+							<td colspan="7" style="text-align: center">조회된 과목 정보가 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list}">
@@ -48,6 +49,7 @@
 			               <td style="vertical-align: middle; text-align: center;">${vo.subjName}</td>
 			               <td style="vertical-align: middle; text-align: center;">${vo.explanation}</td>
 			               <td style="vertical-align: middle; text-align: center;">${vo.credit}</td>
+			               <td style="vertical-align: middle; text-align: center;">${vo.personnel}</td>
 			               <td style="vertical-align: middle; text-align: center;">
 								<a href="<c:url value='/admin/lecture/subjectEdit?subjCode=${vo.subjCode }'/>">
 									<button class="btn btn-primary btn-sm">
@@ -68,6 +70,7 @@
 					</c:if>
 				</tbody>
 			</table>
+			<br>
 			<div style="text-align: right; margin-right: 30px">
 				<a href="<c:url value='/admin/lecture/subjectRegister'/>">
 				<button class="btn btn-primary btn-sm">

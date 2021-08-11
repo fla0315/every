@@ -16,4 +16,8 @@ public interface LectureDAO {
 	public int editSubjTime(LectureVO vo);
 	public int deleteOpenSubj(String openSubCode);
 	public int deleteSubjTime(String openSubCode);
+	public Map<String, Object> selectScoreAvg();
+	public List<Map<String, Object>> selectMajorCount();
+	public List<Map<String, Object>> selectGradeCount();
+	public List<Map<String, Object>> selectByProfNo(String profNo);
 }
