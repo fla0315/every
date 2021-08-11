@@ -308,6 +308,7 @@ $('#emailconfirm').click(function(){
 		            dataType: "json",
 					success:function(res){
 						//alert(res);
+						$('#checkemail').html("인증번호가 발송되었습니다.").css("color", "blue");
 						$('#chkmail').val(res).css("color","red"); 
 					},
 					error:function(xhr, status, error){
