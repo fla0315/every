@@ -40,6 +40,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    	<li><a class="dropdown-item" href="<c:url value='/chitchat/chitchatMain'/>">쪽지함</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="<c:url value='/reg/logout'/>">로그아웃</a></li>
                     </ul>
@@ -215,27 +216,6 @@
                                             <a class="nav-link" href="#">익명게시판</a>
                                         </nav>
                            	</div>
-	                      
-                            <!-- 커뮤니티 -->
-                            
-                   
-                            <div class="sb-sidenav-menu-heading">쪽지함</div>
-	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMypost" aria-expanded="false" aria-controls="collapsePages">
-		                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-		                                쪽지함
-		                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-		                        </a>
-                            
-                            	
-                          	 <div class="collapse" id="collapseMypost" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">수신쪽지함</a>
-                                            <a class="nav-link" href="#">발신쪽지함</a>
-                                            <a class="nav-link" href="#">쪽지보관함</a>
-                                        </nav>
-                           	</div>
-                           	
-                           
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
