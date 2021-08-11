@@ -17,7 +17,7 @@
 	
 	/* 에이젝스로 받는 거  */
 	function subjList(){
-		var subjYear=$('#subjYear').val(); //년도
+		var openYear=$('#openYear').val(); //년도
 		var semester=$('#semester').val(); //학기
 		var grade=$('#grade').val(); //학년
 		var type=$('#type').val(); //이수구분
@@ -25,7 +25,7 @@
 		var subjName=$('#subjName').val(); //과목명
 		
 		
-		console.log(subjYear);
+		console.log(openYear);
 		console.log(semester);
 		console.log(grade);
 		console.log(type);
@@ -41,7 +41,7 @@
 				"type":type,
 				"grade":grade,
 				"semester":semester,
-				"subjYear":subjYear,
+				"openYear":openYear,
 			},
 			dataType:"json",
 			type:"post",
@@ -58,7 +58,7 @@
 					console.log(item)
 					str+="<tr class='' role='row' id=''>"; //테이블 여는거 
 					str+="<td role='gridcell' style='height: 0px; width: 7%;'><form name='frmCart' method='post' action='<c:url value='/registration/open_registrationCart'/>'><input type='hidden' name='openSubCode' value='"+item.OPEN_SUB_CODE+"'> <input type='submit' id='btCart' value='장바구니' class='buttons'> </form> </td>"; //장바구니
-						str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.SUBJ_YEAR+"</td>"; //년도
+						str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.OPEN_YEAR+"</td>"; //년도
 						str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.SEMESTER+"학기"+"</td>"; //학기
 						str+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SUBJ_NAME+"</td>"; //과목명
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.DEPT_NAME+"</td>"; //학부(과)
@@ -106,7 +106,7 @@
 						<td>
 							<!-- 년도  -->
 							<div id="">
-								<select name="subjYear" id="subjYear">
+								<select name="openYear" id="openYear">
 									<option value='0'>All</option>
 									<option value='2021'>2021</option>
 									<option value='2020'>2020</option>

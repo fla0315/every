@@ -16,14 +16,14 @@ $(function(){
 	
 	/* 에이젝스로 개설과목 받는 거  */
 	function subjList(){
-		var subjYear=$('#subjYear').val(); //년도
+		var openYear=$('#openYear').val(); //년도
 		var semester=$('#semester').val(); //학기
 		var grade=$('#grade').val(); //학년
 		var type=$('#type').val(); //이수구분
 		var deptName=$('#deptName').val(); //학과
 		var subjName=$('#subjName').val(); //과목명
 		
-		console.log(subjYear);
+		console.log(openYear);
 		console.log(semester);
 		console.log(grade);
 		console.log(type);
@@ -38,7 +38,7 @@ $(function(){
 				"type":type,
 				"grade":grade,
 				"semester":semester,
-				"subjYear":"0"
+				"openYear":"0"
 			},
 			dataType:"json",
 			type:"post",
@@ -366,13 +366,13 @@ $(function(){
 													 <span>${CMap['OPEN_SUB_CODE']}</span>
 												</td>
 												<!-- 년도 -->
-												<td>${CMap['SUBJ_YEAR']}</td>
+												<td>${CMap['OPEN_YEAR']}</td>
 												<!-- 학기 -->
 												<td>${CMap['SEMESTER'] }</td>
 												<!-- 과목명 -->
 												<td>${CMap['SUBJ_NAME'] }</td>
 												<!-- 학부(과)  -->
-												<td>${CMap['FACULTY_NAME'] }</td>
+												<td>${CMap['DEPT_NAME'] }</td>
 												<!-- 학년 -->
 												<td>${CMap['GRADE'] }</td>
 												<!-- 이수구분 -->

@@ -67,7 +67,7 @@
 	
 	<!-- 개설교과과목 전체조회 + 검색 + 강의계획서 추가한 것 -->
 	<select id="OpenRegistraionSearch" resultType="map"  parameterType="RegistrationSearchVO">
-		select opensub.*,sylla.*,subject.*, subjtype.*,prof.*,depart.*,subj_time.*,timetable.*,classroom.*,NVL(g.count,'0') as count
+		select opensub.*,sylla.*,subject.*, subjtype.*,prof.*,depart.*,subj_time.*,timetable.*,classroom.*,NVL(g.count,'0') as count ,bul.* ,classroom.*
 		from open_subj opensub left join syllabus sylla 
 		on sylla.open_sub_code = opensub.open_sub_code
 		left join subject subject 
@@ -84,47 +84,21 @@
 		on timetable.timetable_code = subj_time.timetable_code
 		left join classroom classroom
 		on classroom.classroom_code = subj_time.classroom_code
+		left join building bul
+		on bul.building_code = classroom.building_code
 		LEFT join
 		    (select open_sub_code, count(*) as count
 		    from registration
 		    group by open_sub_code) g
 		on opensub.open_sub_code=g.open_sub_code
 		where 1=1
-		    <if test='subjYear!=0'>and subj_year=#{subjYear} </if> 
+		    <if test='openYear!=0'>and open_year=#{openYear} </if> 
 		    <if test='semester!=0'>and semester=#{semester}</if> 
 			<if test='subjName!="" and subjName!=null'>and subj_name like '%' || #{subjName} || '%'</if> 
 			<if test='grade!=0'>and grade like '%' || #{grade} || '%'</if> 
 			<if test='type!=0'>and subject.type_code = #{type} </if>
 			<if test='deptName!="0"'>and depart.FACULTY_NO like '%' || #{deptName} || '%'</if> 
 	</select>
-	
-	<!-- 개설교과과목 전체조회 + 검색 백업본 -->
-	<!-- <select id="OpenRegistraionSearch" resultType="map"  parameterType="RegistrationSearchVO">
-		select sj.type, st.* ,prof.prof_name ,os.* ,g.*
-		from 
-		subject st join subj_type sj
-		on st.type_code= sj.type_code
-		join professor prof
-		on prof.prof_no = st.prof_no
-		join open_subj os
-		on os.subj_code = st.subj_code
-		join
-		(select open_sub_code, count(*) as count
-		from registration
-		group by open_sub_code) g
-		on os.open_sub_code=g.open_sub_code
-		where 1=1
-		    <if test='subjYear!=0'>and subj_year=#{subjYear} </if> 
-		    <if test='semester!=0'>and semester=#{semester}</if> 
-			<if test='subjName!="" and subjName!=null'>and subj_name like '%' || #{subjName} || '%'</if> 
-			<if test='grade!=0'>and grade like '%' || #{grade} || '%'</if> 
-			<if test='type!=0'>and st.type_code = #{type} </if>
-			<if test='facultyName!="0"'>and st.faculty_name like '%' || #{facultyName} || '%'</if> 
-	</select> -->
-
-
-
-
 
 
 	<!-- 학과 찾는거 -->

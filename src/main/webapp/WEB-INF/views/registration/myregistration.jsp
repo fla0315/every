@@ -20,10 +20,10 @@
 
 /* 에이젝스로 받는 거  */
 function subjList(){
-	var subjYear=$('#subjYear').val(); //년도
+	var openYear=$('#openYear').val(); //년도
 	var semester=$('#semester').val(); //학기
 	
-	console.log(subjYear);
+	console.log(openYear);
 	console.log(semester);
 	
 	
@@ -31,7 +31,7 @@ function subjList(){
 		url:"<c:url value='/registration/myregistration1'/>",
 		data:{
 			"semester":semester,
-			"subjYear":subjYear
+			"openYear":openYear
 		},
 		dataType:"json",
 		type:"post",
@@ -48,7 +48,7 @@ function subjList(){
 				console.log(item)
 				str+="<c:set var='sum' value='"+item.CREDIT+"'/>"; //테이블 여는거 
 				str+="<tr class='' role='row' id=''>"; //테이블 여는거 
-					str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.SUBJ_YEAR+"</td>"; //년도
+					str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.OPEN_YEAR+"</td>"; //년도
 					str+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SEMESTER+"학기"+"</td>"; //학기
 					str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.SUBJ_NAME+"</td>"; //과목명
 					str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.FACULTY_NAME+"</td>"; //학부
@@ -134,7 +134,7 @@ $(function(){
                                     <td><span class=""><label for="년도">년도</label></span></td>
                                     <td>
                                         <div id="">
-                                            <select id="subjYear" name="subjYear" >
+                                            <select id="openYear" name="openYear" >
                                             	<option value='0'>All</option>
                                                 <option value='2021'>2021</option>
                                                 <option value='2020'>2020</option>

@@ -54,13 +54,13 @@
 												</form>
 											</td>
 												<!-- 년도 -->
-												<td>${CMap['SUBJ_YEAR']}</td>
+												<td>${CMap['OPEN_YEAR']}</td>
 												<!-- 학기 -->
 												<td>${CMap['SEMESTER'] }</td>
 												<!-- 과목명 -->
 												<td>${CMap['SUBJ_NAME'] }</td>
 												<!-- 학부(과)  -->
-												<td>${CMap['FACULTY_NAME'] }</td>
+												<td>${CMap['DEPT_NAME'] }</td>
 												<!-- 학년 -->
 												<!-- 이수구분 -->
 												<td>${CMap['GRADE'] }</td>
