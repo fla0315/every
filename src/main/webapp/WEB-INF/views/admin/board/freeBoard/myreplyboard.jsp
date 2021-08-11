@@ -39,10 +39,10 @@ $(function() {
 			<div class="card-body">
 				<table class="table-bordered text-center" style="width: 100%">
 				<colgroup>
-					<col style="width: 12%" />
+					<col style="width: 10%" />
 					<col style="width: 13%" />
 					<col style="width: 60%" />
-					<col style="width: 15%" />
+					<col style="width: 17%" />
 
 				</colgroup>
 					<thead>
@@ -59,7 +59,7 @@ $(function() {
 					<tbody>
 						<c:if test="${empty list2 }">
 							<tr>
-								<td colspan="7" class="text-center">등록된 글이 없습니다.</td>
+								<td colspan="5" class="text-center">등록된 글이 없습니다.</td>
 							</tr>
 						</c:if>
 						<c:if test="${!empty list2 }">

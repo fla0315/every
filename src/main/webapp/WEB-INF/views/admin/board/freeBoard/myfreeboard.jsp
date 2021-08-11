@@ -30,9 +30,9 @@ $(function() {
 				<table class="table-bordered text-center" style="width: 100%">
 				<colgroup>
 					<col style="width: 10%" />
-					<col style="width: 40%" />
+					<col style="width: 45%" />
 					<col style="width: 15%" />
-					<col style="width: 15%" />
+					<col style="width: 10%" />
 					<col style="width: 10%" />
 				</colgroup>
 					<thead>
@@ -42,7 +42,6 @@ $(function() {
 							<th>등록일자</th>
 							<th>조회수</th>
 							<th>상세</th>
-								
 							<th>삭제</th>
 								
 						
