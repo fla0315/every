@@ -61,7 +61,7 @@ $(function(){
 						str+="<td role='gridcell' style='height: 0px; width: 6%;'>"+item.CREDIT+"학점"+"</td>"; //학점
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.COUNT+"/"+item.PERSONNEL+"</td>"; //담당교수
 						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
-						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //담당교수
+						str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.BUILDING_NAME+"-"+item.CLASSROOM_NAME+"/"+item.TIMETABLE_NAME+"</td>"; //담당교수
 					str+="</tr>"; //테이블 닫는거
 				});
 					
@@ -322,7 +322,7 @@ $(function(){
 												<!-- 담당교수 -->
 												<td>${myMap['PROF_NAME'] }</td>
 												<!-- 강의실/시간 -->
-												<td>${myMap['TIMETABLE'] }</td>
+												<td>${myMap['BUILDING_NAME']}-${myMap['CLASSROOM_NAME']}/&nbsp;${myMap['TIMETABLE_NAME']}</td>
 											</tr>
 										</c:forEach>
 									</c:if>
@@ -382,7 +382,7 @@ $(function(){
 												<!-- 담당교수 -->
 												<td>${CMap['PROF_NAME'] }</td>
 												<!-- 강의실/시간 -->
-												<td>${CMap['TIMETABLE'] }</td>
+												<td>${CMap['BUILDING_NAME']}-${CMap['CLASSROOM_NAME']}/&nbsp;${CMap['TIMETABLE_NAME']}</td>
 											</tr>
 										</c:forEach>
 									</c:if>

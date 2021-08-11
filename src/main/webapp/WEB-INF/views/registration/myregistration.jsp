@@ -51,12 +51,12 @@ function subjList(){
 					str+="<td role='gridcell' style='height: 0px; width: 5%; '>"+item.OPEN_YEAR+"</td>"; //년도
 					str+="<td role='gridcell' style='height: 0px; width: 7%;'>" +item.SEMESTER+"학기"+"</td>"; //학기
 					str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.SUBJ_NAME+"</td>"; //과목명
-					str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.FACULTY_NAME+"</td>"; //학부
+					str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.DEPT_NAME+"</td>"; //학부
 					str+="<td role='gridcell' style='height: 0px; width: 5%;'>"+item.GRADE+"학년"+"</td>";  //학년
 					str+="<td role='gridcell' style='height: 0px; width: 9%;'>" +item.TYPE+"</td>"; //이수구분
 					str+="<td id='credit' role='gridcell' style='height: 0px; width: 6%;'>"+item.CREDIT+"</td>"; //학점
 					str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.PROF_NAME+"</td>"; //담당교수
-					str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.TIMETABLE+"</td>"; //담당교수
+					str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+item.BUILDING_NAME+"-"+item.CLASSROOM_NAME+"</td>"; //담당교수
 					str+="<td role='gridcell' style='height: 0px; width: 9%;'><button type='button' class='applyBt'>강의계획서</button></td>"; //강의계획서
 					/* str+="<td role='gridcell' style='height: 0px; width: 9%;'>"+
 					"<a href='<c:url value='/registration/download?fileName="+fileName+"&originalFileName="+originalFileName+"'/>'>"+

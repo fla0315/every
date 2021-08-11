@@ -42,7 +42,6 @@ $(function(){
 							<th scope="col">이수구분</th>
 							<th scope="col">학점</th>
 							<th scope="col">담당교수</th>
-							<th scope="col">구분</th>
 							<th scope="col">강의실/시간</th>
 							<th scope="col">강의평가구분</th>
 							<th scope="col">강의평가</th>
@@ -83,10 +82,8 @@ $(function(){
 									<td>${myMap['CREDIT'] }</td>
 									<!-- 담당교수 -->
 									<td>${myMap['PROF_NAME'] }</td>
-									<!-- 강의평가구문 -->
-									<td>${myMap['CLASSIFICATION'] }</td>
 									<!-- 강의실/시간 -->
-									<td>${myMap['TIMETABLE'] }</td>
+									<td>${myMap['BUILDING_NAME']}-${myMap['CLASSROOM_NAME']}/&nbsp;${myMap['TIMETABLE_NAME']}</td>
 									<!-- 강의평가구분 -->
 									<td class="evalFlag">
 										<c:if test="${myMap['LECTURE_EVAL_FLAG']=='Y'}">
@@ -247,7 +244,7 @@ $(function(){
                   				</c:if>
 							</td>
 							<!-- 개설학과 학부 -->
-							<td>${gradeMap['FACULTY_NAME'] }</td>
+							<td>${gradeMap['DEPT_NAME'] }</td>
 						</tr>
 					</c:forEach>
 				</c:if>
