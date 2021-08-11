@@ -23,7 +23,7 @@ public interface ConstUtil {
    //자료실 - 파일 저장 경로
    String FILE_UPLOAD_PATH="pds_upload";
    //String FILE_UPLOAD_PATH_TEST="E:\\workspace_list\\spboot_WS\\springherb\\src\\main\\webapp\\pds_upload";
-   String FILE_UPLOAD_PATH_TEST="C:\\Users\\yeongrim kim\\OneDrive - ikw.kr\\문서\\GitHub\\every\\src\\main\\webapp\\WEB-INF\\pds_upload";
+   //String FILE_UPLOAD_PATH_TEST="C:\\Users\\yeongrim kim\\OneDrive - ikw.kr\\문서\\GitHub\\every\\src\\main\\webapp\\WEB-INF\\pds_upload";
    //String FILE_UPLOAD_PATH_TEST="D:\\mywork\\spring\\itwill_lecture\\Final_Project\\every\\src\\main\\webapp\\WEB-INF\\pds_upload";
    
    //과제업로드

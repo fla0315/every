@@ -174,10 +174,7 @@ public class JunggoController {
 		logger.info("업데이트 update={}",update);
 		
 		return "junggo/junggoDetail";
-		
 	}
-	
-	
 	
 	
 }

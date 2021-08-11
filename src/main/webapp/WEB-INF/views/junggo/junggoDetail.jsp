@@ -169,7 +169,7 @@ body {
 		<!-- 상품 이미지 -->
 		<p class="center">
 			<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-					<img style="width: 100%;" src="<c:url value="/resources/images/${map['FILE_NAME']}"/>" >
+					<img style="width: 100%;" src="<c:url value="../pds_junggo/${map['FILE_NAME']}"/>" >
 			</a>
 		</p>
 	</div>
@@ -185,7 +185,7 @@ body {
 				      
 				      <!-- 이미지 넣는 부분 -->
 				      <div class="modal-body"  style="width: 100%">
-				       	<img style="width: 100%;" src="<c:url value="/resources/images/${map['FILE_NAME']}"/>" >
+				       	<img style="width: 100%;" src="<c:url value="../pds_junggo/${map['FILE_NAME']}"/>" >
 				      </div>
 				      
 				      <div class="modal-footer">
@@ -248,12 +248,6 @@ body {
 				<span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;등록일</span>
 				<span><fmt:formatDate value="${map['REG_DATE']}" pattern="yyyy-MM-dd"/>  </span>
 			</p>
-		
-			<p>
-				<span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;조회수</span>
-				<span>${map['READ_COUNT']}</span>
-			</p>
-
 		
 			<p>
 				<!-- <input type="button" id ="chitchat" value="쪽지"> -->
