@@ -2,21 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/admin_top.jsp" %>
 
-<script type="text/javascript">
-	/* $(function(){
-		$('.btnDel').each(function(index, item) {
-			$(item).click(function(){
-				var result = confirm('삭제하시겠습니까?');
-				
-				if(!result) {
-					return false;
-				} 
-				
-			});
-		});
-	});  */
-</script>
-
 	<div class="card mb-4" style="width: 90%; margin: 0 auto; margin-top: 50px">
 		<div class="card-header" style="font-size: 1.5em">
 			<i class="fas fa-user-alt"></i>&nbsp; 교수목록
@@ -74,6 +59,7 @@
 					</c:if>
 				</tbody>
 			</table>
+			<br>
 			<div style="text-align: right; margin-right: 30px">
 				<a href="<c:url value='/admin/professor/professorRegister'/>">
 				<button class="btn btn-primary btn-sm">

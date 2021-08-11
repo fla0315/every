@@ -66,7 +66,7 @@ public class MyRegistrationController {
 		String userid = (String)session.getAttribute("user_id");
 		//String userid ="fla0315";
 		regiSearchVo.setStudentId(userid);
-		regiSearchVo.setSubjYear("0");
+		regiSearchVo.setOpenYear("0");
 		regiSearchVo.setSemester("0");
 		logger.info("나의수상신청목록 페이지");
 		

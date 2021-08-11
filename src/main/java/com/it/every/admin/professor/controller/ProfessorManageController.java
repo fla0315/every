@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.every.admin.professor.model.ProfessorManageService;
 import com.it.every.admin.professor.model.ProfessorManageVO;
@@ -19,6 +20,7 @@ import com.it.every.admin.professor.position.model.ProfessorPositionService;
 import com.it.every.admin.professor.position.model.ProfessorPositionVO;
 import com.it.every.department.model.DepartmentService;
 import com.it.every.department.model.DepartmentVO;
+import com.it.every.lecture.model.LectureService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,6 +33,7 @@ public class ProfessorManageController {
 	private final ProfessorManageService professorManageService;
 	private final ProfessorPositionService professorPositionService;
 	private final DepartmentService departmentService;
+	private final LectureService lectureService;
 	
 	@RequestMapping("/professor/professorList")
 	public String professorList(Model model) {
@@ -142,14 +145,98 @@ public class ProfessorManageController {
 	*/
 	
 	@RequestMapping("/chart/professorChart")
-	public String professorChart() {
+	public String professorChart(Model model) {
 		logger.info("교수강의통계 화면");
+		
+		List<DepartmentVO> deptList = departmentService.selectDepartment();
+		Map<String, Object> lecMap = professorManageService.selectProfLecRate();
+		Map<String, Object> deptMap = professorManageService.selectDeptLecRate();
+		Map<String, Object> allMap = professorManageService.selectAllLecRate();
+		List<Map<String, Object>> commentList =  professorManageService.selectLecComment();
+		
+		logger.info("조회 결과, deptList.size={}", deptList.size());
+		logger.info("조회 결과, lecMap={}", lecMap);
+		logger.info("조회 결과, deptMap={}", deptMap);
+		logger.info("조회 결과, allMap={}", allMap);
+		logger.info("조회 결과, commentList={}", commentList);
+		
+		
+		String str ="[";
+		str +="['범위별 비교', '교수 평균', '학과 평균', '전체 평균'] ,";
+		str +="['평균 평점', '" + lecMap.get("RATE") + "', '";
+		str += deptMap.get("RESULT") + "', '";
+		str += allMap.get("RESULT") + "']";
+		str += "]";
+		
+		logger.info("str={}", str);
+		
+		model.addAttribute("deptList", deptList);
+		model.addAttribute("str1", str);
+		model.addAttribute("commentList", commentList);
+		
+		return "admin/chart/professorChart";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/chart/profList")
+	public List<ProfessorManageVO> deptProfList(@RequestParam String deptNo) {
+		logger.info("학과별 교수리스트 - list");
+		
+		List<ProfessorManageVO> list = professorManageService.selectByDeptNo(deptNo);
+		
+		logger.info("학과별 교수 조회 결과, list.size={}", list.size());
+		
+		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/chart/lectureList")
+	public List<Map<String, Object>> profLectureList(@RequestParam String profNo) {
+		logger.info("학과별 교수리스트 - list");
+		
+		List<Map<String, Object>> list = lectureService.selectByProfNo(profNo);
+		
+		logger.info("학과별 교수 조회 결과, list.size={}", list.size());
+		
+		return list;
+	}
+	
+	
+	@RequestMapping("/chart/searchByProfName")
+	public String searchByProfName(@RequestParam String deptName, 
+			@RequestParam String profName, @RequestParam String lectureName, 
+			Model model) {
+		logger.info("교수이름조회, 파라미터 profName={}", profName);
+		
+		Map<String, Object> deptMap = professorManageService.selectDeptLecRate();
+		Map<String, Object> allMap = professorManageService.selectAllLecRate();
+		List<Map<String, Object>> commentList =  professorManageService.selectLecComment();
+		Map<String, Object> profMap 
+			= professorManageService.searchByProfName(deptName, profName, lectureName);
+		
+		logger.info("조회 결과, deptMap={}", deptMap);
+		logger.info("조회 결과, allMap={}", allMap);
+		logger.info("조회 결과, commentList={}", commentList);
+		logger.info("조회 결과, profMap={}", profMap);
+		
+		String str ="[";
+		str +="['범위별 비교', '교수 평균', '학과 평균', '전체 평균'] ,";
+		str +="['평균 평점', '" + profMap.get("RATE") + "', '";
+		str += deptMap.get("RESULT") + "', '";
+		str += allMap.get("RESULT") + "']";
+		str += "]";
+		
+		logger.info("str={}", str);
+		
+		
+		model.addAttribute("str1", str);
+		model.addAttribute("commentList", commentList);
 		
 		return "admin/chart/professorChart";
 	}
 	
 	@GetMapping("/chart/majorProfChart")
-	public String majorStuChart(Model model) {
+	public String majorProfChart(Model model) {
 		logger.info("학과별 교수통계 초기화면");
 		
 		List<DepartmentVO> deptList = departmentService.selectDepartment();

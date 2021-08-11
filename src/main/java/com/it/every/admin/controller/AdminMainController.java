@@ -16,6 +16,7 @@ import com.it.every.calendar.model.CalendarService;
 import com.it.every.calendar.model.CalendarVO;
 import com.it.every.campus.model.CampusService;
 import com.it.every.campus.model.CampusVO;
+import com.it.every.lecture.model.LectureService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +28,7 @@ public class AdminMainController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminMainController.class);
 	private final CampusService campusService;
 	private final CalendarService calendarService;
+	private final LectureService lectureService;
 	
 	@RequestMapping("/campusInfo/calendar")
 	public String calendar(Model model) {
@@ -200,8 +202,47 @@ public class AdminMainController {
 	}
 	
 	@RequestMapping("/chart/classChart")
-	public String classChart() {
+	public String classChart(Model model) {
 		logger.info("강의별 학생통계 화면");
+		
+		Map<String, Object> map = lectureService.selectScoreAvg();
+		List<Map<String, Object>> majorList = lectureService.selectMajorCount();
+		List<Map<String, Object>> gradeList = lectureService.selectGradeCount();
+		
+		logger.info("조회 결과, map={}", map);
+		logger.info("조회 결과, majorList={}", majorList);
+		logger.info("조회 결과, gradeList={}", gradeList);
+		
+		String str1 ="[";
+		str1 +="['수강생 평균 점수','학생 평균'] ,";
+		str1 +="['평균 점수', '" + map.get("AVGSCORE") +  "']]";
+		
+		logger.info("str1={}", str1);
+		
+		String str2 ="[";
+		str2 +="['학년' , '재학생 수'] ,";
+		int num1 =0;
+		for (Map<String, Object> map1 : gradeList) {
+			
+			str2 +="['";
+			str2 += map1.get("GRADE");
+			str2 +="' , ";
+			str2 += map1.get("COUNT");
+			str2 +=" ]";
+			
+			num1 ++;
+			if(num1<gradeList.size()){
+				str2 +=",";
+			}		
+		}
+		str2 += "]";
+		
+		logger.info("str2={}", str2);
+		
+		model.addAttribute("str1", str1);
+		model.addAttribute("str2", str2);
+		model.addAttribute("majorList", majorList);
+		model.addAttribute("gradeList", gradeList);
 		
 		return "admin/chart/classChart";
 	}

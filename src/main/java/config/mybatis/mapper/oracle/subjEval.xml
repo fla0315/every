@@ -50,7 +50,7 @@
 	
 	<insert id="insertSubjEvalStudent" parameterType="SubjEvalVO">
 		insert into subj_eval(open_sub_code,stu_no,classification,q1,q2,q3,q4,q5,content)
-		values(#{openSubCode}, #{stuNo}, '1', #{q1}, #{q2}, #{q3}, #{q4}, #{q5}, #{content})
+		values(#{openSubCode}, #{stuNo}, 'Y', #{q1}, #{q2}, #{q3}, #{q4}, #{q5}, #{content})
 	</insert>
 	
 	
@@ -74,7 +74,7 @@
 	
 	<!-- 성적조회부분 -->
 	<select id="searchMyGrade" parameterType="String" resultType="map">
-		select * from
+	    select * from
 		evaluation eval left join registration regi
 		on eval.sub_code = regi.open_sub_code and eval.stu_no = regi.stu_no
 		left join subj_eval subEval 
@@ -87,6 +87,8 @@
 		on prof.prof_no = subj.prof_no
 		join subj_type suvjt
 		on suvjt.type_code = subj.type_code
+        join department depart
+        on depart.dept_no = prof.dept_no
 		where regi.stu_no=#{stuNo}
 	</select>
 	

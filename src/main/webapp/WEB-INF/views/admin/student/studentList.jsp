@@ -88,6 +88,7 @@
 				</tbody>
 			</table>
 		</div>
+		<br>
 		<div style="text-align: right; margin-right: 30px">
 				<a href="<c:url value='/admin/student/studentRegister'/>">
 				<button class="btn btn-primary btn-sm">

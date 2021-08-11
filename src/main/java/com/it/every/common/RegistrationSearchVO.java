@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class RegistrationSearchVO extends SearchVO{
 	
-	private String subjYear; //년도
+	private String openYear; //년도
 	private String semester; //학기
 	private int  grade; //학년
 	private String type; //이수구분

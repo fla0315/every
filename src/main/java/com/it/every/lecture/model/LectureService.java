@@ -10,4 +10,8 @@ public interface LectureService {
 	public Map<String, String> selectByOsCode(String openSubCode);
 	public int editOpenSubj(LectureVO vo);
 	public int deleteOpenSubj(String openSubCode);
+	public Map<String, Object> selectScoreAvg();
+	public List<Map<String, Object>> selectMajorCount();
+	public List<Map<String, Object>> selectGradeCount();
+	public List<Map<String, Object>> selectByProfNo(String profNo);
 }
