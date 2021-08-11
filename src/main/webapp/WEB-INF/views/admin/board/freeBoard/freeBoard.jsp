@@ -16,7 +16,7 @@
 		<jsp:include page="../../../inc/student_top.jsp"></jsp:include>
 		<%} %>
 
-	
+
 	
 
 
@@ -36,8 +36,10 @@ $(function() {
 	
 });
 </script>
+	<br>
 
-<article>
+
+
 
 	<div class="container col-lg-10" role="main">
 		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -63,7 +65,7 @@ $(function() {
 			<div class="tab-pane fade show active" id="mainbox"
 				role="tabpanel" aria-labelledby="mainbox-tab">
 	<br>
-	<br>
+
 	
 	
 	<!-- 여기서 부터 본문 내용 -->
@@ -77,11 +79,11 @@ $(function() {
 					<thead>
 						<tr>
 							
-							<th style="vertical-align: middle; text-align: center;"><h5>번호</h5></th>
-							<th style="vertical-align: middle; text-align: center;"><h5>제목</h5></th>
-							<th style="vertical-align: middle; text-align: center;"><h5>등록일자</h5></th>
-							<th style="vertical-align: middle; text-align: center;"><h5>관람수</h5></th>
-							<th style="vertical-align: middle; text-align: center;"><h5>상세</h5></th>
+							<th style="vertical-align: middle; text-align: center;">번호</th>
+							<th style="vertical-align: middle; text-align: center;">제목</th>
+							<th style="vertical-align: middle; text-align: center;">등록일자</th>
+							<th style="vertical-align: middle; text-align: center;">조회수</th>
+							<th style="vertical-align: middle; text-align: center;">상세</th>
 							
 								<%String type=(String)session.getAttribute("usertype");%>		
 					<%if(type.equals("admin")){ %>			
@@ -165,7 +167,7 @@ $(function() {
 		
 		</div>
 </div>
-</article>
+
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <%@ include file="../../../inc/bottom.jsp"%>
 	

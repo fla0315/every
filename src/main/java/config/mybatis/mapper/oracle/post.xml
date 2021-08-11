@@ -125,6 +125,14 @@
 	</select>
 	
 	<!-- 영훈씨부분 -->
+	
+	<select id="mylist" parameterType="String" resultType="PostVO">
+	select post_no,title,contents,reg_date,writer_code,read_count from post
+	where DEL_FLAG='N' and writer_code=#{writer_code} 
+	
+	</select>
+	
+	
 	<insert id="freewrite" parameterType="PostVO">
 	<selectKey resultType="int" keyProperty="postNo" order="BEFORE">
 			select post_seq.nextval from dual
@@ -138,16 +146,30 @@
 	where DEL_FLAG='N'
 	</select> 
 
-	<select id="detail" parameterType="int" resultType="PostVO">
-	select post_no,title,contents,reg_date,writer_code,read_count,contents from post
+
+<resultMap id="clobchange" type="map" >
+ 	 <result property="POST_NO" column="POST_NO" />
+ 	 <result property="TITLE" column="TITLE" />
+      <result property="CONTENTS" column="CONTENTS" jdbcType="CLOB" javaType="java.lang.String"/>
+      <result property="WRITER_CODE" column="WRITER_CODE" />
+      <result property="REG_DATE" column="REG_DATE" />
+      <result property="READ_COUNT" column="READ_COUNT" />
+      <result property="IS_PRIVATE" column="IS_PRIVATE" />
+   </resultMap>
+
+	<select id="detail" parameterType="int" resultMap="clobchange">
+	select post_no,title,reg_date,writer_code,read_count,contents,is_private from post
 	where DEL_FLAG='N' and post_no=#{post_no}
 	</select>
+
+
 
 	<update id="deletepost" parameterType="int">
 
 	update post
 	set DEL_FLAG='Y'
 	where post_No=#{post_NO}
+	
 	</update>
 
 	<update id="updatecount" parameterType="int">
@@ -156,11 +178,7 @@
 	where post_no=#{post_no}
 	</update>
 
-	<select id="mylist" parameterType="String" resultType="PostVO">
-	select post_no,title,contents,reg_date,writer_code,read_count,contents from post
-	where DEL_FLAG='N' and writer_code=#{writer_code} 
-	</select>
-
+	
 
 	<update id="updatepost" parameterType="PostVO">
 	update post

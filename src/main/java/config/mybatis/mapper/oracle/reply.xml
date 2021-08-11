@@ -14,7 +14,7 @@
 	</insert>
 
 
-<resultMap id="clobchange" type="map"  >
+<resultMap id="clobchange" type="map" >
  	 <result property="REPLY_NO" column="REPLY_NO" />
       <result property="CONTENTS" column="CONTENTS" jdbcType="CLOB" javaType="java.lang.String"/>
       <result property="WRITER_CODE" column="WRITER_CODE" />

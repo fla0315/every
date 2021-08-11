@@ -25,6 +25,19 @@ public interface registerDAO {
 		public StudentVO selectByuserid(String id); 
 		public ProfessorVO selectByuserid2(String id); 
 		public EmployeeVO selectByuserid3(String id); 
+		
+		//회원가입 확인용
+		public int checkalready(registerVO vo);
+		
+		int checkalready1(registerVO vo);
+		int checkalready2(registerVO vo);
+		int checkalready3(registerVO vo);
+		
+	 int checkphonenum(registerVO vo); //전화번호 중복확인
+	 int professorchkemail(registerVO vo); //이메일 중복확인
+	 
+	 
+	 
 
 
 }

@@ -73,11 +73,19 @@ body {
  <script type="text/javascript">
 $(function() {
 	
+
+	
 	$('.isprivate').click(function(){
 		  $('.check').val("Y");
 	    });
 	
 	$('#btnSave').click(function(){
+		
+		if ($("#title").val()=="") {
+			alert("제목을 입력해주세요.");
+			event.preventDefault();
+		}else{
+		
 		alert("전송중");
 		 var content = $('.summernote').summernote('code');
 		 var title=$('#title').val();
@@ -127,6 +135,7 @@ $(function() {
 						alert("error 발생!!" + error);
 					}
 			   });
+		}
 		}
 	});
 	

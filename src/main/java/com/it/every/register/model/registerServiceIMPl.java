@@ -119,5 +119,41 @@ public class registerServiceIMPl implements registerService{
 		return dao.selectByuserid3(id);
 	}
 
+	@Override
+	public int checkalready(registerVO vo) {
+		// TODO Auto-generated method stub
+		return dao.checkalready(vo);
+	}
+
+	@Override
+	public int checkalready1(registerVO vo) {
+		// TODO Auto-generated method stub
+		return dao.checkalready1(vo);
+	}
+
+	@Override
+	public int checkalready2(registerVO vo) {
+		// TODO Auto-generated method stub
+		return dao.checkalready2(vo);
+	}
+
+	@Override
+	public int checkalready3(registerVO vo) {
+		// TODO Auto-generated method stub
+		return dao.checkalready3(vo);
+	}
+
+	@Override
+	public int checkphonenum(registerVO vo) {
+		// TODO Auto-generated method stub
+		return dao.checkphonenum(vo);
+	}
+
+	@Override
+	public int professorchkemail(registerVO vo) {
+		// TODO Auto-generated method stub
+		return dao.professorchkemail(vo);
+	}
+
 
 }

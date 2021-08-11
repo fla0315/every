@@ -35,9 +35,6 @@
 	      });
 	   
       $('form[name=changeboard]').submit(function() {
-    	 
-    	
-    	  
          $.ajax({
             type : "post",
             url : '<c:url value='/custompage/customchangeinput'/>',

@@ -118,12 +118,13 @@ public class customController {
 		customVO vo = new customVO();
 		
 		int typenum= service.category(type); 
+		logger.info("num={}",typenum);
 		vo.setCategorycode(typenum);
 		vo.setOpensubcode(opensub);
 		
 		int a = service.checkall(vo);
 		
-		if (a==1) {
+		if (a>=1) {
 			result=true;
 		}else {
 			result=false;

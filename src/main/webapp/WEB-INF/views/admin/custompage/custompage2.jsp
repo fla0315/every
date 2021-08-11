@@ -37,32 +37,13 @@
 
 <script type="text/javascript">
 
-
-
-	
-
-
 $(function(){
+
+
 	
 	//유효성검사
 		var usertype='<%=(String)session.getAttribute("usertype")%>';
 		
-		 $('.boardlist').click(function(){
-		      
-		       if($('.a').val()==""){
-		            alert('이수구분을 선택해 주세요');
-		            event.preventDefault();               
-		      }else if ($('.b').val()=="") {
-		         alert('강좌명을 선택해 주세요.')
-		         event.preventDefault();   
-		      }else if ($('.c').val()=="") {
-		    	  alert('게시판 유형을 선택해 주세요.')
-		    	  event.preventDefault();
-		      }else if ($('.admincheck').val()=="Y") {
-		    	  alert('해당 강좌에 선택하신 유형의 게시판이 개설되어 있습니다.' )
-		    	  event.preventDefault();
-			}
-			 });
 	
 		if (usertype=="professor") {
 			$('#deptnameselect').hide();
@@ -122,7 +103,7 @@ $(function(){
 				type:"post",
 				async: false,
 				data:{"type":type,"name":name},			
-				success:function(res){
+				success: function(res){
 					for (var i = 0; i < res.length; i++) {
 						var name=res[i].subjname;
 						var num=res[i].opensubcode;
@@ -136,25 +117,52 @@ $(function(){
 								  $("#boardtype").css("visibility","visible");
 								  $(".subj_name_check").html(type).css("color", "red");
 								  $(".b").val(spiltname[0]);
-								  $(".b2").val(spiltname[1]);
+								  $(".b2").val(spiltname[1]);//너 잘보자
+								  
+								  var type3=  $(".c").val();
+									 var opensub=$(".b2").val();
+								 
+								  
+								  $.ajax({
+										url:"<c:url value='/custompage/checkadmin'/>",
+										type:"post",
+										async: false,
+										data:{"type":type3,"opensub":opensub},			
+										success:function(res){
+											if (res) {
+												$(".admincheck").val("Y");
+											
+											}else {
+												$(".admincheck").val("N");
+												
+											}	
+										},
+										error:function(xhr, status, error){
+											
+										}
+								
+											});
+								  
+								  
+								  
 							}else{
 								$("#boardtype").css("visibility","hidden");
 							}
 							  
-							  var type3= $(".category:checked").val();
-							  var opensub=$(".b2").val();
-							 
+							
 							
 							});
 						 
 						
+				}
 				},
 				error:function(xhr, status, error){
 					alert("error 발생!!" + error);
 				}
-			});
+			
 	
 		});
+	  });
 
 	 //게시판 타입
 	  $('.category').change(function(){
@@ -164,10 +172,33 @@ $(function(){
 			  $(".type_check").html(type).css("color", "red");
 			  $(".c").val(type);
 			 $('#bdname').css("visibility","visible");	
-		}else
+			 var opensub=$(".b2").val();
+			  $.ajax({
+					url:"<c:url value='/custompage/checkadmin'/>",
+					type:"post",
+					async: false,
+					data:{"type":type,"opensub":opensub},			
+					success:function(res){
+						if (res) {
+							$(".admincheck").val("Y");
+						
+						}else {
+							$(".admincheck").val("N");
+						
+						}	
+					},
+					error:function(xhr, status, error){
+						
+					}
+			
+						});
+			 
+			 
+			 
+		}else{
 			 $("#all_option").css("visibility","hidden");
 		  
-		
+		}
 		  
 		});
 	 //댓글사용 여부.d
@@ -519,8 +550,8 @@ $('form[name=registerboard]').submit(function(){
 			
 			</form>	
 				<!-- 교수 검색용 -->
-				<input type="text" id="professor" value='${professor}'>
-				<input type="text" class="admincheck" name="admincheck">
+				<input type="hidden" id="professor" value='${professor}'>
+				<input type="hidden" class="admincheck" name="admincheck">
 			
 
 </body>

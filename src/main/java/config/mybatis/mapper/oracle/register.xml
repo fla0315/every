@@ -5,6 +5,19 @@
 <!-- <mapper namespace="config.mybatis.mapper.oracle.board"> -->
 <mapper namespace="com.it.every.register.model.registerDAO">
 
+	<!-- 회원가입 시 이미 되었는지 체크 -->
+	
+	<select id="checkalready1" parameterType="registerVo" resultType="int">
+		select COUNT(student_id) from student where stu_no=#{Stu_no}
+	</select>
+	
+	<select id="checkalready2" parameterType="registerVo" resultType="int">
+		select COUNT(prof_id) from professor where prof_no=#{Stu_no}
+	</select>
+	
+	<select id="checkalready3" parameterType="registerVo" resultType="int">
+		select COUNT(emp_id) from employee where emp_no=#{Stu_no}
+	</select>
 	
 	<!-- 학생 회원가입 및 로그인 시 중복 아이디 체크 -->
 	<select id = "checkDuplicate" parameterType="registerVo" resultType="int">
@@ -22,6 +35,30 @@
 		<if test='chk_info=="admin"'>
 			where emp_id=#{User_id}
 		</if>
+	</select>
+	
+	<!-- 전화번호 중복 체크 -->
+	<select id="checkphonenum" parameterType="registerVo" resultType="int">
+		select count(*) from
+		(select * from student stu full outer join 
+		professor pr on stu.stu_no=pr.prof_no
+ 		full outer join employee em on stu.stu_no=em.emp_no)
+	
+		<if test='chk_info=="student"'>
+			where phonenum=#{phonenum}
+		</if>
+		<if test='chk_info=="professor"'>
+			where prof_ph =#{phonenum}
+		</if>
+	</select>
+	
+	<!-- 이메일 체크 -->
+	<select id="professorchkemail" parameterType="registerVo" resultType="int">
+	select count(*) from
+		(select * from student stu full outer join 
+		professor pr on stu.stu_no=pr.prof_no
+ 		full outer join employee em on stu.stu_no=em.emp_no)
+ 		where prof_email=#{Email};
 	</select>
 	
 	

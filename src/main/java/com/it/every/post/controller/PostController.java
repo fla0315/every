@@ -132,14 +132,37 @@ public class PostController {
 		//상세보기 전용
 		@RequestMapping("/Detail")
 		public String postchange(@RequestParam("postNo") String postNo,
-				Model model, HttpSession session,@ModelAttribute PostVO vo, @ModelAttribute ReplyVO vo2) {
+				Model model,HttpSession session,@ModelAttribute PostVO vo, @ModelAttribute ReplyVO vo2) {
 			logger.info("상세보기");
 			int no=Integer.parseInt(postNo);			
-			List<PostVO> list=service.detail(no);
+			List<Map<String, Object>> list=service.detail(no);
 			logger.info("상세보기, detail={}",list);
 			
 			String msg="삭제된 글입니다.", url="/post/freeboard";
+			
+
+			for(Map<String, Object> map : list) {
+				String WRITER = (String)map.get("WRITER_CODE");
+				char startNo = WRITER.charAt(0);
+				String receiverName="";
+			
+					if(startNo=='P'){ //교수일 경우
+						receiverName = professorService.nameByProfNo(WRITER);
+					} else if(startNo== 'E'){ //임직원의 경우
+						receiverName = employeeService.nameByEmpNo(WRITER);
+					} else{	//학생의 경우
+						receiverName = studentService.nameByStuNo(WRITER);
+					}
 					
+					logger.info("receiverName={}", receiverName);
+					map.put("USERNAME", receiverName);
+			
+				
+			}
+			
+			model.addAttribute("list",list);
+			
+
 			if (list.isEmpty()) {
 				model.addAttribute("msg", msg);
 				model.addAttribute("url", url);
@@ -194,15 +217,18 @@ public class PostController {
 			logger.info("정보전달, list={}",list);
 			model.addAttribute("list",list); //전체
 			
-			String no= (String)session.getAttribute("no");
+			String no=(String)session.getAttribute("no");
+			logger.info("no={}",no);
 			
 			List<ReplyVO> list2= service2.selectmyreply(no);
 			model.addAttribute("list2",list2);	//댓글
 			
+			logger.info("no2={}",no);
+			
 			
 			List<PostVO> list3=service.mylist(no);
 			model.addAttribute("list3",list3);
-			logger.info("list3={}",list3);
+			logger.info("list3={}",list3); //내 게시글
 			
 			
 			return "/admin/board/freeBoard/freeBoard";
@@ -219,15 +245,5 @@ public class PostController {
 			return "redirect:/post/freeboard";
 			
 		}
-		//내거 리스트
-		@RequestMapping("/mylist")
-		public String mylist(HttpSession session, Model model, @ModelAttribute PostVO vo) {
-			
-			String no = (String)session.getAttribute("no");
-			List<PostVO> list= service.mylist(no);
-			
-			model.addAttribute("list",list);
-			
-			return "/admin/board/freeBoard/myfreeboard";
-		}
+		
 }

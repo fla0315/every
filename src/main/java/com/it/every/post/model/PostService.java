@@ -3,7 +3,7 @@ package com.it.every.post.model;
 import java.util.List;
 import java.util.Map;
 
-import com.it.every.board.model.BoardVO;
+
 import com.it.every.boardFile.model.BoardFileVO;
 import com.it.every.common.RegistrationSearchVO;
 
@@ -30,9 +30,14 @@ public interface PostService {
 
 	public int freewrite(PostVO VO);
 	public List<PostVO> freepost(); //리스트 출력용
-	public List<PostVO> detail(int no); //상세보기 출력용	
+	
+	public List<Map<String,Object>> detail(int no); //상세보기 출력용	
 	public int deletepost(int a);
 
+
+	
+	
+	
 	public int updatecount(int no);
 	public List<PostVO> mylist(String no);
 	public int updatepost(PostVO vo);

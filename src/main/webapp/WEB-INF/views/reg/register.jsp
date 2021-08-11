@@ -212,25 +212,52 @@ $('#phoneconfirm').click(function(){
 	var phone3 = $('#phone3').val();
 	
 	var phonenum= phone1+phone2+phone3
+	var chk_info= $("#chk_info").val();
 
-		$.ajax({
-			url:"<c:url value='/reg/phonecheck'/>",
-			type:"GET",
-			data:"phonenum="+phonenum,
-			success:function(res){
-				//alert(res);
-				$('#chkphone').val(res).css("color","red"); 
-			},
-			error:function(xhr, status, error){
-				alert("error 발생!!" + error);
+	
+	//중복확인하고, 없으면 돌려야지
+	$.ajax({
+		url:"<c:url value='/reg/regphonecheck'/>",
+		type:"GET",
+		data:{"phonenum":phonenum, "chkinfo":chk_info},
+		success:function(res){
+			//alert(res);
+			if (res) {
+				$('#checknum').html("이미 등록된 휴대폰입니다").css("color", "blue");
+				$('#chkphone2').val(res).css("color","red"); 
+				event.preventDefault();	
+			}else{
+				$('#checknum').html("인증번호가 발송되었습니다.").css("color", "blue");
+				$.ajax({
+					url:"<c:url value='/reg/phonecheck'/>",
+					type:"GET",
+					data:"phonenum="+phonenum,
+					success:function(res){
+						//alert(res);
+						$('#chkphone').val(res).css("color","red"); 
+					},
+					error:function(xhr, status, error){
+						alert("error 발생!!" + error);
+					}
+				});				
+				
 			}
-		});				
+			
+		},
+		error:function(xhr, status, error){
+			alert("error 발생!!" + error);
+		}
+	});	
+	
+
+		
 	}); 
 	
 //인증번호 체크하기	
 $('#phone_check').keyup(function(){
 	var data2=$(this).val();
 	var data1=$('#chkphone').val();
+	
 	
 		$.ajax({
 			url:"<c:url value='/reg/numcheck'/>",
@@ -251,6 +278,8 @@ $('#phone_check').keyup(function(){
 		});				
 	
 });
+
+
 
 //이메일 체크하기
 $('#emailconfirm').click(function(){

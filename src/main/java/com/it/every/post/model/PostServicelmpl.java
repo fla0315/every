@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class PostServiceImpl implements PostService {
+public class PostServicelmpl implements PostService {
 	private final PostDAO postDao;
 
 	@Override
@@ -105,7 +105,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<PostVO> detail(int no) {
+	public List<Map<String,Object>> detail(int no) {
 		return postDao.detail(no);
 	}
 
@@ -113,6 +113,24 @@ public class PostServiceImpl implements PostService {
 	public int deletepost(int a) {
 		return postDao.deletepost(a);
 
+	}
+
+	@Override
+	public int updatecount(int no) {
+		// TODO Auto-generated method stub
+		return postDao.updatecount(no);
+	}
+
+	@Override
+	public List<PostVO> mylist(String no) {
+		// TODO Auto-generated method stub
+		return postDao.mylist(no);
+	}
+
+	@Override
+	public int updatepost(PostVO vo) {
+		// TODO Auto-generated method stub
+		return postDao.updatepost(vo);
 	}
 
 

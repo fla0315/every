@@ -77,7 +77,7 @@
 	<!-- 해당 강좌명의 이미 등록된 카테고리(게시판타입의) 정보가 있다면, alert으로 취소  -->
 	<select id="checkall" parameterType="customVO" resultType="int">
 		select count(*) from board 
-		where category_code=#{categorycode} and open_sub_code=#{opensubcode}
+		where category_code=#{categorycode} and open_sub_code=#{opensubcode} and usage='Y'
 	</select>
 	
 	
@@ -100,7 +100,7 @@
 	<update id="deleteboard" parameterType="String">
 		update board
 		set usage='N'
-		bd_name=#{bd_name}
+		where bd_name=#{bd_name}
 	</update>
 	
 	<!-- 게시판 업데이트 -->

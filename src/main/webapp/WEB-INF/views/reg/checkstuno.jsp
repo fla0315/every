@@ -53,6 +53,9 @@ $(function(){
 				alert('회원번호를 다시 확인해주세요.');
 				$('#chkstu').focus();
 				event.preventDefault();	
+		}else if ($('#checkalready').val()=='Y') {
+			     alert('이미 가입하신 회원입니다.');
+			 	event.preventDefault();	
 		}
 		}); 
 	
@@ -90,7 +93,31 @@ $('#stuno').keyup(function(){
 			error:function(xhr, status, error){
 				alert("error 발생!!" + error);
 			}
-		});				
+		});		
+		
+		
+		
+		$.ajax({
+			url:"<c:url value='/reg/registercheck'/>",
+			type:"post",
+			data:{"stu_no":data,"chk_info":data2},
+			success:function(res){
+				//alert(res);
+				if(res){
+					$('#checkalready').val('Y').css("color","red");//못써먹음
+				}else{
+					$('#checkalready').val('N');
+				}
+			},
+			error:function(xhr, status, error){
+				alert("error 발생!!" + error);
+			}
+		});		
+		
+		
+		
+		
+		
 	}else{
 		$('#checkstuno').text('입력이 짧거나 쓸 수 없는 문자가 있습니다.').css("color", "brown");
 		
@@ -156,6 +183,8 @@ $("input:radio[name=chk_info]").change(function(){
 			
 			   <input type ="hidden" name="chkstu" id="chkstu">
 			   <input type ="hidden" name="changeradio" id="changeradio">
+			     <input type ="hidden" name="checkalready" id="checkalready">
+			   
 
 		</form>
 	</article>

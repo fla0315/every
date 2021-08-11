@@ -27,6 +27,14 @@ public interface registerService {
 	public StudentVO selectByuserid(String id); 
 	public ProfessorVO selectByuserid2(String id); 
 	public EmployeeVO selectByuserid3(String id); 
+	
+	public int checkalready(registerVO vo);
+	int checkalready1(registerVO vo);
+	int checkalready2(registerVO vo);
+	int checkalready3(registerVO vo);
 
+	 int checkphonenum(registerVO vo);
+	 int professorchkemail(registerVO vo); //이메일 중복확인
+	 
 
 }	

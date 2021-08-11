@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.it.every.email.mailSendGoogle;
 import com.it.every.employee.model.EmployeeVO;
 import com.it.every.professor.model.ProfessorVO;
+import com.it.every.register.model.registerDAO;
 import com.it.every.register.model.registerService;
 import com.it.every.register.model.registerVO;
 import com.it.every.sms.sms;
@@ -124,6 +125,28 @@ public class registerController {
 
 		return bool;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/regphonecheck")
+	public boolean ajaxregphonecheck(@RequestParam("phonenum") String phonenum,@RequestParam("chkinfo") String chkinfo) {
+		
+		
+		boolean result=false;
+		registerVO vo = new registerVO();
+		
+		vo.setPhonenum(phonenum);
+		vo.setChk_info(chkinfo);
+		
+		int a=service.checkphonenum(vo);
+		
+		if (a>=1) {
+			result=true;
+		}
+		
+		return result;
+		
+	}
+	
 
 	//회원가입시 비밀번호 체크용
 	@ResponseBody
@@ -210,6 +233,39 @@ public class registerController {
 
 		return bool;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/registercheck")
+	public boolean checkregister(@RequestParam("stu_no") String num1, @RequestParam("chk_info") String num2) {
+		
+		boolean result=false;
+		
+		registerVO vo = new registerVO();
+		vo.setStu_no(num1);
+		vo.setChk_info(num2);
+		
+		registerVO vo2  = new registerVO();
+		int a=0;
+		
+		if (num2.equals("student")) {
+			 a=service.checkalready1(vo);
+		}else if(num2.equals("professor")){
+			 a=service.checkalready2(vo);
+		}else if (num2.equals("admin")) {
+			 a=service.checkalready3(vo);
+		}
+	
+		logger.info("num2={}",num2);
+
+		logger.info("vo={}",vo2);
+		if (a>=1) {
+			result=true;
+		}
+		
+		logger.info("result={}",result);
+		return result;
+		
+	}
 
 	//이메일인증(교수용)
 	@ResponseBody
@@ -294,7 +350,7 @@ public class registerController {
 		vo.setEmail(email);
 		vo.setPhonenum(phonenum);
 		vo.setChk_info(chk_info);
-		vo.setIndentitystate('y');
+		vo.setIndentitystate('Y');
 		
 	
 		int a = service.registerMember(vo);

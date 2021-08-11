@@ -51,6 +51,9 @@
 			$('#delete').hide();
 		}
 		
+		if ($('.private').val()=="Y") {
+			$('#name').hide();
+		}
 		
 		
 		var type='<%=(String)session.getAttribute("usertype")%>';
@@ -59,10 +62,10 @@
 		
 		//답글 달리면 수정 안되지.
 		if ($('.codeinput').val()!=no || $('.id').val()!=null) {
-			$('.changeall').hide();
+			$('#changeall').hide();
 		}
 		
-		$('.changeall').click(function(){
+		$('#changeall').click(function(){
 			var title=$('.title').val();
 			var change="c";
 			var postno2= $('#postNo2').val();
@@ -94,7 +97,7 @@
 		
 //댓글달기
 		$('#replysubmit').click(function() {
-			alert("전송중");
+	
 			var comment = $('#comment').val();
 			var postNo = $('#postNo').val();
 
@@ -226,7 +229,7 @@ body {
 .col-md-8 border {
 	margin: 100px auto;
 	padding: 10px;
-	width: 600px;
+	width: 500px;
 }
 
 .writetext {
@@ -234,7 +237,7 @@ body {
 	padding: 5px 10px 16px 10px;
 	border-radius: 5px;
 	height: auto;
-	width: 470px;
+	width: 450px;
 }
 
 p {
@@ -299,10 +302,10 @@ img {
 				<div class="divForm">
 
 
-					<c:forEach var="vo" items="${list}">
-					<input type="hidden" class="title" value="${vo.title}">
-					<input type="hidden" class="postNo2" id="postNo2" value="${vo.postNo}">
-					<h5>${vo.title}</h5>
+					<c:forEach var="map" items="${list}">
+					<input type="hidden" class="title" value="${map['TITLE']}">
+					<input type="hidden" class="postNo2" id="postNo2" value="${map['POST_NO']}">
+					<h5>${map['TITLE']}</h5>
 					   <!--   <div class="anime__details__rating">
 	                                    <p id="score_nm"> 
 										        <a href="#score_nm" class="bi bi-hand-thumbs-up" id="1"></a>
@@ -314,19 +317,23 @@ img {
 						
 					
 						
-              
-
-						<div class="date">
-							<fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd" />
-						</div>
-
-						<br>
+					
 
 					
-							<div class="contect" style="width:400px; float:left;">${vo.contents}</div>
+						
+	<div class="name" id="name" style="float:left">${map['USERNAME']}</div>  
+	<br>
+		<div class="date">
+		<fmt:formatDate value="${map['REG_DATE']}" pattern="yyyy-MM-dd" />
+						</div>
+						            
+						<br>
+<br>
+					
+							<div class="contect" style="width:500px;">${map['CONTENTS']}</div>
 							
-							<input type="hidden" value="${vo.isPrivate}">
-							<input type="hidden" class="codeinput" value="${vo.writerCode}">
+							<input type="hidden" class="private" value="${map['IS_PRIVATE']}">
+							<input type="hidden" class="codeinput" value="${map['WRITER_CODE']}">
 					
 
 					</c:forEach>
@@ -338,15 +345,13 @@ img {
 			<a href='QAlist.jsp'>목록</a> |
 				<a href='QAlist.jsp'>신고</a>  -->
 	
-				<input type="button" class="changeall" style="float:left" value="수정">
-			<span class="몰라" style="float:right">
-				<input type="button" class="btn btn-danger btn-sm" id="showrite"
-					value="답변" > 
+				<input type="button" class="btn btn-danger btn-sm" id="changeall"  value="수정">
+	
+				<input type="button" class="btn btn-danger btn-sm" id="showrite"value="답변" > 
 					
 					
-				<input type="button"
-					class="btn btn-danger btn-sm" id="call" value="신고하기"  >
-					</span>
+		
+				
 				<br>
 					<br>
 		
@@ -361,7 +366,7 @@ img {
 				<pre>
 			<textarea rows="5" name="comment" id="comment" class="form-control"
 						autocomplete="off" wrap="hard"
-						style="height: 150px; width: 450px;"
+						style="height: 150px; width: 400px;"
 						placeholder="내용을 입력하세요.&#13;&#10;입력하신 글은&#13;&#10;운영정책에 따라 삭제될 수도 있습니다."></textarea>
 			</pre>
 
@@ -391,7 +396,7 @@ img {
 
 									<div class="writetext" style="position: relative">
 									<%String id=(String)session.getAttribute("user_id");%>	
-										<div class="id"><!-- ${map['USERNAME']} -->
+										<div class="id"> ${map['USERNAME']}
 										<span class="writdate" style="float: right">
 											<fmt:formatDate value="${map['REG_DATE']}" pattern="yyyy-MM-dd" />
 										</span>
@@ -405,8 +410,7 @@ img {
 										
 									
 												<button class="btn btn-danger btn-sm"  id="delete" value="">삭제</button>
-								
-												<button class="btn btn-danger btn-sm"  id="call" value="">신고</button>
+
 											
 									
 										<input type="hidden" id="no" class="no" value="${map['REPLY_NO']}">

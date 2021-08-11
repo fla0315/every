@@ -22,27 +22,26 @@ $(function() {
 	
 });
 </script>
+	<br>
 
+	
 <article>
 
-	<div class="container col-lg-10" role="main">
-	
-	<br>
-	<br>
+
 	
 	
 	<!-- 여기서 부터 본문 내용 -->
 
 		<div class="card mb-4">
 			<div class="card-header">
-				<i class="fas fa-table me-1"></i> 전체글 목록
+				<i class="fas fa-table me-1"></i> 댓글 목록
 			</div>
 			<div class="card-body">
 				<table class="table-bordered text-center" style="width: 100%">
 				<colgroup>
-					<col style="width: 10%" />
-					<col style="width: 15%" />
-					<col style="width: 40%" />
+					<col style="width: 12%" />
+					<col style="width: 13%" />
+					<col style="width: 60%" />
 					<col style="width: 15%" />
 
 				</colgroup>
@@ -51,12 +50,9 @@ $(function() {
 							<th>번호</th>
 							<th>등록일자</th>
 							<th>작성내용</th>
-							<th></th>
+					
 					<%String type=(String)session.getAttribute("usertype");%>		
-					<%if(type.equals("admin")){ %>			
-								<th></th>
-						<%}else{%>	
-					<%} %>
+					
 						
 						</tr>
 					</thead>
@@ -82,17 +78,7 @@ $(function() {
 										상세보기
 									</button>
 								</a>
-									</td>			
-										<%if(type.equals("admin")){ %>			
-								<td style="vertical-align: middle; text-align: center;">
-								<a href="<c:url value='/reply/deletereply?writeno=${vo.replyNo}'/>"> 
-									<button class="btn btn-danger btn-sm"  id="delete">
-									삭제
-									</button>
-									</a>
-									</td>
-						<%}else{%>	
-					<%} %>
+								
 									
 			
 								</tr>
@@ -114,7 +100,7 @@ $(function() {
 		
 		
 	
-	</div>
+
 	
 	
 
