@@ -47,7 +47,7 @@ public class PostController {
 			PostVO VO = new PostVO();
 			
 			VO.setBdCode(1);
-			VO.setDelFlag("N");
+			VO.setDelFlag('N');
 			VO.setContents(content);
 			VO.setTitle(title);
 			
