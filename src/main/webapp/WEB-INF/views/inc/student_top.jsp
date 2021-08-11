@@ -187,9 +187,6 @@
                                     </div>
                                 </nav>
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="#">자유게시판</a>
-	                               </nav>
-	                              <nav class="sb-sidenav-menu-nested nav">
                                  	  <a class="nav-link" href="<c:url value='/timetable/timetable'/>">시간표조회</a>
 	                               </nav>
                             </div>
@@ -210,30 +207,14 @@
                           	
                           	 <div class="collapse" id="collapseMyboard" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">자유게시판</a>
-                                            <a class="nav-link" href="#">거래게시판</a>
-                                            <a class="nav-link" href="#">익명게시판</a>
+                                            <a class="nav-link" href="<c:url value='/post/freeboard'/>">자유게시판</a>
+                                            <a class="nav-link" href="<c:url value='/junggo/junggoMain'/>">거래게시판</a>             
                                         </nav>
                            	</div>
 	                      
                             <!-- 커뮤니티 -->
                             
-                   
-                            <div class="sb-sidenav-menu-heading">쪽지함</div>
-	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMypost" aria-expanded="false" aria-controls="collapsePages">
-		                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-		                                쪽지함
-		                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-		                        </a>
-                            
-                            	
-                          	 <div class="collapse" id="collapseMypost" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">수신쪽지함</a>
-                                            <a class="nav-link" href="#">발신쪽지함</a>
-                                            <a class="nav-link" href="#">쪽지보관함</a>
-                                        </nav>
-                           	</div>
+           
                            	
                            
                         </div>
