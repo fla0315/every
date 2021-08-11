@@ -143,7 +143,7 @@
 			</tr>
 			<tr>
 				<td colspan="3"><input type="submit" id="btInsert" value="등록" />
-					<input type="text" name="openSubCode" value="${param.openSubCode }">
+					<input type="hidden" name="openSubCode" value="${param.openSubCode }">
 					<input type="button" value="취소" /></td>
 			</tr>
 		</table>

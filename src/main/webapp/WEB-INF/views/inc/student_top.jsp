@@ -78,7 +78,7 @@
                                    	 	</a>
                                     <div class="collapse" id="collapseScholarship" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="<c:url value='/scholarship/scholarshipWrite'/>">장학금 신청</a>
+                                            <a class="nav-link" href="<c:url value='/admin/student/scholarshipApply'/>">장학금 신청</a>
                                             <a class="nav-link" href="<c:url value='/scholarship/scholarshipList'/>">장학금 조회</a>
                                         </nav>
                                     </div>
@@ -190,7 +190,7 @@
                                  	  <a class="nav-link" href="#">자유게시판</a>
 	                               </nav>
 	                              <nav class="sb-sidenav-menu-nested nav">
-                                 	  <a class="nav-link" href="<c:url value='/timetable/timetable'/>"">시간표조회</a>
+                                 	  <a class="nav-link" href="<c:url value='/timetable/timetable'/>">시간표조회</a>
 	                               </nav>
                             </div>
                           <!-- 나의 강좌 끝 -->
