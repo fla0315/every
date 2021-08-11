@@ -91,7 +91,7 @@
 		<br>
 		<div style="text-align: right; margin-right: 30px">
 				<a href="<c:url value='/admin/student/studentRegister'/>">
-				<button class="btn btn-primary btn-sm">
+				<button class="btn btn-success btn-sm">
 					학생등록
 				</button>
 				</a>

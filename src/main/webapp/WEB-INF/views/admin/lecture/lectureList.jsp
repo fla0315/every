@@ -72,7 +72,7 @@
 			</table>
 			<div style="text-align: right; margin-right: 30px">
 				<a href="<c:url value='/admin/lecture/lectureRegister'/>">
-				<button class="btn btn-primary btn-sm">
+				<button class="btn btn-success btn-sm">
 					강의등록
 				</button>
 				</a>

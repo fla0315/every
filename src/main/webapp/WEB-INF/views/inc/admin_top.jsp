@@ -91,24 +91,14 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                                 	<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link" href="<c:url value='/admin/student/studentList'/>">학생정보관리</a>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTuition" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        등록금관리
+                                        등록금/장학금
                                     	<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="collapseTuition" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="<c:url value='/admin/student/tuitionManage'/>">등록금 납부조회</a>
-                                            <a class="nav-link" href="<c:url value='/admin/student/tuitionStatistic'/>">등록금 통계</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseScholarship" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                       	 장학금관리
-                                       	 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                   	 </a>
-                                    <div class="collapse" id="collapseScholarship" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="<c:url value='/admin/student/scholarshipApproved'/>">장학금 대상조회</a>
                                             <a class="nav-link" href="<c:url value='/admin/student/scholarshipApplyList'/>">장학금 신청조회</a>
-                                            <a class="nav-link" href="<c:url value='/admin/student/scholarshipStatistic'/>">장학금 통계</a>
                                         </nav>
                                     </div>
                                 </nav>
@@ -158,6 +148,8 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                             </a>
                             <div class="collapse" id="collapseMember" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
+                                	<a class="nav-link" href="<c:url value='/admin/student/tuitionStatistic'/>">등록금 통계</a>
+                                    <a class="nav-link" href="<c:url value='/admin/student/scholarshipStatistic'/>">장학금 통계</a>
                                     <a class="nav-link" href="<c:url value='/admin/chart/studentChart'/>">학생 성적 통계</a>
                                     <a class="nav-link" href="<c:url value='/admin/chart/professorChart'/>">교수 강의평가 통계</a>
                                 </nav>

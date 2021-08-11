@@ -75,7 +75,7 @@
 			</table>
 			<div style="text-align: right; margin-right: 30px">
 				<a href="<c:url value='/admin/employee/employeeRegister'/>">
-				<button class="btn btn-primary btn-sm">
+				<button class="btn btn-success btn-sm">
 					직원등록
 				</button>
 				</a>

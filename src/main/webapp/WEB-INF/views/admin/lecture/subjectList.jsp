@@ -73,7 +73,7 @@
 			<br>
 			<div style="text-align: right; margin-right: 30px">
 				<a href="<c:url value='/admin/lecture/subjectRegister'/>">
-				<button class="btn btn-primary btn-sm">
+				<button class="btn btn-success btn-sm">
 					과목등록
 				</button>
 				</a>
