@@ -170,7 +170,7 @@
 			var name='<%=(String)session.getAttribute("name")%>';
 			var userno='<%=(String)session.getAttribute("no")%>';
 			var del = $(this).val();
-			var no = $(this).next().next().val();
+			var no = $(this).next().val();
 			var writeno= $(this).prev().val();
 			
 			if (userno!=writeno) {
