@@ -164,37 +164,37 @@ body {
             <i class="fas fa-table me-1"></i> 상품설명
          </div>
 <div id="info">
-   <!-- 상품이미지  -->
-   <div id="viewImg">
-      <!-- 상품 이미지 -->
-      <p class="center">
-         <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               <img style="width: 100%;" src="<c:url value="../pds_junggo/${map['FILE_NAME']}"/>" >
-         </a>
-      </p>
-   </div>
-   
-      <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">상품이미지 크게 보기</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  
-                  <!-- 이미지 넣는 부분 -->
-                  <div class="modal-body"  style="width: 100%">
-                      <img style="width: 100%;" src="<c:url value="../pds_junggo/${map['FILE_NAME']}"/>" >
-                  </div>
-                  
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-   <!-- Modal -->
+	<!-- 상품이미지  -->
+	<div id="viewImg">
+		<!-- 상품 이미지 -->
+		<p class="center">
+			<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					<img style="width: 100%;" src="<c:url value="../pds_junggo/${map['FILE_NAME']}"/>" >
+			</a>
+		</p>
+	</div>
+	
+		<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">상품이미지 크게 보기</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      
+				      <!-- 이미지 넣는 부분 -->
+				      <div class="modal-body"  style="width: 100%">
+				       	<img style="width: 100%;" src="<c:url value="../pds_junggo/${map['FILE_NAME']}"/>" >
+				      </div>
+				      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+	<!-- Modal -->
 
 
 
@@ -239,55 +239,49 @@ body {
             </c:if>   
          </p>
 
-      
-         <p>
-            <span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;판매자</span> <span>${map['WRITER']}</span>
-         </p>
-      
-         <p>
-            <span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;등록일</span>
-            <span><fmt:formatDate value="${map['REG_DATE']}" pattern="yyyy-MM-dd"/>  </span>
-         </p>
-      
-         <p>
-            <span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;조회수</span>
-            <span>${map['READ_COUNT']}</span>
-         </p>
-
-      
-         <p>
-            <!-- <input type="button" id ="chitchat" value="쪽지"> -->
-            <button id="chitchat" name="chitchat" type="button">쪽지보내기</button>
-         </p>
-         
-         <p style="color: gray; font-size: 0.8em;"> 
-            ※주의사항※
-            직접결제 시 아래 사항에 유의해주세요.<br>
-            구매문의 채팅이나 전화 등을 이용해 연락하고 외부 메신저 이용 및 개인 정보 유출에 주의하세요.<br>
-            계좌이체 시 선입금을 유도할 경우 안전한 거래인지 다시 한번 확인하세요.<br>
-            불확실한 판매자(본인 미인증, 해외IP, 사기의심 전화번호)의 물건은 구매하지 말아주세요.<br>
-            
-            에브리학사에 등록된 판매 물품과 내용은 개별 판매자가 등록한 것으로서, 에브리학사는 등록을 위한 시스템만 제공하며 내용에 대하여 일체의 책임을 지지 않습니다.
-         </p>
-         
-         
-         <p>
-            <c:if test="${map['DEL_FLAG']=='S'}">
-               <button id="check_module" type="button">상품구매</button>
-            </c:if>   
-            
-            <c:if test="${map['DEL_FLAG']=='C'}">
-            </c:if>   
-            
-            <button ><a style="text-decoration: none; color: black;" href="<c:url value='/junggo/junggoMain'/>">목록</a></button>
-         </p>
-      </form>
-   </div>
+		
+			<p>
+				<span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;판매자</span> <span>${map['WRITER']}</span>
+			</p>
+		
+			<p>
+				<span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;등록일</span>
+				<span><fmt:formatDate value="${map['REG_DATE']}" pattern="yyyy-MM-dd"/>  </span>
+			</p>
+		
+			<p>
+				<!-- <input type="button" id ="chitchat" value="쪽지"> -->
+				<button id="chitchat" name="chitchat" type="button">쪽지보내기</button>
+			</p>
+			
+			<p style="color: gray; font-size: 0.8em;"> 
+				※주의사항※
+				직접결제 시 아래 사항에 유의해주세요.<br>
+				구매문의 채팅이나 전화 등을 이용해 연락하고 외부 메신저 이용 및 개인 정보 유출에 주의하세요.<br>
+				계좌이체 시 선입금을 유도할 경우 안전한 거래인지 다시 한번 확인하세요.<br>
+				불확실한 판매자(본인 미인증, 해외IP, 사기의심 전화번호)의 물건은 구매하지 말아주세요.<br>
+				
+				에브리학사에 등록된 판매 물품과 내용은 개별 판매자가 등록한 것으로서, 에브리학사는 등록을 위한 시스템만 제공하며 내용에 대하여 일체의 책임을 지지 않습니다.
+			</p>
+			
+			
+			<p>
+				<c:if test="${map['DEL_FLAG']=='S'}">
+					<button id="check_module" type="button">상품구매</button>
+				</c:if>	
+				
+				<c:if test="${map['DEL_FLAG']=='C'}">
+				</c:if>	
+				
+				<button ><a style="text-decoration: none; color: black;" href="<c:url value='/junggo/junggoMain'/>">목록</a></button>
+			</p>
+		</form>
+	</div>
 </div>
 
  <hr>
       <!-- 여기 써머노트에서 디비 받아오는 부분 -->
-   <div id="divContents" style="margin-left: 30%;">
+   <div id="divContents">
       <p>${contents}</p>
    </div>
 </div>

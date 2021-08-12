@@ -17,11 +17,11 @@
        </ol>
        <div class="row">
        		<div class="col-xl-4">
-				<div class="card mb-4">
+				<div class="card mb-4" style="overflow-y:scroll">
 					<div class="card-header">
 						<i class="fas fa-clipboard-list" style="font-size: 1.3em"></i> 시간표
 					</div>
-					<div style="height: 320px">
+					<div style="height: 320px" class="card-body">
 						<table class="table-bordered text-center" style="width: 100%">
 							<colgroup>
 								<col style="width: 35%" />
@@ -56,11 +56,11 @@
 				</div>
 			</div>
        		<div class="col-xl-4">
-				<div class="card mb-4">
-					<div class="card-header">
+				<div class="card mb-4" style="overflow-y:scroll">
+					<div class="card-header" >
 						<i class="fas fa-chalkboard-teacher" style="font-size: 1.3em"></i> 강의실 위치
 					</div>
-					<div style="height: 320px">
+					<div style="height: 320px" class="card-body">
 						<table class="table-bordered text-center" style="width: 100%">
 							<colgroup>
 								<col style="width: 25%" />
