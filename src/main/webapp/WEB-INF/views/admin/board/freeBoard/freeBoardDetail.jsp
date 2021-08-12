@@ -96,113 +96,113 @@
       
       
 //댓글달기
-      $('#replysubmit').click(function() {
-   
-         var comment = $('#comment').val();
-         var postNo = $('#postNo').val();
+		$('#replysubmit').click(function() {
+	
+			var comment = $('#comment').val();
+			var postNo = $('#postNo').val();
 
-         $.ajax({
-            type : "post",
-            url : '<c:url value='/reply/insert'/>',
-            data : {
-               "comment" : comment,
-               "postNo" : postNo
-            },
-            async : false,
-            success : function(res) {
-               if (res) {
-                  alert("등록성공");
-                  location.reload();
-               } else {
-                  alert("등록실패");
-               }
+			$.ajax({
+				type : "post",
+				url : '<c:url value='/reply/insert'/>',
+				data : {
+					"comment" : comment,
+					"postNo" : postNo
+				},
+				async : false,
+				success : function(res) {
+					if (res) {
+						alert("등록성공");
+						location.reload();
+					} else {
+						alert("등록실패");
+					}
 
-            },
-            error : function(xhr, status, error) {
-               alert("error 발생!!" + error);
-               location.reload();
-            }
-         });
+				},
+				error : function(xhr, status, error) {
+					alert("error 발생!!" + error);
+					location.reload();
+				}
+			});
 
-      });
+		});
 
-      //좋아요 선택 옵션
-      $('#score_nm a').click(function() {
-         $(this).parent().children("a").removeClass("on"); /* 별점의 on 클래스 전부 제거 */
-         $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-         
-         var val = $(this).attr("id");
-         var postNo = $('#postNo').val();
-         
-         $.ajax({
-            type : "post",
-            url : '<c:url value='/reply/good'/>',
-            data : {
-               "val":val,
-               "postNo":postNo
-               },
-            async : false,
-            success : function(res) {
-               if (res) {
-                  alert("성공");
-               } else {
-                  alert("실패");
-               }
+		//좋아요 선택 옵션
+		$('#score_nm a').click(function() {
+			$(this).parent().children("a").removeClass("on"); /* 별점의 on 클래스 전부 제거 */
+			$(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+			
+			var val = $(this).attr("id");
+			var postNo = $('#postNo').val();
+			
+			$.ajax({
+				type : "post",
+				url : '<c:url value='/reply/good'/>',
+				data : {
+					"val":val,
+					"postNo":postNo
+					},
+				async : false,
+				success : function(res) {
+					if (res) {
+						alert("성공");
+					} else {
+						alert("실패");
+					}
 
-            },
-            error : function(xhr, status, error) {
-               alert("error 발생!!" + error);
-               
-            }
-         });
-         
-      });
-      
-      //좋아요 눌렀으면 아예 못 바꾸게 하자.
-      if ($('#good').val()==1) {
-            $('#score_nm a').addClass("on").prevAll("a").addClass("on");
-      }
-      
+				},
+				error : function(xhr, status, error) {
+					alert("error 발생!!" + error);
+					
+				}
+			});
+			
+		});
+		
+		//좋아요 눌렀으면 아예 못 바꾸게 하자.
+		if ($('#good').val()==1) {
+				$('#score_nm a').addClass("on").prevAll("a").addClass("on");
+		}
+		
 
-      //작성자 다르면 못 지운다.
+		//작성자 다르면 못 지운다.
 
-      $('.writetext #delete').click(function() {
-         var name='<%=(String)session.getAttribute("name")%>';
-         var userno='<%=(String)session.getAttribute("no")%>';
-         var del = $(this).val();
-         var no = $(this).next().val();
-         var writeno= $(this).prev().val();
-         
-         if (userno!=writeno) {
-            alert("자신의 글만을 삭제하실 수 있습니다.");
-            event.preventDefault();   
-            
-         }else{
-         
-         
-         $.ajax({
-            type : "post",
-            url : '<c:url value='/reply/deletereply'/>',
-            data : "writeno="+no,
-            async : false,
-            success : function(res) {
-               if (res) {
-                  location.reload();
-               } else {
-                  alert("삭제실패");
-               }
+		$('.writetext #delete').click(function() {
+			var name='<%=(String)session.getAttribute("name")%>';
+			var userno='<%=(String)session.getAttribute("no")%>';
+			var del = $(this).val();
+			var no = $(this).next().val();
+			var writeno= $(this).prev().val();
+			
+			if (userno!=writeno) {
+				alert("자신의 글만을 삭제하실 수 있습니다.");
+				event.preventDefault();	
+				
+			}else{
+			
+			
+			$.ajax({
+				type : "post",
+				url : '<c:url value='/reply/deletereply'/>',
+				data : "writeno="+no,
+				async : false,
+				success : function(res) {
+					if (res) {
+						location.reload();
+					} else {
+						alert("삭제실패");
+					}
 
-            },
-            error : function(xhr, status, error) {
-               alert("error 발생!!" + error);
-               location.reload();
-            }
-         });
-         }
-      });
-      
+				},
+				error : function(xhr, status, error) {
+					alert("error 발생!!" + error);
+					location.reload();
+				}
+			});
+			}
+		});
+		
 
-   });
+	});
 </script>
 <style type="text/css">
 body {

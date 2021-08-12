@@ -79,7 +79,6 @@
                                    	 	</a>
                                     <div class="collapse" id="collapseScholarship" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="<c:url value='/admin/student/scholarshipApply'/>">장학금 신청</a>
                                             <a class="nav-link" href="<c:url value='/scholarship/scholarshipList'/>">장학금 조회</a>
                                         </nav>
                                     </div>
