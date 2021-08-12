@@ -61,7 +61,7 @@
 	<insert id="insertboard" parameterType="customVO">
 	
 		<selectKey resultType="int" keyProperty="bdcode" order="BEFORE">
-			select seq_board.nextval from dual
+			select board_seq.nextval from dual
 		</selectKey>
 		insert into board(bd_code,bd_name,auth_code,usage,is_reply,is_comment,category_code,is_private,is_upload,max_upfile,max_filesize,open_sub_code ) 
 			values (#{bdcode}, #{bdname}, #{authcode},#{usage}, #{isreply}, #{iscomment},#{categorycode},#{isprivate},#{isupload},#{maxupfile},#{maxfilesize},#{opensubcode})
