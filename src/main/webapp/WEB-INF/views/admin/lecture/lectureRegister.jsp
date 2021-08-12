@@ -137,7 +137,7 @@
 		$('#deptNo').change(function() {
 			
 			var deptNo = $(this).val();
-			
+
 			$.ajax({
 				url:"<c:url value='/admin/lecture/profList?deptNo=" + deptNo + "'/>",
 				type:"get",

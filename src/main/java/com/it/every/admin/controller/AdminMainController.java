@@ -1,5 +1,6 @@
 package com.it.every.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +12,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.every.admin.professor.model.ProfessorManageVO;
 import com.it.every.calendar.model.CalendarService;
 import com.it.every.calendar.model.CalendarVO;
 import com.it.every.campus.model.CampusService;
 import com.it.every.campus.model.CampusVO;
+import com.it.every.department.model.DepartmentService;
+import com.it.every.department.model.DepartmentVO;
 import com.it.every.lecture.model.LectureService;
+import com.it.every.lecture.model.LectureVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +35,8 @@ public class AdminMainController {
 	private final CampusService campusService;
 	private final CalendarService calendarService;
 	private final LectureService lectureService;
+	private final DepartmentService departmentService;
+	
 	
 	@RequestMapping("/campusInfo/calendar")
 	public String calendar(Model model) {
@@ -202,48 +210,85 @@ public class AdminMainController {
 	}
 	
 	@RequestMapping("/chart/classChart")
-	public String classChart(Model model) {
-		logger.info("강의별 학생통계 화면");
-		
-		Map<String, Object> map = lectureService.selectScoreAvg();
-		List<Map<String, Object>> majorList = lectureService.selectMajorCount();
-		List<Map<String, Object>> gradeList = lectureService.selectGradeCount();
-		
-		logger.info("조회 결과, map={}", map);
-		logger.info("조회 결과, majorList={}", majorList);
-		logger.info("조회 결과, gradeList={}", gradeList);
-		
-		String str1 ="[";
-		str1 +="['수강생 평균 점수','학생 평균'] ,";
-		str1 +="['평균 점수', '" + map.get("AVGSCORE") +  "']]";
-		
-		logger.info("str1={}", str1);
-		
-		String str2 ="[";
-		str2 +="['학년' , '재학생 수'] ,";
-		int num1 =0;
-		for (Map<String, Object> map1 : gradeList) {
+	public String classChart(@RequestParam(defaultValue = "0") String openSubCode, 
+			Model model) {
+			logger.info("강의별 학생통계 화면, 파라미터 openSubCode={}", openSubCode);
 			
-			str2 +="['";
-			str2 += map1.get("GRADE");
-			str2 +="' , ";
-			str2 += map1.get("COUNT");
-			str2 +=" ]";
+			List<DepartmentVO> deptList = departmentService.selectDepartment();
+			logger.info("조회 결과, deptList={}", deptList);
 			
-			num1 ++;
-			if(num1<gradeList.size()){
-				str2 +=",";
-			}		
+			try {
+			
+			Map<String, Object> map = lectureService.selectScoreAvg(openSubCode);
+			List<Map<String, Object>> majorList = lectureService.selectMajorCount(openSubCode);
+			List<Map<String, Object>> gradeList = lectureService.selectGradeCount(openSubCode);
+			
+			logger.info("조회 결과, map={}", map);
+			logger.info("조회 결과, majorList={}", majorList);
+			logger.info("조회 결과, gradeList={}", gradeList);
+			
+			String str1 ="[";
+			str1 +="['수강생 평균 점수','학생 평균'] ,";
+			str1 +="['평균 점수', '" + map.get("AVGSCORE") +  "']]";
+			
+			logger.info("str1={}", str1);
+			
+			String str2 ="[";
+			str2 +="['학년' , '재학생 수'] ,";
+			int num1 =0;
+			for (Map<String, Object> map1 : gradeList) {
+				
+				str2 +="['";
+				str2 += map1.get("GRADE");
+				str2 +="' , ";
+				str2 += map1.get("COUNT");
+				str2 +=" ]";
+				
+				num1 ++;
+				if(num1<gradeList.size()){
+					str2 +=",";
+				}		
+			}
+			str2 += "]";
+			
+			logger.info("str2={}", str2);
+			
+			model.addAttribute("str1", str1);
+			model.addAttribute("str2", str2);
+			model.addAttribute("majorList", majorList);
+			model.addAttribute("gradeList", gradeList);
+			model.addAttribute("deptList", deptList);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			String str1 = "";
+			String str2 = "";
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<Map<String, Object>> majorList = null;
+			List<Map<String, Object>> gradeList = null;
+			
+			model.addAttribute("str1", str1);
+			model.addAttribute("str2", str2);
+			model.addAttribute("majorList", majorList);
+			model.addAttribute("deptList", deptList);
 		}
-		str2 += "]";
 		
-		logger.info("str2={}", str2);
-		
-		model.addAttribute("str1", str1);
-		model.addAttribute("str2", str2);
-		model.addAttribute("majorList", majorList);
-		model.addAttribute("gradeList", gradeList);
 		
 		return "admin/chart/classChart";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/chart/deptLecture")
+	public List<Map<String, Object>> deptLectureList(@RequestParam String deptNo) {
+		logger.info("학과별 강의리스트 - list, 파라미터 deptNo={}", deptNo);
+		
+		List<Map<String, Object>> list = lectureService.selectByDeptNo(deptNo);
+		
+		logger.info("학과별 교수 조회 결과, list.size={}", list.size());
+		logger.info("학과별 교수 조회 결과, list={}", list);
+		
+		return list;
 	}
 }

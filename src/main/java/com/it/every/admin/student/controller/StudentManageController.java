@@ -1,5 +1,6 @@
 package com.it.every.admin.student.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import com.it.every.award.model.AwardService;
 import com.it.every.award.model.AwardVO;
 import com.it.every.department.model.DepartmentService;
 import com.it.every.department.model.DepartmentVO;
+import com.it.every.subject.model.SubjectVO;
 import com.it.every.tuition.model.TuitionService;
 import com.it.every.tuition.model.TuitionVO;
 
@@ -237,6 +239,76 @@ public class StudentManageController {
 	
 	
 	@GetMapping("/chart/studentChart")
+	public String studentChart(@RequestParam(defaultValue = "") String stuName, 
+			Model model) {
+		logger.info("학생성적통계 화면, 파라미터 stuName={}", stuName);
+		
+		List<StudentManageVO> stuList = studentManageService.selectAll();
+		logger.info("과목 조회 결과, stuList.size={}", stuList.size());
+		
+		String strAuto ="[";
+		int num =0;
+		for (StudentManageVO vo : stuList) {
+			
+			strAuto += "'" + vo.getName() + "-" 
+						+ vo.getMajor() + "/" + vo.getStuNo() + "'";
+			num ++;
+			if(num<stuList.size()){
+				strAuto +=", ";
+			}		
+		}
+		strAuto += "]";
+		
+		logger.info("strAuto={}", strAuto);
+		
+		try {
+			
+			String[] arr = stuName.split("/");
+			String stuNo = arr[1];
+			logger.info("stuNo={}", stuNo);
+			
+			StudentManageVO vo = studentManageService.selectByStuNo(stuNo);
+			List<Map<String, Object>> scoreList = studentManageService.selectSubjectScore(stuNo);
+			Map<String, Object> scoreAvgMap = studentManageService.selectSubjectAvg(stuNo);
+			Map<String, Object> deptAvgMap = studentManageService.selectDeptAvg(vo.getDeptNo());
+			Map<String, Object> allAvgMap = studentManageService.selectTotalAvg();
+			
+			logger.info("조회 결과, scoreList={}", scoreList);
+			logger.info("조회 결과, scoreAvgMap={}", scoreAvgMap);
+			logger.info("조회 결과, deptAvgMap={}", deptAvgMap);
+			logger.info("조회 결과, allAvgMap={}", allAvgMap);
+			
+			String str ="[";
+			str +="['항목별 비교', '학생 평균', '학과 평균', '전체 평균'] ,";
+			str +="['평균 점수', '" + scoreAvgMap.get("AVGSCORE") + "', '";
+			str += deptAvgMap.get("AVGSCORE") + "', '";
+			str += allAvgMap.get("TOTALAVG") + "']";
+			str += "]";
+			
+			logger.info("str={}", str);
+			
+			model.addAttribute("scoreList", scoreList);
+			model.addAttribute("str1", str);
+			model.addAttribute("strAuto", strAuto);
+			model.addAttribute("stuName", stuName);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			String str ="";
+			Map<String, Object> scoreList = new HashMap<String, Object>();
+			
+			model.addAttribute("str1", str);
+			model.addAttribute("scoreList", scoreList);
+			model.addAttribute("strAuto", strAuto);
+			model.addAttribute("stuName", stuName);
+		}
+		
+		return "admin/chart/studentChart";
+	}
+	
+	/*
+	@GetMapping("/chart/studentChart")
 	public String studentChart(Model model) {
 		logger.info("학생성적통계 화면");
 		
@@ -264,6 +336,7 @@ public class StudentManageController {
 		
 		return "admin/chart/studentChart";
 	}
+	*/
 	
 	@GetMapping("/chart/majorStuChart")
 	public String majorStuChart(Model model) {

@@ -80,7 +80,7 @@
 		order by g.grade
 	</select>
 	
-	<select id="selectSubjectScore" resultType="HashMap">
+	<select id="selectSubjectScore" parameterType="String" resultType="HashMap">
 		select st.name name, s.subj_name subject, e.total_grade score,
 		<![CDATA[
 		case when e.total_grade >= 95 then 'A+'
@@ -101,10 +101,10 @@
 		on o.subj_code = s.subj_code
 		join student st
 		on e.stu_no = st.stu_no
-		where st.name = '라희언'
+		where st.stu_no = #{stuNo}
 	</select>
 	
-	<select id="selectSubjectAvg" resultType="HashMap">
+	<select id="selectSubjectAvg" parameterType="String" resultType="HashMap">
 		select E.name name, avg(E.grade) avgScore
 		from
 		(select st.name name, s.subj_name subject, e.total_grade grade
@@ -114,11 +114,11 @@
 		on o.subj_code = s.subj_code
 		join student st
 		on e.stu_no = st.stu_no
-		where st.name = '라희언') E
+		where st.stu_no = #{stuNo}) E
 		group by E.name
 	</select>
 	
-	<select id="selectDeptAvg" resultType="HashMap">
+	<select id="selectDeptAvg" parameterType="int" resultType="HashMap">
 		select E.dept dept, avg(E.grade) avgScore 
 		from
 		(select d.dept_name dept, st.name name, s.subj_name subject, e.total_grade grade
@@ -130,7 +130,7 @@
 		on e.stu_no = st.stu_no
 		join department d
 		on st.dept_no = d.dept_no
-		where d.dept_name='경영학과') E
+		where d.dept_no=#{deptNo}) E
 		group by E.dept
 	</select>
 	

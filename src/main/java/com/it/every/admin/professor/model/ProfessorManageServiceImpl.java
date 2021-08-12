@@ -69,14 +69,15 @@ public class ProfessorManageServiceImpl implements ProfessorManageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectLecComment() {
-		return professorDao.selectLecComment();
+	public List<Map<String, Object>> selectLecComment(Map<String, Object> map) {
+		return professorDao.selectLecComment(map);
 	}
 
 	@Override
-	public Map<String, Object> searchByProfName(String deptName, String profName, String subjName) {
-		return professorDao.searchByProfName(deptName, profName, subjName);
+	public Map<String, Object> searchByProfNo(Map<String, Object> map) {
+		return professorDao.searchByProfNo(map);
 	}
+
 
 	
 }

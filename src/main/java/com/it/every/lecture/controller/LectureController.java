@@ -38,7 +38,6 @@ public class LectureController {
 	private static final Logger logger = LoggerFactory.getLogger(LectureController.class);
 	private final LectureService lectureService;
 	private final DepartmentService departmentService;
-	private final SubjTypeService subjTypeService;
 	private final ProfessorManageService profManageService;
 	private final TimetableService timetableService;
 	private final ClassroomService classroomService;

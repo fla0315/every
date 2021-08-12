@@ -71,23 +71,28 @@ public class LectureServiceImpl implements LectureService {
 	}
 
 	@Override
-	public Map<String, Object> selectScoreAvg() {
-		return lectureDao.selectScoreAvg();
-	}
-
-	@Override
-	public List<Map<String, Object>> selectMajorCount() {
-		return lectureDao.selectMajorCount();
-	}
-
-	@Override
-	public List<Map<String, Object>> selectGradeCount() {
-		return lectureDao.selectGradeCount();
-	}
-
-	@Override
 	public List<Map<String, Object>> selectByProfNo(String profNo) {
 		return lectureDao.selectByProfNo(profNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectByDeptNo(String deptNo) {
+		return lectureDao.selectByDeptNo(deptNo);
+	}
+
+	@Override
+	public Map<String, Object> selectScoreAvg(String openSubjCode) {
+		return lectureDao.selectScoreAvg(openSubjCode);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMajorCount(String openSubjCode) {
+		return lectureDao.selectMajorCount(openSubjCode);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectGradeCount(String openSubjCode) {
+		return lectureDao.selectGradeCount(openSubjCode);
 	}
 
 

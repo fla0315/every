@@ -5,6 +5,97 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+	$(function(){
+	  	
+		// 학과별 교수목록 불러오기
+		$('#deptNo').change(function() {
+			
+			var deptNo = $(this).val();
+			
+			$.ajax({
+				url:"<c:url value='/admin/chart/profList?deptNo=" + deptNo + "'/>",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					
+					if(res.length == 0) {
+						alert('해당 학과에 등록된 교수가 없습니다.');
+						$("#profNo").empty();
+						$("#profNo").append("<option value='0'>---선택하세요---</option>");
+						
+						
+					} else if(res.length > 0) {
+						$("#profNo").empty();
+						var result = "";
+						$.each(res, function(idx, item){
+							result += "<option value='" + item.profNo + "'>" + item.profName + "</option>";
+						});
+						
+						$("#profNo").append("<option value='0'>---선택하세요---</option>");
+						$("#profNo").append(result);
+					}
+				},
+				error:function(xhr, status, error){
+					alert("error 발생!" + error);
+				}
+			});
+		});
+	  
+		// 교수별 강의목록 불러오기
+		$('#profNo').change(function() {
+			
+			var profNo = $(this).val();
+			
+			$.ajax({
+				url:"<c:url value='/admin/chart/lectureList?profNo=" + profNo + "'/>",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					
+					if(res.length == 0) {
+						alert('해당 교수에게 배정된 강의가 없습니다.');
+						$("#lectureNo").empty();
+						$("#lectureNo").append("<option value='0'>---선택하세요---</option>");
+						
+						
+					} else if(res.length > 0) {
+						$("#lectureNo").empty();
+						var result = "";
+						$.each(res, function(idx, map){
+							result += "<option value='" + map['OPENSUBCODE'] + "'>" + map['SUBJECT'] + "</option>";
+						});
+						
+						$("#lectureNo").append("<option value='0'>---선택하세요---</option>");
+						$("#lectureNo").append(result);
+					}
+				},
+				error:function(xhr, status, error){
+					alert("error 발생!" + error);
+				}
+			});
+		});
+		
+		
+		
+	  
+		var date = new Date();
+		var selYear = date.getFullYear();
+		var selMonth = date.getMonth()+1;
+		console.log(selMonth);
+		var semester = '';
+		
+		if(selMonth == 7 || selMonth == 8) {
+			semester = '2학기';
+		} else if(selMonth == 1 || selMonth == 2) {
+			semester = '1학기';
+		}
+		
+		
+		$('#semester').append("<span>(" + selYear + "년 " + semester + " 기준)</span>");
+		
+	});	 
+  
+  
   google.charts.load('current', {'packages':['bar']});
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawChart1);
@@ -28,96 +119,7 @@
     chart1.draw(data1, google.charts.Bar.convertOptions(options1));
   };
   
-  $(function(){
-	  	
-		// 학과별 교수목록 불러오기
-		$('#deptName').change(function() {
-			
-			var deptNo = $(this).val();
-			alert(deptNo);
-			
-			$.ajax({
-				url:"<c:url value='/admin/chart/profList?deptNo=" + deptNo + "'/>",
-				type:"get",
-				dataType:"json",
-				success:function(res){
-					
-					if(res.length == 0) {
-						alert('해당 학과에 등록된 교수가 없습니다.');
-						$("#profName").empty();
-						$("#profName").append("<option value='0'>---선택하세요---</option>");
-						
-						
-					} else if(res.length > 0) {
-						$("#profName").empty();
-						var result = "";
-						$.each(res, function(idx, item){
-							result += "<option value='" + item.profNo + "'>" + item.profName + "</option>";
-						});
-						
-						$("#profName").append("<option value='0'>---선택하세요---</option>");
-						$("#profName").append(result);
-					}
-				},
-				error:function(xhr, status, error){
-					alert("error 발생!" + error);
-				}
-			});
-		});
-	  
-		// 교수별 강의목록 불러오기
-		$('#profName').change(function() {
-			
-			var profNo = $(this).val();
-			
-			$.ajax({
-				url:"<c:url value='/admin/chart/lectureList?profNo=" + profNo + "'/>",
-				type:"get",
-				dataType:"json",
-				success:function(res){
-					
-					if(res.length == 0) {
-						alert('해당 교수에게 배정된 강의가 없습니다.');
-						$("#lectureName").empty();
-						$("#lectureName").append("<option value='0'>---선택하세요---</option>");
-						
-						
-					} else if(res.length > 0) {
-						$("#lectureName").empty();
-						var result = "";
-						$.each(res, function(idx, item){
-							result += "<option value='" + item.profNo + "'>" + item.profName + "</option>";
-						});
-						
-						$("#lectureName").append("<option value='0'>---선택하세요---</option>");
-						$("#lectureName").append(result);
-					}
-				},
-				error:function(xhr, status, error){
-					alert("error 발생!" + error);
-				}
-			});
-		});
-		
-	  
-		var date = new Date();
-		var selYear = date.getFullYear();
-		var selMonth = date.getMonth()+1;
-		console.log(selMonth);
-		var semester = '';
-		
-		if(selMonth == 7 || selMonth == 8) {
-			semester = '2학기';
-		} else if(selMonth == 1 || selMonth == 2) {
-			semester = '1학기';
-		}
-		
-		
-		$('#semester').append("<span>(" + selYear + "년 " + semester + " 기준)</span>");
-		
-		$("#major").val((("${major}" == '') ? "" : "${major}")).prop("selected", true);              //select문
-		
-	});  
+   
 
 </script>
 
@@ -130,9 +132,9 @@
 		<br>
 		<br>
 		<div style="height: 60px">
-		<form name="searchfrm" method="get" action="<c:url value='/admin/chart/searchByProfName'/>">
+		<form name="searchfrm" method="get" action="<c:url value='/admin/chart/professorChart'/>">
 			<div style="width: 200px; float: left; margin-right: 10px">
-				<select class="form-control" name="deptName" id="deptName">
+				<select class="form-control" name="deptNo" id="deptNo">
 					<option value="">--학과를 선택하세요--</option>
 					<!-- 반복문 시작 -->
 					<c:forEach var="deptVo" items="${deptList }" varStatus="status">
@@ -141,21 +143,15 @@
 				</select>
 			</div>
 			<div style="width: 200px; float: left; margin-right: 10px">
-				<select class="form-control" name="profName" id="profName">
+				<select class="form-control" name="profNo" id="profNo">
 					<option value="">--교수를 선택하세요--</option>
 					<!-- 반복문 시작 -->
-					<%-- <c:forEach var="profVo" items="${profList }" varStatus="status">
-						<option value="${profVo.profNo }">${profVo.profName }</option>
-					</c:forEach> --%>
 				</select>
 			</div>
 			<div style="width: 200px; float: left; margin-right: 10px">
-				<select class="form-control" name="lectureName" id="lectureName">
+				<select class="form-control" name="lectureNo" id="lectureNo">
 					<option value="">--강의를 선택하세요--</option>
 					<!-- 반복문 시작 -->
-					<%-- <c:forEach var="map" items="${lectureList }" varStatus="status">
-						<option value="${deptVo.deptName }">${deptVo.deptName }</option>
-					</c:forEach> --%>
 				</select>
 			</div>
 			<div style="float: left;">
@@ -169,7 +165,12 @@
 					<div class="card-header">
 						<i class="fas fa-chart-bar me-1" style="font-size: 1.3em"></i> 강의 평점
 					</div>
-					<div id="columnchart_material" style="width: 600px; height: 450px; margin: 20px 0px 10px 20px;"></div>
+					<c:if test="${empty str1}">
+						<div style="text-align: center; margin:0 auto; display: flex; align-items: center; height: 400px">찾고자 하는 강의를 선택하세요</div>
+					</c:if>
+					<c:if test="${!empty str1}">
+						<div id="columnchart_material" style="width: 600px; height: 450px; margin: 20px 0px 10px 20px;"></div>
+					</c:if>
 				</div>
 			</div>
 			<div class="col-xl-6" style="width: 550px; float: left; margin-left: 20px">
@@ -177,7 +178,7 @@
 					<div class="card-header">
 						<i class="fas fa-chart-bar me-1" style="font-size: 1.3em"></i> 강의 평가 댓글
 					</div>
-					<div class="card-body" style="height: 480px">
+					<div class="card-body" style="height: 400px">
 						<table id="datatablesSimple">
 							<thead>
 								<tr>

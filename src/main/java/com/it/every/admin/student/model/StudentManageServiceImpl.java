@@ -59,18 +59,18 @@ public class StudentManageServiceImpl implements StudentManageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectSubjectScore() {
-		return studentDao.selectSubjectScore();
+	public List<Map<String, Object>> selectSubjectScore(String stuName) {
+		return studentDao.selectSubjectScore(stuName);
 	}
 
 	@Override
-	public Map<String, Object> selectSubjectAvg() {
-		return studentDao.selectSubjectAvg();
+	public Map<String, Object> selectSubjectAvg(String stuName) {
+		return studentDao.selectSubjectAvg(stuName);
 	}
 
 	@Override
-	public Map<String, Object> selectDeptAvg() {
-		return studentDao.selectDeptAvg();
+	public Map<String, Object> selectDeptAvg(int deptNo) {
+		return studentDao.selectDeptAvg(deptNo);
 	}
 
 	@Override

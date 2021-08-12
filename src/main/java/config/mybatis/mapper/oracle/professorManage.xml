@@ -82,8 +82,9 @@
 		group by s.subj_name, p.prof_name
 	</select>
 	
-	<select id="searchByProfName" parameterType="String" resultType="HashMap">
-		select d.dept_name, s.subj_name, p.prof_name, avg((e.q1+e.q2+e.q3+e.q4+e.q5)/5) rate
+	<select id="searchByProfNo" parameterType="HashMap" resultType="HashMap">
+		select d.dept_name deptName, s.subj_name subjName, p.prof_name profName, 
+		avg((e.q1+e.q2+e.q3+e.q4+e.q5)/5) rate
 		from subj_eval e join open_subj o
 		on e.open_sub_code = o.open_sub_code
 		join subject s
@@ -92,7 +93,7 @@
 		on o.prof_no = p.prof_no
 		join department d
 		on p.dept_no = d.dept_no
-		where d.dept_name=#{deptName} and p.prof_name=#{profName} and s.subj_name=#{subjName}
+		where p.prof_no=#{profNo} and e.open_sub_code=#{subjNo}
 		group by d.dept_name, s.subj_name, p.prof_name
 	</select>
 	
@@ -122,7 +123,7 @@
 	<resultMap type="HashMap" id="clobChange">
 		<result property="CONTENT" column="CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
 	</resultMap>
-	<select id="selectLecComment" resultType="HashMap" resultMap="clobChange">
+	<select id="selectLecComment" parameterType="HashMap" resultType="HashMap" resultMap="clobChange">
 		select p.prof_name profName, s.subj_name subjName, e.content content
 		from subj_eval e join open_subj o
 		on e.open_sub_code = o.open_sub_code
@@ -130,7 +131,8 @@
 		on o.subj_code = s.subj_code
 		join professor p
 		on o.prof_no = p.prof_no
-		where p.prof_name='홍교수' and s.subj_name = '데이터베이스'
+		where p.prof_no=#{profNo} and e.open_sub_code=#{subjNo}
+		<!-- where p.prof_name='홍교수' and s.subj_name = '데이터베이스' -->
 	</select>
 	
 </mapper>

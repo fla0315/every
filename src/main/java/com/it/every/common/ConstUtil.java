@@ -23,22 +23,22 @@ public interface ConstUtil {
    //자료실 - 파일 저장 경로
    String FILE_UPLOAD_PATH="pds_upload";
    //String FILE_UPLOAD_PATH_TEST="E:\\workspace_list\\spboot_WS\\springherb\\src\\main\\webapp\\pds_upload";
-   String FILE_UPLOAD_PATH_TEST="C:\\Users\\yeongrim kim\\OneDrive - ikw.kr\\문서\\GitHub\\every\\src\\main\\webapp\\WEB-INF\\pds_upload";
-   //String FILE_UPLOAD_PATH_TEST="D:\\mywork\\spring\\itwill_lecture\\Final_Project\\every\\src\\main\\webapp\\WEB-INF\\pds_upload";
+   //String FILE_UPLOAD_PATH_TEST="C:\\Users\\yeongrim kim\\OneDrive - ikw.kr\\문서\\GitHub\\every\\src\\main\\webapp\\WEB-INF\\pds_upload";
+   String FILE_UPLOAD_PATH_TEST="D:\\mywork\\spring\\itwill_lecture\\Final_Project\\every\\src\\main\\webapp\\WEB-INF\\pds_upload";
    
    //과제업로드
    //String ASSIGNMENT_FILE_UPLOAD_PATH_TEST= "C:\\Users\\yeongrim kim\\OneDrive - ikw.kr\\문서\\GitHub\\every\\src\\main\\webapp\\WEB-INF\\pds_assignment";
-   String ASSIGNMENT_FILE_UPLOAD_PATH_TEST= "F:\\lecture\\project\\final\\every\\src\\main\\webapp\\WEB-INF\\pds_assignment";
-   //String ASSIGNMENT_FILE_UPLOAD_PATH_TEST= "D:\\mywork\\spring\\itwill_lecture\\Final_Project\\every\\src\\main\\webapp\\WEB-INF\\pds_assignment"; 
+   //String ASSIGNMENT_FILE_UPLOAD_PATH_TEST= "F:\\lecture\\project\\final\\every\\src\\main\\webapp\\WEB-INF\\pds_assignment";
+   String ASSIGNMENT_FILE_UPLOAD_PATH_TEST= "D:\\mywork\\spring\\itwill_lecture\\Final_Project\\every\\src\\main\\webapp\\WEB-INF\\pds_assignment"; 
    
    //강의계획서 업로드
-   String SYLLABUS_FILE_UPLOAD_PATH_TEST="F:\\lecture\\project\\final\\every\\src\\main\\webapp\\pds_syllabus";
+   //String SYLLABUS_FILE_UPLOAD_PATH_TEST="F:\\lecture\\project\\final\\every\\src\\main\\webapp\\pds_syllabus";
    //String SYLLABUS_FILE_UPLOAD_PATH_TEST= "C:\\Users\\yeongrim kim\\OneDrive - ikw.kr\\문서\\GitHub\\every\\src\\main\\webapp\\pds_syllabus";
-   //String SYLLABUS_FILE_UPLOAD_PATH_TEST="D:\\mywork\\spring\\itwill_lecture\\Final_Project\\every\\src\\main\\webapp\\pds_syllabus";
+   String SYLLABUS_FILE_UPLOAD_PATH_TEST="D:\\mywork\\spring\\itwill_lecture\\Final_Project\\every\\src\\main\\webapp\\pds_syllabus";
    
    //중고 거래 업로드
-   String JUNGGO_FILE_UPLOAD_PATH_TEST="F:\\lecture\\project\\final\\every\\src\\main\\webapp\\pds_junggo";
-   //String JUNGGO_FILE_UPLOAD_PATH_TEST="D:\\mywork\\spring\\itwill_lecture\\Final_Project\\every\\src\\main\\webapp\\pds_junggo";
+   //String JUNGGO_FILE_UPLOAD_PATH_TEST="F:\\lecture\\project\\final\\every\\src\\main\\webapp\\pds_junggo";
+   String JUNGGO_FILE_UPLOAD_PATH_TEST="D:\\mywork\\spring\\itwill_lecture\\Final_Project\\every\\src\\main\\webapp\\pds_junggo";
    
    //강의계획서 업로드인지,  과제업로드
    int UPLOAD_SYLLABUS_FLAG=1; //강의계획서 업로드

@@ -17,8 +17,8 @@ public interface StudentManageDAO {
 	public List<StudentManageVO> selectBeingInSchool();
 	public List<Map<String, Object>> selectGrade();
 	public List<Map<String, Object>> selectMajorGrade(String major);
-	public List<Map<String, Object>> selectSubjectScore();
-	public Map<String, Object> selectSubjectAvg();
-	public Map<String, Object> selectDeptAvg();
+	public List<Map<String, Object>> selectSubjectScore(String stuName);
+	public Map<String, Object> selectSubjectAvg(String stuName);
+	public Map<String, Object> selectDeptAvg(int deptNo);
 	public Map<String, Object> selectTotalAvg();
 }

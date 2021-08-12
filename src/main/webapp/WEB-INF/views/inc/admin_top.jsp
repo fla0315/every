@@ -183,9 +183,12 @@ if (Id!= null&&!Id.isEmpty()) { //세션에 값이 있으면
                             <a class="nav-link" href="<c:url value='/admin/campusInfo/calendar'/>">학사일정</a>
                         </div>
                     </div>
-                    <div class="sb-sidenav-footer">
+                    <!-- <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         Start Bootstrap
+                    </div> -->
+                    <div class="sb-sidenav-footer">
+                        <div class="small">${sessionScope.name }님 로그인 중입니다.</div>
                     </div>
                 </nav>
             </div>

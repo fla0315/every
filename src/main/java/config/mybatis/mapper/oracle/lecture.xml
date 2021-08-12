@@ -85,17 +85,17 @@
 		delete from subj_time where open_sub_code=#{openSubCode}
 	</delete>
 	
-	<select id="selectScoreAvg" resultType="HashMap">
-		select s.subj_name subject, avg(e.total_grade) avgScore
+	<select id="selectScoreAvg" parameterType="String" resultType="HashMap">
+		select s.subj_name subject, round(avg(e.total_grade),2) avgScore
 		from evaluation e join open_subj o
 		on e.sub_code = o.open_sub_code
 		join subject s
 		on o.subj_code = s.subj_code
-		where s.subj_name='데이터베이스'
+		where o.open_sub_code = #{openSubjCode}
 		group by s.subj_name
 	</select>
 	
-	<select id="selectMajorCount" resultType="HashMap">
+	<select id="selectMajorCount" parameterType="String" resultType="HashMap">
 		select d.dept_name deptName, count(*) count
 		from evaluation e join open_subj o
 		on e.sub_code = o.open_sub_code
@@ -105,7 +105,7 @@
 		on e.stu_no = st.stu_no
 		join department d
 		on st.dept_no = d.dept_no
-		where s.subj_name='데이터베이스'
+		where o.open_sub_code = #{openSubjCode}
 		group by d.dept_name
 	</select>
 
@@ -130,7 +130,7 @@
 		on e.sub_code = o.open_sub_code
 		join subject s
 		on o.subj_code = s.subj_code
-		where s.subj_name='데이터베이스') S
+		where o.open_sub_code = #{openSubjCode}) S
 		group by S.grade
 	</select>
 	
@@ -141,6 +141,17 @@
 		join professor p
 		on o.prof_no = p.prof_no
 		where p.prof_no = #{profNo}
+	</select>
+	
+	<select id="selectByDeptNo" parameterType="String" resultType="HashMap">
+		select d.dept_name deptName, s.subj_name subjName, o.open_sub_code subjCode
+		from open_subj o join subject s
+		on o.subj_code = s.subj_code
+		join professor p
+		on o.prof_no = p.prof_no
+		join department d
+		on p.dept_no = d.dept_no
+		where d.dept_no=#{deptNo}
 	</select>
 	
 </mapper>

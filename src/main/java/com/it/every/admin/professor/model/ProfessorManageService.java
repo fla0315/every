@@ -14,8 +14,8 @@ public interface ProfessorManageService {
 	public List<Map<String, Object>> selectPosition();
 	public List<Map<String, Object>> selectMajorPosition(String deptName);
 	public Map<String, Object> selectProfLecRate();
-	public Map<String, Object> searchByProfName(String deptName, String profName, String subjName);
+	public Map<String, Object> searchByProfNo(Map<String, Object> map);
 	public Map<String, Object> selectDeptLecRate();
 	public Map<String, Object> selectAllLecRate();
-	public List<Map<String, Object>> selectLecComment();
+	public List<Map<String, Object>> selectLecComment(Map<String, Object> map);
 }

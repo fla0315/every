@@ -12,6 +12,7 @@
 		on s.stu_no = a.stu_no
 		left outer join scholarship sc
 		on a.scholarship_no = sc.scholarship_no
+		where s.state = 1
 		order by s.major
 	</select>
 	
