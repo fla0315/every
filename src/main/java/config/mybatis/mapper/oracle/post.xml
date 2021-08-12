@@ -71,6 +71,7 @@
 		where bd_code = #{bdCode}
 		order by post_no desc
 	</select>
+	
 	<!-- 중고게시판 상품 등록하기 -->
 	<insert id="insertJunggo" parameterType="postVo">
 		<selectKey resultType="int" keyProperty="postNo" order="BEFORE">

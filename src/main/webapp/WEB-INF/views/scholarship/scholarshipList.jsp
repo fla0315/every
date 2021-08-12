@@ -225,7 +225,7 @@
 						<tr class="align_center">
 							<td>${map['STU_NO']}</td>
 							<!-- 번호  -->
-							<td>${map['SEMESTER']}</td>
+							<td>${map['SEMESTER']}학기</td>
 							<!-- 학기  -->
 							<td>${map['NAME']}</td>
 							<!-- 이름 -->

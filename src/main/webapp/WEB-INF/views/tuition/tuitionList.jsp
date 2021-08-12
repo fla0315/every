@@ -118,15 +118,18 @@
 							<tr class="align_center">
 								<td>${map['TUITION_NO'] }</td>
 								<!-- 번호  -->
-								<td>${map['SEMESTER'] }</td>
+								<td>${map['SEMESTER'] }학기</td>
 								<!-- 학기  -->
 								<td>${map['STU_NO'] }</td>
 								<!-- 학번 -->
 								<td><fmt:formatNumber value="${map['TUITION'] }"
 										pattern="#,###" />원 <!-- 금액 --></td>
-								<td>${map['DEPOSIT_STATE']}</td>
+								<c:if test="${map['DEPOSIT_STATE']=='Y'}">
+								<td>납입완료</td></c:if>
+								<c:if test="${map['DEPOSIT_STATE']=='N'}">
+									<td>납입미완료</td>
+								</c:if>
 								<!-- 납입구분 -->
-
 								<td><fmt:formatDate value="${map['DEPOSIT_DATE']}"
 										pattern="yyyy-MM-dd" /> <!-- 납입 날짜 --></td>
 								<td><button type="button" name="btTuition" class="btn btn-sm btn-secondary" value="${map['TUITION_NO']}">출력</button></td>

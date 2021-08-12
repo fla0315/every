@@ -249,11 +249,6 @@ body {
             <span><fmt:formatDate value="${map['REG_DATE']}" pattern="yyyy-MM-dd"/>  </span>
          </p>
       
-         <p>
-            <span><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;조회수</span>
-            <span>${map['READ_COUNT']}</span>
-         </p>
-
       
          <p>
             <!-- <input type="button" id ="chitchat" value="쪽지"> -->
@@ -287,7 +282,7 @@ body {
 
  <hr>
       <!-- 여기 써머노트에서 디비 받아오는 부분 -->
-   <div id="divContents" style="margin-left: 30%;">
+   <div id="divContents">
       <p>${contents}</p>
    </div>
 </div>
